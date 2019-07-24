@@ -21,7 +21,9 @@
 # You ned to have an installed JDK so as to run Gradle through command line.
 #
 # Will do the following actions:
-#	- Increment the verison number
+#	- Check the app configuration details
+#	- Check if images do not contain legal notices in metadata
+#	- Increment the version number
 #	- Build Dokka-vased documentation using Gradle
 #	- Update changelog using Gradle
 #
@@ -31,6 +33,12 @@
 #. *******************************************
 
 ./check-appconfiguration.sh
+
+# ********************************
+# Check legal mentions in pictures
+# ********************************
+
+./check-imagecredits.sh
 
 # *********************
 # Increase version code

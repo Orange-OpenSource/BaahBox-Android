@@ -61,6 +61,7 @@ buildscript {
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:${dokka_version}"
         classpath "com.github.marcpoppleton:git-changelog:${gitChangelog}"
         classpath files('../libs/properties-file-checker-1.0.jar')
+        classpath files('../libs/copyright-checker-1.1.jar')
     }
 
 }

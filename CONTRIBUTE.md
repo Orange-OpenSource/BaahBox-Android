@@ -93,9 +93,13 @@ The configuration file is controlled by an open source Gradle plugin hosted in t
 
 
 
-## Rule 6: Tags
+## Rule 6: Tags and versions
 
-Once we are sure a version of the sources and the app builds and runs correctly without bugs, we have to tag it with the version number. Thus we ensure to keep versions of working sources.
+Once we are sure a version of the sources and the app builds and runs correctly without bugs, we have to tag it with the version number. Thus we ensure to keep versions of working sources.  
+
+Tags can follow this format "vX.Y.Z-versioncode", where _versioncode_ is the version code of the Android app, and _X.Y.Z_ is the version number.  
+
+For version number _X.Y.Z._, the _X_ refers to the major update, the _Y_ to a minor update, and the _Z_ to the bug fix.  
 
 
 
