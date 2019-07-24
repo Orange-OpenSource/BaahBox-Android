@@ -16,7 +16,69 @@ The common training tools are not fun, there are no games. We provide with Baah 
 * a lovely assets
 
 
-Sensors have to be plugged to the box communicating with the apps using Bluetooth Low Energy.
+Sensorsor koystick have to be plugged to the box communicating with the apps using Bluetooth Low Energy.
+
+
+## Pictures of the project
+
+### Some mockups of the Android app
+
+<table>
+	<tr>
+		<td>
+			<img
+				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_device_menu.png" 
+				title="The main menu (version 0.6.0 of the app)"alt="The main menu (version 0.6.0 of the app)"
+				width="200">
+		</td>
+		<td>
+			<img
+				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_device_game_balloon.png"
+				title="The balloon game (version 0.6.0 of the app)"
+				alt="The balloon game (version 0.6.0 of the app)"
+				width="200">
+		</td>
+	</tr>
+</table>
+
+
+### The Baah box
+
+<table>
+	<tr>
+		<td>
+			<img 
+				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_baahbox.jpg"
+				title="The Baah Box with 3Dprintable shield conncted in BLE to apps"
+				alt="The Baah Box with 3Dprintable shield conncted in BLE to apps"
+				width="200">
+		</td>
+	</tr>
+</table>
+
+
+### Pictures of the set up
+
+<table>
+	<tr>
+		<td>
+			<img
+				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_setup_sensors.jpg"
+				alt="Sensors on arm to train plugged to the box connected in BLE to iOS app"
+				title="Sensors on arm to train plugged to the box connected in BLE to iOS app"
+				width="200">
+		</td>
+		<td>
+			<img
+				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_setup_joystick.jpeg"
+				alt="Set up with plates and joystick plugged to the box connected to the iPad"
+				title="Set up with plates and joystick plugged to the box connected to the iPad"
+				width="200">
+		</td>
+	</tr>
+</table>
+
+
 
 ## More links
 
@@ -27,3 +89,7 @@ Here are four links pointing to all sides of the project.
 * The Arduino firmware: https://github.com/Orange-OpenSource/BaahBox-Arduino
 * The assets: https://github.com/Orange-OpenSource/BaahBox-assets
 
+
+## About stores
+
+Keep on eye here, we'll deliver the apps on stores ;-)
