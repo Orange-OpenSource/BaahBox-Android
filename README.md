@@ -51,7 +51,7 @@ Sensorsor koystick have to be plugged to the box communicating with the apps usi
 				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_baahbox.jpg"
 				title="The Baah Box with 3Dprintable shield conncted in BLE to apps"
 				alt="The Baah Box with 3Dprintable shield conncted in BLE to apps"
-				width="300">
+				width="400">
 		</td>
 	</tr>
 </table>
@@ -84,7 +84,7 @@ Sensorsor koystick have to be plugged to the box communicating with the apps usi
 
 Here are four links pointing to all sides of the project.
 
-* The Android code: https://github.com/Orange-OpenSource/BaahBox-assets
+* The Android code: https://github.com/Orange-OpenSource/BaahBox-Android
 * The iOS code: https://github.com/Orange-OpenSource/BaahBox-iOS
 * The Arduino firmware: https://github.com/Orange-OpenSource/BaahBox-Arduino
 * The assets: https://github.com/Orange-OpenSource/BaahBox-assets
