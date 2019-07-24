@@ -1,0 +1,97 @@
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <string name="app_name">Baah !</string>
+    <string name="title_activity_main">Baah !</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="title_game_star">Make the star shine!</string>
+    <string name="title_game_balloon">Make the balloon explode!</string>
+    <string name="title_game_sheep">Jump, Shaun, jump!</string>
+    <string name="title_game_space">The space war!</string>
+    <string name="title_game_toad">Slurp!</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_bluetooth_devices">Bluetooth LE devices</string>
+
+    <string name="preferences_sensors_section">Sensors</string>
+    <string name="preferences_about_section">About this app</string>
+    <string name="preferences_about_version_title">Baah !</string>
+    <string name="preferences_about_version_summary">😀</string>
+    <string name="preferences_about_licenses_title">Licenses</string>
+    <string name="preferences_about_licenses_summary">Tap to get details about third-party tools we use</string>
+    <string name="preferences_sensors_hardness_title">Hardness factor</string>
+    <string name="preferences_sensors_hardness_summary">Weak, medium, hard</string>
+
+    <string name="selector_connect_hand_title">Select a box to connected to</string>
+
+    <string name="toast_connected_to_hand">Connected to box %1$s (with MAC address %2$s)</string>
+    <string name="toast_hardness_factor_changed">Changed hardness to %1$s</string>
+
+    <string name="game_star_instructions_line_1">Make the star shine</string>
+    <string name="game_star_instructions_line_2">by contracting your muscle&#8230;</string>
+    <string name="game_star_congratulations_level_1">Keep going&#8230;</string>
+    <string name="game_star_congratulations_level_2">Looking good!</string>
+    <string name="game_star_congratulations_level_3">Almost there!</string>
+    <string name="game_star_congratulations_level_max">Congratulations!!!</string>
+
+    <string name="game_balloon_instructions_line_1">Blow the balloon up</string>
+    <string name="game_balloon_instructions_line_2">by contracting your muscle.</string>
+    <string name="game_balloon_congratulations_level_1">Go!</string>
+    <string name="game_balloon_congratulations_level_2">Keep going&#8230;</string>
+    <string name="game_balloon_congratulations_level_3">Almost there!</string>
+    <string name="game_balloon_congratulations_level_4">Almost great&#8230;</string>
+    <string name="game_balloon_congratulations_level_max">Congratulations!!!</string>
+    <string name="game_balloon_instructions">Blow the balloon up!</string>
+
+    <string name="game_sheep_instructions">Jump Sheep!</string>
+    <string name="game_sheep_instructions_line_1">Make the sheep jump</string>
+    <string name="game_sheep_instructions_line_2">by contracting your muscles..</string>
+    <string name="game_sheep_congratulations">Congratulations!!!</string>
+    <string name="game_sheep_comforting">Try again&#8230;</string>
+    <string name="game_sheep_score_details">You jumped %1$d/%1$d fences!</string>
+
+    <string name="game_space_instructions">Space war</string>
+    <string name="game_space_instructions_line_1">Avoid meteorites</string>
+    <string name="game_space_instructions_line_2">by alternating the contracted muscles.</string>
+    <string name="game_space_score_details">Congratulations!!!</string>
+    <string name="game_space_score_title">score: $1$d</string>
+    <string name="game_space_score_details_congratulations">New record!</string>
+    <string name="game_space_score_details_comforting">It\'s good!</string>
+
+    <string name="game_toad_instructions">Eat the flies</string>
+    <string name="game_toad_instructions_line_1">Eat the flies</string>
+    <string name="game_toad_instructions_line_2">by alternating the contracted muscles.</string>
+    <string name="game_toad_score_title">score: $1$d</string>
+    <string name="game_toad_score_details_congratulations">You ate all the flies!</string>
+    <string name="game_toad_score_details_comforting">It\'s good!</string>
+
+    <string name="iv_star_description">image of a star</string>
+    <string name="iv_balloon_description">image of a balloon</string>
+    <string name="iv_toad_description">image of a toad</string>
+    <string name="iv_sheep_description">image of a sheep</string>
+    <string name="iv_space_description">image of a spaceship</string>
+
+    <string name="btn_start">Start</string>
+    <string name="btn_restart">Restart</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

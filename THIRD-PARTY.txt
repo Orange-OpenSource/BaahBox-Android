@@ -1,0 +1,36 @@
+================================================================================
+Apache 2.0
+================================================================================
+Component: Anko Copyright © JetBrains s.r.o 2016
+License Text URL: licenses/LICENSE-anko.txt
+Source Code: https://github.com/Kotlin/anko
+
+Component: Gradle changelog plugin Copyright © Marc Poppleton 2017
+License Text URL: licenses/LICENSE-changelog.txt
+Source Code: https://github.com/marcpoppleton/gradle-changelog-plugin
+
+Component: Dokka Copyright © JetBrains s.r.o 2018
+License Text URL: licenses/LICENSE-dokka.txt
+Source Code: https://github.com/Kotlin/dokka
+
+Component: Kotlin Copyright © JetBrains s.r.o 2000 - 2018
+License Text URL: licenses/LICENSE-kotlin.txt
+Source Code: https://github.com/JetBrains/kotlin
+
+Component: LicensesDialog Copyright © Philip Schiffer 2013
+License Text URL: licenses/LICENSE-licensesdialog.txt
+Source Code: https://github.com/PSDev/LicensesDialog
+
+================================================================================
+Eclipse Public License 1.0
+================================================================================
+Component: Anko Copyright © The JUnit Team 2009
+License Text URL: licenses/LICENSE-junit.txt
+Source Code: https://github.com/junit-team/junit4
+
+================================================================================
+MIT License
+================================================================================
+Component: Properties File Checker Copyright © Orange SA 2019
+License Text URL: licenses/LICENSE-properties-file-checker.txt
+Source Code: https://github.com/Orange-OpenSource/gradle-properties-checker

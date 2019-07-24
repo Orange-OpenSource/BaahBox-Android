@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainActivityFragment">
+
+    <!-- *************************************** -->
+    <!-- The main fragment with entries to games -->
+    <!-- *************************************** -->
+
+    <fragment
+        android:id="@+id/mainActivityFragment"
+        android:name="com.orange.labs.orangetrainingbox.ui.fragments.MainActivityFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainActivityFragment_to_gameBalloonFragment"
+            app:destination="@id/gameBalloonFragment" />
+        <action
+            android:id="@+id/action_mainActivityFragment_to_gameStarFragment"
+            app:destination="@id/gameStarFragment" />
+        <action
+            android:id="@+id/action_mainActivityFragment_to_gameSheepFragment"
+            app:destination="@id/gameSheepFragment" />
+        <action
+            android:id="@+id/action_mainActivityFragment_to_gameSpaceFragment"
+            app:destination="@id/gameSpaceFragment" />
+        <action
+            android:id="@+id/action_mainActivityFragment_to_gameToadFragment"
+            app:destination="@id/gameToadFragment" />
+    </fragment>
+
+    <!-- *********************** -->
+    <!-- The star game fragments -->
+    <!-- *********************** -->
+
+    <!-- The introduction screen -->
+    <fragment
+        android:id="@+id/gameStarFragment"
+        android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameStarFragment"
+        android:label="fragment_game_star_intro"
+        tools:layout="@layout/fragment_game_star_intro" >
+        <action
+            android:id="@+id/action_gameStarFragment_to_gameStarPlayingFragment"
+            app:destination="@+id/gameStarPlayingFragment" >
+            <argument
+                android:name="playing"
+                android:defaultValue="true" />
+            <argument
+                    android:name="introducing"
+                    android:defaultValue="false" />
+        </action>
+        <argument
+            android:name="playing"
+            app:argType="boolean"
+            android:defaultValue="false" />
+    </fragment>
+
+    <!-- The playing screen -->
+    <fragment
+            android:id="@+id/gameStarPlayingFragment"
+            android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameStarFragment"
+            android:label="fragment_game_star_playing" >
+        <argument
+                android:name="playing"
+                app:argType="boolean"
+                android:defaultValue="true" />
+        <argument
+                android:name="introducing"
+                app:argType="boolean"
+                android:defaultValue="true"/>
+    </fragment>
+
+    <action
+            android:id="@+id/action_global_gameStarPlayingFragment"
+            app:destination="@id/gameStarPlayingFragment"
+            app:popUpTo="@+id/gameStarFragment"/>
+
+    <!-- ************************** -->
+    <!-- The balloon game fragments -->
+    <!-- ************************** -->
+
+    <!-- The introduction screen -->
+    <fragment
+        android:id="@+id/gameBalloonFragment"
+        android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameBalloonFragment"
+        android:label="fragment_game_balloon_intro"
+        tools:layout="@layout/fragment_game_balloon_intro">
+        <action
+                android:id="@+id/action_gameBalloonFragment_to_gameBalloonPlayingFragment"
+                app:destination="@+id/gameBalloonPlayingFragment" >
+            <argument
+                    android:name="playing"
+                    android:defaultValue="true" />
+            <argument
+                    android:name="introducing"
+                    android:defaultValue="false" />
+        </action>
+        <argument
+                android:name="playing"
+                app:argType="boolean"
+                android:defaultValue="false" />
+    </fragment>
+
+    <!-- The playing screen -->
+    <fragment
+            android:id="@+id/gameBalloonPlayingFragment"
+            android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameBalloonFragment"
+            android:label="fragment_game_balloon_playing"
+            tools:layout="@layout/fragment_game_balloon_playing">
+        <argument
+                android:name="playing"
+                app:argType="boolean"
+                android:defaultValue="true" />
+        <argument
+                android:name="introducing"
+                app:argType="boolean"
+                android:defaultValue="true"/>
+    </fragment>
+
+    <action
+            android:id="@+id/action_global_gameBalloonPlayingFragment"
+            app:destination="@id/gameBalloonPlayingFragment"
+            app:popUpTo="@+id/gameBalloonFragment"/>
+
+
+    <!-- ************************ -->
+    <!-- The sheep game fragments -->
+    <!-- ************************ -->
+
+    <!-- The introduction screen -->
+    <fragment
+        android:id="@+id/gameSheepFragment"
+        android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment"
+        android:label="fragment_game_sheep_intro"
+        tools:layout="@layout/fragment_game_sheep_intro">
+        <action
+                android:id="@+id/action_gameSheepFragment_to_gameSheepPlayingFragment"
+                app:destination="@+id/gameSheepPlayingFragment" >
+            <argument
+                    android:name="playing"
+                    android:defaultValue="true" />
+            <argument
+                    android:name="introducing"
+                    android:defaultValue="false" />
+        </action>
+        <argument
+                android:name="playing"
+                app:argType="boolean"
+                android:defaultValue="false" />
+    </fragment>
+
+    <!-- The playing screen -->
+    <fragment
+            android:id="@+id/gameSheepPlayingFragment"
+            android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment"
+            android:label="fragment_game_sheep_playing"
+            tools:layout="@layout/fragment_game_sheep_playing">
+        <argument
+                android:name="playing"
+                app:argType="boolean"
+                android:defaultValue="true" />
+        <argument
+                android:name="introducing"
+                app:argType="boolean"
+                android:defaultValue="true"/>
+    </fragment>
+
+    <action
+            android:id="@+id/action_global_gameSheepPlayingFragment"
+            app:destination="@id/gameSheepPlayingFragment"
+            app:popUpTo="@+id/gameSheepFragment"/>
+
+
+    <!-- ************************ -->
+    <!-- The space game fragments -->
+    <!-- ************************ -->
+
+    <fragment
+        android:id="@+id/gameSpaceFragment"
+        android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameSpaceFragment"
+        android:label="fragment_game_space_intro"
+        tools:layout="@layout/fragment_game_space_intro" />
+
+    <!-- *********************** -->
+    <!-- The toad game fragments -->
+    <!-- *********************** -->
+
+    <fragment
+        android:id="@+id/gameToadFragment"
+        android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameToadFragment"
+        android:label="fragment_game_toad_intro"
+        tools:layout="@layout/fragment_game_toad_intro" />
+
+</navigation>

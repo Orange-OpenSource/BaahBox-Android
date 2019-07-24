@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.orange.labs.orangetrainingbox">
+
+    <!-- *********** -->
+    <!-- Permissions -->
+    <!-- *********** -->
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <!-- ************ -->
+    <!-- Requirements -->
+    <!-- ************ -->
+
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
+    <!-- *********** -->
+    <!-- Application -->
+    <!-- *********** -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- Main activity -->
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="sensorPortrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="mootmoot.app"
+                    android:scheme="http" />
+            </intent-filter>
+
+        </activity>
+
+        <!-- Preferences activity -->
+
+        <activity
+                android:name=".ui.settings.SettingsActivity"
+                android:label="@string/title_activity_settings"
+                android:theme="@style/SettingsActivityTheme"
+                android:screenOrientation="sensorPortrait"/>
+
+    </application>
+
+</manifest>

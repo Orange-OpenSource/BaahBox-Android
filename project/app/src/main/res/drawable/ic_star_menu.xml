@@ -1,0 +1,30 @@
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="343.15"
+    android:viewportHeight="326.35">
+    <group android:name="icon">
+        <path
+            android:name="path"
+            android:fillColor="#fff"
+            android:pathData="M171.57,0l51.73,109.21l119.85,15.45l-87.88,82.94l22.34,118.75l-106.04,-57.95l-106.03,57.95l22.34,-118.75l-87.88,-82.94l119.85,-15.45l51.72,-109.21z" />
+    </group>
+</vector>

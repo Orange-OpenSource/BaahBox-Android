@@ -1,0 +1,34 @@
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<vector android:height="24dp" android:viewportHeight="180"
+    android:viewportWidth="176.05" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#fff" android:pathData="M62.13,76.64l-51.77,25.89l0,-27.86l-10.36,0l0.01,62.13l62.12,0l10.36,-30.14l-10.36,-30.02z"/>
+    <path android:fillColor="#fff" android:pathData="M165.69,74.67l0,27.86l-51.78,-25.89l-10.35,25.86l10.35,34.3l62.14,0l0,-62.13l-10.36,0z"/>
+    <path android:fillColor="#fff" android:pathData="M91.65,3.73 L88,0 84.4,3.73A75,75 0,0 0,62.13 57.37V136.8h51.78V57.37A75,75 0,0 0,91.65 3.73Z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M82.84,33.24h10.36v31.07h-10.36z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M82.85,116.09h10.36v31.07h-10.36z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M72.49,121.27v31.07H41.42V121.27a15.54,15.54 0,1 1,31.07 0Z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M134.63,121.27v31.07H103.56V121.27a15.54,15.54 0,1 1,31.07 0Z"/>
+    <path android:fillColor="#ffd15c" android:pathData="M119.11,180c-1.79,-3.08 -3.93,-6.2 -4.06,-6.39l-2.26,-3.32L111.3,174a17.86,17.86 0,0 1,-1.55 3.09c-2.41,-5 -3.2,-13.06 -3.29,-16.19l-0.15,-4.78 -3.48,3.3a13.56,13.56 0,0 0,-2.81 3.78A6.33,6.33 0,0 1,98.8 160c-0.37,-4.06 2.86,-8.68 4.72,-10.77h31.14c1.45,1.68 5.12,6.39 4.72,10.8a6.69,6.69 0,0 1,-1.19 3.23,13 13,0 0,0 -2.81,-3.78l-3.46,-3.32 -0.15,4.81c-0.09,3.13 -0.89,11.22 -3.29,16.19a18.85,18.85 0,0 1,-1.55 -3.08l-1.49,-3.74 -2.26,3.32C123.05,173.79 120.89,176.92 119.11,180Z"/>
+    <path android:fillColor="#ffd15c" android:pathData="M57,180c-1.78,-3.08 -3.92,-6.2 -4.06,-6.39l-2.25,-3.32L49.16,174a18.69,18.69 0,0 1,-1.54 3.09c-2.41,-5 -3.21,-13.06 -3.3,-16.19l-0.14,-4.78 -3.49,3.3a13.51,13.51 0,0 0,-2.8 3.78A6.33,6.33 0,0 1,36.67 160c-0.37,-4.06 2.86,-8.68 4.72,-10.77H72.53c1.44,1.68 5.12,6.39 4.72,10.8a6.6,6.6 0,0 1,-1.2 3.23,12.91 12.91,0 0,0 -2.8,-3.78l-3.47,-3.32 -0.15,4.81c-0.09,3.13 -0.88,11.22 -3.29,16.19A19.69,19.69 0,0 1,64.79 174L63.3,170.3 61,173.62C60.91,173.79 58.76,176.92 57,180Z"/>
+    <path android:fillColor="#fff" android:pathData="M5.165,75.664m-3.656,3.656a5.17,5.17 90,1 1,7.311 -7.311a5.17,5.17 90,1 1,-7.311 7.311"/>
+    <path android:fillColor="#fff" android:pathData="M170.87,75.659m-1.188,5.032a5.17,5.17 58.28,1 1,2.375 -10.063a5.17,5.17 58.28,1 1,-2.375 10.063"/>
+    <path android:fillColor="#6d6a66" android:pathData="M88.018,116.088m-3.656,3.656a5.17,5.17 90,1 1,7.311 -7.311a5.17,5.17 90,1 1,-7.311 7.311"/>
+    <path android:fillColor="#6d6a66" android:pathData="M88.02,33.239m-1.188,5.032a5.17,5.17 58.28,1 1,2.375 -10.063a5.17,5.17 58.28,1 1,-2.375 10.063"/>
+</vector>

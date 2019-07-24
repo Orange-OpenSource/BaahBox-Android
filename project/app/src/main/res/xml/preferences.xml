@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/action_settings">
+
+    <!-- ******************************** -->
+    <!-- Section dedicated to the sensors -->
+    <!-- ******************************** -->
+
+    <PreferenceCategory
+            android:title="@string/preferences_sensors_section"
+            android:key="pref_key_settings_sensors">
+
+        <SeekBarPreference
+                android:title="@string/preferences_sensors_hardness_title"
+                android:key="pref_key_settings_sensors_hardness"
+                android:summary="@string/preferences_sensors_hardness_summary"
+                android:max="2"
+                android:defaultValue="1">
+
+        </SeekBarPreference>
+
+    </PreferenceCategory>
+
+    <!-- ************* -->
+    <!-- Section about -->
+    <!-- ************* -->
+
+    <PreferenceCategory
+            android:title="@string/preferences_about_section"
+            android:key="pref_key_about">
+
+        <Preference
+                android:key="pref_key_about_app"
+                android:title="@string/preferences_about_version_title"
+                android:summary="@string/preferences_about_version_summary" />
+
+        <Preference
+                android:key="pref_key_about_licenses"
+                android:title="@string/preferences_about_licenses_title"
+                android:summary="@string/preferences_about_licenses_summary" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

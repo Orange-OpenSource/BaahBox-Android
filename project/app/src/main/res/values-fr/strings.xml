@@ -1,0 +1,97 @@
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+<resources>
+
+    <string name="app_name">Baah !</string>
+    <string name="title_activity_main">Baah !</string>
+    <string name="title_activity_settings">Paramètres</string>
+
+    <string name="title_game_star">Fais briller l\'étoile !</string>
+    <string name="title_game_balloon">Fais exploser le ballon !</string>
+    <string name="title_game_sheep">Saute, Mouton, Saute !</string>
+    <string name="title_game_space">La bataille de l\'espace !</string>
+    <string name="title_game_toad">Slurp !</string>
+
+    <string name="action_settings">Paramètres</string>
+    <string name="action_bluetooth_devices">Appareils Bluetooth LE</string>
+
+    <string name="preferences_sensors_section">Capteurs</string>
+    <string name="preferences_about_section">À propos</string>
+    <string name="preferences_about_version_title">Baah !</string>
+    <string name="preferences_about_version_summary">😀</string>
+    <string name="preferences_about_licenses_title">Licences</string>
+    <string name="preferences_about_licenses_summary">Tapper pour obtenir des informations supplémentaires sur les outils tiers utilisés</string>
+    <string name="preferences_sensors_hardness_title">Sensibilité</string>
+    <string name="preferences_sensors_hardness_summary">Faible, moyenne ou forte</string>
+
+    <string name="selector_connect_hand_title">Choisi une boîte à utiliser</string>
+
+    <string name="toast_connected_to_hand">Connecté à la boîte %1$s (avec l\'adresse MAC %2$s)</string>
+    <string name="toast_hardness_factor_changed">Difficulté définie à %1$s</string>
+
+    <string name="game_star_instructions_line_1">Fais briller l\'étoile !</string>
+    <string name="game_star_instructions_line_2">en contractant ton muscle.</string>
+    <string name="game_star_congratulations_level_1">Continue&#8230;</string>
+    <string name="game_star_congratulations_level_2">C\'est pas mal !</string>
+    <string name="game_star_congratulations_level_3">Tu y es presque !</string>
+    <string name="game_star_congratulations_level_max">Bravo !!!</string>
+
+    <string name="game_balloon_instructions_line_1">Glonfle le ballon</string>
+    <string name="game_balloon_instructions_line_2">en contractant ton muscle.</string>
+    <string name="game_balloon_congratulations_level_1">C\'est parti !</string>
+    <string name="game_balloon_congratulations_level_2">Continue&#8230;</string>
+    <string name="game_balloon_congratulations_level_3">Encore un petit effort !</string>
+    <string name="game_balloon_congratulations_level_4">On y est presque !</string>
+    <string name="game_balloon_congratulations_level_max">Bien joué !!!</string>
+    <string name="game_balloon_instructions">Gonfle le ballon</string>
+
+    <string name="game_sheep_instructions">Saute Mouton !</string>
+    <string name="game_sheep_instructions_line_1">Fais sauter le mouton</string>
+    <string name="game_sheep_instructions_line_2">en contractant tes muscles.</string>
+    <string name="game_sheep_congratulations">Bravo !</string>
+    <string name="game_sheep_comforting">Essaie encore&#8230;</string>
+    <string name="game_sheep_score_details">Tu as sauté %1$d/%1$d barrières !</string>
+
+    <string name="game_space_instructions">Bataille de l\'espace</string>
+    <string name="game_space_instructions_line_1">Evite les météorites</string>
+    <string name="game_space_instructions_line_2">en alternant les muscules contractés.</string>
+    <string name="game_space_score_details">Bravo !</string>
+    <string name="game_space_score_title">score : $1$d</string>
+    <string name="game_space_score_details_congratulations">Nouveau record !</string>
+    <string name="game_space_score_details_comforting">C\'est bien !</string>
+
+    <string name="game_toad_instructions">Gobe les mouches</string>
+    <string name="game_toad_instructions_line_1">Gobe les mouches</string>
+    <string name="game_toad_instructions_line_2">en alternant les muscules contractés.</string>
+    <string name="game_toad_score_title">score : $1$d</string>
+    <string name="game_toad_score_details_congratulations">Tu as gobé toutes les mouches !</string>
+    <string name="game_toad_score_details_comforting">C\'est bien !</string>
+
+    <string name="iv_star_description">image d\'une étoile</string>
+    <string name="iv_balloon_description">image d\'un ballon</string>
+    <string name="iv_toad_description">image d\'une grenouille</string>
+    <string name="iv_sheep_description">image d\'un mouton</string>
+    <string name="iv_space_description">image d\'un vaisseau spatial</string>
+
+    <string name="btn_start">Commencer</string>
+    <string name="btn_restart">Rejouer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

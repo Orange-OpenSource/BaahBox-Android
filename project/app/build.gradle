@@ -1,0 +1,127 @@
+/**
+     Orange Baah Box
+     Copyright (C) 2017 – 2019 Orange SA
+
+     This program is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by
+     the Free Software Foundation, either version 3 of the License, or
+     (at your option) any later version.
+
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+     GNU General Public License for more details.
+
+     You should have received a copy of the GNU General Public License
+     along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'changelog'
+apply plugin: 'com.orange.labs.properties-file-checker'
+
+// *****************
+// App configuration
+// *****************
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.orange.labs.orangetrainingbox"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode 21
+        versionName "0.6.0"
+        vectorDrawables.useSupportLibrary true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+// *******************
+// Dependencies to get
+// *******************
+
+dependencies {
+
+    // Common things
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.kotlinCoroutinesVersion"
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // Navigation
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.legacySupportVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycleVersion"
+
+    // ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+
+    // Preferences
+    implementation "androidx.preference:preference:$rootProject.preferencesVersion"
+
+    // Material Design
+    implementation "androidx.legacy:legacy-support-core-utils:$rootProject.materialVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+
+    // Anko: to make things easier with Android and Kotlin
+    implementation "org.jetbrains.anko:anko:$anko_version"
+
+    // LicensesDialog: to display third party contents
+    implementation "de.psdev.licensesdialog:licensesdialog:$rootProject.licensesDialogVersion"
+
+    // Tests
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
+    androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$rootProject.navigationVersion"
+
+}
+
+// *****
+// Tasks
+// *****
+
+dokka {
+    moduleName = 'data'
+    outputFormat = 'javadoc'
+    outputDirectory = '../doc/dokka'
+    processConfigurations = ['compile']
+    sourceDirs = files('src/main/java')
+}
+
+changelog {
+    file "../CHANGELOG-temp.md"
+    appName "Orange Baah Box"
+    versionNum "${android.defaultConfig.versionName}"
+    versionText "- version code: ${android.defaultConfig.versionCode}"
+    repoUrl "https://gitlab.forge.orange-labs.fr/3dhandz/training-box"
+    trackerUrl "https://gitlab.forge.orange-labs.fr/3dhandz/training-box"
+    from ""
+    to "HEAD"
+    match "^fix|^doc|^test|^feat|^fix|^perf|^refactor|BREAKING" // style and chore are not parsed
+}
+
+propertieschecker {
+    rulesFile "app/src/main/assets/app_configuration.rules.properties"
+    targetFile "app/src/main/assets/app_configuration.properties"
+}

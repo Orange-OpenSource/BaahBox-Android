@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.MainActivityFragment"
+        tools:layout_editor_absoluteY="81dp">
+
+    <include
+            android:id="@+id/menu_star"
+            layout="@layout/menu_item_star"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="-1dp"
+            app:layout_constraintBottom_toTopOf="@+id/menu_balloon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <include
+            android:id="@+id/menu_balloon"
+            layout="@layout/menu_item_balloon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/menu_sheep"
+            app:layout_constraintStart_toStartOf="@+id/menu_star"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_star"/>
+
+    <include
+            android:id="@+id/menu_sheep"
+            layout="@layout/menu_item_sheep"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/menu_space"
+            app:layout_constraintStart_toStartOf="@+id/menu_balloon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_balloon"/>
+
+    <include
+            android:id="@+id/menu_space"
+            layout="@layout/menu_item_space"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/menu_toad"
+            app:layout_constraintStart_toStartOf="@+id/menu_sheep"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_sheep"/>
+
+    <include
+            android:id="@+id/menu_toad"
+            layout="@layout/menu_item_toad"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/menu_space"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menu_space"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

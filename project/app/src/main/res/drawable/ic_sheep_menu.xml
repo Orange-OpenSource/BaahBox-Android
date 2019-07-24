@@ -1,0 +1,50 @@
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<vector android:height="24dp" android:viewportHeight="312.23"
+    android:viewportWidth="389.07" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#6d6a66" android:pathData="M120.44,264.58s-4,28.6 -8.35,37 5.64,16.37 9.52,1.22S133,264.88 133,264.88Z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M121.94,268.61s11.47,26.52 12.17,35.92 13.35,11 8.76,-3.92 -10.11,-38.27 -10.11,-38.27Z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M185.63,259.6s-5.54,31.47 -10.29,40.62 4.8,18.18 9.47,1.56 13.33,-41.58 13.33,-41.58Z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M189.22,261.56s7,31.18 6.09,41.46 11.41,15 9.34,-2.2S201,257.31 201,257.31Z"/>
+    <path android:fillColor="#fff" android:pathData="M34.07,146.66a143.96,108.45 0,1 0,287.92 0a143.96,108.45 0,1 0,-287.92 0z"/>
+    <path android:fillColor="#fff" android:pathData="M83.632,65.752m-6.329,26.813a27.55,27.55 58.28,1 1,12.657 -53.627a27.55,27.55 58.28,1 1,-12.657 53.627"/>
+    <path android:fillColor="#fff" android:pathData="M92.21,59.97a68.61,59.97 0,1 0,137.22 0a68.61,59.97 0,1 0,-137.22 0z"/>
+    <path android:fillColor="#fff" android:pathData="M242,69.49m-55.41,0a55.41,55.41 0,1 1,110.82 0a55.41,55.41 0,1 1,-110.82 0"/>
+    <path android:fillColor="#fff" android:pathData="M64.236,191.098m-8.044,34.084a35.02,35.02 58.28,1 1,16.089 -68.167a35.02,35.02 58.28,1 1,-16.089 68.167"/>
+    <path android:fillColor="#fff" android:pathData="M75.28,226.62a55.65,44.62 0,1 0,111.3 0a55.65,44.62 0,1 0,-111.3 0z"/>
+    <path android:fillColor="#fff" android:pathData="M192.338,243.406m-23.051,9.548a24.95,24.95 112.5,1 1,46.102 -19.096a24.95,24.95 112.5,1 1,-46.102 19.096"/>
+    <path android:fillColor="#fff" android:pathData="M198.09,223.72a47.5,44.64 0,1 0,95 0a47.5,44.64 0,1 0,-95 0z"/>
+    <path android:fillColor="#fff" android:pathData="M26.4,111.07a32.59,35.59 0,1 0,65.18 0a32.59,35.59 0,1 0,-65.18 0z"/>
+    <path android:fillColor="#fff" android:pathData="M8.521,166.094a30.29,22.25 122.69,1 0,32.719 -50.984a30.29,22.25 122.69,1 0,-32.719 50.984z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M293.09,93.31s94,0.41 96,88.69 -116.11,-2.33 -111.31,-44.35S293.09,93.31 293.09,93.31Z"/>
+    <path android:fillColor="#6d6a66" android:pathData="M251.83,105.23s-53.73,13.18 -34.54,35.38 50.85,-35.38 50.85,-35.38S252.79,116.75 251.83,105.23Z"/>
+    <path android:fillColor="#fff" android:pathData="M311.32,132.1c3.27,-0.18 6.42,-0.22 9.54,-0.3s6.2,-0.17 9.22,-0.44a46,46 0,0 0,8.84 -1.52,19.07 19.07,0 0,0 7.91,-4.37c-1,3.18 -3.7,5.76 -6.72,7.29a26.39,26.39 0,0 1,-9.68 2.58,39.51 39.51,0 0,1 -9.79,-0.41A34.39,34.39 0,0 1,311.32 132.1Z"/>
+    <path android:fillColor="#fff" android:pathData="M315.3,133.55a7.14,7.14 0,0 1,0 2.53,10.35 10.35,0 0,1 -0.73,2.33 9.47,9.47 0,0 1,-1.27 2.11,6.4 6.4,0 0,1 -1.94,1.66 13.54,13.54 0,0 1,0.56 -2.41,17.67 17.67,0 0,1 0.83,-2.17 17.87,17.87 0,0 1,1.08 -2.08A11.24,11.24 0,0 1,315.3 133.55Z"/>
+    <path android:fillColor="#fff" android:pathData="M325.11,133.55a7.37,7.37 0,0 1,1.69 2.57,9.56 9.56,0 0,1 0.68,3 8.13,8.13 0,0 1,-0.45 3.12,5.16 5.16,0 0,1 -1.92,2.48 25.09,25.09 0,0 0,0.39 -2.83c0,-0.9 0,-1.77 0,-2.67C325.39,137.43 325.14,135.63 325.11,133.55Z"/>
+    <path android:fillColor="#fff" android:pathData="M335.35,133.55a17.14,17.14 0,0 1,1.85 4.23c0.23,0.7 0.42,1.39 0.6,2.11s0.37,1.42 0.53,2.29a4.75,4.75 0,0 1,-1.94 -1.6,7.66 7.66,0 0,1 -1.09,-2.2 8.46,8.46 0,0 1,-0.38 -2.39A6,6 0,0 1,335.35 133.55Z"/>
+    <path android:fillColor="#fff" android:pathData="M342.9,129.51c1.39,1.23 2.42,2.38 3.54,3.42 0.56,0.53 1.13,1 1.74,1.47s1.3,0.85 2.1,1.38a4.48,4.48 0,0 1,-2.78 0,6.28 6.28,0 0,1 -2.42,-1.41 7.27,7.27 0,0 1,-1.6 -2.23A5.75,5.75 0,0 1,342.9 129.51Z"/>
+    <path android:fillColor="#fff" android:pathData="M364.61,168.16c2.52,2.2 4.82,4.46 7.15,6.63 1.17,1.08 2.32,2.14 3.5,3.11a20.92,20.92 0,0 0,3.56 2.46,4.87 4.87,0 0,0 1.56,0.53 1.26,1.26 0,0 0,0.92 -0.19,3.19 3.19,0 0,0 0.95,-1.2 11.32,11.32 0,0 0,0.77 -1.95c0.85,-2.87 1.23,-6.12 1.89,-9.39a25.19,25.19 0,0 1,1.19 10,11.52 11.52,0 0,1 -0.6,2.71 6.57,6.57 0,0 1,-1.8 2.76,5 5,0 0,1 -1.71,1 5.72,5.72 0,0 1,-1.9 0.23,8.53 8.53,0 0,1 -3.06,-0.89 18.4,18.4 0,0 1,-4.31 -3.23,32.21 32.21,0 0,1 -3.3,-3.84A35.94,35.94 0,0 1,364.61 168.16Z"/>
+    <path android:fillColor="#fff" android:pathData="M381.9,183.8a31,31 0,0 1,1.42 7.63,44 44,0 0,1 -0.09,7.78c-0.12,1.3 -0.34,2.58 -0.54,3.86s-0.5,2.55 -0.9,3.79a33.56,33.56 0,0 1,-2.89 7.2c0.43,-2.56 1,-5 1.36,-7.54s0.75,-5 1,-7.5 0.41,-5 0.53,-7.56S381.91,186.39 381.9,183.8Z"/>
+    <path android:fillColor="#fff" android:pathData="M277.6,82.91a18.85,17.15 0,1 0,37.7 0a18.85,17.15 0,1 0,-37.7 0z"/>
+    <path android:fillColor="#fff" android:pathData="M268.15,101.34a14.63,12.79 0,1 0,29.26 0a14.63,12.79 0,1 0,-29.26 0z"/>
+    <path android:fillColor="#fff" android:pathData="M283.61,121.4m-10.33,0a10.33,10.33 0,1 1,20.66 0a10.33,10.33 0,1 1,-20.66 0"/>
+    <path android:fillColor="#fff" android:pathData="M279.284,142.008m-10.366,10.366a14.66,14.66 90,1 1,20.732 -20.732a14.66,14.66 90,1 1,-20.732 20.732"/>
+    <path android:fillColor="#fff" android:pathData="M309.53,93.47m-15.58,0a15.58,15.58 0,1 1,31.16 0a15.58,15.58 0,1 1,-31.16 0"/>
+    <path android:fillColor="#fff" android:pathData="M306.101,70.956m-5.171,21.908a22.51,22.51 58.28,1 1,10.342 -43.816a22.51,22.51 58.28,1 1,-10.342 43.816"/>
+</vector>

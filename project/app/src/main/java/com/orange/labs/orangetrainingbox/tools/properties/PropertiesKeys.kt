@@ -1,0 +1,99 @@
+/**
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package com.orange.labs.orangetrainingbox.tools.properties
+
+/**
+ * Enumeration defining objects for properties to configure the app.
+ *
+ * @author Pierre-Yves Lapersonne
+ * @author Marc Poppleton
+ * @since 20/05/2019
+ * @version 1.4.0
+ */
+enum class PropertiesKeys(val key: String) {
+
+    /**
+     * Set to true to enable the star game, false to disable it
+     */
+    ENABLE_GAME_STAR("enable_game_star"),
+    /**
+     * Set to true to enable the balloon game, false to disable it
+     */
+    ENABLE_GAME_BALLOON("enable_game_balloon"),
+    /**
+     * Set to true to enable the sheep game, false to disable it
+     */
+    ENABLE_GAME_SHEEP("enable_game_sheep"),
+    /**
+     * Set to true to enable the space game, false to disable it
+     */
+    ENABLE_GAME_SPACE("enable_game_space"),
+    /**
+     * Set to true to enable the toad game, false to disable it
+     */
+    ENABLE_GAME_TOAD("enable_game_toad"),
+
+    /* Game configuration */
+
+    /**
+     * A factor to apply on measures so as to define a difficulty. The higher the factor is, the bigger will be the difficulty.
+     */
+    DIFFICULTY_FACTOR("difficulty_factor"),
+    /**
+     * The numeric values of the difficulty factors (low, medium and high).
+     */
+    DIFFICULTY_NUMERIC_VALUES("difficulty_factor_values"),
+
+    /**
+     * A set of values defining steps for the star game where congratulations and animations change
+     */
+    GAME_STAR_THRESHOLD("game_star_threshold"),
+    /**
+     * A set of values defining steps for the balloon game where congratulations and animations change
+     */
+    GAME_BALLOON_THRESHOLD("game_balloon_threshold"),
+    /**
+     * A set of values defining things for sheep game
+     */
+    GAME_SHEEP_THRESHOLD("game_sheep_threshold"),
+    /**
+     * Defines the period where the game icon of the balloon game in the introduction screen is changed during animation
+     */
+    GAME_BALLOON_INTRODUCTION_ANIMATION_PERIOD("game_balloon_introduction_animation_period"),
+    /**
+     * Defines the period where the game icon of the sheep game in the introduction screen is changed during animation
+     */
+    GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD("game_sheep_introduction_animation_period"),
+
+    /* BLE configuration */
+
+    /**
+     * Identifier of the BLE service
+     */
+    BLE_SERVICE_UUID("ble_service_uuid"),
+    /**
+     * Identifier to use to get Baah Box frames
+     */
+    BLE_SENSORS_CHAR_UUID("ble_sensors_char_uuid"),
+    /**
+     * Descriptor to use to get Baah Box frames
+     */
+    BLE_CHAR_DESCRIPTOR_UUID("ble_sensors_char_descriptor_uuid")
+
+}
