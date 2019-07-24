@@ -23,7 +23,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'changelog'
+
 apply plugin: 'com.orange.labs.properties-file-checker'
+apply plugin: 'com.orange.labs.copyright-checker'
+
 
 // *****************
 // App configuration
@@ -36,7 +39,7 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        versionCode 21
+        versionCode 22
         versionName "0.6.0"
         vectorDrawables.useSupportLibrary true
     }
@@ -124,4 +127,10 @@ changelog {
 propertieschecker {
     rulesFile "app/src/main/assets/app_configuration.rules.properties"
     targetFile "app/src/main/assets/app_configuration.properties"
+}
+
+copyrightchecker {
+    folderToCheck "app/src/main/res"
+    creditLineToFind "Baah Box, (c) Copyright Orange SA 2017-2019, CC-BY-SA 4.0"
+    verbose true
 }

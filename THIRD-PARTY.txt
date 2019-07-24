@@ -34,3 +34,7 @@ MIT License
 Component: Properties File Checker Copyright © Orange SA 2019
 License Text URL: licenses/LICENSE-properties-file-checker.txt
 Source Code: https://github.com/Orange-OpenSource/gradle-properties-checker
+
+Component: Copyright Checker Copyright © Orange SA 2019
+License Text URL: licenses/LICENSE-properties-file-checker.txt
+Source Code: https://github.com/Orange-OpenSource/copyright-checker

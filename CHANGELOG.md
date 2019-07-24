@@ -107,3 +107,13 @@
 
 * licenses - add ref to Orange Baah Boox GPL 3.0 license in the notices of the app ([5c9699dd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/5c9699dd))
 * licenses - more entries ([93cf2ded](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/93cf2ded))
+
+
+
+<a name="0.6.0"></a>
+## 0.6.0 "- version code: 22" (2019/07/24)
+
+
+## Features
+
+* tool - 🔨 add plugin for images metadata ([c8ab8bfd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/c8ab8bfd))
