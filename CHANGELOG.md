@@ -100,20 +100,29 @@
 
 
 <a name="0.6.0"></a>
-## 0.6.0 "- version code: 21" (2019/07/22)
+## 0.6.0
 
 
 ## Features
 
 * licenses - add ref to Orange Baah Boox GPL 3.0 license in the notices of the app ([5c9699dd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/5c9699dd))
 * licenses - more entries ([93cf2ded](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/93cf2ded))
+* tool - 🔨 add plugin for images metadata ([c8ab8bfd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/c8ab8bfd))
 
 
 
-<a name="0.6.0"></a>
-## 0.6.0 "- version code: 22" (2019/07/24)
+<a name="0.7.0"></a>
+## 0.7.0 "- version code: 25" (2019/08/13)
 
+
+## Bug Fixes
+
+* #16 - lateinit proeprty used and not initialized ([ed672bd3](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/ed672bd3))
 
 ## Features
 
-* tool - 🔨 add plugin for images metadata ([c8ab8bfd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/c8ab8bfd))
+* tool - add plugin for images metadata ([c8ab8bfd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/c8ab8bfd))
+* #15 - ribbons on app icons for aplha, beta and Orange PrimeZone ([05edb442](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/05edb442))
+
+
+
