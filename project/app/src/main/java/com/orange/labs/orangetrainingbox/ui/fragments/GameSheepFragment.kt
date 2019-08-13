@@ -123,7 +123,7 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     override fun startIntroductionAnimation() {
         gameIconAnimator = IconAnimator()
-        val period = context!!.readSheepAdditionalConfiguration()
+        val period = context!!.readSheepAdditionalConfiguration().sheepAnimationPeriod
         gameIconAnimator!!.animateGameIcon((activity as AppCompatActivity), gameIcon, period,
             arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
     }

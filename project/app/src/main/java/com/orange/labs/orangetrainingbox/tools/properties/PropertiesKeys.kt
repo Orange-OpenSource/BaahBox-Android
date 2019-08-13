@@ -24,7 +24,7 @@ package com.orange.labs.orangetrainingbox.tools.properties
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 1.4.0
+ * @version 1.5.0
  */
 enum class PropertiesKeys(val key: String) {
 
@@ -60,26 +60,42 @@ enum class PropertiesKeys(val key: String) {
      */
     DIFFICULTY_NUMERIC_VALUES("difficulty_factor_values"),
 
+    /* Star game */
+
     /**
      * A set of values defining steps for the star game where congratulations and animations change
      */
     GAME_STAR_THRESHOLD("game_star_threshold"),
+
+    /* Balloon game */
+
     /**
      * A set of values defining steps for the balloon game where congratulations and animations change
      */
     GAME_BALLOON_THRESHOLD("game_balloon_threshold"),
     /**
+     * Defines the period where the game icon of the balloon game in the introduction screen is changed during animation
+     */
+    GAME_BALLOON_INTRODUCTION_ANIMATION_PERIOD("game_balloon_introduction_animation_period"),
+
+    /* Sheep game */
+
+    /**
      * A set of values defining things for sheep game
      */
     GAME_SHEEP_THRESHOLD("game_sheep_threshold"),
     /**
-     * Defines the period where the game icon of the balloon game in the introduction screen is changed during animation
-     */
-    GAME_BALLOON_INTRODUCTION_ANIMATION_PERIOD("game_balloon_introduction_animation_period"),
-    /**
      * Defines the period where the game icon of the sheep game in the introduction screen is changed during animation
      */
     GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD("game_sheep_introduction_animation_period"),
+    /**
+     * Defines the default speed for the sheep, i.e. the speed for which the floor with fences move
+     */
+    GAME_SHEEP_DEFAULT_SPEED_VALUE("game_sheep_speed_default_value"),
+    /**
+     * Defines the default number of fences to jump over
+     */
+    GAME_SHEEP_DEFAULT_FENCES_NUMBER("game_sheep_fences_default_number"),
 
     /* BLE configuration */
 

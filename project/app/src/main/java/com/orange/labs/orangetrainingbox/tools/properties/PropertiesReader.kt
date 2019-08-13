@@ -28,7 +28,7 @@ import java.util.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 2.1.0
+ * @version 2.2.0
  */
 
 
@@ -166,23 +166,24 @@ fun Context.readBalloonAdditionalConfiguration(): Long {
  * @return SheepGameConfiguration The configuration
  */
 fun Context.readSheepGameConfiguration(): SheepGameConfiguration {
-    // TODO Parse properties and package them in the configuration object
     val properties = loadProperties()
     val sheepGameRawConfiguration = properties.getProperty(PropertiesKeys.GAME_SHEEP_THRESHOLD.key)
     val configurationItems = sheepGameRawConfiguration.split(delimiter)
-    // FIXME Check with the good amount of params
-    if(configurationItems.size != 5) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 5")
-    return SheepGameConfiguration(0, 0)
+    if (configurationItems.size != 1) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 1")
+    return SheepGameConfiguration(0)
 }
 
 /**
  * Reads from properties file assets additional configuration elements for the sheep game.
  *
- * @return Long Just the period for animations of the game icon in the introduction screen
+ * @return SheepGameDefaultConfiguration A bundle with default fences number and speed
  */
-fun Context.readSheepAdditionalConfiguration(): Long {
+fun Context.readSheepAdditionalConfiguration(): SheepGameDefaultConfiguration {
     val properties = loadProperties()
-    return properties.getProperty(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
+    val defaultFencesNumber = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
+    val defaultSpeed = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
+    val animationPeriod = properties.getProperty(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
+    return SheepGameDefaultConfiguration(defaultFencesNumber, defaultSpeed, animationPeriod)
 }
 
 /**
@@ -275,8 +276,14 @@ data class BalloonGameConfiguration(val minThreshold1: Int, val maxThreshold1: I
 
 /**
  * Models a bundle of sheep game configuration elements.
- * @param fenceNumber The number of fences to add in the game
- * @param fenceSpeed The elapsed time between two fences
+ * @param stayThreshold Sheep rises if under, or stay if greater than this value
  */
-// TODO Enrich with suitable parameters
-data class SheepGameConfiguration(val fenceNumber: Int, val fenceSpeed: Int)
+data class SheepGameConfiguration(val stayThreshold: Int)
+
+/**
+ * Models a bundle of sheep game default configuration values..
+ * @param defaultFencesCount The default number of fences to display
+ * @param defaultSpeed The default speed for the floor and fences
+ * @param sheepAnimationPeriod Each "frame" of the game icon is animated with this period (in ms)
+ */
+data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultSpeed: String, val sheepAnimationPeriod: Long)
