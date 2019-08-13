@@ -42,7 +42,7 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        versionCode 24
+        versionCode 25
         versionName "0.7.0"
         vectorDrawables.useSupportLibrary true
     }
@@ -161,7 +161,7 @@ propertieschecker {
 copyrightchecker {
     folderToCheck "app/src/main/res"
     creditLineToFind "Baah Box, (c) Copyright Orange SA 2017-2019, CC-BY-SA 4.0"
-    verbose true
+    verbose false
 }
 
 // To customize the icons with ribbons

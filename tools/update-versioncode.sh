@@ -29,7 +29,7 @@ echo 		"* Incrementing version code *"
 echo  -e    "* ************************* *\n"
 
 APP_GRADLE_BUILD_FILE="../project/app/build.gradle"
-LINE_FOR_BUILD_VALUE=42
+LINE_FOR_BUILD_VALUE=45
 
 TEMP_FILE="build.gradle-temp"
 
