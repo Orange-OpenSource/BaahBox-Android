@@ -21,6 +21,10 @@ Component: LicensesDialog Copyright © Philip Schiffer 2013
 License Text URL: licenses/LICENSE-licensesdialog.txt
 Source Code: https://github.com/PSDev/LicensesDialog
 
+Component: Easylauncher-gradle-plugin Copyright © Mikel 2018
+License Text URL: licenses/LICENSE-easylauncher.txt
+Source Code: https://github.com/akaita/easylauncher-gradle-plugin
+
 ================================================================================
 Eclipse Public License 1.0
 ================================================================================
