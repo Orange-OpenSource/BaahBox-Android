@@ -73,7 +73,7 @@ private val BluetoothAdapter.isDisabled: Boolean
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.1.0
+ * @version 2.1.1
  */
 class MainActivity : AppCompatActivity() {
 
@@ -247,7 +247,9 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onDestroy() {
         super.onDestroy()
-        bluetoothGatt.close()
+        if (::bluetoothGatt.isInitialized) {
+            bluetoothGatt.close()
+        }
     }
 
     /**
