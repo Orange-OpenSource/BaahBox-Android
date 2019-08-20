@@ -64,9 +64,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@mipmap/ic_sheep_moving_1"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"/>
+            android:layout_marginTop="170dp"
+            android:layout_marginStart="128dp"
+            android:layout_marginEnd="128dp"/>
 
     <!-- The floor -->
 
@@ -79,8 +79,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:src="@mipmap/ic_sheep_floor"
             app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginTop="110dp"
-            app:layout_constraintTop_toTopOf="@id/gameIcon"/>
+            android:layout_marginBottom="0dp"
+            app:layout_constraintBottom_toTopOf="@id/btnPlay"/>
 
     <!-- Play button -->
 
