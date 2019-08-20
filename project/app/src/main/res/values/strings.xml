@@ -61,6 +61,7 @@
     <string name="game_balloon_instructions">Blow the balloon up!</string>
 
     <string name="game_sheep_instructions">Jump Sheep!</string>
+    <string name="game_sheep_instructions_line_0">Try to jump over %1$d fences</string>
     <string name="game_sheep_instructions_line_1">Make the sheep jump</string>
     <string name="game_sheep_instructions_line_2">by contracting your muscles to make him jump over fences.</string>
     <string name="game_sheep_congratulations">Congratulations!!!</string>

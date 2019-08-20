@@ -61,6 +61,7 @@
     <string name="game_balloon_instructions">Gonfle le ballon</string>
 
     <string name="game_sheep_instructions">Saute Mouton !</string>
+    <string name="game_sheep_instructions_line_0">Essaie de franchir %1$d barrières</string>
     <string name="game_sheep_instructions_line_1">Fais sauter le mouton</string>
     <string name="game_sheep_instructions_line_2">en contractant tes muscles pour lui faire sauter les barrières.</string>
     <string name="game_sheep_congratulations">Bravo !</string>

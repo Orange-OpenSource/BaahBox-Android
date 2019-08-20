@@ -29,6 +29,20 @@
     <!-- Game details -->
 
     <TextView
+            android:id="@+id/tvLine10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/game_sheep_instructions_line_0"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:typeface="sans"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
             android:id="@+id/tvLine1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
