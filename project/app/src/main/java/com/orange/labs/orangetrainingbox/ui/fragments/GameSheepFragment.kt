@@ -17,7 +17,11 @@
  */
 package com.orange.labs.orangetrainingbox.ui.fragments
 
+import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -28,6 +32,13 @@ import com.orange.labs.orangetrainingbox.tools.properties.readSheepAdditionalCon
 import com.orange.labs.orangetrainingbox.tools.properties.readSheepGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
+import org.jetbrains.anko.imageResource
+import org.jetbrains.anko.support.v4.find
+import android.util.TypedValue
+import android.view.ViewGroup
+import androidx.core.view.marginTop
+import org.jetbrains.anko.margin
+
 
 // *******
 // Classes
@@ -183,8 +194,12 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     override fun prepareGameLayout() {
         startIntroductionAnimation()
+        moveFences()
+        // TODO Check if collisions
+        // TODO Display final animation (collision or all fences jumped)
     }
 
+    
     // **********
     // Game logic
     // **********
@@ -207,5 +222,54 @@ class GameSheepFragment : AbstractGameFragment() {
 
     }
 
+    /**
+     * Makes the fences images moves above the floor from the right to the left
+     */
+    private fun moveFences() {
+
+        val loadFenceImageView = {
+            val toDp: (Float) -> Int = {
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it, resources.displayMetrics).toInt()
+            }
+            val view = ImageView(this@GameSheepFragment.context)
+            view.id = View.generateViewId()
+            view.imageResource = R.mipmap.ic_sheep_fence
+            val layoutParams = ConstraintLayout.LayoutParams(toDp(100f), toDp(100f))
+            layoutParams.setMargins(toDp(0f), toDp(212f), toDp(0f), toDp(0f))
+            view.layoutParams = layoutParams
+            view
+        }
+
+        val addFenceImageView: (ImageView) -> Any = {
+            val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
+            parentLayout.addView(it)
+            val constraintSet = ConstraintSet()
+            constraintSet.clone(parentLayout)
+            constraintSet.connect(it.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+            constraintSet.connect(it.id, ConstraintSet.END, R.id.gameSheepFloor, ConstraintSet.END)
+            constraintSet.applyTo(parentLayout)
+        }
+
+        val moveFenceImageView: (ImageView) -> Any {
+            
+        }
+
+        // Repeat for each fence according to settings
+        // TODO
+
+        // Load fence asset
+        val fenceView = loadFenceImageView()
+
+        // Add widget to the view
+        addFenceImageView(fenceView)
+
+        // Make the asset move from right to left
+        // TODO
+
+        // Remove the asset once left reached
+        // TODO
+
+
+    }
 
 }
