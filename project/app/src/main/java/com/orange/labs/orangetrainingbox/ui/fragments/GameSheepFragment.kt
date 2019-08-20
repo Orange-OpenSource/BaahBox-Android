@@ -28,26 +28,21 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.tools.properties.SheepGameConfiguration
 import com.orange.labs.orangetrainingbox.tools.properties.readSheepAdditionalConfiguration
 import com.orange.labs.orangetrainingbox.tools.properties.readSheepGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
+
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
+
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
+
 import android.util.TypedValue
-import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import androidx.core.view.marginTop
-import com.orange.labs.orangetrainingbox.tools.logs.Logger
-import org.jetbrains.anko.margin
 import android.util.DisplayMetrics
-
-
-
 
 
 // *******
@@ -188,9 +183,7 @@ class GameSheepFragment : AbstractGameFragment() {
 
         // Define the observer
         val sensorBObserver = Observer<Int> { sensorValue ->
-
             processBaahBoxData(gameConfiguration, sensorValue, difficultyFactor)
-
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
@@ -233,101 +226,60 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
-     * Makes the fences images moves above the floor from the right to the left
+     * Makes the fences images move above the floor from the right to the left
      */
     private fun moveFences() {
 
-        val loadFenceImageView = {
-            val toDp: (Float) -> Int = {
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it, resources.displayMetrics).toInt()
+        // Load the fence asset in a dedicated image view
+        val toDp: (Float) -> Int = {
+            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it, resources.displayMetrics).toInt()
+        }
+        val fenceImageView = ImageView(this@GameSheepFragment.context)
+        fenceImageView.id = View.generateViewId()
+        fenceImageView.imageResource = R.mipmap.ic_sheep_fence
+        val layoutParams = ConstraintLayout.LayoutParams(toDp(100f), toDp(100f))
+        layoutParams.setMargins(toDp(0f), toDp(214f), toDp(0f), toDp(0f))
+        fenceImageView.layoutParams = layoutParams
+
+        // Add fence image view to the game layout
+        val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
+        parentLayout.addView(fenceImageView)
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(parentLayout)
+        constraintSet.connect(fenceImageView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
+        constraintSet.connect(fenceImageView.id, ConstraintSet.END, R.id.gameSheepFloor, ConstraintSet.END)
+        constraintSet.applyTo(parentLayout)
+
+        // Prepare animation of the fence, which will be repeated
+        val metrics = DisplayMetrics()
+        activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
+
+        val objectAnimator = ObjectAnimator.ofFloat(fenceImageView, "translationX", 200f, metrics.widthPixels * -1f)
+        // TODO: Load duration from config
+        objectAnimator.duration = 2000
+        // TODO: Load count from config
+        objectAnimator.repeatCount = 10
+        objectAnimator.repeatMode = ValueAnimator.RESTART
+        objectAnimator.addListener(object : Animator.AnimatorListener {
+
+            override fun onAnimationStart(animation: Animator) {}
+
+            override fun onAnimationEnd(animation: Animator) {
+                parentLayout.removeView(fenceImageView)
+                // TODO: If no fence has been touched, load success view
             }
-            val view = ImageView(this@GameSheepFragment.context)
-            view.id = View.generateViewId()
-            view.imageResource = R.mipmap.ic_sheep_fence
-            val layoutParams = ConstraintLayout.LayoutParams(toDp(100f), toDp(100f))
-            layoutParams.setMargins(toDp(0f), toDp(214f), toDp(0f), toDp(0f))
-            view.layoutParams = layoutParams
-            view
-        }
 
-        val addFenceImageView: (ImageView) -> Unit = {
-            val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
-            parentLayout.addView(it)
-            val constraintSet = ConstraintSet()
-            constraintSet.clone(parentLayout)
-            constraintSet.connect(it.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-            constraintSet.connect(it.id, ConstraintSet.END, R.id.gameSheepFloor, ConstraintSet.END)
-            constraintSet.applyTo(parentLayout)
-        }
+            override fun onAnimationCancel(animation: Animator) {}
 
-        val moveFenceImageView: (ImageView) -> Unit = {
-            //val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
-            val metrics = DisplayMetrics()
-            activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
+            override fun onAnimationRepeat(animation: Animator) {
+                // TODO: If no collision has been made, update text of UI  about remaining fences to jump over
+            }
 
-            val objectAnimator = ObjectAnimator.ofFloat(it, "translationX", 200f,metrics.widthPixels* (-1f))
-            objectAnimator.duration = 2000
-            objectAnimator.repeatCount = 10
-            objectAnimator.repeatMode = ValueAnimator.RESTART
-            objectAnimator.addListener(object : Animator.AnimatorListener {
+        })
 
-                override fun onAnimationStart(animation: Animator) {
-                    Logger.d(">>>>>>> Start")
+        objectAnimator.start()
 
-                }
-
-                override fun onAnimationEnd(animation: Animator) {
-                    Logger.d(">>>>>>> End")
-                    val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
-                    parentLayout.removeView(it)
-                }
-
-                override fun onAnimationCancel(animation: Animator) {}
-
-                override fun onAnimationRepeat(animation: Animator) {
-                    Logger.d(">>>>>>> Repeat")
-                }
-            })
-
-            objectAnimator.start()
-
-
-            /*
-            val animSlide = AnimationUtils.loadAnimation(this@GameSheepFragment.context, R.anim.fence_slide)
-            animSlide.repeatCount = 6
-            animSlide.repeatMode = Animation.INFINITE
-            animSlide.duration = 5000
-            animSlide.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {
-                    Logger.d(">>>> Start of animation")
-                }
-                override fun onAnimationEnd(animation: Animation) {
-                    Logger.d(">>>> End of animation")
-
-                    //val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
-                    //parentLayout.removeView(it)
-
-                }
-                override fun onAnimationRepeat(animation: Animation) {
-                    Logger.d(">>>> Repeat of animation")
-                }
-            })
-            it.startAnimation(animSlide)
-            */
-
-        }
-
-        // Repeat for each fence according to settings
-        // TODO
-
-        // Load fence asset
-        val fenceView = loadFenceImageView()
-
-        // Add widget to the view
-        addFenceImageView(fenceView)
-
-        // Make the asset move from right to left
-        moveFenceImageView(fenceView)
+        // TODO: Check collisions
 
     }
 
