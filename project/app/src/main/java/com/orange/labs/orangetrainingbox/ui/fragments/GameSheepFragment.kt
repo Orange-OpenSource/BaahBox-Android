@@ -17,6 +17,9 @@
  */
 package com.orange.labs.orangetrainingbox.ui.fragments
 
+import android.animation.Animator
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +44,10 @@ import android.view.animation.AnimationUtils
 import androidx.core.view.marginTop
 import com.orange.labs.orangetrainingbox.tools.logs.Logger
 import org.jetbrains.anko.margin
+import android.util.DisplayMetrics
+
+
+
 
 
 // *******
@@ -254,16 +261,60 @@ class GameSheepFragment : AbstractGameFragment() {
         }
 
         val moveFenceImageView: (ImageView) -> Unit = {
-            val animSlide = AnimationUtils.loadAnimation(this@GameSheepFragment.context, R.anim.fence_slide)
-            it.startAnimation(animSlide)
-            animSlide.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation) {}
-                override fun onAnimationEnd(animation: Animation) {
+            //val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
+            val metrics = DisplayMetrics()
+            activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
+
+            val objectAnimator = ObjectAnimator.ofFloat(it, "translationX", 200f,metrics.widthPixels* (-1f))
+            objectAnimator.duration = 2000
+            objectAnimator.repeatCount = 10
+            objectAnimator.repeatMode = ValueAnimator.RESTART
+            objectAnimator.addListener(object : Animator.AnimatorListener {
+
+                override fun onAnimationStart(animation: Animator) {
+                    Logger.d(">>>>>>> Start")
+
+                }
+
+                override fun onAnimationEnd(animation: Animator) {
+                    Logger.d(">>>>>>> End")
                     val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
                     parentLayout.removeView(it)
                 }
-                override fun onAnimationRepeat(animation: Animation) {}
+
+                override fun onAnimationCancel(animation: Animator) {}
+
+                override fun onAnimationRepeat(animation: Animator) {
+                    Logger.d(">>>>>>> Repeat")
+                }
             })
+
+            objectAnimator.start()
+
+
+            /*
+            val animSlide = AnimationUtils.loadAnimation(this@GameSheepFragment.context, R.anim.fence_slide)
+            animSlide.repeatCount = 6
+            animSlide.repeatMode = Animation.INFINITE
+            animSlide.duration = 5000
+            animSlide.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {
+                    Logger.d(">>>> Start of animation")
+                }
+                override fun onAnimationEnd(animation: Animation) {
+                    Logger.d(">>>> End of animation")
+
+                    //val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
+                    //parentLayout.removeView(it)
+
+                }
+                override fun onAnimationRepeat(animation: Animation) {
+                    Logger.d(">>>> Repeat of animation")
+                }
+            })
+            it.startAnimation(animSlide)
+            */
+
         }
 
         // Repeat for each fence according to settings

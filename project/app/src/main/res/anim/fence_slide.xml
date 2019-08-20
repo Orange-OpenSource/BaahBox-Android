@@ -23,7 +23,6 @@
 
     <translate
             android:fromXDelta="20%p"
-            android:toXDelta="-100%p"
-            android:duration="20000" />
+            android:toXDelta="-100%p"/>
 
 </set>
