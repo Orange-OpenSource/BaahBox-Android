@@ -36,7 +36,10 @@ import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.core.view.marginTop
+import com.orange.labs.orangetrainingbox.tools.logs.Logger
 import org.jetbrains.anko.margin
 
 
@@ -235,12 +238,12 @@ class GameSheepFragment : AbstractGameFragment() {
             view.id = View.generateViewId()
             view.imageResource = R.mipmap.ic_sheep_fence
             val layoutParams = ConstraintLayout.LayoutParams(toDp(100f), toDp(100f))
-            layoutParams.setMargins(toDp(0f), toDp(212f), toDp(0f), toDp(0f))
+            layoutParams.setMargins(toDp(0f), toDp(214f), toDp(0f), toDp(0f))
             view.layoutParams = layoutParams
             view
         }
 
-        val addFenceImageView: (ImageView) -> Any = {
+        val addFenceImageView: (ImageView) -> Unit = {
             val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
             parentLayout.addView(it)
             val constraintSet = ConstraintSet()
@@ -250,8 +253,17 @@ class GameSheepFragment : AbstractGameFragment() {
             constraintSet.applyTo(parentLayout)
         }
 
-        val moveFenceImageView: (ImageView) -> Any {
-            
+        val moveFenceImageView: (ImageView) -> Unit = {
+            val animSlide = AnimationUtils.loadAnimation(this@GameSheepFragment.context, R.anim.fence_slide)
+            it.startAnimation(animSlide)
+            animSlide.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation) {}
+                override fun onAnimationEnd(animation: Animation) {
+                    val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
+                    parentLayout.removeView(it)
+                }
+                override fun onAnimationRepeat(animation: Animation) {}
+            })
         }
 
         // Repeat for each fence according to settings
@@ -264,11 +276,7 @@ class GameSheepFragment : AbstractGameFragment() {
         addFenceImageView(fenceView)
 
         // Make the asset move from right to left
-        // TODO
-
-        // Remove the asset once left reached
-        // TODO
-
+        moveFenceImageView(fenceView)
 
     }
 
