@@ -162,6 +162,7 @@ class GameSheepFragment : AbstractGameFragment() {
     override fun onPause() {
         super.onPause()
         gameIconAnimator?.stopAnimateGameIcon()
+        // FIXME Deal with fences when activity paused / resumed
     }
 
     // TODO Enrich this doc
