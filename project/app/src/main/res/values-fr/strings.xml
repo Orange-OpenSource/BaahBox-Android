@@ -62,7 +62,7 @@
 
     <string name="game_sheep_instructions">Saute Mouton !</string>
     <string name="game_sheep_instructions_line_1">Fais sauter le mouton</string>
-    <string name="game_sheep_instructions_line_2">en contractant tes muscles.</string>
+    <string name="game_sheep_instructions_line_2">en contractant tes muscles pour lui faire sauter les barrières.</string>
     <string name="game_sheep_congratulations">Bravo !</string>
     <string name="game_sheep_comforting">Essaie encore&#8230;</string>
     <string name="game_sheep_score_details">Tu as sauté %1$d/%1$d barrières !</string>
