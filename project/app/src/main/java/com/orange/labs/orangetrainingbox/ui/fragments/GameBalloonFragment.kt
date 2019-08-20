@@ -42,7 +42,7 @@ import org.jetbrains.anko.imageResource
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.1.0
+ * @version 2.2.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
@@ -174,6 +174,13 @@ class GameBalloonFragment : AbstractGameFragment() {
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         model.sensorB.observe(this, sensorBObserver)
 
+    }
+
+    /**
+     * Does nothing
+     */
+    override fun prepareGameLayout() {
+        // FIXME Useless, dirty
     }
 
     // **********

@@ -36,7 +36,7 @@ import android.view.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 23/05/2019
- * @version 2.0.0
+ * @version 2.1.0
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
@@ -108,7 +108,7 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
                     stopIntroductionAnimation()
                 }
 
-                // Restart the game
+            // Restart the game
             } else {
                 btnRestart.onClick {
                     val bundle = Bundle()
@@ -118,9 +118,10 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
                 }
             }
 
-            // Otherwise define the model and the sensor observer for the game
+        // Otherwise define the model and the sensor observer for the game
         } else {
             prepareSensorObserver()
+            prepareGameLayout()
         }
 
     }
@@ -171,6 +172,12 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
      * The game logic starts there.
      */
     abstract fun prepareSensorObserver()
+
+    /**
+     * Prepares the inheriting classes for the game logic, the animations and other logic for the game.
+     * The game animations start here.
+     */
+    abstract fun prepareGameLayout()
 
 }
 

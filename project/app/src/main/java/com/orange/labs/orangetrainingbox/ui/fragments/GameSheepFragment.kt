@@ -177,6 +177,14 @@ class GameSheepFragment : AbstractGameFragment() {
 
     }
 
+    /**
+     * Prepares the inheriting classes for the game logic, the animations and other logic for the game.
+     * The game animations start here.
+     */
+    override fun prepareGameLayout() {
+        startIntroductionAnimation()
+    }
+
     // **********
     // Game logic
     // **********

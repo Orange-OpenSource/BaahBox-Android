@@ -38,7 +38,7 @@ import kotlinx.android.synthetic.main.fragment_game_star_playing.*
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.3.0
+ * @version 2.4.0
  * @see [AbstractGameFragment]
  */
 class GameStarFragment : AbstractGameFragment() {
@@ -144,6 +144,14 @@ class GameStarFragment : AbstractGameFragment() {
         model.sensorB.observe(this, sensorBObserver)
 
     }
+
+    /**
+     * Does nothing
+     */
+    override fun prepareGameLayout() {
+        // FIXME Useless, dirty
+    }
+
 
     // **********
     // Game logic
