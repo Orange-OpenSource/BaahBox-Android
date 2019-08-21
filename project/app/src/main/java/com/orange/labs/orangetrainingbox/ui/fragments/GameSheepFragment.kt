@@ -41,6 +41,7 @@ import android.util.TypedValue
 import android.util.DisplayMetrics
 import com.orange.labs.orangetrainingbox.tools.logs.Logger
 import com.orange.labs.orangetrainingbox.tools.properties.SheepGameDefaultConfiguration
+import com.orange.labs.orangetrainingbox.tools.structures.Queue
 
 
 // *******
@@ -66,14 +67,19 @@ class GameSheepFragment : AbstractGameFragment() {
     // **********
 
     /**
-     * Permits to play some kind of animations for the game icon
+     * Permits to play some kind of animations for the game icon, i.e. here move the legs of the sheep.
      */
     private lateinit var gameIconAnimator: IconAnimator
 
     /**
-     * Permits to play animations for fences
+     * Permits to play animations for fences, i.e. make them move on the floor.
      */
     private lateinit var fencesAnimator: ObjectAnimator
+
+    /**
+     * Permits to play animations for the sheep, i.e. make it jump over fences.
+     */
+    private lateinit var sheepAnimator: ObjectAnimator
 
     /**
      * The default configuration for this game
@@ -81,9 +87,31 @@ class GameSheepFragment : AbstractGameFragment() {
     private lateinit var defaultGameConfiguration: SheepGameDefaultConfiguration
 
     /**
+     * The global configuration for this game
+     */
+    private lateinit var gameConfiguration: SheepGameConfiguration
+
+    /**
      * The difficulty factor to apply
      */
     private var difficultyFactor: Double = 0.0
+
+    /**
+     * The initial position (Y-axis) of the sheep image view.
+     * The sheep view should not go under.
+     */
+    private var sheepInitialVerticalPosition: Float = 0f
+
+    /**
+     * The maximal position tin Y axis the sheep can reach.
+     * It cannot go higher.
+     */
+    private var sheepHighestVerticalPosition: Float = 0f
+
+    /**
+     * The last points broadcast by the Baah box
+     */
+    private val lastPoints = Queue<Int>(20)
 
 
     // ***********************************
@@ -178,12 +206,12 @@ class GameSheepFragment : AbstractGameFragment() {
         } ?: throw Exception("Invalid Activity")
 
         defaultGameConfiguration = context!!.readSheepAdditionalConfiguration()
-        val gameConfiguration = context!!.readSheepGameConfiguration()
+        gameConfiguration = context!!.readSheepGameConfiguration()
         difficultyFactor = getDifficultyNumericValue()
 
         // Define the observer
         val sensorBObserver = Observer<Int> { sensorValue ->
-            processBaahBoxData(gameConfiguration, sensorValue, difficultyFactor)
+            processBaahBoxData(sensorValue)
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer
@@ -199,6 +227,8 @@ class GameSheepFragment : AbstractGameFragment() {
     override fun prepareGameLayout() {
         startIntroductionAnimation()
         moveFences()
+        sheepInitialVerticalPosition = find<ImageView>(R.id.gameIcon).y
+        sheepHighestVerticalPosition = sheepInitialVerticalPosition + 300
         // TODO Check if collisions
         // TODO Display final animation (collision or all fences jumped)
     }
@@ -224,20 +254,85 @@ class GameSheepFragment : AbstractGameFragment() {
     // **********
 
     // TODO Enrich this doc
+
     /**
      * The logic of this game.
-     * Get from properties the thresholds to apply for the game.
      * According to the gotten sensor value, will do things (display score, congratulation message, ...)
      *
-     * @param configuration The game configuration
-     * @param userInput The data given by the Baah box
-     * @param difficultyFactor The numeric value to apply for inputs to create a kind of difficulty
+     * @param userInput The data given by the Baah box, i.e. the sensor value
      */
-    private fun processBaahBoxData(configuration: SheepGameConfiguration, userInput: Int,
-                                   difficultyFactor: Double) {
+    private fun processBaahBoxData(userInput: Int) {
 
+        Logger.d(">>>>> Sensor value: $userInput")
+        lastPoints.enqueue(userInput)
+
+        moveSheep(userInput)
+
+    }
+
+    /**
+     * Moves the sheep with an Y-axis translation using an offset based on uer input / sensor value
+     *
+     * @param offset The sensor value to sue for the translation
+     */
+    private fun moveSheep(offset: Int){
+
+        // Get elements like image view and positions
         // TODO
 
+        // Check if the sheep must go higher (i.e. muscles contraction)
+        // TODO
+
+        // Check if sheep must fall (i.e. muscles detraction)
+        // TODO
+
+        // Check if shep must remain at that high (i.e. almost same contraction of muscles)
+        // TODO
+
+        /*
+
+
+        val sheepImageView = find<ImageView>(R.id.gameIcon)
+        val startY = sheepImageView.y
+        val endY = (startY + offset) * -1
+
+        // No need to go under the floor, sheeps are not worms nor moles
+        if (startY <= sheepInitialVerticalPosition) return
+
+        // "🎤 🐑 I believe I can flyyyyyy" - No Shaun, you don't
+        if (startY >= sheepHighestVerticalPosition) return
+
+        sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "translationY", startY, endY)
+
+        Logger.d(">>>>> Sheep $startY -> $endY")
+
+        // TODO: Load/update duration and fences count from preferences
+        sheepAnimator.duration = 10000 // FIXME
+
+        sheepAnimator.addListener(object : Animator.AnimatorListener {
+
+            override fun onAnimationStart(animation: Animator) {
+                Logger.d(">>>>> Sheep animation started")
+            }
+
+            override fun onAnimationEnd(animation: Animator) {
+                Logger.d(">>>>> Sheep animation ended")
+                // TODO: If no fence has been touched, load success view
+            }
+
+            override fun onAnimationCancel(animation: Animator) {
+                Logger.d(">>>>> Sheep animation canceled")
+            }
+
+            override fun onAnimationRepeat(animation: Animator) {
+                Logger.d(">>>>> Sheep animation repeated")
+                // TODO: If no collision has been made, update text of UI  about remaining fences to jump over
+            }
+
+        })
+
+        sheepAnimator.start()
+        */
     }
 
     /**
