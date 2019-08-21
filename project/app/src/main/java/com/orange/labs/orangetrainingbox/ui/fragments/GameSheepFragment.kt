@@ -40,6 +40,7 @@ import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
 import com.orange.labs.orangetrainingbox.tools.logs.Logger
+import com.orange.labs.orangetrainingbox.tools.properties.SheepGameDefaultConfiguration
 
 
 // *******
@@ -67,12 +68,23 @@ class GameSheepFragment : AbstractGameFragment() {
     /**
      * Permits to play some kind of animations for the game icon
      */
-    private var gameIconAnimator: IconAnimator? = null
+    private lateinit var gameIconAnimator: IconAnimator
 
     /**
      * Permits to play animations for fences
      */
     private lateinit var fencesAnimator: ObjectAnimator
+
+    /**
+     * The default configuration for this game
+     */
+    private lateinit var defaultGameConfiguration: SheepGameDefaultConfiguration
+
+    /**
+     * The difficulty factor to apply
+     */
+    private var difficultyFactor: Double = 0.0
+
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -141,7 +153,7 @@ class GameSheepFragment : AbstractGameFragment() {
     override fun startIntroductionAnimation() {
         gameIconAnimator = IconAnimator()
         val period = context!!.readSheepAdditionalConfiguration().sheepAnimationPeriod
-        gameIconAnimator!!.animateGameIcon((activity as AppCompatActivity), gameIcon, period,
+        gameIconAnimator.animateGameIcon((activity as AppCompatActivity), gameIcon, period,
             arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
     }
 
@@ -149,32 +161,32 @@ class GameSheepFragment : AbstractGameFragment() {
      * Stops the [IconAnimator]
      */
     override fun stopIntroductionAnimation() {
-        gameIconAnimator!!.stopAnimateGameIcon()
+        if (::gameIconAnimator.isInitialized) gameIconAnimator.stopAnimateGameIcon()
     }
 
-    // TODO Enrich this doc
     /**
      * Prepare the Bluetooth LE sensor observer.
      * Defines the behaviour of the observer using the sensor value, and thus the logic of the game.
-     * Get from properties the thresholds of the sheep game.
+     * Get from properties the configuration details of the sheep game like difficulty factor or numeric values for examples.
      * Use the value returned by the sensor and process the game logic.
      */
     override fun prepareSensorObserver() {
 
-        // Get the ViewModel.
+        // Get the ViewModel
         model = activity?.run {
             ViewModelProviders.of(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
+        defaultGameConfiguration = context!!.readSheepAdditionalConfiguration()
         val gameConfiguration = context!!.readSheepGameConfiguration()
-        val difficultyFactor = getDifficultyNumericValue()
+        difficultyFactor = getDifficultyNumericValue()
 
         // Define the observer
         val sensorBObserver = Observer<Int> { sensorValue ->
             processBaahBoxData(gameConfiguration, sensorValue, difficultyFactor)
         }
 
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer
         model.sensorB.observe(this, sensorBObserver)
 
     }
@@ -191,6 +203,7 @@ class GameSheepFragment : AbstractGameFragment() {
         // TODO Display final animation (collision or all fences jumped)
     }
 
+
     // *****************
     // Lifecycle methods
     // *****************
@@ -201,9 +214,10 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     override fun onPause() {
         super.onPause()
-        gameIconAnimator?.stopAnimateGameIcon()
+        if (::gameIconAnimator.isInitialized) gameIconAnimator.stopAnimateGameIcon()
         if (::fencesAnimator.isInitialized) fencesAnimator.pause()
     }
+
 
     // **********
     // Game logic
@@ -293,10 +307,9 @@ class GameSheepFragment : AbstractGameFragment() {
         activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
 
         fencesAnimator = ObjectAnimator.ofFloat(view, "translationX", 200f, metrics.widthPixels * -1f)
-        // TODO: Load duration from config
-        fencesAnimator.duration = 2000
-        // TODO: Load count from config
-        fencesAnimator.repeatCount = 10
+        // TODO: Load/update duration and fences count from preferences
+        fencesAnimator.duration = defaultGameConfiguration.defaultSpeed.toLong()
+        fencesAnimator.repeatCount = defaultGameConfiguration.defaultFencesCount - 1 // For k fences, repeat k-1 times
         fencesAnimator.repeatMode = ValueAnimator.RESTART
 
         fencesAnimator.addListener(object : Animator.AnimatorListener {

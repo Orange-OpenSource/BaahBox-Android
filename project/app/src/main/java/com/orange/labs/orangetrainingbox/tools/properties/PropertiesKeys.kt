@@ -89,9 +89,9 @@ enum class PropertiesKeys(val key: String) {
      */
     GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD("game_sheep_introduction_animation_period"),
     /**
-     * Defines the default speed for the sheep, i.e. the speed for which the floor with fences move
+     * Defines the default speed for the sheep / fences, i.e. the speed for which the floor with fences move
      */
-    GAME_SHEEP_DEFAULT_SPEED_VALUE("game_sheep_speed_default_value"),
+    GAME_SHEEP_DEFAULT_SPEED_VALUE("game_sheep_fences_default_speed"),
     /**
      * Defines the default number of fences to jump over
      */

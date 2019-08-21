@@ -47,6 +47,7 @@ import org.jetbrains.anko.imageResource
  */
 class GameBalloonFragment : AbstractGameFragment() {
 
+
     // **********
     // Properties
     // **********
@@ -55,6 +56,7 @@ class GameBalloonFragment : AbstractGameFragment() {
      * Permits to play some kind of animations for the game icon
      */
     private var gameIconAnimator: IconAnimator? = null
+
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -180,7 +182,7 @@ class GameBalloonFragment : AbstractGameFragment() {
      * Does nothing
      */
     override fun prepareGameLayout() {
-        // FIXME Useless, dirty
+        // FIXME Useless, dirty, empty
     }
 
     // **********

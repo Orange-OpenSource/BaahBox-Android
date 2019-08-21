@@ -36,7 +36,7 @@ import android.view.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 23/05/2019
- * @version 2.1.0
+ * @version 2.1.1
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
@@ -169,12 +169,16 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
     /**
      * Prepares the observer for the sensor which will receive the data broadcast by the Baah Box sensors.
      * The game logic starts there.
+     * This method is called when the activity is resuming.
+     * Called before _prepareGameLayout_.
      */
     abstract fun prepareSensorObserver()
 
     /**
      * Prepares the inheriting classes for the game logic, the animations and other logic for the game.
      * The game animations start here.
+     * This method is called when the activity is resuming.
+     * Called after _prepareSensorObserver_.
      */
     abstract fun prepareGameLayout()
 
