@@ -28,21 +28,18 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.tools.properties.SheepGameConfiguration
 import com.orange.labs.orangetrainingbox.tools.properties.readSheepAdditionalConfiguration
 import com.orange.labs.orangetrainingbox.tools.properties.readSheepGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
-
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
-
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
-
 import android.util.TypedValue
 import android.util.DisplayMetrics
+import com.orange.labs.orangetrainingbox.tools.logs.Logger
 
 
 // *******
@@ -72,6 +69,10 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     private var gameIconAnimator: IconAnimator? = null
 
+    /**
+     * Permits to play animations for fences
+     */
+    private lateinit var fencesAnimator: ObjectAnimator
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -151,20 +152,6 @@ class GameSheepFragment : AbstractGameFragment() {
         gameIconAnimator!!.stopAnimateGameIcon()
     }
 
-
-    // *******
-    // Methods
-    // *******
-
-    /**
-     * Fragment lifecycle
-     */
-    override fun onPause() {
-        super.onPause()
-        gameIconAnimator?.stopAnimateGameIcon()
-        // FIXME Deal with fences when activity paused / resumed
-    }
-
     // TODO Enrich this doc
     /**
      * Prepare the Bluetooth LE sensor observer.
@@ -194,7 +181,8 @@ class GameSheepFragment : AbstractGameFragment() {
 
     /**
      * Prepares the inheriting classes for the game logic, the animations and other logic for the game.
-     * The game animations start here.
+     * The game animations start here (sheep icon, fences).
+     * This method is triggered from the super-class when the activity is resuming.
      */
     override fun prepareGameLayout() {
         startIntroductionAnimation()
@@ -203,11 +191,23 @@ class GameSheepFragment : AbstractGameFragment() {
         // TODO Display final animation (collision or all fences jumped)
     }
 
-    
+    // *****************
+    // Lifecycle methods
+    // *****************
+
+    /**
+     * Fragment lifecycle>.
+     * Stops animations if running.
+     */
+    override fun onPause() {
+        super.onPause()
+        gameIconAnimator?.stopAnimateGameIcon()
+        if (::fencesAnimator.isInitialized) fencesAnimator.pause()
+    }
+
     // **********
     // Game logic
     // **********
-
 
     // TODO Enrich this doc
     /**
@@ -231,10 +231,35 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     private fun moveFences() {
 
-        // Load the fence asset in a dedicated image view
+        // Resume animations if paused (e.g. when fragment paused)
+        if (::fencesAnimator.isInitialized && fencesAnimator.isPaused) {
+            fencesAnimator.resume()
+        // Prepare animation of the fence, which will be repeated
+        } else {
+            // Loads and adds the fence asset in a dedicated image view
+            val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
+            val fenceImageView = addNewFenceView(parentLayout)
+            fencesAnimator = createAnimator(fenceImageView, parentLayout)
+            fencesAnimator.start()
+        }
+
+    }
+
+    /**
+     * Creates a new image view for the fence.
+     * Uses [ConstraintLayout] params for configuration.
+     * Adds the view to the parent layout.
+     *
+     * @param parent The parent layout
+     * @return [ImageView]  The new view added to the parent layout
+     */
+    private fun addNewFenceView(parent: ConstraintLayout): ImageView {
+
         val toDp: (Float) -> Int = {
             TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it, resources.displayMetrics).toInt()
         }
+
+        // Create the new image view
         val fenceImageView = ImageView(this@GameSheepFragment.context)
         fenceImageView.id = View.generateViewId()
         fenceImageView.imageResource = R.mipmap.ic_sheep_fence
@@ -242,46 +267,64 @@ class GameSheepFragment : AbstractGameFragment() {
         layoutParams.setMargins(toDp(0f), toDp(214f), toDp(0f), toDp(0f))
         fenceImageView.layoutParams = layoutParams
 
-        // Add fence image view to the game layout
-        val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
-        parentLayout.addView(fenceImageView)
+        // Add the new view to parent layout with constraints
+        parent.addView(fenceImageView)
         val constraintSet = ConstraintSet()
-        constraintSet.clone(parentLayout)
+        constraintSet.clone(parent)
         constraintSet.connect(fenceImageView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
         constraintSet.connect(fenceImageView.id, ConstraintSet.END, R.id.gameSheepFloor, ConstraintSet.END)
-        constraintSet.applyTo(parentLayout)
+        constraintSet.applyTo(parent)
 
-        // Prepare animation of the fence, which will be repeated
+        return fenceImageView
+
+    }
+
+    /**
+     * Creates and returns an animator which will make X-axis translations to animate an image view using
+     * its parent layout. The parent layout is used to remove the view once animation ended.
+     * Uses configuration details picked from preferences or in-app config.
+     *
+     * @param view The image view to animate
+     * @return [ObjectAnimator] The animator dealing with the view
+     */
+    private fun createAnimator(view: ImageView, parent: ConstraintLayout): ObjectAnimator {
+
         val metrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
 
-        val objectAnimator = ObjectAnimator.ofFloat(fenceImageView, "translationX", 200f, metrics.widthPixels * -1f)
+        fencesAnimator = ObjectAnimator.ofFloat(view, "translationX", 200f, metrics.widthPixels * -1f)
         // TODO: Load duration from config
-        objectAnimator.duration = 2000
+        fencesAnimator.duration = 2000
         // TODO: Load count from config
-        objectAnimator.repeatCount = 10
-        objectAnimator.repeatMode = ValueAnimator.RESTART
-        objectAnimator.addListener(object : Animator.AnimatorListener {
+        fencesAnimator.repeatCount = 10
+        fencesAnimator.repeatMode = ValueAnimator.RESTART
 
-            override fun onAnimationStart(animation: Animator) {}
+        fencesAnimator.addListener(object : Animator.AnimatorListener {
+
+            override fun onAnimationStart(animation: Animator) {
+                Logger.d(">>>>> Fence animation started")
+            }
 
             override fun onAnimationEnd(animation: Animator) {
-                parentLayout.removeView(fenceImageView)
+                Logger.d(">>>>> Fence animation ended")
+                parent.removeView(view)
                 // TODO: If no fence has been touched, load success view
             }
 
-            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationCancel(animation: Animator) {
+                Logger.d(">>>>> Fence animation canceled")
+            }
 
             override fun onAnimationRepeat(animation: Animator) {
+                Logger.d(">>>>> Fence animation repeated")
                 // TODO: If no collision has been made, update text of UI  about remaining fences to jump over
             }
 
         })
 
-        objectAnimator.start()
+        return fencesAnimator
 
         // TODO: Check collisions
-
     }
 
 }

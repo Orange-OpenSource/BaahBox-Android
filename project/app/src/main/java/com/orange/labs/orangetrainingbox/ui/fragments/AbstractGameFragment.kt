@@ -94,7 +94,6 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
 
         super.onResume()
 
-
         // If not playing, start animation and prepare play button if introduction screen, else prepare for restart
         if (!playing) {
 
