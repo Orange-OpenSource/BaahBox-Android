@@ -30,18 +30,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
-import com.orange.labs.orangetrainingbox.tools.properties.SheepGameConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.readSheepAdditionalConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.readSheepGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.SheepGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readSheepAdditionalConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readSheepGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
-import com.orange.labs.orangetrainingbox.tools.logs.Logger
-import com.orange.labs.orangetrainingbox.tools.properties.SheepGameDefaultConfiguration
-import com.orange.labs.orangetrainingbox.tools.structures.Queue
+import com.orange.labs.orangetrainingbox.btle.SensorDataSeries
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import com.orange.labs.orangetrainingbox.utils.properties.SheepGameDefaultConfiguration
+import com.orange.labs.orangetrainingbox.utils.structures.Queue
 
 
 // *******
@@ -109,9 +110,9 @@ class GameSheepFragment : AbstractGameFragment() {
     private var sheepHighestVerticalPosition: Float = 0f
 
     /**
-     * The last points broadcast by the Baah box
+     * The registry for sensor data records
      */
-    private val lastPoints = Queue<Int>(20)
+    private val lastPoints = SensorDataSeries(20)
 
 
     // ***********************************
@@ -264,7 +265,10 @@ class GameSheepFragment : AbstractGameFragment() {
     private fun processBaahBoxData(userInput: Int) {
 
         Logger.d(">>>>> Sensor value: $userInput")
-        lastPoints.enqueue(userInput)
+        lastPoints.addRecord(userInput)
+
+        val trend = lastPoints.trendOfRecordedData()
+        Logger.d(">>>>> Trend: $trend")
 
         moveSheep(userInput)
 
@@ -348,7 +352,7 @@ class GameSheepFragment : AbstractGameFragment() {
             // Loads and adds the fence asset in a dedicated image view
             val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
             val fenceImageView = addNewFenceView(parentLayout)
-            fencesAnimator = createAnimator(fenceImageView, parentLayout)
+            fencesAnimator = createFenceAnimator(fenceImageView, parentLayout)
             fencesAnimator.start()
         }
 
@@ -392,11 +396,12 @@ class GameSheepFragment : AbstractGameFragment() {
      * Creates and returns an animator which will make X-axis translations to animate an image view using
      * its parent layout. The parent layout is used to remove the view once animation ended.
      * Uses configuration details picked from preferences or in-app config.
+     * This animator is more for fences.
      *
      * @param view The image view to animate
      * @return [ObjectAnimator] The animator dealing with the view
      */
-    private fun createAnimator(view: ImageView, parent: ConstraintLayout): ObjectAnimator {
+    private fun createFenceAnimator(view: ImageView, parent: ConstraintLayout): ObjectAnimator {
 
         val metrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(metrics)

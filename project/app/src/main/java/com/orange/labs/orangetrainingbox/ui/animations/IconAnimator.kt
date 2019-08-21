@@ -19,7 +19,6 @@ package com.orange.labs.orangetrainingbox.ui.animations
 
 import android.app.Activity
 import android.widget.ImageView
-import com.orange.labs.orangetrainingbox.tools.properties.readBalloonAdditionalConfiguration
 import org.jetbrains.anko.imageResource
 import java.util.*
 import kotlin.concurrent.schedule

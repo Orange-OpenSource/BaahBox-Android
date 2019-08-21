@@ -25,9 +25,9 @@ import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.InputsParser
-import com.orange.labs.orangetrainingbox.tools.properties.BalloonGameConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.readBalloonAdditionalConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.readBalloonGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.BalloonGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readBalloonAdditionalConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readBalloonGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
 import kotlinx.android.synthetic.main.fragment_game_balloon_playing.*
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon

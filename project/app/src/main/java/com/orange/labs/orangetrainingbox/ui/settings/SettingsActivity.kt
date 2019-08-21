@@ -23,7 +23,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import com.orange.labs.orangetrainingbox.tools.properties.PropertiesKeys
+import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import android.app.Activity
 import android.content.Intent
 

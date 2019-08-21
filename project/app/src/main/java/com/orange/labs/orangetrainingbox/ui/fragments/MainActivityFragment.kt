@@ -23,8 +23,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import com.orange.labs.orangetrainingbox.R
-import com.orange.labs.orangetrainingbox.tools.logs.Logger
-import com.orange.labs.orangetrainingbox.tools.properties.readAppGamesConfiguration
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import com.orange.labs.orangetrainingbox.utils.properties.readAppGamesConfiguration
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 

@@ -25,8 +25,8 @@ import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.InputsParser
-import com.orange.labs.orangetrainingbox.tools.properties.StarGameConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.readStarGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readStarGameConfiguration
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
 import kotlinx.android.synthetic.main.fragment_game_star_playing.*
 

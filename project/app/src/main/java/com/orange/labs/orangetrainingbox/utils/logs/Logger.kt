@@ -16,7 +16,7 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.orange.labs.orangetrainingbox.tools.logs
+package com.orange.labs.orangetrainingbox.utils.logs
 
 import android.util.Log
 

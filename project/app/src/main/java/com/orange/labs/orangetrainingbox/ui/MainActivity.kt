@@ -46,10 +46,10 @@ import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import com.orange.labs.orangetrainingbox.game.InputsParser
-import com.orange.labs.orangetrainingbox.tools.logs.Logger
-import com.orange.labs.orangetrainingbox.tools.properties.BleConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.PropertiesKeys
-import com.orange.labs.orangetrainingbox.tools.properties.readBleSensorsConfiguration
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import com.orange.labs.orangetrainingbox.utils.properties.BleConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
+import com.orange.labs.orangetrainingbox.utils.properties.readBleSensorsConfiguration
 import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 

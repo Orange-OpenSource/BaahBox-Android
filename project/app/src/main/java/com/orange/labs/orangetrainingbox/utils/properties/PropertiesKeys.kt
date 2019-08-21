@@ -16,7 +16,7 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.orange.labs.orangetrainingbox.tools.properties
+package com.orange.labs.orangetrainingbox.utils.properties
 
 /**
  * Enumeration defining objects for properties to configure the app.

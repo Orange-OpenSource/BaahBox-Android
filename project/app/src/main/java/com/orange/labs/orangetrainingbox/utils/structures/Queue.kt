@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.orange.labs.orangetrainingbox.tools.structures
+package com.orange.labs.orangetrainingbox.utils.structures
 
 import java.lang.IllegalArgumentException
 
@@ -129,7 +129,9 @@ class Queue<T>(private val maxSize: Int) {
  * @return Int The average of items in this list
  */
 fun <Int> Queue<kotlin.Int>.average(): kotlin.Int {
+    val count = count()
+    if (count <= 0) return 0
     var sum = 0
     elements.forEach { sum += it }
-    return sum / count()
+    return sum / count
 }

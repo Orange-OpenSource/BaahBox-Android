@@ -21,7 +21,7 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
-import com.orange.labs.orangetrainingbox.tools.properties.readDifficultyDetailsConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readDifficultyDetailsConfiguration
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import kotlinx.android.synthetic.main.fragment_game_star_outro.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
