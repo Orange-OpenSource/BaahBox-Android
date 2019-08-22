@@ -34,7 +34,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 1.1.0
+ * @version 1.1.1
  */
 class MainActivityFragment : AbstractThemedFragment() {
 
@@ -76,28 +76,28 @@ class MainActivityFragment : AbstractThemedFragment() {
         if (enableBalloon) {
             menu_balloon.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameBalloonFragment) }
         } else {
-            Logger.i("Star game is not enabled")
+            Logger.i("Balloon game is not enabled")
             menu_balloon.alpha = 0.1f
         }
 
         if (enableSheep) {
             menu_sheep.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameSheepFragment) }
         } else {
-            Logger.i("Star game is not enabled")
+            Logger.i("Sheep game is not enabled")
             menu_sheep.alpha = 0.1f
         }
 
         if (enableSpace) {
             menu_space.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameSpaceFragment) }
         } else {
-            Logger.i("Star game is not enabled")
+            Logger.i("Space game is not enabled")
             menu_space.alpha = 0.1f
         }
 
         if (enableToad) {
             menu_toad.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameToadFragment) }
         } else {
-            Logger.i("Star game is not enabled")
+            Logger.i("Toad game is not enabled")
             menu_toad.alpha = 0.1f
         }
 
