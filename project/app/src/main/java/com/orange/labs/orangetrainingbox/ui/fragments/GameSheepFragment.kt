@@ -114,7 +114,7 @@ class GameSheepFragment : AbstractGameFragment() {
     /**
      * The registry for sensor data records
      */
-    private val lastPoints = SensorDataSeries(20)
+    private val lastPoints = SensorDataSeries(5)
 
 
     // ***********************************
@@ -275,6 +275,8 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     private fun moveSheep(trend: SensorTrends){
 
+        //Logger.d("Sheep game - sheep icon trend is: $trend")
+
         if (trend == SensorTrends.EQUAL) return
 
         // Get elements like image view and positions
@@ -290,16 +292,15 @@ class GameSheepFragment : AbstractGameFragment() {
 
         // FIXME Raw offsets -> properties file
         val offsetY = when (trend) {
-            SensorTrends.INCREASE -> - 20
-            SensorTrends.DECREASE -> + 20
+            SensorTrends.INCREASE -> - 30
+            SensorTrends.DECREASE -> + 30
             else -> 0
         }
-
-        Logger.d(">>>>> ABSOLUTE POS: $absoluteSheepYAxisPosition")
-
+        
         if ((trend == SensorTrends.INCREASE && absoluteSheepYAxisPosition + offsetY >= 0)
             || (trend == SensorTrends.DECREASE && absoluteSheepYAxisPosition + offsetY <= sheepInitialVerticalPosition)){
             val relativeSheepYAxisPositionForAnimation = sheepImageView.y + offsetY
+            if (::sheepAnimator.isInitialized) sheepAnimator.pause()
             sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "Y", relativeSheepYAxisPositionForAnimation)
             sheepAnimator.duration = 1 // FIXME
             sheepAnimator.start()
