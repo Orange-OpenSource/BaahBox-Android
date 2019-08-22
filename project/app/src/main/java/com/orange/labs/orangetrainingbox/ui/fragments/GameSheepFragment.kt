@@ -39,10 +39,10 @@ import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
-import com.orange.labs.orangetrainingbox.btle.SensorDataSeries
+import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import com.orange.labs.orangetrainingbox.utils.properties.SheepGameDefaultConfiguration
-import com.orange.labs.orangetrainingbox.utils.structures.Queue
+import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
 
 
 // *******
@@ -100,12 +100,14 @@ class GameSheepFragment : AbstractGameFragment() {
     /**
      * The initial position (Y-axis) of the sheep image view.
      * The sheep view should not go under.
+     * Do not forget the landmark is in 2D and based on the device screen, i.e. with (0,0 in the top left corner.
      */
     private var sheepInitialVerticalPosition: Float = 0f
 
     /**
      * The maximal position tin Y axis the sheep can reach.
      * It cannot go higher.
+     * Do not forget the landmark is in 2D and based on the device screen, i.e. with (0,0 in the top left corner.
      */
     private var sheepHighestVerticalPosition: Float = 0f
 
@@ -228,8 +230,6 @@ class GameSheepFragment : AbstractGameFragment() {
     override fun prepareGameLayout() {
         startIntroductionAnimation()
         moveFences()
-        sheepInitialVerticalPosition = find<ImageView>(R.id.gameIcon).y
-        sheepHighestVerticalPosition = sheepInitialVerticalPosition + 300
         // TODO Check if collisions
         // TODO Display final animation (collision or all fences jumped)
     }
@@ -263,80 +263,43 @@ class GameSheepFragment : AbstractGameFragment() {
      * @param userInput The data given by the Baah box, i.e. the sensor value
      */
     private fun processBaahBoxData(userInput: Int) {
-
-        Logger.d(">>>>> Sensor value: $userInput")
         lastPoints.addRecord(userInput)
-
         val trend = lastPoints.trendOfRecordedData()
-        Logger.d(">>>>> Trend: $trend")
-
-        moveSheep(userInput)
-
+        moveSheep(trend)
     }
 
     /**
      * Moves the sheep with an Y-axis translation using an offset based on uer input / sensor value
      *
-     * @param offset The sensor value to sue for the translation
+     * @param trend The value saying if the sheep should rise (INCREASE), stay (EQUAL) or fall (DECREASE)
      */
-    private fun moveSheep(offset: Int){
+    private fun moveSheep(trend: SensorTrends){
+
+        if (trend == SensorTrends.EQUAL) return
 
         // Get elements like image view and positions
-        // TODO
-
-        // Check if the sheep must go higher (i.e. muscles contraction)
-        // TODO
-
-        // Check if sheep must fall (i.e. muscles detraction)
-        // TODO
-
-        // Check if shep must remain at that high (i.e. almost same contraction of muscles)
-        // TODO
-
-        /*
-
-
+        val location = IntArray(2)
         val sheepImageView = find<ImageView>(R.id.gameIcon)
-        val startY = sheepImageView.y
-        val endY = (startY + offset) * -1
+        sheepImageView.getLocationOnScreen(location)
+        val absoluteSheepYAxisPosition = location[1].toFloat()
 
-        // No need to go under the floor, sheeps are not worms nor moles
-        if (startY <= sheepInitialVerticalPosition) return
+        // WARNING: It seems getLocationOnScreen() above does not return the same values
+        // That 280 Y-axis value comes from... nowhere?
+        // FIXME
+        if (sheepInitialVerticalPosition <= 280f) sheepInitialVerticalPosition = absoluteSheepYAxisPosition
 
-        // "🎤 🐑 I believe I can flyyyyyy" - No Shaun, you don't
-        if (startY >= sheepHighestVerticalPosition) return
+        // FIXME Raw offsets -> properties file
+        val offsetY = when (trend) {
+            SensorTrends.INCREASE -> - 20
+            SensorTrends.DECREASE -> + 20
+            else -> 0
+        }
 
-        sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "translationY", startY, endY)
-
-        Logger.d(">>>>> Sheep $startY -> $endY")
-
-        // TODO: Load/update duration and fences count from preferences
-        sheepAnimator.duration = 10000 // FIXME
-
-        sheepAnimator.addListener(object : Animator.AnimatorListener {
-
-            override fun onAnimationStart(animation: Animator) {
-                Logger.d(">>>>> Sheep animation started")
-            }
-
-            override fun onAnimationEnd(animation: Animator) {
-                Logger.d(">>>>> Sheep animation ended")
-                // TODO: If no fence has been touched, load success view
-            }
-
-            override fun onAnimationCancel(animation: Animator) {
-                Logger.d(">>>>> Sheep animation canceled")
-            }
-
-            override fun onAnimationRepeat(animation: Animator) {
-                Logger.d(">>>>> Sheep animation repeated")
-                // TODO: If no collision has been made, update text of UI  about remaining fences to jump over
-            }
-
-        })
-
+        val relativeSheepYAxisPositionForAnimation = sheepImageView.y + offsetY
+        sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "Y", relativeSheepYAxisPositionForAnimation)
+        sheepAnimator.duration = 1 // FIXME
         sheepAnimator.start()
-        */
+
     }
 
     /**
@@ -406,7 +369,7 @@ class GameSheepFragment : AbstractGameFragment() {
         val metrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
 
-        fencesAnimator = ObjectAnimator.ofFloat(view, "translationX", 200f, metrics.widthPixels * -1f)
+        fencesAnimator = ObjectAnimator.ofFloat(view, "translationX", metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
         // TODO: Load/update duration and fences count from preferences
         fencesAnimator.duration = defaultGameConfiguration.defaultSpeed.toLong()
         fencesAnimator.repeatCount = defaultGameConfiguration.defaultFencesCount - 1 // For k fences, repeat k-1 times

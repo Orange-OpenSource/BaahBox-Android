@@ -27,12 +27,12 @@ import android.annotation.SuppressLint
 /**
  * All INTERVAL_FOR_UPDATEth items, compute a new average and store it.
  */
-private const val INTERVAL_FOR_UPDATE: Int = 20
+private const val INTERVAL_FOR_UPDATE: Int = 10
 
 /**
  * The trend threshold defining if trend is increasing, freezing or decreasing
  */
-private const val TREND_THRESHOLD: Int = 20
+private const val TREND_THRESHOLD: Int = 10
 
 
 // *******
