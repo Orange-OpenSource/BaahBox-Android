@@ -89,6 +89,18 @@ class Queue<T>(private val maxSize: Int) {
     }
 
     /**
+     * Enqueue all items. It will thus be added in the last position.
+     * If the queue has reached its maximal size, will before dequeue the first item and add the new.
+     *
+     * @param items The objects to add
+     */
+    fun enqueueAll(items: MutableList<T>) {
+        items.forEach {
+            enqueue(it)
+        }
+    }
+
+    /**
      * Dequeue the first element of the structure, i.e. element at index 0, of course if
      * the structure is not empty
      *

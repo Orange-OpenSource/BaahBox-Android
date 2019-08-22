@@ -15,13 +15,11 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.orange.labs.orangetrainingbox.btle
+package com.orange.labs.orangetrainingbox.utils.structures
 
 import android.annotation.SuppressLint
-import com.orange.labs.orangetrainingbox.utils.structures.Queue
-import com.orange.labs.orangetrainingbox.utils.structures.average
 
-
+// FIXME Hard-coded value! Should be in .properties config file
 // **********************
 // Compile-time constants
 // **********************
@@ -108,6 +106,7 @@ class SensorDataSeries(val historySize: Int) {
      * Computes the difference between the current average and the last computed.
      * If the result is negligible, will consider a non-moving trend.
      * If the result is significant, will consider an increasing or a decreasing trend.
+     * Removes previously parasites.
      *
      * <b>Considering here sensor records are integers, where the lowest value is 1 and the highest value
      * is 1002 (i.e. full contraction / work of muscles / ...)</b>
@@ -117,13 +116,44 @@ class SensorDataSeries(val historySize: Int) {
      * @return SensorTrends
      */
     fun trendOfRecordedData(): SensorTrends {
+        removeParasites()
         return when (computeAverage() - lastComputedAverage) {
-            // FIXME Hard-coded value! Should be in .properties config file
             in Int.MIN_VALUE..-TREND_THRESHOLD -> SensorTrends.DECREASE
             in -TREND_THRESHOLD..TREND_THRESHOLD -> SensorTrends.EQUAL
             in TREND_THRESHOLD..Int.MAX_VALUE -> SensorTrends.INCREASE
             else -> SensorTrends.EQUAL
         }
+    }
+
+    /**
+     * Cleans the series of records so as to remove parasites.
+     * Indeed with Baah box Arduino firmware 2.0.0 (https://github.com/Orange-OpenSource/BaahBox-Arduino/releases/tag/v2.0.0)
+     * some frames are broadcast with input data even if nothing has been done on the sensors.
+     * For example when a slider is plugged to the box, the box sends frames with non-zero data even if the slider has not been touched.
+     * Those values are polluting the series and finally the average computation.
+     */
+    private fun removeParasites() {
+
+        if (sensorDataQueue.isEmpty()) return
+
+        // First case: inputs greater than 1024 which must be the highest value
+        // E.g: 10, 20, 10, 30, 2022, 15
+        sensorDataQueue.elements.removeAll { it > 1024 }
+
+        // Other case: too high inputs between smaller ones
+        // E.g.: 10, 20, 5, 90, 5, 10, 20     <---- 90
+        // E.g.: 10, 20, 5, 800, 5, 10, 20    <---- 800
+        // For this case, compare the two biggest values. If one is far more great than the other, remove it.
+        val notFifoAnymore /* grumph */  = sensorDataQueue.elements.toMutableList()
+        notFifoAnymore.sort()
+        val count = notFifoAnymore.count()
+        if (count <= 2) return
+
+        val max1 = notFifoAnymore[count - 1]
+        val max2 = notFifoAnymore[count - 2]
+
+        if (max1 > max2 * 5) sensorDataQueue.elements.remove(max1)
+
     }
 
 }
