@@ -105,13 +105,6 @@ class GameSheepFragment : AbstractGameFragment() {
     private var sheepInitialVerticalPosition: Float = 0f
 
     /**
-     * The maximal position tin Y axis the sheep can reach.
-     * It cannot go higher.
-     * Do not forget the landmark is in 2D and based on the device screen, i.e. with (0,0 in the top left corner.
-     */
-    private var sheepHighestVerticalPosition: Float = 0f
-
-    /**
      * The registry for sensor data records
      */
     private val lastPoints = SensorDataSeries(5)
@@ -275,9 +268,13 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     private fun moveSheep(trend: SensorTrends){
 
-        //Logger.d("Sheep game - sheep icon trend is: $trend")
-
+        Logger.d("Sheep game - sheep icon trend is: $trend")
         if (trend == SensorTrends.EQUAL) return
+
+        // WARNING: It seems getLocationOnScreen() above does not return the same values
+        // That 280 Y-axis value comes from... nowhere?
+        // FIXME Define the first good position relative to the screen, here on the Nexus 6P 875 (px? dp?)
+        sheepInitialVerticalPosition = 875f
 
         // Get elements like image view and positions
         val location = IntArray(2)
@@ -285,25 +282,33 @@ class GameSheepFragment : AbstractGameFragment() {
         sheepImageView.getLocationOnScreen(location)
         val absoluteSheepYAxisPosition = location[1].toFloat()
 
-        // WARNING: It seems getLocationOnScreen() above does not return the same values
-        // That 280 Y-axis value comes from... nowhere?
-        // FIXME Define the first good position relative to the screen, here on the Nexus 6P 875 (px? dp?)
-        sheepInitialVerticalPosition = 875f
-
         // FIXME Raw offsets -> properties file
         val offsetY = when (trend) {
             SensorTrends.INCREASE -> - 30
             SensorTrends.DECREASE -> + 30
             else -> 0
         }
-        
+
+        // In case the sheep jumps
         if ((trend == SensorTrends.INCREASE && absoluteSheepYAxisPosition + offsetY >= 0)
+            // In case the sheep falls
             || (trend == SensorTrends.DECREASE && absoluteSheepYAxisPosition + offsetY <= sheepInitialVerticalPosition)){
+
             val relativeSheepYAxisPositionForAnimation = sheepImageView.y + offsetY
+
+            // The sheep jumps or falls, change its skin
+            stopIntroductionAnimation()
+            sheepImageView.imageResource = R.mipmap.ic_sheep_jump
+
             if (::sheepAnimator.isInitialized) sheepAnimator.pause()
             sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "Y", relativeSheepYAxisPositionForAnimation)
             sheepAnimator.duration = 1 // FIXME
             sheepAnimator.start()
+
+        // The sheep walks
+        } else if (absoluteSheepYAxisPosition == sheepInitialVerticalPosition) {
+            if (::sheepAnimator.isInitialized) sheepAnimator.pause()
+            startIntroductionAnimation()
         }
 
     }
