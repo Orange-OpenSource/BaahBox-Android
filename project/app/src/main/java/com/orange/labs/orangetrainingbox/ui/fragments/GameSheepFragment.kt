@@ -285,8 +285,8 @@ class GameSheepFragment : AbstractGameFragment() {
 
         // WARNING: It seems getLocationOnScreen() above does not return the same values
         // That 280 Y-axis value comes from... nowhere?
-        // FIXME
-        if (sheepInitialVerticalPosition <= 280f) sheepInitialVerticalPosition = absoluteSheepYAxisPosition
+        // FIXME Define the first good position relative to the screen, here on the Nexus 6P 875 (px? dp?)
+        sheepInitialVerticalPosition = 875f
 
         // FIXME Raw offsets -> properties file
         val offsetY = when (trend) {
@@ -295,10 +295,15 @@ class GameSheepFragment : AbstractGameFragment() {
             else -> 0
         }
 
-        val relativeSheepYAxisPositionForAnimation = sheepImageView.y + offsetY
-        sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "Y", relativeSheepYAxisPositionForAnimation)
-        sheepAnimator.duration = 1 // FIXME
-        sheepAnimator.start()
+        Logger.d(">>>>> ABSOLUTE POS: $absoluteSheepYAxisPosition")
+
+        if ((trend == SensorTrends.INCREASE && absoluteSheepYAxisPosition + offsetY >= 0)
+            || (trend == SensorTrends.DECREASE && absoluteSheepYAxisPosition + offsetY <= sheepInitialVerticalPosition)){
+            val relativeSheepYAxisPositionForAnimation = sheepImageView.y + offsetY
+            sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "Y", relativeSheepYAxisPositionForAnimation)
+            sheepAnimator.duration = 1 // FIXME
+            sheepAnimator.start()
+        }
 
     }
 
