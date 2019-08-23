@@ -100,29 +100,36 @@
 
 
 <a name="0.6.0"></a>
-## 0.6.0
-
-
-## Features
-
-* licenses - add ref to Orange Baah Boox GPL 3.0 license in the notices of the app ([5c9699dd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/5c9699dd))
-* licenses - more entries ([93cf2ded](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/93cf2ded))
-* tool - 🔨 add plugin for images metadata ([c8ab8bfd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/c8ab8bfd))
-
-
-
-<a name="0.7.0"></a>
-## 0.7.0 "- version code: 25" (2019/08/13)
+## 0.6.0 "- version code: 26" (2019/08/23)
 
 
 ## Bug Fixes
 
 * #16 - lateinit proeprty used and not initialized ([ed672bd3](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/ed672bd3))
+* #5 - size of sheep ([94222066](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/94222066))
+* #5 - wording and text fields ([7e6df844](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/7e6df844))
+* project - logs ([505a42ef](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/505a42ef))
+* project - english i18n ([1dcf9a00](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/1dcf9a00))
+* project - properties key use ([0eef3bc3](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/0eef3bc3))
 
 ## Features
 
 * tool - add plugin for images metadata ([c8ab8bfd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/c8ab8bfd))
 * #15 - ribbons on app icons for aplha, beta and Orange PrimeZone ([05edb442](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/05edb442))
+* #5 - sheep legs animation on the floor of intro screen ([bcab5edf](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/bcab5ed)
+* #5 - sheep game properties ([4b01c87a](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/4b01c87a))
+* #5 - sheep moves in playing mode ([e09f1382](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/e09f1382))
+* #5 - move fences programatically only hard-coded config ([3b2c2df8](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/3b2c2df8))
+* #5 - display fences with dedicated speed from in-app config ([199777f2](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/199777f2))
+* project - remove parasites from sensor data records ([2652341c](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/2652341c))
+* #5 - move sheep with sensors (raugh implemantation) ([bb3ee556](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/bb3ee556))
 
+## Test
 
-
+* project - Logger
+* project - PropertiesKeys
+* project - PropertiesReader
+* project - Queue
+* project - SensorDataSeries
+* project - InputsParser
+* project - InputsParser, PropertiesKeys
