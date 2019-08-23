@@ -15,7 +15,6 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.orange.labs.orangetrainingbox.utils.logs
 
 import android.util.Log
@@ -37,7 +36,7 @@ class Logger {
         /**
          * The ta gin use for logs
          */
-        const val TAG = "BaahBox"
+        private const val TAG = "BaahBox"
 
         /**
          * Use the common logger to log a message in the verbsose channel, prefixed with ✏️
@@ -45,7 +44,7 @@ class Logger {
          */
         @Suppress("unused")
         @JvmStatic
-        fun v(message : String) {
+        fun v(message: String) {
             Log.d(TAG, "✏️️️ $message")
         }
 
@@ -55,7 +54,7 @@ class Logger {
          */
         @Suppress("unused")
         @JvmStatic
-        fun d(message : String) {
+        fun d(message: String) {
             Log.d(TAG, "▫️️ $message")
         }
 
@@ -65,7 +64,7 @@ class Logger {
          */
         @Suppress("unused")
         @JvmStatic
-        fun i(message : String) {
+        fun i(message: String) {
             Log.d(TAG, "➡️ $message")
         }
 
@@ -75,7 +74,7 @@ class Logger {
          */
         @Suppress("unused")
         @JvmStatic
-        fun w(message : String) {
+        fun w(message: String) {
             Log.d(TAG, "⚠️ $message")
         }
 
@@ -85,7 +84,7 @@ class Logger {
          */
         @Suppress("unused")
         @JvmStatic
-        fun e(message : String) {
+        fun e(message: String) {
             Log.d(TAG, "‼️️ $message")
         }
 
@@ -95,7 +94,7 @@ class Logger {
          */
         @Suppress("unused")
         @JvmStatic
-        fun wtf(message : String) {
+        fun wtf(message: String) {
             Log.d(TAG, "☠️ $message")
         }
 
