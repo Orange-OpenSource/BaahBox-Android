@@ -116,12 +116,6 @@ class Queue<T>(private val maxSize: Int) {
      */
     fun peek() = if (!isEmpty()) elements[0] else null
 
-    /**
-     * Enqueues items in the collection to the structure
-     *
-     * @param items The elements to enqueue in the structure
-     */
-    fun push(items: Collection<T>) = items.forEach { this.enqueue(it) }
 
     /**
      *
