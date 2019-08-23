@@ -162,14 +162,18 @@ fun Context.readBalloonAdditionalConfiguration(): Long {
 
 /**
  * Reads from properties file assets configuration elements for the sheep game.
+ * Return configuration details with:
+ *
+ <ul>
+    <li>The offset to use for each sheep move</li>
+ </ul>
  *
  * @return SheepGameConfiguration The configuration
  */
 fun Context.readSheepGameConfiguration(): SheepGameConfiguration {
     val properties = loadProperties()
-    val sheepGameRawConfiguration = properties.getProperty(PropertiesKeys.GAME_SHEEP_THRESHOLD.key)
-    val configurationItems = sheepGameRawConfiguration.split(delimiter)
-    if (configurationItems.size != 1) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 1")
+    val sheepMoveOffset = properties.getProperty(PropertiesKeys.GAME_SHEEP_MOVE_OFFSET.key).toInt()
+    if (sheepMoveOffset <= 0) throw InvalidConfigurationException("Sheep move offset key must be an integer greater than 0")
     return SheepGameConfiguration(0)
 }
 
@@ -276,9 +280,9 @@ data class BalloonGameConfiguration(val minThreshold1: Int, val maxThreshold1: I
 
 /**
  * Models a bundle of sheep game configuration elements.
- * @param stayThreshold Sheep rises if under, or stay if greater than this value
+ * @param moveOffset The move the sheep should make for each rise or fall event, in px
  */
-data class SheepGameConfiguration(val stayThreshold: Int)
+data class SheepGameConfiguration(val moveOffset: Int)
 
 /**
  * Models a bundle of sheep game default configuration values..

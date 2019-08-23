@@ -24,7 +24,7 @@ package com.orange.labs.orangetrainingbox.utils.properties
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 1.5.0
+ * @version 1.6.0
  */
 enum class PropertiesKeys(val key: String) {
 
@@ -81,9 +81,9 @@ enum class PropertiesKeys(val key: String) {
     /* Sheep game */
 
     /**
-     * A set of values defining things for sheep game
+     * The distance the sheep should walk for each rise or fall event
      */
-    GAME_SHEEP_THRESHOLD("game_sheep_threshold"),
+    GAME_SHEEP_MOVE_OFFSET("game_sheep_move_offset"),
     /**
      * Defines the period where the game icon of the sheep game in the introduction screen is changed during animation
      */

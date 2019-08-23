@@ -282,10 +282,9 @@ class GameSheepFragment : AbstractGameFragment() {
         sheepImageView.getLocationOnScreen(location)
         val absoluteSheepYAxisPosition = location[1].toFloat()
 
-        // FIXME Raw offsets -> properties file
         val offsetY = when (trend) {
-            SensorTrends.INCREASE -> - 30
-            SensorTrends.DECREASE -> + 30
+            SensorTrends.INCREASE -> - gameConfiguration.moveOffset
+            SensorTrends.DECREASE -> + gameConfiguration.moveOffset
             else -> 0
         }
 
