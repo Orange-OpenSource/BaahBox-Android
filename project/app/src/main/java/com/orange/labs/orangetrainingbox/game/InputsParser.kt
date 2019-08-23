@@ -53,6 +53,22 @@ class InputsParser {
          * Returns a bundle of data with cleaned and computed values for muscles and joystick.
          * If these values are equal to -1, the frame is null.
          *
+         * This implementation follows the frame format of version v2.0.0 of Arduino firmware embedded in the
+         * Baah box (see https://github.com/Orange-OpenSource/BaahBox-Arduino/releases).
+         *
+         * In a nutshell, a frame with 6 bytes like:
+         <pre>
+
+            C1|a1|C2|a2|JBin|90
+
+            Where:
+                - muscle1 = C1 x 32 + a1
+                - muscle2 = C2 x 32 + a2
+                - joystic = JBin
+                - EndOfFrame = 90 -> '\n', end of frame
+
+         </pre>
+         *
          * @param frame The object where the data must be extracted
          * @return MuscleData The bundle of data
          */

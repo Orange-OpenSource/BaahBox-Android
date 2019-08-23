@@ -70,7 +70,7 @@ class TestPropertiesKeys {
         // Sensor data series
 
         assertEquals(PropertiesKeys.SENSOR_DATA_SERIES_INTERVAL_FOR_UPDATE.key, "sensor_series_interval_for_update")
-        assertEquals(PropertiesKeys.SENSOR_DATA_SERIES_TREND_THRESHOLD.key, "game_sheep_fences_default_number")
+        assertEquals(PropertiesKeys.SENSOR_DATA_SERIES_TREND_THRESHOLD.key, "sensor_series_trend_threshold")
 
         // BLE configuration
 
