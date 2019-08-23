@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.orange.labs.orangetrainingbox.utils.btle
+package com.orange.labs.orangetrainingbox.utils.game
 
 import com.orange.labs.orangetrainingbox.game.InputsParser
 import org.junit.Assert.assertEquals
@@ -70,7 +70,7 @@ class TestInputsParser {
         assertTrue(muscleData.muscle1 == -1)
         assertTrue(muscleData.muscle2 == -1)
         assertTrue(muscleData.joystick == -1)
-        
+
     }
 
 }

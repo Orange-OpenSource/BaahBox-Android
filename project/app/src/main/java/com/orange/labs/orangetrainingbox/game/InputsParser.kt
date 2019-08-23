@@ -51,7 +51,7 @@ class InputsParser {
         /**
          * Using a BLE frame, extracts from it integer values, parse them and return suitable data.
          * Returns a bundle of data with cleaned and computed values for muscles and joystick.
-         * If these values are equal to 1, the frame is null.
+         * If these values are equal to -1, the frame is null.
          *
          * @param frame The object where the data must be extracted
          * @return MuscleData The bundle of data
