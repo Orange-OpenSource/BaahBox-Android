@@ -36,13 +36,13 @@
     <string name="preferences_about_version_summary">😀</string>
     <string name="preferences_about_licenses_title">Licences</string>
     <string name="preferences_about_licenses_summary">Tapper pour obtenir des informations supplémentaires sur les outils tiers utilisés</string>
-    <string name="preferences_sensors_hardness_title">Sensibilité</string>
-    <string name="preferences_sensors_hardness_summary">Faible, moyenne ou forte</string>
+    <string name="preferences_sensors_difficulty_title">Sensibilité</string>
+    <string name="preferences_sensors_difficulty_summary">Faible, moyenne ou forte</string>
 
     <string name="selector_connect_hand_title">Choisi une boîte à utiliser</string>
 
     <string name="toast_connected_to_hand">Connecté à la boîte %1$s (avec l\'adresse MAC %2$s)</string>
-    <string name="toast_hardness_factor_changed">Difficulté définie à %1$s</string>
+    <string name="toast_difficulty_factor_changed">Difficulté définie à %1$s</string>
 
     <string name="game_star_instructions_line_1">Fais briller l\'étoile !</string>
     <string name="game_star_instructions_line_2">en contractant ton muscle.</string>

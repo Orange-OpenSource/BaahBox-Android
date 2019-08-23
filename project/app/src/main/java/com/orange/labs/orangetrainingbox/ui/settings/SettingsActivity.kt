@@ -123,7 +123,7 @@ class SettingsActivity : AppCompatActivity() {
             }
 
             // Hardness factor
-            val hardnessPreference = findPreference("pref_key_settings_sensors_hardness")
+            val hardnessPreference = findPreference("pref_key_settings_sensors_difficulty")
             // TODO If never defined use default value from properties
             hardnessPreference.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)

@@ -36,13 +36,13 @@
     <string name="preferences_about_version_summary">😀</string>
     <string name="preferences_about_licenses_title">Licenses</string>
     <string name="preferences_about_licenses_summary">Tap to get details about third-party tools we use</string>
-    <string name="preferences_sensors_hardness_title">Hardness factor</string>
-    <string name="preferences_sensors_hardness_summary">Weak, medium, hard</string>
+    <string name="preferences_sensors_difficulty_title">Difficulty factor</string>
+    <string name="preferences_sensors_difficulty_summary">Weak, medium, hard</string>
 
     <string name="selector_connect_hand_title">Select a box to connected to</string>
 
     <string name="toast_connected_to_hand">Connected to box %1$s (with MAC address %2$s)</string>
-    <string name="toast_hardness_factor_changed">Changed hardness to %1$s</string>
+    <string name="toast_difficulty_factor_changed">Changed difficulty to %1$s</string>
 
     <string name="game_star_instructions_line_1">Make the star shine</string>
     <string name="game_star_instructions_line_2">by contracting your muscle&#8230;</string>

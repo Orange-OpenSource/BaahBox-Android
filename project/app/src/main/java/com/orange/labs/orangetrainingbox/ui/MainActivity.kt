@@ -310,7 +310,7 @@ class MainActivity : AppCompatActivity() {
                                 2 -> model.difficultyFactor = DifficultyFactor.HIGH
                                 else /* and 1 */ -> model.difficultyFactor = DifficultyFactor.MEDIUM
                         }
-                        toast(this.getString(R.string.toast_hardness_factor_changed, model.difficultyFactor))
+                        toast(this.getString(R.string.toast_difficulty_factor_changed, model.difficultyFactor))
                         Logger.d("Hardness factor has been changed: ${model.difficultyFactor}")
                     }
                 }

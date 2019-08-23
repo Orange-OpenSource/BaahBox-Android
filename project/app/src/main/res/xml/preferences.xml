@@ -30,9 +30,9 @@
             android:key="pref_key_settings_sensors">
 
         <SeekBarPreference
-                android:title="@string/preferences_sensors_hardness_title"
-                android:key="pref_key_settings_sensors_hardness"
-                android:summary="@string/preferences_sensors_hardness_summary"
+                android:title="@string/preferences_sensors_difficulty_title"
+                android:key="pref_key_settings_sensors_difficulty"
+                android:summary="@string/preferences_sensors_difficulty_summary"
                 android:max="2"
                 android:defaultValue="1">
 
