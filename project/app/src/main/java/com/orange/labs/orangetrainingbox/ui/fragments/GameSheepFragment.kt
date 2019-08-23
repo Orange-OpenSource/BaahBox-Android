@@ -30,9 +30,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
-import com.orange.labs.orangetrainingbox.utils.properties.SheepGameConfiguration
-import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfiguration
-import com.orange.labs.orangetrainingbox.utils.properties.readSheepGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import org.jetbrains.anko.imageResource
@@ -41,7 +38,7 @@ import android.util.TypedValue
 import android.util.DisplayMetrics
 import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
-import com.orange.labs.orangetrainingbox.utils.properties.SheepGameDefaultConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.*
 import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
 
 
@@ -107,7 +104,7 @@ class GameSheepFragment : AbstractGameFragment() {
     /**
      * The registry for sensor data records
      */
-    private val lastPoints = SensorDataSeries(5)
+    private lateinit var lastPoints: SensorDataSeries
 
 
     // ***********************************
@@ -204,6 +201,9 @@ class GameSheepFragment : AbstractGameFragment() {
         defaultGameConfiguration = context!!.readSheepDefaultConfiguration()
         gameConfiguration = context!!.readSheepGameConfiguration()
         difficultyFactor = getDifficultyNumericValue()
+
+        val sensorDataSeriesConfiguration = context!!.readSensorDataSeriesConfiguration()
+        lastPoints = SensorDataSeries(5, sensorDataSeriesConfiguration.intervalForUpdate, sensorDataSeriesConfiguration.trendThreshold)
 
         // Define the observer
         val sensorBObserver = Observer<Int> { sensorValue ->

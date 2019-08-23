@@ -101,6 +101,18 @@ enum class PropertiesKeys(val key: String) {
      */
     GAME_SHEEP_DEFAULT_FENCES_NUMBER("game_sheep_fences_default_number"),
 
+    /* Sensor data series */
+
+    /**
+     * Each interval-th items, compute a ne average of recorded sensor data and store it
+     */
+    SENSOR_DATA_SERIES_INTERVAL_FOR_UPDATE("sensor_series_interval_for_update"),
+
+    /**
+     *  The trend threshold defining if trend is increasing, freezing or decreasing
+     */
+    SENSOR_DATA_SERIES_TREND_THRESHOLD("game_sheep_fences_default_number"),
+
     /* BLE configuration */
 
     /**

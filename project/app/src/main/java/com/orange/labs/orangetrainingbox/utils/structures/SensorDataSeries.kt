@@ -19,21 +19,6 @@ package com.orange.labs.orangetrainingbox.utils.structures
 
 import android.annotation.SuppressLint
 
-// FIXME Hard-coded value! Should be in .properties config file
-// **********************
-// Compile-time constants
-// **********************
-
-/**
- * All INTERVAL_FOR_UPDATEth items, compute a new average and store it.
- */
-private const val INTERVAL_FOR_UPDATE: Int = 20
-
-/**
- * The trend threshold defining if trend is increasing, freezing or decreasing
- */
-private const val TREND_THRESHOLD: Int = 15
-
 
 // *******
 // Classes
@@ -43,12 +28,16 @@ private const val TREND_THRESHOLD: Int = 15
  * Class containing a series of sensor data stord in a [Queue], and providing methods for averages and trends.
  *
  * @param historySize Higher is this value, bigger is the number of sensor data records
+ * @param intervalForUpdate All INTERVAL_FOR_UPDATEth items, compute a new average and store it.
+ * @param trendThreshold The trend threshold defining if trend is increasing, freezing or decreasing
  *
  * @author Pierre-Yves Lapersonne
  * @since 22/08/2019
  * @version 1.0.0
  */
-class SensorDataSeries(val historySize: Int) {
+class SensorDataSeries(private val historySize: Int,
+                       private val intervalForUpdate: Int,
+                       private val trendThreshold: Int) {
 
 
     // **********
@@ -69,7 +58,7 @@ class SensorDataSeries(val historySize: Int) {
     /**
      * Countdown when, if equal to 0, the last computed average will be updated
      */
-    private var countDownForAverage = INTERVAL_FOR_UPDATE
+    private var countDownForAverage = intervalForUpdate
 
 
     // *******
@@ -87,7 +76,7 @@ class SensorDataSeries(val historySize: Int) {
         countDownForAverage--
         if (countDownForAverage <= 0) {
             lastComputedAverage = computeAverage()
-            countDownForAverage = INTERVAL_FOR_UPDATE
+            countDownForAverage = intervalForUpdate
         }
         sensorDataQueue.enqueue(record)
     }
@@ -118,9 +107,9 @@ class SensorDataSeries(val historySize: Int) {
     fun trendOfRecordedData(): SensorTrends {
         removeParasites()
         return when (computeAverage() - lastComputedAverage) {
-            in Int.MIN_VALUE..-TREND_THRESHOLD -> SensorTrends.DECREASE
-            in -TREND_THRESHOLD..TREND_THRESHOLD -> SensorTrends.EQUAL
-            in TREND_THRESHOLD..Int.MAX_VALUE -> SensorTrends.INCREASE
+            in Int.MIN_VALUE..-trendThreshold -> SensorTrends.DECREASE
+            in -trendThreshold..trendThreshold -> SensorTrends.EQUAL
+            in trendThreshold..Int.MAX_VALUE -> SensorTrends.INCREASE
             else -> SensorTrends.EQUAL
         }
     }

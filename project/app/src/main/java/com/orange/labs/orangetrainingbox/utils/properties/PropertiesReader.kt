@@ -196,6 +196,18 @@ fun Context.readSheepDefaultConfiguration(): SheepGameDefaultConfiguration {
 }
 
 /**
+ * Reads from properties file assets configuration details for recorded sensor data.
+ *
+ * @return SensorDataSeriesConfiguration A bundle with details about how recorded data can be used
+ */
+fun Context.readSensorDataSeriesConfiguration(): SensorDataSeriesConfiguration {
+    val properties = loadProperties()
+    val intervalForUpdate = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_INTERVAL_FOR_UPDATE.key).toInt()
+    val trendThreshold = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_TREND_THRESHOLD.key).toInt()
+    return SensorDataSeriesConfiguration(intervalForUpdate, trendThreshold)
+}
+
+/**
  * Exception to throw if a configuration is not suitable in the properties file
  */
 class InvalidConfigurationException(override var message:String): Exception(message)
@@ -297,3 +309,11 @@ data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: 
  * @param defaultSpeed The default speed for the floor and fences
  */
 data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultSpeed: String)
+
+/**
+ * Models a bundle of configuration details for sensor data series
+ *
+ * @param intervalForUpdate Each interval-th items, compute a ne average of recorded sensor data and store it
+ * @param trendThreshold The trend threshold defining if trend is increasing, freezing or decreasing
+ */
+data class SensorDataSeriesConfiguration(val intervalForUpdate: Int, val trendThreshold: Int)
