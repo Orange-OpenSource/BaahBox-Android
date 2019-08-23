@@ -31,19 +31,21 @@ import java.util.*
  * @version 2.2.0
  */
 
+// Compile-time constants
 
-private const val filename = "app_configuration.properties"
-private const val delimiter = ";"
-private const val difficulty_low = "low"
-private const val difficulty_medium = "medium"
-private const val difficulty_high = "high"
+private const val DEFAULT_FILENAME = "app_configuration.properties"
+private const val DELIMITER = ";"
+private const val DIFFICULTY_LOW = "low"
+private const val DIFFICULTY_MEDIUM = "medium"
+private const val DIFFICULTY_HIGH = "high"
 
 /**
  * Load the properties in the reader
  *
+ * @param filename The proeprties file to load
  * @return Properties The read data
  */
-private fun Context.loadProperties(): Properties {
+fun Context.loadProperties(filename: String = DEFAULT_FILENAME): Properties {
     val assetManager = this.assets
     val inputStream = assetManager.open(filename)
     val properties = Properties()
@@ -80,26 +82,6 @@ fun Context.readAppGamesConfiguration(): AppGamesConfiguration {
 }
 
 /**
- * Reads from properties file assets.
- * If the entry for "difficulty_factor" is not defined or does not match "low", "medium" or "high", will be defined
- * to DifficultyFactor.MEDIUM.
- *
- * @return GameDetailsConfiguration The configuration
- */
-fun Context.readGameDetailsConfiguration(): GameDetailsConfiguration {
-    val properties = loadProperties()
-    val rawDifficultyFactor = properties.getProperty(PropertiesKeys.DIFFICULTY_FACTOR.key)
-    val difficultyFactor = when (rawDifficultyFactor.toLowerCase()) {
-        difficulty_low -> DifficultyFactor.LOW
-        difficulty_medium -> DifficultyFactor.MEDIUM
-        difficulty_high -> DifficultyFactor.HIGH
-        else -> DifficultyFactor.MEDIUM
-    }
-    return GameDetailsConfiguration(difficultyFactor)
-}
-
-
-/**
  * Reads from properties file assets configuration elements for the star game.
  *
  * @return DifficultyDetailsConfiguration The configuration
@@ -107,7 +89,7 @@ fun Context.readGameDetailsConfiguration(): GameDetailsConfiguration {
 fun Context.readDifficultyDetailsConfiguration(): DifficultyDetailsConfiguration {
     val properties = loadProperties()
     val difficultyConfiguration = properties.getProperty(PropertiesKeys.DIFFICULTY_NUMERIC_VALUES.key)
-    val configurationItems = difficultyConfiguration.split(delimiter)
+    val configurationItems = difficultyConfiguration.split(DELIMITER)
     if (configurationItems.size != 3) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 3")
     return DifficultyDetailsConfiguration(
         configurationItems[0].toDouble(), configurationItems[1].toDouble(),
@@ -123,7 +105,7 @@ fun Context.readDifficultyDetailsConfiguration(): DifficultyDetailsConfiguration
 fun Context.readStarGameConfiguration(): StarGameConfiguration {
     val properties = loadProperties()
     val starGameRawConfiguration = properties.getProperty(PropertiesKeys.GAME_STAR_THRESHOLD.key)
-    val configurationItems = starGameRawConfiguration.split(delimiter)
+    val configurationItems = starGameRawConfiguration.split(DELIMITER)
     if (configurationItems.size != 4) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 4")
     return StarGameConfiguration(
         configurationItems[0].toInt(), configurationItems[1].toInt() - 1,
@@ -140,7 +122,7 @@ fun Context.readStarGameConfiguration(): StarGameConfiguration {
 fun Context.readBalloonGameConfiguration(): BalloonGameConfiguration {
     val properties = loadProperties()
     val starGameRawConfiguration = properties.getProperty(PropertiesKeys.GAME_BALLOON_THRESHOLD.key)
-    val configurationItems = starGameRawConfiguration.split(delimiter)
+    val configurationItems = starGameRawConfiguration.split(DELIMITER)
     if (configurationItems.size != 5) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 5")
     return BalloonGameConfiguration(
         configurationItems[0].toInt(), configurationItems[1].toInt() - 1,
@@ -210,7 +192,7 @@ fun Context.readSensorDataSeriesConfiguration(): SensorDataSeriesConfiguration {
 /**
  * Exception to throw if a configuration is not suitable in the properties file
  */
-class InvalidConfigurationException(override var message:String): Exception(message)
+class InvalidConfigurationException(override var message: String): Exception(message)
 
 
 // ************
@@ -237,13 +219,6 @@ data class BleConfiguration(val serviceUUID: String, val sensorsCharUUID: String
  */
 data class AppGamesConfiguration(val enableStarGame: Boolean, val enableBalloonGame: Boolean,
                                  val enableSheepGame: Boolean, val enableSpaceGame: Boolean, val enableToadGame: Boolean)
-
-/**
- * Models a bundle of game configuration
- *
- * @param difficultyFactor The hardness value to apply to calculations
- */
-data class GameDetailsConfiguration(val difficultyFactor: DifficultyFactor)
 
 /**
  * Models a bundle of game configuration

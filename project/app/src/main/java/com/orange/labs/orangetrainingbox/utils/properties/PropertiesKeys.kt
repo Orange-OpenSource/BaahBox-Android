@@ -111,7 +111,7 @@ enum class PropertiesKeys(val key: String) {
     /**
      *  The trend threshold defining if trend is increasing, freezing or decreasing
      */
-    SENSOR_DATA_SERIES_TREND_THRESHOLD("game_sheep_fences_default_number"),
+    SENSOR_DATA_SERIES_TREND_THRESHOLD("sensor_series_trend_threshold"),
 
     /* BLE configuration */
 
