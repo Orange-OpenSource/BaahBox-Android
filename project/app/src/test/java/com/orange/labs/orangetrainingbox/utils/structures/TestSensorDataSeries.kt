@@ -22,7 +22,6 @@ import org.junit.Test
 
 /**
  * To test [SensorDataSeries] class.
- * See [testing documentation](http://d.android.com/tools/testing).
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019

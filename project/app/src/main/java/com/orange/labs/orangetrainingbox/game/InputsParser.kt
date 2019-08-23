@@ -24,7 +24,7 @@ import android.bluetooth.BluetoothGattCharacteristic
  *
  * @author Pierre-Yves Lapersonne
  * @since 16/05/2019
- * @version 1.1.0
+ * @version 1.1.1
  */
 class InputsParser {
 
@@ -40,8 +40,8 @@ class InputsParser {
          * Will be divided by 10 and multiplied by a factor.
          * A [DifficultyFactor.MEDIUM] will be applied.
          *
-         * @param sensorValue The integer to parsed, should be between [0 ; 1000]
-         * @param factor The factor to apply for the hardness difficulty
+         * @param sensorValue The integer to parse, should be between [0 ; 1024]
+         * @param factor The factor to apply for the difficulty
          * @return Int The game-logic value
          */
         fun prepareValue(sensorValue: Int, factor: Double): Int {
