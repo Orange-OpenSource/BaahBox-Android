@@ -85,6 +85,10 @@ enum class PropertiesKeys(val key: String) {
      */
     GAME_SHEEP_MOVE_OFFSET("game_sheep_move_offset"),
     /**
+     * The duration of animations used by the animator dealing with the sheep icon
+     */
+    GAME_SHEEP_MOVE_DURATION("game_sheep_move_duration"),
+    /**
      * Defines the period where the game icon of the sheep game in the introduction screen is changed during animation
      */
     GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD("game_sheep_introduction_animation_period"),

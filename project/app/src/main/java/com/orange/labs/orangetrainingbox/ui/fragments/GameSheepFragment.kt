@@ -31,7 +31,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.utils.properties.SheepGameConfiguration
-import com.orange.labs.orangetrainingbox.utils.properties.readSheepAdditionalConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readSheepGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
@@ -176,7 +176,7 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     override fun startIntroductionAnimation() {
         gameIconAnimator = IconAnimator()
-        val period = context!!.readSheepAdditionalConfiguration().sheepAnimationPeriod
+        val period = context!!.readSheepGameConfiguration().walkAnimationPeriod
         gameIconAnimator.animateGameIcon((activity as AppCompatActivity), gameIcon, period,
             arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
     }
@@ -201,7 +201,7 @@ class GameSheepFragment : AbstractGameFragment() {
             ViewModelProviders.of(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        defaultGameConfiguration = context!!.readSheepAdditionalConfiguration()
+        defaultGameConfiguration = context!!.readSheepDefaultConfiguration()
         gameConfiguration = context!!.readSheepGameConfiguration()
         difficultyFactor = getDifficultyNumericValue()
 
@@ -301,7 +301,7 @@ class GameSheepFragment : AbstractGameFragment() {
 
             if (::sheepAnimator.isInitialized) sheepAnimator.pause()
             sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "Y", relativeSheepYAxisPositionForAnimation)
-            sheepAnimator.duration = 1 // FIXME
+            sheepAnimator.duration = gameConfiguration.moveDuration
             sheepAnimator.start()
 
         // The sheep walks

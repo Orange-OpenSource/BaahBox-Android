@@ -166,6 +166,8 @@ fun Context.readBalloonAdditionalConfiguration(): Long {
  *
  <ul>
     <li>The offset to use for each sheep move</li>
+    <li>The period to use to animate the sheep (in walking mode, for introduction screen...)</li>
+    <li>The duration for sheep move animation</li>
  </ul>
  *
  * @return SheepGameConfiguration The configuration
@@ -173,8 +175,12 @@ fun Context.readBalloonAdditionalConfiguration(): Long {
 fun Context.readSheepGameConfiguration(): SheepGameConfiguration {
     val properties = loadProperties()
     val sheepMoveOffset = properties.getProperty(PropertiesKeys.GAME_SHEEP_MOVE_OFFSET.key).toInt()
-    if (sheepMoveOffset <= 0) throw InvalidConfigurationException("Sheep move offset key must be an integer greater than 0")
-    return SheepGameConfiguration(0)
+    if (sheepMoveOffset <= 0) throw InvalidConfigurationException("Sheep move offset value must be an integer greater than 0")
+    val animationPeriod = properties.getProperty(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
+    if (animationPeriod <= 0) throw InvalidConfigurationException("Sheep animation period value must be a long greater than 0")
+    val moveDuration = properties.getProperty(PropertiesKeys.GAME_SHEEP_MOVE_DURATION.key).toLong()
+    if (moveDuration <= 0) throw InvalidConfigurationException("Sheep move duration value must be a long greater than 0")
+    return SheepGameConfiguration(0, animationPeriod, moveDuration)
 }
 
 /**
@@ -182,12 +188,11 @@ fun Context.readSheepGameConfiguration(): SheepGameConfiguration {
  *
  * @return SheepGameDefaultConfiguration A bundle with default fences number and speed
  */
-fun Context.readSheepAdditionalConfiguration(): SheepGameDefaultConfiguration {
+fun Context.readSheepDefaultConfiguration(): SheepGameDefaultConfiguration {
     val properties = loadProperties()
     val defaultFencesNumber = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
     val defaultSpeed = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
-    val animationPeriod = properties.getProperty(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
-    return SheepGameDefaultConfiguration(defaultFencesNumber, defaultSpeed, animationPeriod)
+    return SheepGameDefaultConfiguration(defaultFencesNumber, defaultSpeed)
 }
 
 /**
@@ -281,13 +286,14 @@ data class BalloonGameConfiguration(val minThreshold1: Int, val maxThreshold1: I
 /**
  * Models a bundle of sheep game configuration elements.
  * @param moveOffset The move the sheep should make for each rise or fall event, in px
+ * @param walkAnimationPeriod Each "frame" of the game icon is animated with this period (in ms)
+ * @param moveDuration The duration of each move used by the animator in charge of the sheep icon
  */
-data class SheepGameConfiguration(val moveOffset: Int)
+data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: Long, val moveDuration: Long)
 
 /**
  * Models a bundle of sheep game default configuration values..
  * @param defaultFencesCount The default number of fences to display
  * @param defaultSpeed The default speed for the floor and fences
- * @param sheepAnimationPeriod Each "frame" of the game icon is animated with this period (in ms)
  */
-data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultSpeed: String, val sheepAnimationPeriod: Long)
+data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultSpeed: String)
