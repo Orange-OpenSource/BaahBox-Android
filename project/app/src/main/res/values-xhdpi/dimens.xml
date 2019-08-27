@@ -26,14 +26,15 @@
 
     <!-- Sheep game -->
 
+    <dimen name="game_sheep_image_icon_margin_top">206dp</dimen>
+    <dimen name="game_sheep_line1_margin_top">0dp</dimen>
+    <dimen name="game_sheep_line2_margin_top">0dp</dimen>
+    <dimen name="game_sheep_floor_margin_top">128dp</dimen>
     <dimen name="game_sheep_btn_play_margin_start_stop">32dp</dimen>
     <dimen name="game_sheep_btn_play_margin_bottom">16dp</dimen>
-    <dimen name="game_sheep_image_icon_margin_top">206dp</dimen>
 
     <dimen name="game_sheep_line0_text_size">16sp</dimen>
     <dimen name="game_sheep_line1_text_size">22sp</dimen>
     <dimen name="game_sheep_line2_text_size">18sp</dimen>
-
-    <dimen name="game_sheep_line1_margin_top">0dp</dimen>
 
 </resources>
