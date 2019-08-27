@@ -31,4 +31,6 @@
     <dimen name="game_sheep_line1_text_size">30sp</dimen>
     <dimen name="game_sheep_line2_text_size">24sp</dimen>
 
+    <dimen name="game_sheep_fence_margin_top">374dp</dimen>
+
 </resources>

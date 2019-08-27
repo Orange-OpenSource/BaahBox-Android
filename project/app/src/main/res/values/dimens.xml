@@ -36,6 +36,4 @@
     <dimen name="game_sheep_floor_height">0dp</dimen>
     <dimen name="game_sheep_btn_play_margin_start_stop">32dp</dimen>
 
-
-
 </resources>

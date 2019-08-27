@@ -349,8 +349,10 @@ class GameSheepFragment : AbstractGameFragment() {
         val fenceImageView = ImageView(this@GameSheepFragment.context)
         fenceImageView.id = View.generateViewId()
         fenceImageView.imageResource = R.mipmap.ic_sheep_fence
+
         val layoutParams = ConstraintLayout.LayoutParams(toDp(100f), toDp(100f))
-        layoutParams.setMargins(toDp(0f), toDp(214f), toDp(0f), toDp(0f))
+        val marginTop = resources.getDimension(R.dimen.game_sheep_fence_margin_top).toInt()
+        layoutParams.setMargins(toDp(0f), marginTop, toDp(0f), toDp(0f))
         fenceImageView.layoutParams = layoutParams
 
         // Add the new view to parent layout with constraints
