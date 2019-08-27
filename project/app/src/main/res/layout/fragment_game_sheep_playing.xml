@@ -37,64 +37,67 @@
             android:layout_marginTop="16dp"
             android:text="@string/game_sheep_instructions_line_0"
             android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
+            android:textSize="@dimen/game_sheep_line0_text_size"
             android:textStyle="normal"
             android:typeface="sans"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
             android:id="@+id/tvLine1"
+            android:text="@string/game_sheep_instructions_line_1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/game_sheep_line1_text_size"
+            android:textStyle="bold"
+            android:typeface="sans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="64dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:typeface="sans"
+            android:layout_marginTop="@dimen/game_sheep_line1_margin_top"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gameIcon"/>
+            app:layout_constraintTop_toBottomOf="@+id/gameIcon" />
 
     <TextView
             android:id="@+id/tvLine2"
+            android:text="@string/game_sheep_instructions_line_2"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/game_sheep_line2_text_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:textColor="@color/colorPrimary"
-            android:textSize="24sp"
+            android:layout_marginTop="@dimen/game_sheep_line2_margin_top"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLine1"
-            app:layout_constraintBottom_toTopOf="@+id/btnPlay"/>
+            app:layout_constraintBottom_toTopOf="@+id/btnPlay" />
 
     <!-- Shaun the sheep -->
 
     <ImageView
             android:id="@+id/gameIcon"
+            android:src="@mipmap/ic_sheep_moving_1"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="H, 1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/ic_sheep_moving_1"
-            android:layout_marginTop="170dp"
             android:layout_marginStart="128dp"
-            android:layout_marginEnd="128dp"/>
+            android:layout_marginEnd="128dp"
+            android:layout_marginTop="@dimen/game_sheep_image_icon_margin_top"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <!-- The floor -->
 
     <ImageView
             android:id="@+id/gameSheepFloor"
+            android:src="@mipmap/ic_sheep_floor"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/game_sheep_floor_margin_top"
             app:layout_constraintDimensionRatio="H, 1:1"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:src="@mipmap/ic_sheep_floor"
-            android:layout_marginTop="108dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
