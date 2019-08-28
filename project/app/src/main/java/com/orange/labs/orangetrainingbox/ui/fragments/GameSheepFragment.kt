@@ -75,11 +75,6 @@ class GameSheepFragment : AbstractGameFragment() {
     private lateinit var fencesAnimator: ObjectAnimator
 
     /**
-     * Permits to play animations for the sheep, i.e. make it jump over fences.
-     */
-    private lateinit var sheepAnimator: ObjectAnimator
-
-    /**
      * The default configuration for this game
      */
     private lateinit var defaultGameConfiguration: SheepGameDefaultConfiguration
@@ -95,16 +90,14 @@ class GameSheepFragment : AbstractGameFragment() {
     private var difficultyFactor: Double = 0.0
 
     /**
-     * The initial position (Y-axis) of the sheep image view.
-     * The sheep view should not go under.
-     * Do not forget the landmark is in 2D and based on the device screen, i.e. with (0,0 in the top left corner.
-     */
-    private var sheepInitialVerticalPosition: Float = 0f
-
-    /**
      * The registry for sensor data records
      */
     private lateinit var lastPoints: SensorDataSeries
+
+    /**
+     * Initial position on Y-axis of the sheep game icon
+     */
+    private var sheepInitialYposition = -1
 
 
     // ***********************************
@@ -262,8 +255,6 @@ class GameSheepFragment : AbstractGameFragment() {
         moveSheep(trend)
     }
 
-    private var sheepInitialYpos = -1
-
     /**
      * Moves the sheep with an Y-axis translation using an offset based on uer input / sensor value
      *
@@ -273,81 +264,21 @@ class GameSheepFragment : AbstractGameFragment() {
 
         if (trend == SensorTrends.EQUAL) return
 
-        val toDp: (Float) -> Int = {
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it, resources.displayMetrics).toInt()
-        }
-
         val offsetY = when (trend) {
-            SensorTrends.INCREASE -> {
-                Logger.d("Sheep game - sheep icon trend is INCREASE, move to ${gameConfiguration.moveOffset * -1}")
-                gameConfiguration.moveOffset * -1
-            }
-            SensorTrends.DECREASE -> {
-                Logger.d("Sheep game - sheep icon trend is DECREASE, move to ${gameConfiguration.moveOffset}")
-                gameConfiguration.moveOffset
-            }
-            else -> {
-                Logger.d("Sheep game - sheep icon trend is EQUAL, move to0")
-                0
-            }
-        }
-
-
-        val sheepView = find<ImageView>(R.id.gameIcon)
-        val layoutParams = sheepView.layoutParams as ConstraintLayout.LayoutParams
-        if (sheepInitialYpos == -1) sheepInitialYpos = layoutParams.topMargin
-
-        val newMarginTop = layoutParams.topMargin + offsetY
-        Logger.d("Sheep game - $sheepInitialYpos // ${layoutParams.topMargin} -> $newMarginTop ($offsetY)")
-
-        if (newMarginTop < 0 || newMarginTop > sheepInitialYpos) return
-
-
-        layoutParams.setMargins(layoutParams.leftMargin, newMarginTop, layoutParams.rightMargin, layoutParams.bottomMargin)
-        sheepView.layoutParams = layoutParams
-
-
-
-        /*
-        // WARNING: It seems getLocationOnScreen() above does not return the same values
-        // That 280 Y-axis value comes from... nowhere?
-        // FIXME Define the first good position relative to the screen, here on the Nexus 6P 875 (px? dp?)
-        sheepInitialVerticalPosition = 875f
-
-        // Get elements like image view and positions
-        val location = IntArray(2)
-        val sheepImageView = find<ImageView>(R.id.gameIcon)
-        sheepImageView.getLocationOnScreen(location)
-        val absoluteSheepYAxisPosition = location[1].toFloat()
-
-        val offsetY = when (trend) {
-            SensorTrends.INCREASE -> - gameConfiguration.moveOffset
-            SensorTrends.DECREASE -> + gameConfiguration.moveOffset
+            SensorTrends.INCREASE -> gameConfiguration.moveOffset * -1
+            SensorTrends.DECREASE -> gameConfiguration.moveOffset
             else -> 0
         }
 
-        // In case the sheep jumps
-        if ((trend == SensorTrends.INCREASE && absoluteSheepYAxisPosition + offsetY >= 0)
-            // In case the sheep falls
-            || (trend == SensorTrends.DECREASE && absoluteSheepYAxisPosition + offsetY <= sheepInitialVerticalPosition)){
+        val sheepView = find<ImageView>(R.id.gameIcon)
+        val layoutParams = sheepView.layoutParams as ConstraintLayout.LayoutParams
+        if (sheepInitialYposition == -1) sheepInitialYposition = layoutParams.topMargin
 
-            val relativeSheepYAxisPositionForAnimation = sheepImageView.y + offsetY
+        val newMarginTop = layoutParams.topMargin + offsetY
+        if (newMarginTop < 0 || newMarginTop > sheepInitialYposition) return
+        layoutParams.setMargins(layoutParams.leftMargin, newMarginTop, layoutParams.rightMargin, layoutParams.bottomMargin)
+        sheepView.layoutParams = layoutParams
 
-            // The sheep jumps or falls, change its skin
-            stopIntroductionAnimation()
-            sheepImageView.imageResource = R.mipmap.ic_sheep_jump
-
-            if (::sheepAnimator.isInitialized) sheepAnimator.pause()
-            sheepAnimator = ObjectAnimator.ofFloat(sheepImageView, "Y", relativeSheepYAxisPositionForAnimation)
-            sheepAnimator.duration = gameConfiguration.moveDuration
-            sheepAnimator.start()
-
-        // The sheep walks
-        } else if (absoluteSheepYAxisPosition == sheepInitialVerticalPosition) {
-            if (::sheepAnimator.isInitialized) sheepAnimator.pause()
-            startIntroductionAnimation()
-        }
-*/
     }
 
     /**
@@ -366,51 +297,6 @@ class GameSheepFragment : AbstractGameFragment() {
             fencesAnimator = createFenceAnimator(fenceImageView, parentLayout)
             fencesAnimator.start()
         }
-
-    }
-
-    /**
-     * Creates a new image view for the sheep.
-     * Uses [ConstraintLayout] params for configuration.
-     * Adds the view to the parent layout.
-     *
-     * @param parent The parent layout
-     * @return [ImageView]  The new view added to the parent layout
-     */
-    private fun addNewSheepView(parent: ConstraintLayout): ImageView {
-
-        val toDp: (Float) -> Int = {
-            TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, it, resources.displayMetrics).toInt()
-        }
-
-        // Create the new image view
-        val sheepImageView = ImageView(this@GameSheepFragment.context)
-        sheepImageView.id = View.generateViewId()
-        sheepImageView.imageResource = R.mipmap.ic_sheep_moving_1
-
-        /*
-        app:layout_constraintDimensionRatio="H, 1:1"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-*/
-        val marginStartEnd = resources.getDimension(R.dimen.game_sheep_image_icon_margin_start_end).toInt()
-        val marginTop = resources.getDimension(R.dimen.game_sheep_image_icon_margin_top).toInt()
-
-        val layoutParams = ConstraintLayout.LayoutParams(toDp(0f), toDp(0f))
-        layoutParams.setMargins(marginStartEnd, marginTop, marginStartEnd, toDp(0f))
-        sheepImageView.layoutParams = layoutParams
-
-        // Add the new view to parent layout with constraints
-        parent.addView(sheepImageView)
-        val constraintSet = ConstraintSet()
-        constraintSet.clone(parent)
-        constraintSet.connect(sheepImageView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-        constraintSet.connect(sheepImageView.id, ConstraintSet.END, R.id.gameSheepFloor, ConstraintSet.END)
-        constraintSet.applyTo(parent)
-
-        return sheepImageView
 
     }
 

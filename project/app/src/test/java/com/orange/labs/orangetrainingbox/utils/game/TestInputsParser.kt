@@ -96,6 +96,11 @@ class TestInputsParser {
 
         // Time to test!
         testFrameParsing(0, 0, 0, 0, 0)
+        testFrameParsing(20, 15, 20, 15, 0)
+        testFrameParsing(6, 15, 0, 0, 1)
+        testFrameParsing(7, 0, 90, 0, 2)
+        testFrameParsing(20, 0, 90, 0, 3)
+        testFrameParsing(85, 4, 42, 3, 4)
 
     }
 

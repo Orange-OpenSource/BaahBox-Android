@@ -19,7 +19,6 @@ package com.orange.labs.orangetrainingbox.utils.structures
 
 import android.annotation.SuppressLint // YOLO
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
-import kotlin.math.absoluteValue
 
 
 // **********************
@@ -98,16 +97,16 @@ class SensorDataSeries(private val historySize: Int,
         )
     }
 
-    /**
-     * Check in the swap if the values stored, which can be higher than these in the queue, can be considered
-     * as a powerful move.
-     * Indeed sometimes pic values, i.e. very bigger or lower than the others, can be enqueued and be seen as parasite.
-     * But if the user makes a powerful move (a big contraction of its muscle or a big release), we will get
-     * pic values which must not be seen as parasites.
-     */
-    private val isPowerfulMove: () -> Boolean = {
-        (swap[0] != -1 && swap[1] != -1) && ((swap[0] - swap[1]).absoluteValue < POWERFUL_MOVE_DIFF)
-    }
+//    /**
+//     * Check in the swap if the values stored, which can be higher than these in the queue, can be considered
+//     * as a powerful move.
+//     * Indeed sometimes pic values, i.e. very bigger or lower than the others, can be enqueued and be seen as parasite.
+//     * But if the user makes a powerful move (a big contraction of its muscle or a big release), we will get
+//     * pic values which must not be seen as parasites.
+//     */
+//    private val isPowerfulMove: () -> Boolean = {
+//        (swap[0] != -1 && swap[1] != -1) && ((swap[0] - swap[1]).absoluteValue < POWERFUL_MOVE_DIFF)
+//    }
 
     /**
      * The last computed average which will be compared to a newer value so as to define

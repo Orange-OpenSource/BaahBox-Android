@@ -178,10 +178,9 @@ class TestPropertiesReader {
 
         val sensorDataSeriesConfig = appContext!!.readSensorDataSeriesConfiguration()
 
-        assertTrue(sensorDataSeriesConfig.intervalForUpdate == 20)
+        assertTrue(sensorDataSeriesConfig.intervalForUpdate == 10)
         assertTrue(sensorDataSeriesConfig.trendThreshold == 15)
 
     }
-
 
 }

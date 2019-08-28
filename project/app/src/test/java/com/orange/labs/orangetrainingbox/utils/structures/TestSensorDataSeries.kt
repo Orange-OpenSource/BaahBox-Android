@@ -25,7 +25,7 @@ import org.junit.Test
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.0.0
+ * @version 2.0.0
  */
 class TestSensorDataSeries {
 
@@ -35,6 +35,8 @@ class TestSensorDataSeries {
      */
     @Test
     fun addRecord() {
+
+        // Test if add operations are successful depending to size of series
 
         val records = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
@@ -50,6 +52,26 @@ class TestSensorDataSeries {
         sensorDataSeries = SensorDataSeries(2, 2, 5)
         records.forEach { sensorDataSeries.addRecord(it) }
 
+        // Test the use of the swap (size of 2)
+
+        sensorDataSeries = SensorDataSeries(10, 2, 5)
+        assertTrue(sensorDataSeries.computeAverage() == 0)
+
+        sensorDataSeries.addRecord(10) // In swap
+        assertTrue(sensorDataSeries.computeAverage() == 0)
+        sensorDataSeries.addRecord(20) // In swap with 10
+        assertTrue(sensorDataSeries.computeAverage() == 0)
+
+        sensorDataSeries.addRecord(30) // Queue: 10, swap: 20, 30
+        assertTrue(sensorDataSeries.computeAverage() == 10)
+        sensorDataSeries.addRecord(40) // Queue: 10, 20, swap: 30, 40
+        assertTrue(sensorDataSeries.computeAverage() == 15)
+
+        sensorDataSeries.addRecord(50) // Queue: 10, 20, 30,  swap: 40, 50
+        assertTrue(sensorDataSeries.computeAverage() == 20)
+        sensorDataSeries.addRecord(60) // Queue: 10, 20, 30, 40, swap: 50, 60
+        assertTrue(sensorDataSeries.computeAverage() == 25)
+
     }
 
     /**
@@ -59,21 +81,28 @@ class TestSensorDataSeries {
     fun computeAverage() {
 
         val records = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val recordsWithSwap = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8) // 9 and 10 in swap
 
         var sensorDataSeries = SensorDataSeries(0, 2, 5)
         assertTrue(sensorDataSeries.computeAverage() == 0)
         records.forEach { sensorDataSeries.addRecord(it) }
-        assertTrue(sensorDataSeries.computeAverage() == records.average().toInt())
+        assertTrue(sensorDataSeries.computeAverage() == recordsWithSwap.average().toInt())
 
         sensorDataSeries = SensorDataSeries(10, 2, 5)
         assertTrue(sensorDataSeries.computeAverage() == 0)
         records.forEach { sensorDataSeries.addRecord(it) }
-        assertTrue(sensorDataSeries.computeAverage() == 5) // average(1, 2, 3, 4, 5, 6, 7, 8, 9) = 45
+        assertTrue(sensorDataSeries.computeAverage() == recordsWithSwap.average().toInt())
 
         sensorDataSeries = SensorDataSeries(3, 2, 5)
         assertTrue(sensorDataSeries.computeAverage() == 0)
         records.forEach { sensorDataSeries.addRecord(it) }
-        assertTrue(sensorDataSeries.computeAverage() == 9) // average (8, 9, 10) = 9
+        assertTrue(sensorDataSeries.computeAverage() == 7)
+
+        /*
+        With a series of size 3, which embeds a swap of 2, at the end 9 and 10 will be swapped,
+        and 6, 7, 8 stored.
+        Thus average(6, 7, 8) = 7
+        */
 
     }
 
@@ -85,38 +114,36 @@ class TestSensorDataSeries {
 
         // Without parasites
         var sensorDataSeries = SensorDataSeries(20, 2, 5)
-
         var increasingTrend = mutableListOf(20, 40, 100, 200, 500, 600, 650, 680, 800, 810)
         increasingTrend.forEach { sensorDataSeries.addRecord(it) }
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.INCREASE)
 
         sensorDataSeries = SensorDataSeries(20, 2, 5)
-
         var decreasingTrend = mutableListOf(1024, 1000, 900, 800, 700, 400, 50, 10, 1)
         decreasingTrend.forEach { sensorDataSeries.addRecord(it) }
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.DECREASE)
 
         sensorDataSeries = SensorDataSeries(20, 2, 5)
-
-        var equalTrend = mutableListOf(350, 400, 350, 300, 310, 330, 380)
+        var equalTrend = mutableListOf(403, 400, 402, 400, 405, 400, 402)
         equalTrend.forEach { sensorDataSeries.addRecord(it) }
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.EQUAL)
 
         // With parasites
 
         sensorDataSeries = SensorDataSeries(20, 2, 5)
-
         increasingTrend = mutableListOf(20, 40, 100, 1 /* <--- parasite */, 200, 500, 600, 650, 680, 800, 810)
         increasingTrend.forEach { sensorDataSeries.addRecord(it) }
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.INCREASE)
 
         sensorDataSeries = SensorDataSeries(20, 2, 5)
+        equalTrend = mutableListOf(403, 400, 2088 /* <--- parasite */, 402, 400, 405, 400, 402)
+        equalTrend.forEach { sensorDataSeries.addRecord(it) }
+        assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.EQUAL)
 
-        decreasingTrend = mutableListOf(600, 500, 550, 400, 320, 300, 200, 1024 /* <--- parasite */, 200, 195, 5)
+        sensorDataSeries = SensorDataSeries(20, 2, 5)
+        decreasingTrend = mutableListOf(800, 750, 700, 600, 620, 2088 /* <--- parasite */, 400, 300, 250, 200)
         decreasingTrend.forEach { sensorDataSeries.addRecord(it) }
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.DECREASE)
-
-        sensorDataSeries = SensorDataSeries(20, 2, 100)
 
     }
 
