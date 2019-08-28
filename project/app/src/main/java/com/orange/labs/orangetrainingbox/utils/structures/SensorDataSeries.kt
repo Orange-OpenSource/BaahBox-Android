@@ -17,8 +17,10 @@
  */
 package com.orange.labs.orangetrainingbox.utils.structures
 
-import android.annotation.SuppressLint
+import android.annotation.SuppressLint // YOLO
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import kotlin.math.absoluteValue
+
 
 // **********************
 // Compile-time constants
@@ -33,12 +35,23 @@ import com.orange.labs.orangetrainingbox.utils.logs.Logger
  */
 private const val PARASITE_MAX_FACTOR = 10
 
+/**
+ * Sometimes too-high records are not parasites, but a start of a powerful move.
+ * Indeed when the user makes a big muscle contraction, or a big release, very high value can occur but are not parasites.
+ * So as to check if we are in this case, a difference is made between values in the swap.
+ * If the absolute value fo the result is lower than this constant, we are in a powerful move
+ */
+private const val POWERFUL_MOVE_DIFF = 200
+
+
 // *******
 // Classes
 // *******
 
 /**
- * Class containing a series of sensor data stord in a [Queue], and providing methods for averages and trends.
+ * Class containing a series of sensor data stored in a [Queue], and providing methods for averages and trends.
+ * It contains also a swap for data stored before being added in the queue.
+ * This structure allows to check if data are parasites, powerful move or simple move.
  *
  * @param historySize Higher is this value, bigger is the number of sensor data records
  * @param intervalForUpdate All INTERVAL_FOR_UPDATEth items, compute a new average and store it.
@@ -58,9 +71,37 @@ class SensorDataSeries(private val historySize: Int,
     // **********
 
     /**
-     * Sensor data are stored in a FIFO structure
+     * Sensor data are stored in a FIFO structure so as to deal with order of values
      */
     private val sensorDataQueue: Queue<Int> = Queue(historySize)
+
+    /**
+     * The swap is a kind of waiting queue for values before adding them in the queue.
+     * It allows to catch parasite values and check if such high values are not for powerful move.
+     * Indeed, a parasite in a site is like [10, 12, 12, 15, 800, 12, 15].
+     * A powerful move (big contraction or big release of muscle) is more like [10, 12, 12, 15, 800, 810, 850]
+     */
+    private val swap: Array<Int> = arrayOf(-1, -1)
+
+    /**
+     * Check in the swap if a parasite value has been stored.
+     * If the swap is not empty (no -1 stored), check if the 1st value is far higher (using PARASITE_MAX_FACTOR)
+     * than the 2nd. In this ase returns true, otherwise false.
+     */
+    private val wasParasite: () -> Boolean = {
+        (swap[0] != -1 && swap[1] != -1) && (swap[0] > swap[1] * PARASITE_MAX_FACTOR)
+    }
+
+    /**
+     * Check in the swap if the values stored, which can be higher than these in the queue, can be considered
+     * as a powerful move.
+     * Indeed sometimes pic values, i.e. very bigger or lower than the others, can be enqueued and be seen as parasite.
+     * But if the user makes a powerful move (a big contraction of its muscle or a big release), we will get
+     * pic values which must not be seen as parasites.
+     */
+    private val isPowerfulMove: () -> Boolean = {
+        (swap[0] != -1 && swap[1] != -1) && ((swap[0] - swap[1]).absoluteValue < POWERFUL_MOVE_DIFF)
+    }
 
     /**
      * The last computed average which will be compared to a newer value so as to define
@@ -86,13 +127,39 @@ class SensorDataSeries(private val historySize: Int,
      */
     @SuppressLint("ByteOrderMark")
     fun addRecord(record: Int) {
+
         countDownForAverage--
         if (countDownForAverage <= 0) {
             lastComputedAverage = computeAverage()
             countDownForAverage = intervalForUpdate
             Logger.d("Sensor data series - last computed average $lastComputedAverage")
         }
-        sensorDataQueue.enqueue(record)
+
+        when {
+
+            // Swap never used until now
+            swap[0] == -1 -> swap[0] = record
+
+            // Only one value has been added in the swap, fill its other cell
+            swap[1] == -1 -> swap[1] = record
+
+            // Swap is full, need to move values
+            else -> {
+
+                // Woops, parasite value, delete it
+                if (wasParasite() && !isPowerfulMove()){
+                    swap[0] = swap[1]
+                    swap[1] = record
+                } else {
+                    sensorDataQueue.enqueue(swap[0])
+                    swap[0] = swap[1]
+                    swap[1] = record
+                }
+
+            }
+
+        }
+
     }
 
     /**
@@ -119,47 +186,12 @@ class SensorDataSeries(private val historySize: Int,
      * @return SensorTrends
      */
     fun trendOfRecordedData(): SensorTrends {
-        removeParasites()
         return when (computeAverage() - lastComputedAverage) {
             in Int.MIN_VALUE..-trendThreshold -> SensorTrends.DECREASE
             in -trendThreshold..trendThreshold -> SensorTrends.EQUAL
             in trendThreshold..Int.MAX_VALUE -> SensorTrends.INCREASE
             else -> SensorTrends.EQUAL
         }
-    }
-
-    /**
-     * Cleans the series of records so as to remove parasites.
-     * Indeed with Baah box Arduino firmware 2.0.0 (https://github.com/Orange-OpenSource/BaahBox-Arduino/releases/tag/v2.0.0)
-     * some frames are broadcast with input data even if nothing has been done on the sensors.
-     * For example when a slider is plugged to the box, the box sends frames with non-zero data even if the slider has not been touched.
-     * Those values are polluting the series and finally the average computation.
-     */
-    private fun removeParasites() {
-
-        if (sensorDataQueue.isEmpty()) return
-
-        // First case: inputs greater than 1024 which must be the highest value
-        // E.g: 10, 20, 10, 30, 2022, 15
-        sensorDataQueue.elements.removeAll { it > 1024 }
-
-        // Other case: too high inputs between smaller ones
-        // E.g.: 10, 20, 5, 90, 5, 10, 20     <---- 90
-        // E.g.: 10, 20, 5, 800, 5, 10, 20    <---- 800
-        // For this case, compare the two biggest values. If one is far more great than the other, remove it.
-        val notFifoAnymore /* grumph */  = sensorDataQueue.elements.toMutableList()
-        notFifoAnymore.sort()
-        val count = notFifoAnymore.count()
-        if (count <= 2) return
-
-        val max1 = notFifoAnymore[count - 1]
-        val max2 = notFifoAnymore[count - 2]
-
-        if (max2 != 0 && max1 > max2 * PARASITE_MAX_FACTOR) {
-            Logger.d("Sensor data series - remove parasite $max1 ($max1 > ${max2 * 5})")
-            sensorDataQueue.elements.remove(max1)
-        }
-
     }
 
 }
