@@ -20,6 +20,18 @@ package com.orange.labs.orangetrainingbox.utils.structures
 import android.annotation.SuppressLint
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
 
+// **********************
+// Compile-time constants
+// **********************
+
+/**
+ * A factor for parasite computations.
+ * Once the data is enqueued, the 2 first highest values will be defined.
+ * If the highest of the 2 is FACTOR time greater than the another, thus this value is considered as a parasite.
+ * Indeed, the BaahBox sends data like 2022, 1024 or other too-high value. Need to find them because they
+ * have an effect on trends and averages (muscles contractions, decontractions, ...)
+ */
+private const val PARASITE_MAX_FACTOR = 10
 
 // *******
 // Classes
@@ -143,7 +155,7 @@ class SensorDataSeries(private val historySize: Int,
         val max1 = notFifoAnymore[count - 1]
         val max2 = notFifoAnymore[count - 2]
 
-        if (max2 != 0 && max1 > max2 * 5) {
+        if (max2 != 0 && max1 > max2 * PARASITE_MAX_FACTOR) {
             Logger.d("Sensor data series - remove parasite $max1 ($max1 > ${max2 * 5})")
             sensorDataQueue.elements.remove(max1)
         }
