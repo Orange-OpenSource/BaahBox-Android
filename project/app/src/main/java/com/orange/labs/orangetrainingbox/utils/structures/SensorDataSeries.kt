@@ -86,10 +86,16 @@ class SensorDataSeries(private val historySize: Int,
     /**
      * Check in the swap if a parasite value has been stored.
      * If the swap is not empty (no -1 stored), check if the 1st value is far higher (using PARASITE_MAX_FACTOR)
-     * than the 2nd. In this ase returns true, otherwise false.
+     * than the 2nd. In this case returns true, otherwise false.
+     *
+     * <b>Please note that this code works for Arduino firmware v2.0.0 which sends bad values</b>
      */
     private val wasParasite: () -> Boolean = {
-        (swap[0] != -1 && swap[1] != -1) && (swap[0] > swap[1] * PARASITE_MAX_FACTOR)
+        (swap[0] != -1 && swap[1] != -1) && (
+                (swap[0] > swap[1] * PARASITE_MAX_FACTOR)
+                ||
+                (swap[0] > 1024)
+        )
     }
 
     /**
@@ -140,14 +146,14 @@ class SensorDataSeries(private val historySize: Int,
             // Swap never used until now
             swap[0] == -1 -> swap[0] = record
 
-            // Only one value has been added in the swap, fill its other cell
+            // Only one value has been added in the swap, fill its other cell of the swap
             swap[1] == -1 -> swap[1] = record
 
             // Swap is full, need to move values
             else -> {
 
                 // Woops, parasite value, delete it
-                if (wasParasite() && !isPowerfulMove()){
+                if (wasParasite()){
                     swap[0] = swap[1]
                     swap[1] = record
                 } else {
