@@ -189,6 +189,7 @@ class SensorDataSeries(private val historySize: Int,
      */
     fun trendOfRecordedData(): SensorTrends {
         if (computeAverage() < 5) return SensorTrends.LOWEST
+        if (computeAverage() > 1020) return SensorTrends.HIGHEST
         return when (computeAverage() - lastComputedAverage) {
             in Int.MIN_VALUE..-trendThreshold -> SensorTrends.DECREASE
             in -trendThreshold..trendThreshold -> SensorTrends.EQUAL
@@ -210,6 +211,12 @@ class SensorDataSeries(private val historySize: Int,
  * @version 1.0.0
  */
 enum class SensorTrends {
+
+    /**
+     * The metrics computed from sensor data give a very high average, considering
+     * the sensor is at its highest level.
+     */
+    HIGHEST,
 
     /**
      * The metrics computed from sensor data records are going higher
