@@ -55,7 +55,7 @@ class TestTrainingBoxViewModel {
      */
     private var appContext: Context? = null
 
-    
+
     /**
      * Init the object to test
      */
