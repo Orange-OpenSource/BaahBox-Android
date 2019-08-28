@@ -15,11 +15,9 @@
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.orange.labs.orangetrainingbox.utils.game
+package com.orange.labs.orangetrainingbox.game
 
 import android.bluetooth.BluetoothGattCharacteristic
-import com.orange.labs.orangetrainingbox.game.InputsParser
-import com.orange.labs.orangetrainingbox.game.MuscleData
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
