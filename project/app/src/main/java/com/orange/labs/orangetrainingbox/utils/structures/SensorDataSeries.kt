@@ -18,6 +18,7 @@
 package com.orange.labs.orangetrainingbox.utils.structures
 
 import android.annotation.SuppressLint
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
 
 
 // *******
@@ -77,6 +78,7 @@ class SensorDataSeries(private val historySize: Int,
         if (countDownForAverage <= 0) {
             lastComputedAverage = computeAverage()
             countDownForAverage = intervalForUpdate
+            Logger.d("Sensor data series - last computed average $lastComputedAverage")
         }
         sensorDataQueue.enqueue(record)
     }
@@ -141,7 +143,10 @@ class SensorDataSeries(private val historySize: Int,
         val max1 = notFifoAnymore[count - 1]
         val max2 = notFifoAnymore[count - 2]
 
-        if (max1 > max2 * 5) sensorDataQueue.elements.remove(max1)
+        if (max2 != 0 && max1 > max2 * 5) {
+            Logger.d("Sensor data series - remove parasite $max1 ($max1 > ${max2 * 5})")
+            sensorDataQueue.elements.remove(max1)
+        }
 
     }
 
