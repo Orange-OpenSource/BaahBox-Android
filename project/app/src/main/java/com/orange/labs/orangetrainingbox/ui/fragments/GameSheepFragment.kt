@@ -200,7 +200,6 @@ class GameSheepFragment : AbstractGameFragment() {
 
         // Define the observer
         val sensorBObserver = Observer<Int> { sensorValue ->
-            Logger.d("Sensor data - $sensorValue")
             processBaahBoxData(sensorValue)
         }
 
@@ -274,9 +273,13 @@ class GameSheepFragment : AbstractGameFragment() {
         val layoutParams = sheepView.layoutParams as ConstraintLayout.LayoutParams
         if (sheepInitialYposition == -1) sheepInitialYposition = layoutParams.topMargin
 
-        val newMarginTop = layoutParams.topMargin + offsetY
-        if (newMarginTop < 0 || newMarginTop > sheepInitialYposition) return
-        layoutParams.setMargins(layoutParams.leftMargin, newMarginTop, layoutParams.rightMargin, layoutParams.bottomMargin)
+        if (trend == SensorTrends.LOWEST) {
+            layoutParams.setMargins(layoutParams.leftMargin, sheepInitialYposition, layoutParams.rightMargin, layoutParams.bottomMargin)
+        } else {
+            val newMarginTop = layoutParams.topMargin + offsetY
+            if (newMarginTop < 0 || newMarginTop > sheepInitialYposition) return
+            layoutParams.setMargins(layoutParams.leftMargin, newMarginTop, layoutParams.rightMargin, layoutParams.bottomMargin)
+        }
         sheepView.layoutParams = layoutParams
 
     }

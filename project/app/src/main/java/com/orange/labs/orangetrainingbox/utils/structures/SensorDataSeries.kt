@@ -137,7 +137,6 @@ class SensorDataSeries(private val historySize: Int,
         if (countDownForAverage <= 0) {
             lastComputedAverage = computeAverage()
             countDownForAverage = intervalForUpdate
-            Logger.d("Sensor data series - last computed average $lastComputedAverage")
         }
 
         when {
@@ -181,16 +180,15 @@ class SensorDataSeries(private val historySize: Int,
      * Computes the difference between the current average and the last computed.
      * If the result is negligible, will consider a non-moving trend.
      * If the result is significant, will consider an increasing or a decreasing trend.
-     * Removes previously parasites.
+     * If the average of recorded values is very slow, will consider trend at its LOWEST state.
      *
      * <b>Considering here sensor records are integers, where the lowest value is 1 and the highest value
-     * is 1002 (i.e. full contraction / work of muscles / ...)</b>
-     *
-     * <b>Arbitrary decided for now to consider a variation in [-100 ; 100] is not enough significant.</b>
+     * is 1024 (i.e. full contraction / work of muscles / ...)</b>
      *
      * @return SensorTrends
      */
     fun trendOfRecordedData(): SensorTrends {
+        if (computeAverage() < 5) return SensorTrends.LOWEST
         return when (computeAverage() - lastComputedAverage) {
             in Int.MIN_VALUE..-trendThreshold -> SensorTrends.DECREASE
             in -trendThreshold..trendThreshold -> SensorTrends.EQUAL
@@ -226,6 +224,12 @@ enum class SensorTrends {
     /**
      * The metrics computed from sensor data are going lower
      */
-    DECREASE
+    DECREASE,
+
+    /**
+     * The metrics computed from sensor data give a very low average, considering
+     * the sensor is at its lowest level.
+     */
+    LOWEST
 
 }

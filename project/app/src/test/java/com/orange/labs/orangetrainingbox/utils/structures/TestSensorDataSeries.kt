@@ -25,7 +25,7 @@ import org.junit.Test
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 2.0.0
+ * @version 2.1.0
  */
 class TestSensorDataSeries {
 
@@ -113,6 +113,7 @@ class TestSensorDataSeries {
     fun trendOfRecordedData() {
 
         // Without parasites
+
         var sensorDataSeries = SensorDataSeries(20, 2, 5)
         var increasingTrend = mutableListOf(20, 40, 100, 200, 500, 600, 650, 680, 800, 810)
         increasingTrend.forEach { sensorDataSeries.addRecord(it) }
@@ -127,6 +128,11 @@ class TestSensorDataSeries {
         var equalTrend = mutableListOf(403, 400, 402, 400, 405, 400, 402)
         equalTrend.forEach { sensorDataSeries.addRecord(it) }
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.EQUAL)
+
+        sensorDataSeries = SensorDataSeries(20, 2, 5)
+        var lowestTrend = mutableListOf(1, 1, 2, 3, 2, 0, 0)
+        lowestTrend.forEach { sensorDataSeries.addRecord(it) }
+        assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.LOWEST)
 
         // With parasites
 
@@ -144,6 +150,11 @@ class TestSensorDataSeries {
         decreasingTrend = mutableListOf(800, 750, 700, 600, 620, 2088 /* <--- parasite */, 400, 300, 250, 200)
         decreasingTrend.forEach { sensorDataSeries.addRecord(it) }
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.DECREASE)
+
+        sensorDataSeries = SensorDataSeries(20, 2, 5)
+        lowestTrend = mutableListOf(1, 1, 2, 3, 90 /* <--- parasite */, 2, 0, 0)
+        lowestTrend.forEach { sensorDataSeries.addRecord(it) }
+        assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.LOWEST)
 
     }
 
