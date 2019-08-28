@@ -43,6 +43,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <TextView
             android:id="@+id/tvLine1"
             android:text="@string/game_sheep_instructions_line_1"
@@ -70,6 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLine1"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     <!-- Shaun the sheep -->
 

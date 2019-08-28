@@ -28,7 +28,7 @@ import java.util.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 2.2.0
+ * @version 2.2.1
  */
 
 // Compile-time constants
@@ -162,7 +162,7 @@ fun Context.readSheepGameConfiguration(): SheepGameConfiguration {
     if (animationPeriod <= 0) throw InvalidConfigurationException("Sheep animation period value must be a long greater than 0")
     val moveDuration = properties.getProperty(PropertiesKeys.GAME_SHEEP_MOVE_DURATION.key).toLong()
     if (moveDuration <= 0) throw InvalidConfigurationException("Sheep move duration value must be a long greater than 0")
-    return SheepGameConfiguration(0, animationPeriod, moveDuration)
+    return SheepGameConfiguration(sheepMoveOffset, animationPeriod, moveDuration)
 }
 
 /**
