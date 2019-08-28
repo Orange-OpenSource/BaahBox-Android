@@ -105,7 +105,7 @@ class TestIconAnimator {
         val imageView: ImageView = mock(ImageView::class.java)
         iconAnimator?.animateGameIcon(activity, imageView, 500, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
         iconAnimator?.stopAnimateGameIcon()
-        
+
     }
 
 }
