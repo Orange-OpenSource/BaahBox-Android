@@ -23,7 +23,7 @@
 GRADLE_PATH="../project"
 INSTRUMENTED_TESTS_REPORTS="app/build/reports/androidTests/connected/flavors"
 GRADLE_COMMAND="gradlew"
-GRADLE_CHECK="$GRADLE_COMMAND connectedAndroidTest"
+GRADLE_TEST="$GRADLE_COMMAND connectedAndroidTest"
 
 SCORE_CONFIDENCE=100
 
@@ -33,7 +33,7 @@ echo  -e    "* ************************** *\n"
 
 echo -e "\n>>>>> Running instrumented tests"
 cd $GRADLE_PATH
-./$GRADLE_CHECK
+./$GRADLE_TEST > /dev/null
 
 echo -e "\n>>>>> Checking results"
 ALL_GOOD=true
