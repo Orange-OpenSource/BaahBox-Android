@@ -32,7 +32,7 @@
     <dimen name="game_sheep_line2_margin_top">0dp</dimen>
     <dimen name="game_sheep_image_icon_width">0dp</dimen>
     <dimen name="game_sheep_image_icon_height">0dp</dimen>
-    <dimen name="game_sheep_image_icon_margin_start_end">128dp</dimen>
+    <dimen name="game_sheep_image_icon_margin_start_end">150dp</dimen>
     <dimen name="game_sheep_floor_width">0dp</dimen>
     <dimen name="game_sheep_floor_height">0dp</dimen>
     <dimen name="game_sheep_btn_play_margin_start_stop">32dp</dimen>

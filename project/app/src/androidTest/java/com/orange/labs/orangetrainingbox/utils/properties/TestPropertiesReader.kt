@@ -33,8 +33,10 @@ import org.junit.runner.RunWith
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.1.0
+ * @version 1.2.0
  */
+
+// TODO hard-coded value in test cases, need to sue properties load Context legacy function and comapre results to extension functions
 @RunWith(AndroidJUnit4::class)
 class TestPropertiesReader {
 
@@ -171,6 +173,40 @@ class TestPropertiesReader {
     }
 
     /**
+     * Test the readSheepGameConfiguration() Context extension
+     */
+    @Test
+    fun readSheepGameConfiguration() {
+
+        val gameSheepMoveOffset = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_MOVE_OFFSET.key).toInt()
+        val gameSheepDuration = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_MOVE_DURATION.key).toLong()
+        val gameSheepAnimationPeriod = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
+
+        val sheepGamesConfiguration = appContext!!.readSheepGameConfiguration()
+
+        assertTrue(gameSheepMoveOffset == sheepGamesConfiguration.moveOffset)
+        assertTrue(gameSheepDuration == sheepGamesConfiguration.moveDuration)
+        assertTrue(gameSheepAnimationPeriod == sheepGamesConfiguration.walkAnimationPeriod)
+
+    }
+
+    /**
+     * Test the readSheepDefaultConfiguration() Context extension
+     */
+    @Test
+    fun readSheepDefaultConfiguration() {
+
+        val defaultFencesNumber = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
+        val defaultSpeed = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
+
+        val sheepDefaultGameConfiguration = appContext!!.readSheepDefaultConfiguration()
+
+        assertTrue(defaultFencesNumber == sheepDefaultGameConfiguration.defaultFencesCount)
+        assertTrue(defaultSpeed == sheepDefaultGameConfiguration.defaultSpeed)
+
+    }
+
+    /**
      * Test the readSensorDataSeriesConfiguration() Context extension
      */
     @Test
@@ -180,7 +216,7 @@ class TestPropertiesReader {
 
         assertTrue(sensorDataSeriesConfig.queueSize == 15)
         assertTrue(sensorDataSeriesConfig.intervalForUpdate == 5)
-        assertTrue(sensorDataSeriesConfig.trendThreshold == 15)
+        assertTrue(sensorDataSeriesConfig.trendThreshold == 5)
 
     }
 

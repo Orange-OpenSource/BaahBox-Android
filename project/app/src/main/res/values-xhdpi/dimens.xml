@@ -22,7 +22,7 @@
 
     <!-- Sheep game -->
 
-    <dimen name="game_sheep_image_icon_margin_top">206dp</dimen>
+    <dimen name="game_sheep_image_icon_margin_top">245dp</dimen>
     <dimen name="game_sheep_line1_margin_top">0dp</dimen>
     <dimen name="game_sheep_line1_margin_bottom">128dp</dimen>
     <dimen name="game_sheep_line2_margin_bottom">80dp</dimen>
