@@ -46,6 +46,7 @@
 # ##############
 
 ./run-unittests.sh
+
 unittests_status=$?
 if [ $unittests_status -ne 0 ]; then
 	echo "🚨 Something went wrong with unit tests, not going further!"

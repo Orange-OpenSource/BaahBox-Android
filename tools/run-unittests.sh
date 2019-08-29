@@ -31,11 +31,11 @@ echo -e   "\n* ****************** *"
 echo 		"* Running unit tests *"
 echo  -e    "* ****************** *\n"
 
-echo ">>>>> Running unit tests"
+echo -e "\n>>>>> Running unit tests"
 cd $GRADLE_PATH
 ./$GRADLE_CHECK
 
-echo ">>>>> Checking results"
+echo -e "\n>>>>> Checking results"
 ALL_GOOD=true
 for testReportFolder in `ls $UNIT_TESTS_REPORTS`; do
 	echo "Processing $testReportFolder..."
@@ -53,7 +53,7 @@ done
 
 cd ..
 
-echo ">>>>> Completed!"
+echo -e "\n>>>>> Completed!"
 
 if $ALL_GOOD; then
 	exit 0

@@ -46,11 +46,11 @@ awk "{ if (NR == $LINE_FOR_BUILD_VALUE) print \"$newBuildLine\"; else print \$0}
 cat $TEMP_FILE > $APP_GRADLE_BUILD_FILE
 rm $TEMP_FILE
 
-echo ">>>>> New version code will be: $newBuildVersion"
+echo -e "\n>>>>> New version code will be: $newBuildVersion"
 
 # Building project
 #cd $GRADLE_PATH
 #./$GRADLE_BUILD
 #cd ..
 
-echo ">>>>> Completed!"
+echo -e "\n>>>>> Completed!"
