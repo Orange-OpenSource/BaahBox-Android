@@ -23,9 +23,10 @@
 # Will do the following actions:
 #	- Check the app configuration details
 #	- Check if images do not contain legal notices in metadata
-#	- Increment the version number
+#	- Check if unit tests are all passing
+#	- Increment the version code number
 #	- Build Dokka-vased documentation using Gradle
-#	- Update changelog using Gradle
+#	- Update changelog using Gradle (still need to read and modify it manually after for now)
 #
 
 #. *******************************************
@@ -39,6 +40,17 @@
 # ********************************
 
 ./check-imagecredits.sh
+
+# ##############
+# Run unit tests
+# ##############
+
+./run-unittests.sh
+unittests_status=$?
+if [ unittests_status -ne 1 ]; then
+	echo "🚨 Something went wrong with unit tests, not going further!"
+	exit 1
+fi;
 
 # *********************
 # Increase version code
@@ -58,5 +70,5 @@
 
 ./update-changelog.sh
 
-
+exit 0
 
