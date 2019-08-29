@@ -253,6 +253,7 @@ class GameSheepFragment : AbstractGameFragment() {
     private fun processBaahBoxData(userInput: Int) {
         lastPoints.addRecord(userInput)
         val trend = lastPoints.trendOfRecordedData()
+        Logger.d("Sheep game - sensor data: received $userInput, trend is $trend ")
         moveSheep(trend)
     }
 

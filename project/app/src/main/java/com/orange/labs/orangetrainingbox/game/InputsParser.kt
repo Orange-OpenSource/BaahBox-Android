@@ -18,13 +18,14 @@
 package com.orange.labs.orangetrainingbox.game
 
 import android.bluetooth.BluetoothGattCharacteristic
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
 
 /**
  * Utility class allowing to prepare raw sensors inputs for game logic.
  *
  * @author Pierre-Yves Lapersonne
  * @since 16/05/2019
- * @version 1.1.1
+ * @version 1.2.0
  */
 class InputsParser {
 
@@ -95,11 +96,12 @@ class InputsParser {
             val c2 = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,2)
             val a2 = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,3)
             val joystick = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,4)
-            //val stop = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,5)
+            val stop = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,5)
 
             val muscle1 = c1 * 32 + a1
             val muscle2 = c2 * 32 + a2
 
+            Logger.d("BLE characteristic for sensor - <$c1 | $a1 | $c2 | $a2 | $joystick | $stop>, giving muscle 1 = $muscle1, muscle 2 = $muscle2")
             return MuscleData(muscle1, muscle2, joystick)
 
         }
