@@ -43,8 +43,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-
     <TextView
             android:id="@+id/tvLine1"
             android:text="@string/game_sheep_instructions_line_1"
@@ -56,8 +54,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/game_sheep_line1_margin_start"
             android:layout_marginTop="@dimen/game_sheep_line1_margin_top"
+            android:layout_marginBottom="@dimen/game_sheep_line1_margin_bottom"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gameIcon" />
+            app:layout_constraintBottom_toBottomOf="@+id/gameSheepFloor" />
 
     <TextView
             android:id="@+id/tvLine2"

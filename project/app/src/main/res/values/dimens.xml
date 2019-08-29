@@ -27,6 +27,7 @@
     <!-- Sheep game -->
 
     <dimen name="game_sheep_line1_margin_start">32dp</dimen>
+    <dimen name="game_sheep_line1_margin_bottom">64dp</dimen>
     <dimen name="game_sheep_line2_margin_start">16dp</dimen>
     <dimen name="game_sheep_line2_margin_top">0dp</dimen>
     <dimen name="game_sheep_image_icon_width">0dp</dimen>
