@@ -196,7 +196,9 @@ class GameSheepFragment : AbstractGameFragment() {
         difficultyFactor = getDifficultyNumericValue()
 
         val sensorDataSeriesConfiguration = context!!.readSensorDataSeriesConfiguration()
-        lastPoints = SensorDataSeries(5, sensorDataSeriesConfiguration.intervalForUpdate, sensorDataSeriesConfiguration.trendThreshold)
+        lastPoints = SensorDataSeries(sensorDataSeriesConfiguration.queueSize,
+                                        sensorDataSeriesConfiguration.intervalForUpdate,
+                                        sensorDataSeriesConfiguration.trendThreshold)
 
         // Define the observer
         val sensorBObserver = Observer<Int> { sensorValue ->

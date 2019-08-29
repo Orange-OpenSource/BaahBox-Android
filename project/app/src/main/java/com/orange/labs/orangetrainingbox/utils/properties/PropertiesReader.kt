@@ -28,7 +28,7 @@ import java.util.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 2.2.1
+ * @version 2.3.0
  */
 
 // Compile-time constants
@@ -184,9 +184,10 @@ fun Context.readSheepDefaultConfiguration(): SheepGameDefaultConfiguration {
  */
 fun Context.readSensorDataSeriesConfiguration(): SensorDataSeriesConfiguration {
     val properties = loadProperties()
+    val queueSize = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_QUEUE_SIZE.key).toInt()
     val intervalForUpdate = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_INTERVAL_FOR_UPDATE.key).toInt()
     val trendThreshold = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_TREND_THRESHOLD.key).toInt()
-    return SensorDataSeriesConfiguration(intervalForUpdate, trendThreshold)
+    return SensorDataSeriesConfiguration(queueSize, intervalForUpdate, trendThreshold)
 }
 
 /**
@@ -288,7 +289,8 @@ data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaul
 /**
  * Models a bundle of configuration details for sensor data series
  *
+ * @param queueSize The size fo te queue stored sensor data. Higher it is, more records stored
  * @param intervalForUpdate Each interval-th items, compute a ne average of recorded sensor data and store it
  * @param trendThreshold The trend threshold defining if trend is increasing, freezing or decreasing
  */
-data class SensorDataSeriesConfiguration(val intervalForUpdate: Int, val trendThreshold: Int)
+data class SensorDataSeriesConfiguration(val queueSize: Int, val intervalForUpdate: Int, val trendThreshold: Int)

@@ -113,6 +113,12 @@ enum class PropertiesKeys(val key: String) {
      */
     SENSOR_DATA_SERIES_TREND_THRESHOLD("sensor_series_trend_threshold"),
 
+    /**
+     * The size of the queue which stores sensor data records. Trends (increase, decrease, equal) are defined
+     * with the average of records stored in a queue.
+     */
+    SENSOR_DATA_SERIES_QUEUE_SIZE("sensor_series_queue_size"),
+
     /* BLE configuration */
 
     /**

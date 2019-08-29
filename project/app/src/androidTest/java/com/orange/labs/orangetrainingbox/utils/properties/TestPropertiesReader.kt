@@ -33,7 +33,7 @@ import org.junit.runner.RunWith
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.0.0
+ * @version 1.1.0
  */
 @RunWith(AndroidJUnit4::class)
 class TestPropertiesReader {
@@ -178,6 +178,7 @@ class TestPropertiesReader {
 
         val sensorDataSeriesConfig = appContext!!.readSensorDataSeriesConfiguration()
 
+        assertTrue(sensorDataSeriesConfig.queueSize == 15)
         assertTrue(sensorDataSeriesConfig.intervalForUpdate == 10)
         assertTrue(sensorDataSeriesConfig.trendThreshold == 15)
 

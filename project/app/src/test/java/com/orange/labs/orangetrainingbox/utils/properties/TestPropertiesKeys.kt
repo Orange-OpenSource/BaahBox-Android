@@ -27,7 +27,7 @@ import org.junit.Assert.assertEquals
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.0.0
+ * @version 1.1.0
  */
 class TestPropertiesKeys {
 
@@ -71,6 +71,7 @@ class TestPropertiesKeys {
 
         assertEquals(PropertiesKeys.SENSOR_DATA_SERIES_INTERVAL_FOR_UPDATE.key, "sensor_series_interval_for_update")
         assertEquals(PropertiesKeys.SENSOR_DATA_SERIES_TREND_THRESHOLD.key, "sensor_series_trend_threshold")
+        assertEquals(PropertiesKeys.SENSOR_DATA_SERIES_QUEUE_SIZE.key, "sensor_series_queue_size")
 
         // BLE configuration
 
