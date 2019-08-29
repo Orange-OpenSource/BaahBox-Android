@@ -50,7 +50,7 @@
 
 unittests_status=$?
 if [ $unittests_status -ne 0 ]; then
-	echo "🚨 Something went wrong with unit tests, not going further!"
+	echo -e "\n 🚨 Something went wrong with unit tests, not going further!"
 	exit 1
 fi;
 
@@ -62,7 +62,7 @@ fi;
 
 instrumentedtests_status=$?
 if [ $instrumentedtests_status -ne 0 ]; then
-	echo "🚨 Something went wrong with instrumented tests, not going further!"
+	echo -e "\n 🚨 Something went wrong with instrumented tests, not going further!"
 	exit 1
 fi;
 

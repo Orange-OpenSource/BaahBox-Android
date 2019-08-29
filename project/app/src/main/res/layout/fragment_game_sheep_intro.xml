@@ -52,8 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/game_sheep_line1_margin_start"
             android:layout_marginTop="@dimen/game_sheep_line1_margin_top"
+            android:layout_marginBottom="@dimen/game_sheep_line1_margin_bottom"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gameIcon" />
+            app:layout_constraintBottom_toBottomOf="@+id/gameSheepFloor" />
 
     <TextView
             android:id="@+id/tvLine2"
@@ -64,10 +65,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/game_sheep_line2_margin_start"
             android:layout_marginTop="@dimen/game_sheep_line2_margin_top"
+            android:layout_marginBottom="@dimen/game_sheep_line2_margin_bottom"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLine1"
-            app:layout_constraintBottom_toTopOf="@+id/btnPlay" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     <!-- Shaun the sheep -->
 

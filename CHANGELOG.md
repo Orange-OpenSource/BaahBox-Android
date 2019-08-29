@@ -133,3 +133,41 @@
 * project - SensorDataSeries
 * project - InputsParser
 * project - InputsParser, PropertiesKeys
+
+
+
+<a name="0.6.0"></a>
+## 0.6.0 "- version code: 27" (2019/08/29)
+
+
+## Bug Fixes
+
+* #5 - ❌  positions of florr, sheep, fences and widgets for x/xx/xxx-hdpi screens ([572a6096](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/572a6096))
+* SensorDataSeries - ❌  parasite removal when 0 as max ([59b05cc4](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/59b05cc4))
+* SensorDataSeries - ❌  parasite factor ([13d1bc8d](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/13d1bc8d))
+* SensorDataSeries - ❌  parasite detection ([b4d42d8b](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/b4d42d8b))
+* SensorDataSeries - ❌  parasite detection ([6a8d255b](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/6a8d255b))
+* SensorDataSeries - ❌  parasite detection ([f46c52ff](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/f46c52ff))
+* #5 - ❌  positions of sheep when sensor data to low ([22808e19](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/22808e19))
+* #5 - ❌  positions of sheep when sensor data are very high ([7e63e88a](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/7e63e88a))
+* tools - ❌  command status ([9f491f16](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/9f491f16))
+
+## Features
+
+* tool - 🔨 add Shell script to run unit tests and check reports ([e68c59b6](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/e68c59b6))
+* tool - 🔨 add Shell script to run instrumented tests and check reports ([dd99d079](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/dd99d079))
+
+## Refactor
+
+* project - 📦 TrainingBox
+
+## Test
+
+* project - ⭕ TrainingBoxViewModel
+* project - ⭕ IconAnimator
+* project - ⭕ IconAnimator
+* project - ⭕ IconAnimator
+* project - ⭕ GzmeStarFragment
+* project - ⭕ GameBalloonFragment
+* project - ⭕ GameSheepFragment
+* project - ⭕ MainActivityFragment
