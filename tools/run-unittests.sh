@@ -55,7 +55,7 @@ cd ..
 
 echo ">>>>> Completed!"
 
-if ALL_GOOD; then
+if $ALL_GOOD; then
 	exit 0
 else
 	exit 1
