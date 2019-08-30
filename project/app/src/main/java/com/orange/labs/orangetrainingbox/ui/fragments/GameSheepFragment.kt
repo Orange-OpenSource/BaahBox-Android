@@ -54,7 +54,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.0.0
+ * @version 2.0.1
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
@@ -305,7 +305,7 @@ class GameSheepFragment : AbstractGameFragment() {
         // Prepare animation of the fence, which will be repeated
         } else {
             // Loads and adds the fence asset in a dedicated image view
-            val parentLayout = find<ConstraintLayout>(R.id.clGameSheep)
+            val parentLayout = find<ConstraintLayout>(R.id.clSheepGamePlaying)
             val fenceImageView = addNewFenceView(parentLayout)
             fencesAnimator = createFenceAnimator(fenceImageView, parentLayout)
             fencesAnimator.start()
