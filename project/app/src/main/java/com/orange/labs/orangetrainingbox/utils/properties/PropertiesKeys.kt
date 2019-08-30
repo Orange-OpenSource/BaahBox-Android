@@ -24,9 +24,18 @@ package com.orange.labs.orangetrainingbox.utils.properties
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 1.6.0
+ * @version 1.7.0
  */
 enum class PropertiesKeys(val key: String) {
+
+    /* Demo */
+
+    /**
+     * Enagles demo interaction with swipes faking baah box data
+     */
+    ENABLE_DEMO_SWIPES("enable_demo_swipes"),
+
+    /* Games */
 
     /**
      * Set to true to enable the star game, false to disable it

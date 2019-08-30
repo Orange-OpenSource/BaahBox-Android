@@ -28,7 +28,7 @@ import java.util.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 2.3.0
+ * @version 2.4.0
  */
 
 // Compile-time constants
@@ -51,6 +51,16 @@ fun Context.loadProperties(filename: String = DEFAULT_FILENAME): Properties {
     val properties = Properties()
     properties.load(inputStream)
     return properties
+}
+
+/**
+ * Reads from properties file ina ssets flag dor demo purposes
+ *
+ * @return Boolean - True enable swipes, false disable them
+ */
+fun Context.isDemoModeActivated(): Boolean {
+    val properties = loadProperties()
+    return properties.getProperty(PropertiesKeys.ENABLE_DEMO_SWIPES.key).toBoolean()
 }
 
 /**

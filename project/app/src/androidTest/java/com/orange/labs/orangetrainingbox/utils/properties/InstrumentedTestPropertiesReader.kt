@@ -244,4 +244,18 @@ class InstrumentedTestPropertiesReader {
 
     }
 
+    /**
+     * Test the isDemoModeActivated() Context extension
+     */
+    @Test
+    fun isDemoModeActivated() {
+
+        val expectedFlag = appContext!!.loadProperties().getProperty(PropertiesKeys.ENABLE_DEMO_SWIPES.key).toBoolean()
+
+        val config = appContext!!.isDemoModeActivated()
+
+        assertEquals(expectedFlag, config)
+
+    }
+
 }

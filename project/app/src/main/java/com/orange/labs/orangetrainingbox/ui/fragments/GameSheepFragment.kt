@@ -36,6 +36,7 @@ import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
+import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import com.orange.labs.orangetrainingbox.utils.properties.*
@@ -54,7 +55,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.0.1
+ * @version 2.1.0
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
@@ -211,11 +212,23 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
+     * Defines, if defined in app config, a gesture listener with [GesturesDemo] to fake
+     * sensors and sends data from manual tests.
      * Prepares the inheriting classes for the game logic, the animations and other logic for the game.
      * The game animations start here (sheep icon, fences).
      * This method is triggered from the super-class when the activity is resuming.
      */
     override fun prepareGameLayout() {
+        if (activity?.isDemoModeActivated() == true) {
+            // Reset layout to default state
+            model.sensorA.postValue(0)
+            model.sensorB.postValue(0)
+            // Define listeners
+            GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
+                find<ConstraintLayout>(R.id.clSheepGamePlaying),
+                context!!
+            )
+        }
         startIntroductionAnimation()
         moveFences()
         // TODO Check if collisions

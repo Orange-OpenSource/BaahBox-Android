@@ -19,6 +19,7 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -29,10 +30,13 @@ import com.orange.labs.orangetrainingbox.utils.properties.BalloonGameConfigurati
 import com.orange.labs.orangetrainingbox.utils.properties.readBalloonAdditionalConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readBalloonGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
+import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
+import com.orange.labs.orangetrainingbox.utils.properties.isDemoModeActivated
 import kotlinx.android.synthetic.main.fragment_game_balloon_playing.*
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
 import kotlinx.android.synthetic.main.fragment_game_star_playing.tv_congratulations
 import org.jetbrains.anko.imageResource
+import org.jetbrains.anko.support.v4.find
 
 
 /**
@@ -42,7 +46,7 @@ import org.jetbrains.anko.imageResource
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.2.0
+ * @version 2.3.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
@@ -179,11 +183,22 @@ class GameBalloonFragment : AbstractGameFragment() {
     }
 
     /**
-     * Does nothing
+     * Defines, if defined in app config, a gesture listener with [GesturesDemo] to fake
+     * sensors and sends data from manual tests.
      */
     override fun prepareGameLayout() {
-        // FIXME Useless, dirty, empty
+        if (activity?.isDemoModeActivated() == true) {
+            // Reset layout to default state
+            model.sensorA.postValue(0)
+            model.sensorB.postValue(0)
+            // Define listeners
+            GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
+                find<ConstraintLayout>(R.id.clBalloonGamePlaying),
+                context!!
+            )
+        }
     }
+
 
     // **********
     // Game logic

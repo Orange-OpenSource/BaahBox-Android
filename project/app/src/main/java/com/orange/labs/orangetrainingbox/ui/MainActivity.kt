@@ -51,6 +51,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.BleConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import com.orange.labs.orangetrainingbox.utils.properties.readBleSensorsConfiguration
 import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
+import com.orange.labs.orangetrainingbox.utils.properties.isDemoModeActivated
 import kotlinx.android.synthetic.main.activity_main.*
 
 // **********
@@ -73,7 +74,7 @@ private val BluetoothAdapter.isDisabled: Boolean
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.1.1
+ * @version 2.2.0
  */
 class MainActivity : AppCompatActivity() {
 
@@ -167,7 +168,12 @@ class MainActivity : AppCompatActivity() {
             Logger.v("Connection state change: $newState (connected is ${BluetoothProfile.STATE_CONNECTED})")
             when (newState) {
                 BluetoothProfile.STATE_CONNECTED -> {
-                    bluetoothGatt.discoverServices()
+                    if (! isDemoModeActivated()) {
+                        Logger.w("Demo mode is NOT activated, use Baah Box's BLE modem and its sensors data. BLE service discovery started")
+                        bluetoothGatt.discoverServices()
+                    } else {
+                        Logger.w("Demo mode IS activated. BLE service discovery not started. Use gestures on screen instead")
+                    }
                     connected = true
                     Logger.d("BLE connected")
                 }
