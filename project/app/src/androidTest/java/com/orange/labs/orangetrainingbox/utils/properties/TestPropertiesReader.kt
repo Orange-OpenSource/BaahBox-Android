@@ -35,8 +35,6 @@ import org.junit.runner.RunWith
  * @since 23/08/2019
  * @version 1.2.0
  */
-
-// TODO hard-coded value in test cases, need to sue properties load Context legacy function and comapre results to extension functions
 @RunWith(AndroidJUnit4::class)
 class TestPropertiesReader {
 
@@ -62,7 +60,7 @@ class TestPropertiesReader {
     /**
      * Test the loastProperties() Context extension.
      */
-    @Test(expected = java.io.FileNotFoundException::class)
+    @Test (expected=java.io.FileNotFoundException::class)
     fun loadProperties() {
 
         val props = appContext!!.loadProperties()
@@ -78,11 +76,16 @@ class TestPropertiesReader {
     @Test
     fun readBleSensorsConfiguration() {
 
+        val properties = appContext!!.loadProperties()
+        val expectedDescriptor = properties.getProperty(PropertiesKeys.BLE_CHAR_DESCRIPTOR_UUID.key)
+        val uuid = properties.getProperty(PropertiesKeys.BLE_SENSORS_CHAR_UUID.key)
+        val service = properties.getProperty(PropertiesKeys.BLE_SERVICE_UUID.key)
+
         val bleConfiguration = appContext!!.readBleSensorsConfiguration()
 
-        assertEquals(bleConfiguration.sensorCharDescriptorUUID, "00002902-0000-1000-8000-00805f9b34fb")
-        assertEquals(bleConfiguration.sensorsCharUUID, "6e400003-b5a3-f393-e0a9-e50e24dcca9e")
-        assertEquals(bleConfiguration.serviceUUID, "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+        assertEquals(expectedDescriptor, bleConfiguration.sensorCharDescriptorUUID)
+        assertEquals(uuid, bleConfiguration.sensorsCharUUID)
+        assertEquals(service, bleConfiguration.serviceUUID)
 
     }
 
@@ -92,13 +95,20 @@ class TestPropertiesReader {
     @Test
     fun readAppGamesConfiguration() {
 
+        val properties = appContext!!.loadProperties()
+        val enableStarGame = properties.getProperty(PropertiesKeys.ENABLE_GAME_STAR.key).toBoolean()
+        val enableBalloonGame = properties.getProperty(PropertiesKeys.ENABLE_GAME_BALLOON.key).toBoolean()
+        val enableSheepGame = properties.getProperty(PropertiesKeys.ENABLE_GAME_SHEEP.key).toBoolean()
+        val enableSpaceGame = properties.getProperty(PropertiesKeys.ENABLE_GAME_SPACE.key).toBoolean()
+        val enableToadGame = properties.getProperty(PropertiesKeys.ENABLE_GAME_TOAD.key).toBoolean()
+
         val appGamesConfig = appContext!!.readAppGamesConfiguration()
 
-        assertTrue(appGamesConfig.enableStarGame)
-        assertTrue(appGamesConfig.enableBalloonGame)
-        assertTrue(appGamesConfig.enableSheepGame)
-        assertFalse(appGamesConfig.enableSpaceGame)
-        assertFalse(appGamesConfig.enableToadGame)
+        assertEquals(enableStarGame, appGamesConfig.enableStarGame)
+        assertEquals(enableBalloonGame, appGamesConfig.enableBalloonGame)
+        assertEquals(enableSheepGame, appGamesConfig.enableSheepGame)
+        assertEquals(enableSpaceGame, appGamesConfig.enableSpaceGame)
+        assertEquals(enableToadGame, appGamesConfig.enableToadGame)
 
     }
 
@@ -108,11 +118,17 @@ class TestPropertiesReader {
     @Test
     fun readDifficultyDetailsConfiguration() {
 
+        val factors = appContext!!.loadProperties()
+            .getProperty(PropertiesKeys.DIFFICULTY_NUMERIC_VALUES.key).split(";")
+        val expectedLow = factors[0].toDouble()
+        val expectedMedium = factors[1].toDouble()
+        val expectedHigh = factors[2].toDouble()
+
         val difficultyDetailsConfig = appContext!!.readDifficultyDetailsConfiguration()
 
-        assertTrue(difficultyDetailsConfig.difficultyFactorLow == 1.5)
-        assertTrue(difficultyDetailsConfig.difficultyFactorMedium == 0.9)
-        assertTrue(difficultyDetailsConfig.difficultyFactorHigh == 0.7)
+        assertTrue(expectedLow == difficultyDetailsConfig.difficultyFactorLow)
+        assertTrue(expectedMedium == difficultyDetailsConfig.difficultyFactorMedium)
+        assertTrue(expectedHigh == difficultyDetailsConfig.difficultyFactorHigh)
 
     }
 
@@ -166,9 +182,12 @@ class TestPropertiesReader {
     @Test
     fun readBalloonAdditionalConfiguration() {
 
+        val expectedConfig = appContext!!.loadProperties()
+            .getProperty(PropertiesKeys.GAME_BALLOON_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
+
         val balloonAdditionalConfig = appContext!!.readBalloonAdditionalConfiguration()
 
-        assertTrue(balloonAdditionalConfig == 600L)
+        assertTrue(expectedConfig == balloonAdditionalConfig)
 
     }
 
@@ -212,11 +231,16 @@ class TestPropertiesReader {
     @Test
     fun readSensorDataSeriesConfiguration() {
 
+        val properties = appContext!!.loadProperties()
+        val expectedQueueSize = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_QUEUE_SIZE.key).toInt()
+        val expectedInterval = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_INTERVAL_FOR_UPDATE.key).toInt()
+        val expectedThreshold = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_TREND_THRESHOLD.key).toInt()
+
         val sensorDataSeriesConfig = appContext!!.readSensorDataSeriesConfiguration()
 
-        assertTrue(sensorDataSeriesConfig.queueSize == 15)
-        assertTrue(sensorDataSeriesConfig.intervalForUpdate == 5)
-        assertTrue(sensorDataSeriesConfig.trendThreshold == 5)
+        assertTrue(expectedQueueSize == sensorDataSeriesConfig.queueSize)
+        assertTrue(expectedInterval == sensorDataSeriesConfig.intervalForUpdate)
+        assertTrue(expectedThreshold == sensorDataSeriesConfig.trendThreshold)
 
     }
 
