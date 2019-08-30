@@ -17,95 +17,44 @@
  */
 package com.orange.labs.orangetrainingbox.ui.fragments
 
-import android.content.Context
-import android.widget.TextView
-import androidx.test.InstrumentationRegistry
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.espresso.matcher.ViewMatchers.withParent
-import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import com.orange.labs.orangetrainingbox.R
-import com.orange.labs.orangetrainingbox.ui.MainActivity
-import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.core.IsInstanceOf.instanceOf
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
 
 
 /**
  * To test [GameStarFragment] class.
+ * See [AbstractInstrumentedTestSimpleGameFragment].
  *
  * @author Pierre-Yves Lapersonne
  * @since 30/08/2019
  * @version 1.0.0
  */
 @RunWith(AndroidJUnit4::class)
-class InstrumentedTestGameStarFragment {
-
-
-    /**
-     * Activity to play with
-     */
-    @Rule @JvmField var activityActivityTestRule = ActivityTestRule(MainActivity::class.java)
+class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragment() {
 
     /**
-     * To get UI thread
+     * The text to find in the tool bar
      */
-    private var appContext: Context? = null
-
+    override val rStringGameTitle: Int
+        get() = R.string.title_game_star
 
     /**
-     *
+     * First line of instruction
      */
-    @Before
-    fun setup(){
-        appContext = InstrumentationRegistry.getTargetContext()
-        goToGame()
-    }
+    override val rStringGameInstructionLine1: Int
+        get() = R.string.game_star_instructions_line_1
 
     /**
-     * Test the layout elements
+     * Second line of instruction
      */
-    @Test
-    fun layoutTextContents(){
-
-        // Test the app bar
-
-        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.toolbar))))
-            .check(matches(withText(appContext!!.getString(R.string.title_game_star))))
-
-        // Test the text contents
-        onView(withId(R.id.tvLine1)).check(matches(withText(appContext!!.getString(R.string.game_star_instructions_line_1))))
-        onView(withId(R.id.tvLine2)).check(matches(withText(appContext!!.getString(R.string.game_star_instructions_line_2))))
-
-        // Test the button
-        onView(withId(R.id.btnPlay)).check(matches(withText(appContext!!.getString(R.string.btn_start))))
-
-    }
+    override val rStringGameInstructionLine2: Int
+        get() = R.string.game_star_instructions_line_2
 
     /**
-     * Test the action on the play button: should go from intro screen to playing screen.
+     * Id of the layout for playing mode
      */
-    @Test
-    fun playButton() {
-        onView(withId(R.id.btnPlay)).perform(click())
-        onView(withId(R.id.clStarGamePlaying)).check(matches(isDisplayed()))
-    }
-
-    // ****************
-    // Helper functions
-    // ****************
-
-    /**
-     * Goes to star game screen
-     */
-    private fun goToGame(){
-        onView(withText(appContext!!.getString(R.string.title_game_star))).perform(click())
-    }
+    override val playingModeLayoutId: Int
+        get() = R.id.clStarGamePlaying
 
 }
