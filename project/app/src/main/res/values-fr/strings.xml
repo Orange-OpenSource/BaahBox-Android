@@ -51,7 +51,7 @@
     <string name="game_star_congratulations_level_3">Tu y es presque !</string>
     <string name="game_star_congratulations_level_max">Bravo !!!</string>
 
-    <string name="game_balloon_instructions_line_1">Glonfle le ballon</string>
+    <string name="game_balloon_instructions_line_1">Gonfle le ballon</string>
     <string name="game_balloon_instructions_line_2">en contractant ton muscle.</string>
     <string name="game_balloon_congratulations_level_1">C\'est parti !</string>
     <string name="game_balloon_congratulations_level_2">Continue&#8230;</string>
