@@ -24,34 +24,34 @@ import org.junit.Before
 import org.junit.Test
 
 /**
- * To test [GameBalloonFragment] class.
+ * To test [GameStarFragment] class.
  *
  * @author Pierre-Yves Lapersonne
  * @since 29/08/2019
  * @version 1.0.0
  */
-class TestGameBalloonFragment {
+class UnitTestGameStarFragment {
 
 
     /**
      * The fragment to test
      */
-    private var gameBalloonFragment: GameBalloonFragment? = null
+    private var gameStarFragment: GameStarFragment? = null
 
     /**
      * Init
      */
     @Before
     fun setup(){
-        gameBalloonFragment = GameBalloonFragment()
+        gameStarFragment = GameStarFragment()
     }
 
     /**
      * Deinit
      */
     @After
-    fun tearDown(){
-        gameBalloonFragment = null
+    fun teardown(){
+        gameStarFragment = null
     }
 
     /**
@@ -59,7 +59,7 @@ class TestGameBalloonFragment {
      */
     @Test
     fun introductionLayout() {
-        assertEquals(R.layout.fragment_game_balloon_intro, gameBalloonFragment?.introductionLayout)
+        assertEquals(R.layout.fragment_game_star_intro, gameStarFragment?.introductionLayout)
     }
 
     /**
@@ -67,7 +67,7 @@ class TestGameBalloonFragment {
      */
     @Test
     fun playingLayout() {
-        assertEquals(R.layout.fragment_game_balloon_playing, gameBalloonFragment?.playingLayout)
+        assertEquals(R.layout.fragment_game_star_playing, gameStarFragment?.playingLayout)
     }
 
     /**
@@ -75,7 +75,7 @@ class TestGameBalloonFragment {
      */
     @Test
     fun restartLayout() {
-        assertEquals(R.layout.fragment_game_balloon_outro, gameBalloonFragment?.restartLayout)
+        assertEquals(R.layout.fragment_game_star_outro, gameStarFragment?.restartLayout)
     }
 
     /**
@@ -83,7 +83,7 @@ class TestGameBalloonFragment {
      */
     @Test
     fun screenTitle() {
-        assertEquals(R.string.title_game_balloon, gameBalloonFragment?.screenTitle)
+        assertEquals(R.string.title_game_star, gameStarFragment?.screenTitle)
     }
 
     /**
@@ -91,7 +91,7 @@ class TestGameBalloonFragment {
      */
     @Test
     fun themingColor() {
-        assertEquals(R.color.orange, gameBalloonFragment?.themingColor)
+        assertEquals(R.color.purple, gameStarFragment?.themingColor)
     }
 
     /**
@@ -99,7 +99,7 @@ class TestGameBalloonFragment {
      */
     @Test
     fun actionFromIntroductionToPlaying() {
-        assertEquals(R.id.action_gameBalloonFragment_to_gameBalloonPlayingFragment, gameBalloonFragment?.actionFromIntroductionToPlaying)
+        assertEquals(R.id.action_gameStarFragment_to_gameStarPlayingFragment, gameStarFragment?.actionFromIntroductionToPlaying)
     }
 
     /**
@@ -107,7 +107,7 @@ class TestGameBalloonFragment {
      */
     @Test
     fun actionGoToPlaying() {
-        assertEquals(R.id.action_global_gameBalloonPlayingFragment, gameBalloonFragment?.actionGoToPlaying)
+        assertEquals(R.id.action_global_gameStarPlayingFragment, gameStarFragment?.actionGoToPlaying)
     }
 
 }

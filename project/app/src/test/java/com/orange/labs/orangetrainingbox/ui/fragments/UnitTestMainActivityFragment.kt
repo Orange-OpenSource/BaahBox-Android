@@ -30,7 +30,7 @@ import org.junit.Test
  * @since 29/08/2019
  * @version 1.0.0
  */
-class TestMainActivityFragment {
+class UnitTestMainActivityFragment {
 
 
     /**

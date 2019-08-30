@@ -36,7 +36,7 @@ import org.junit.runner.RunWith
  * @version 1.2.0
  */
 @RunWith(AndroidJUnit4::class)
-class TestPropertiesReader {
+class InstrumentedTestPropertiesReader {
 
     // Needed to play with properties files
     private var appContext: Context? = null

@@ -29,7 +29,7 @@ import org.junit.Assert.assertEquals
  * @since 23/08/2019
  * @version 1.1.0
  */
-class TestPropertiesKeys {
+class UnitTestPropertiesKeys {
 
     /**
      * Test if values of items of [PropertiesKeys] have not changed

@@ -35,7 +35,7 @@ import org.mockito.Mockito.mock
  * @version 1.0.0
  */
 @RunWith(AndroidJUnit4::class)
-class TestIconAnimator {
+class InstrumentedTestIconAnimator {
 
 
     /**

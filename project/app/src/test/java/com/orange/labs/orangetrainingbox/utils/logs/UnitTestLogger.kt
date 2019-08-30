@@ -26,7 +26,7 @@ import org.junit.Test
  * @since 23/08/2019
  * @version 1.0.0
  */
-class TestLogger {
+class UnitTestLogger {
 
     /**
      * Test the v() static method with several kinds of inputs

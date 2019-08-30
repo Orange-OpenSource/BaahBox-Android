@@ -24,26 +24,26 @@ import org.junit.Before
 import org.junit.Test
 
 /**
- * To test [GameStarFragment] class.
+ * To test [GameSheepFragment] class.
  *
  * @author Pierre-Yves Lapersonne
  * @since 29/08/2019
  * @version 1.0.0
  */
-class TestGameStarFragment {
+class UnitTestGameSheepFragment {
 
 
     /**
      * The fragment to test
      */
-    private var gameStarFragment: GameStarFragment? = null
+    private var gameSheepFragment: GameSheepFragment? = null
 
     /**
      * Init
      */
     @Before
     fun setup(){
-        gameStarFragment = GameStarFragment()
+        gameSheepFragment = GameSheepFragment()
     }
 
     /**
@@ -51,7 +51,7 @@ class TestGameStarFragment {
      */
     @After
     fun teardown(){
-        gameStarFragment = null
+        gameSheepFragment = null
     }
 
     /**
@@ -59,7 +59,7 @@ class TestGameStarFragment {
      */
     @Test
     fun introductionLayout() {
-        assertEquals(R.layout.fragment_game_star_intro, gameStarFragment?.introductionLayout)
+        assertEquals(R.layout.fragment_game_sheep_intro, gameSheepFragment?.introductionLayout)
     }
 
     /**
@@ -67,7 +67,7 @@ class TestGameStarFragment {
      */
     @Test
     fun playingLayout() {
-        assertEquals(R.layout.fragment_game_star_playing, gameStarFragment?.playingLayout)
+        assertEquals(R.layout.fragment_game_sheep_playing, gameSheepFragment?.playingLayout)
     }
 
     /**
@@ -75,7 +75,7 @@ class TestGameStarFragment {
      */
     @Test
     fun restartLayout() {
-        assertEquals(R.layout.fragment_game_star_outro, gameStarFragment?.restartLayout)
+        assertEquals(R.layout.fragment_game_sheep_outro, gameSheepFragment?.restartLayout)
     }
 
     /**
@@ -83,7 +83,7 @@ class TestGameStarFragment {
      */
     @Test
     fun screenTitle() {
-        assertEquals(R.string.title_game_star, gameStarFragment?.screenTitle)
+        assertEquals(R.string.title_game_sheep, gameSheepFragment?.screenTitle)
     }
 
     /**
@@ -91,7 +91,7 @@ class TestGameStarFragment {
      */
     @Test
     fun themingColor() {
-        assertEquals(R.color.purple, gameStarFragment?.themingColor)
+        assertEquals(R.color.pink, gameSheepFragment?.themingColor)
     }
 
     /**
@@ -99,7 +99,7 @@ class TestGameStarFragment {
      */
     @Test
     fun actionFromIntroductionToPlaying() {
-        assertEquals(R.id.action_gameStarFragment_to_gameStarPlayingFragment, gameStarFragment?.actionFromIntroductionToPlaying)
+        assertEquals(R.id.action_gameSheepFragment_to_gameSheepPlayingFragment, gameSheepFragment?.actionFromIntroductionToPlaying)
     }
 
     /**
@@ -107,7 +107,7 @@ class TestGameStarFragment {
      */
     @Test
     fun actionGoToPlaying() {
-        assertEquals(R.id.action_global_gameStarPlayingFragment, gameStarFragment?.actionGoToPlaying)
+        assertEquals(R.id.action_global_gameSheepPlayingFragment, gameSheepFragment?.actionGoToPlaying)
     }
 
 }

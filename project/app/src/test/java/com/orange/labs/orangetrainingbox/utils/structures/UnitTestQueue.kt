@@ -28,7 +28,7 @@ import java.lang.IllegalArgumentException
  * @since 23/08/2019
  * @version 1.0.0
  */
-class TestQueue {
+class UnitTestQueue {
 
 
     /**

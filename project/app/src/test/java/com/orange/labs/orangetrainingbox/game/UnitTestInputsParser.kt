@@ -31,7 +31,7 @@ import org.mockito.Mockito.mock
 * @since 23/08/2019
 * @version 1.0.0
 */
-class TestInputsParser {
+class UnitTestInputsParser {
 
     /**
      * Test the prepareValue() method

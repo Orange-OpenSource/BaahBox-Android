@@ -42,7 +42,7 @@ import org.junit.After
  * @version 1.0.0
  */
 @RunWith(AndroidJUnit4::class)
-class TestTrainingBoxViewModel {
+class InstrumentedTestTrainingBoxViewModel {
 
 
     /**

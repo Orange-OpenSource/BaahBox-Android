@@ -27,7 +27,7 @@ import org.junit.Test
  * @since 23/08/2019
  * @version 2.1.0
  */
-class TestSensorDataSeries {
+class UnitTestSensorDataSeries {
 
 
     /**
