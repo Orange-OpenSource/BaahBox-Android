@@ -77,7 +77,7 @@ class InstrumentedTestGameStarFragment {
         // Test the app bar
 
         onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.toolbar))))
-            .check(matches(withText(appContext!!.getString(R.string.game_star_instructions_line_1))))
+            .check(matches(withText(appContext!!.getString(R.string.title_game_star))))
 
         // Test the text contents
         onView(withId(R.id.tvLine1)).check(matches(withText(appContext!!.getString(R.string.game_star_instructions_line_1))))
