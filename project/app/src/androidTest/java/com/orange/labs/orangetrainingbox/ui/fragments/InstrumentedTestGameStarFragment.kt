@@ -18,21 +18,27 @@
 package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.content.Context
+import android.widget.TextView
 import androidx.test.InstrumentationRegistry
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.runner.AndroidJUnit4
-import org.junit.runner.RunWith
+import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import com.orange.labs.orangetrainingbox.R
+import com.orange.labs.orangetrainingbox.ui.MainActivity
+import org.hamcrest.CoreMatchers.allOf
+import org.hamcrest.core.IsInstanceOf.instanceOf
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
 
 /**
- * To test [MainActivity] class.
+ * To test [GameStarFragment] class.
  *
  * @author Pierre-Yves Lapersonne
  * @since 30/08/2019
@@ -52,40 +58,54 @@ class InstrumentedTestGameStarFragment {
      */
     private var appContext: Context? = null
 
+
     /**
      *
      */
     @Before
     fun setup(){
         appContext = InstrumentationRegistry.getTargetContext()
+        goToGame()
     }
 
     /**
-     * Test the app bar of the main activity
+     * Test the layout elements
      */
     @Test
-    fun appBar() {
-        onView(withText(R.string.app_name)).check(matches(isDisplayed()))
+    fun layoutTextContents(){
+
+        // Test the app bar
+
+        onView(allOf(instanceOf(TextView::class.java), withParent(withId(R.id.toolbar))))
+            .check(matches(withText(appContext!!.getString(R.string.game_star_instructions_line_1))))
+
+        // Test the text contents
+        onView(withId(R.id.tvLine1)).check(matches(withText(appContext!!.getString(R.string.game_star_instructions_line_1))))
+        onView(withId(R.id.tvLine2)).check(matches(withText(appContext!!.getString(R.string.game_star_instructions_line_2))))
+
+        // Test the button
+        onView(withId(R.id.btnPlay)).check(matches(withText(appContext!!.getString(R.string.btn_start))))
+
     }
 
     /**
-     * Test the navgraph with fragments entries
+     * Test the action on the play button: should go from intro screen to playing screen.
      */
     @Test
-    fun gameEntries(){
+    fun playButton() {
+        onView(withId(R.id.btnPlay)).perform(click())
+        onView(withId(R.id.clStarGamePlaying)).check(matches(isDisplayed()))
+    }
 
-        // Check the navigation fragment
+    // ****************
+    // Helper functions
+    // ****************
 
-        onView(withId(R.id.nav_fragment)).check(matches(isDisplayed()))
-
-        // Check entries of navgraph
-
-        onView(withText(appContext!!.getString(R.string.title_game_star))).check(matches(isDisplayed()))
-        onView(withText(appContext!!.getString(R.string.title_game_balloon))).check(matches(isDisplayed()))
-        onView(withText(appContext!!.getString(R.string.title_game_sheep))).check(matches(isDisplayed()))
-        onView(withText(appContext!!.getString(R.string.title_game_space))).check(matches(isDisplayed()))
-        onView(withText(appContext!!.getString(R.string.title_game_toad))).check(matches(isDisplayed()))
-
+    /**
+     * Goes to star game screen
+     */
+    private fun goToGame(){
+        onView(withText(appContext!!.getString(R.string.title_game_star))).perform(click())
     }
 
 }
