@@ -171,3 +171,32 @@
 * project - ⭕ GameBalloonFragment
 * project - ⭕ GameSheepFragment
 * project - ⭕ MainActivityFragment
+
+
+
+<a name="0.6.0"></a>
+## 0.6.0 "- version code: 28" (2019/09/03)
+
+
+## Bug Fixes
+
+* l10n - ❌ typo in french strings ([cd3154d0](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/cd3154d0))
+
+## Features
+
+* project - 🆕 demo mode ([6bd73d78](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/6bd73d78))
+
+## Refactor
+
+* #5 - 🔩 sheep game layout dimensions and game properties
+* project - 🔩 tests
+
+## Test
+
+* project - ⭕ PropertiesReader
+* project - ⭕ MainActivity
+* project - ⭕ GameStarFragment
+* project - ⭕ GameBalloonFragment
+* project - ⭕ GameSheepFragment
+* project - ⭕ factorisation
+* project - ⭕ GesturesDemo
