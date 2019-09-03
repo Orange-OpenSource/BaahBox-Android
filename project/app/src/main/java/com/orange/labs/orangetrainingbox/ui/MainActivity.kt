@@ -51,8 +51,9 @@ import com.orange.labs.orangetrainingbox.utils.properties.BleConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import com.orange.labs.orangetrainingbox.utils.properties.readBleSensorsConfiguration
 import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
-import com.orange.labs.orangetrainingbox.utils.properties.isDemoModeActivated
+import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.longToast
 
 // **********
 // Properties
@@ -168,12 +169,7 @@ class MainActivity : AppCompatActivity() {
             Logger.v("Connection state change: $newState (connected is ${BluetoothProfile.STATE_CONNECTED})")
             when (newState) {
                 BluetoothProfile.STATE_CONNECTED -> {
-                    if (! isDemoModeActivated()) {
-                        Logger.w("Demo mode is NOT activated, use Baah Box's BLE modem and its sensors data. BLE service discovery started")
-                        bluetoothGatt.discoverServices()
-                    } else {
-                        Logger.w("Demo mode IS activated. BLE service discovery not started. Use gestures on screen instead")
-                    }
+                    bluetoothGatt.discoverServices()
                     connected = true
                     Logger.d("BLE connected")
                 }
@@ -234,6 +230,8 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Activity lifecycle.
+     * Check if Bluetooth Low Energy permissions (BLE) are still enabled.
+     * Check if demo mode has be activated in settings or not (so as to get rid of BLUE things and just use gestures, or not)
      */
     override fun onResume() {
         super.onResume()

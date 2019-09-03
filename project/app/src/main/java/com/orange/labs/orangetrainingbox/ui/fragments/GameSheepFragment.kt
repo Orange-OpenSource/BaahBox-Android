@@ -219,7 +219,7 @@ class GameSheepFragment : AbstractGameFragment() {
      * This method is triggered from the super-class when the activity is resuming.
      */
     override fun prepareGameLayout() {
-        if (activity?.isDemoModeActivated() == true) {
+        if (isDemoModeActivated()) {
             // Reset layout to default state
             model.sensorA.postValue(0)
             model.sensorB.postValue(0)

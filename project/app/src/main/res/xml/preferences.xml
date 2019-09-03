@@ -26,8 +26,16 @@
     <!-- ******************************** -->
 
     <PreferenceCategory
-            android:title="@string/preferences_sensors_section"
-            android:key="pref_key_settings_sensors">
+            android:title="@string/preferences_general_section"
+            android:key="pref_key_settings_general">
+
+        <SwitchPreference
+                android:title="@string/preferences_demo_mode_enabled_title"
+                android:summary="@string/preferences_demo_mode_enabled_summary"
+                android:key="preferences_demo_mode_enabled"
+                android:defaultValue="false">
+
+        </SwitchPreference>
 
         <SeekBarPreference
                 android:title="@string/preferences_sensors_difficulty_title"

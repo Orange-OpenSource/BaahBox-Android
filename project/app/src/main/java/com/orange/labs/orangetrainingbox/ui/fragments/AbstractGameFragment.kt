@@ -26,6 +26,8 @@ import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import kotlinx.android.synthetic.main.fragment_game_star_outro.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.view.*
+import androidx.preference.PreferenceManager
+import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 
 
 /**
@@ -138,6 +140,18 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
             DifficultyFactor.MEDIUM -> difficultyConfigurationValues.difficultyFactorMedium
             DifficultyFactor.HIGH -> difficultyConfigurationValues.difficultyFactorHigh
         }
+    }
+
+    /**
+     * If demo feature enabled (project settings) and demo mode activated (app preferences), returns true.
+     * Otherwise returns false.
+     *
+     * @return Boolean
+     */
+    protected fun isDemoModeActivated(): Boolean {
+        if (activity?.isDemoFeatureEnabled() == false) return false
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        return preferences.getBoolean("preferences_demo_mode_enabled", false)
     }
 
     /**

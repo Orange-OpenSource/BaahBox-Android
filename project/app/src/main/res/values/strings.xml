@@ -30,14 +30,16 @@
     <string name="action_settings">Settings</string>
     <string name="action_bluetooth_devices">Bluetooth LE devices</string>
 
-    <string name="preferences_sensors_section">Sensors</string>
+    <string name="preferences_general_section">Global</string>
     <string name="preferences_about_section">About this app</string>
     <string name="preferences_about_version_title">Baah !</string>
     <string name="preferences_about_version_summary">😀</string>
     <string name="preferences_about_licenses_title">Licenses</string>
     <string name="preferences_about_licenses_summary">Tap to get details about third-party tools we use</string>
-    <string name="preferences_sensors_difficulty_title">Difficulty factor</string>
+    <string name="preferences_sensors_difficulty_title">Sensors reactivity</string>
     <string name="preferences_sensors_difficulty_summary">Weak, medium, hard</string>
+    <string name="preferences_demo_mode_enabled_title">Demo mode</string>
+    <string name="preferences_demo_mode_enabled_summary">Check to play to games using swipe gestures on the screen</string>
 
     <string name="selector_connect_hand_title">Select a box to connected to</string>
 

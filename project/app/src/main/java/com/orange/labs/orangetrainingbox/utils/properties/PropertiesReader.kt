@@ -19,7 +19,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package com.orange.labs.orangetrainingbox.utils.properties
 
 import android.content.Context
-import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import java.util.*
 
 /**
@@ -54,13 +53,13 @@ fun Context.loadProperties(filename: String = DEFAULT_FILENAME): Properties {
 }
 
 /**
- * Reads from properties file ina ssets flag dor demo purposes
+ * Reads from properties file in assets flag dor demo purposes
  *
  * @return Boolean - True enable swipes, false disable them
  */
-fun Context.isDemoModeActivated(): Boolean {
+fun Context.isDemoFeatureEnabled(): Boolean {
     val properties = loadProperties()
-    return properties.getProperty(PropertiesKeys.ENABLE_DEMO_SWIPES.key).toBoolean()
+    return properties.getProperty(PropertiesKeys.ENABLE_DEMO_FEATURE.key).toBoolean()
 }
 
 /**

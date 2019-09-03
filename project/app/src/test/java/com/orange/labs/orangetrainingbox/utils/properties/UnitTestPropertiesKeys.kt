@@ -27,7 +27,7 @@ import org.junit.Assert.assertEquals
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.1.0
+ * @version 1.2.0
  */
 class UnitTestPropertiesKeys {
 
@@ -78,6 +78,9 @@ class UnitTestPropertiesKeys {
         assertEquals(PropertiesKeys.BLE_SERVICE_UUID.key, "ble_service_uuid")
         assertEquals(PropertiesKeys.BLE_SENSORS_CHAR_UUID.key, "ble_sensors_char_uuid")
         assertEquals(PropertiesKeys.BLE_CHAR_DESCRIPTOR_UUID.key, "ble_sensors_char_descriptor_uuid")
+
+        // Demo
+        assertEquals(PropertiesKeys.ENABLE_DEMO_FEATURE.key, "enable_demo_feature")
 
     }
 

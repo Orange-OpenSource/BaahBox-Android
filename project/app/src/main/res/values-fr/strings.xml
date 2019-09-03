@@ -30,14 +30,16 @@
     <string name="action_settings">Paramètres</string>
     <string name="action_bluetooth_devices">Appareils Bluetooth LE</string>
 
-    <string name="preferences_sensors_section">Capteurs</string>
+    <string name="preferences_general_section">Général</string>
     <string name="preferences_about_section">À propos</string>
     <string name="preferences_about_version_title">Baah !</string>
     <string name="preferences_about_version_summary">😀</string>
     <string name="preferences_about_licenses_title">Licences</string>
     <string name="preferences_about_licenses_summary">Tapper pour obtenir des informations supplémentaires sur les outils tiers utilisés</string>
-    <string name="preferences_sensors_difficulty_title">Sensibilité</string>
+    <string name="preferences_sensors_difficulty_title">Sensibilité des capteurs</string>
     <string name="preferences_sensors_difficulty_summary">Faible, moyenne ou forte</string>
+    <string name="preferences_demo_mode_enabled_title">Mode démo</string>
+    <string name="preferences_demo_mode_enabled_summary">Cocher pour jouer aux jeux avec des gestes sur l\'écran</string>
 
     <string name="selector_connect_hand_title">Choisi une boîte à utiliser</string>
 

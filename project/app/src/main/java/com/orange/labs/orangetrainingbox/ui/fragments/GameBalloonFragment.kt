@@ -31,7 +31,6 @@ import com.orange.labs.orangetrainingbox.utils.properties.readBalloonAdditionalC
 import com.orange.labs.orangetrainingbox.utils.properties.readBalloonGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
-import com.orange.labs.orangetrainingbox.utils.properties.isDemoModeActivated
 import kotlinx.android.synthetic.main.fragment_game_balloon_playing.*
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
 import kotlinx.android.synthetic.main.fragment_game_star_playing.tv_congratulations
@@ -46,7 +45,7 @@ import org.jetbrains.anko.support.v4.find
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.3.0
+ * @version 2.4.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
@@ -187,7 +186,7 @@ class GameBalloonFragment : AbstractGameFragment() {
      * sensors and sends data from manual tests.
      */
     override fun prepareGameLayout() {
-        if (activity?.isDemoModeActivated() == true) {
+        if (isDemoModeActivated()) {
             // Reset layout to default state
             model.sensorA.postValue(0)
             model.sensorB.postValue(0)

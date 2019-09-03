@@ -26,6 +26,7 @@ import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import android.app.Activity
 import android.content.Intent
+import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 
 
 /**
@@ -33,7 +34,7 @@ import android.content.Intent
  *
  * @author Pierre-Yves Lapersonne
  * @since 24/05/2019
- * @version 1.0.0
+ * @version 1.1.0
  */
 class SettingsActivity : AppCompatActivity() {
 
@@ -55,16 +56,12 @@ class SettingsActivity : AppCompatActivity() {
      * Activity lifecycle.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         versionRelease = buildReleaseString()
-
         supportFragmentManager
             .beginTransaction()
             .replace(android.R.id.content, SettingsFragment())
             .commit()
-
     }
 
     /**
@@ -100,7 +97,7 @@ class SettingsActivity : AppCompatActivity() {
      *
      * @author Pierre-Yves Lapersonne
      * @since 24/05/2019
-     * @version 1.0.0
+     * @version 1.1.0
      */
     class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -110,6 +107,20 @@ class SettingsActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
             setPreferencesFromResource(com.orange.labs.orangetrainingbox.R.xml.preferences, rootKey)
+
+            // Demo mode
+            val demoPreference = findPreference("preferences_demo_mode_enabled")
+            if (activity?.isDemoFeatureEnabled() == false) {
+                demoPreference.isVisible = false
+            } else {
+                demoPreference.setOnPreferenceChangeListener { _, newValue ->
+                    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+                    val editor = preferences.edit()
+                    editor.putBoolean(PropertiesKeys.ENABLE_DEMO_FEATURE.key, newValue as Boolean)
+                    editor.apply()
+                    true
+                }
+            }
 
             // Version name and code
             val versionPreference = findPreference("pref_key_about_app")
@@ -122,7 +133,7 @@ class SettingsActivity : AppCompatActivity() {
                 true
             }
 
-            // Hardness factor
+            // Difficulty factor
             val hardnessPreference = findPreference("pref_key_settings_sensors_difficulty")
             // TODO If never defined use default value from properties
             hardnessPreference.setOnPreferenceChangeListener { _, newValue ->
@@ -137,5 +148,5 @@ class SettingsActivity : AppCompatActivity() {
 
     } // End of class MySettingsFragment
 
-}
+} // End of class SettingsActivity : AppCompatActivity()
 

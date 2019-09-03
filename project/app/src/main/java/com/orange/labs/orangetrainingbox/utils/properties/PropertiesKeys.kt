@@ -33,7 +33,7 @@ enum class PropertiesKeys(val key: String) {
     /**
      * Enagles demo interaction with swipes faking baah box data
      */
-    ENABLE_DEMO_SWIPES("enable_demo_swipes"),
+    ENABLE_DEMO_FEATURE("enable_demo_feature"),
 
     /* Games */
 
