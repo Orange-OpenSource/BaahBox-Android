@@ -32,7 +32,7 @@ import com.orange.labs.orangetrainingbox.utils.logs.Logger
  * Indeed, the BaahBox sends data like 2022, 1024 or other too-high value. Need to find them because they
  * have an effect on trends and averages (muscles contractions, decontractions, ...)
  */
-private const val PARASITE_MAX_FACTOR = 10
+private const val PARASITE_MAX_FACTOR = 8
 
 /**
  * Sometimes too-high records are not parasites, but a start of a powerful move.

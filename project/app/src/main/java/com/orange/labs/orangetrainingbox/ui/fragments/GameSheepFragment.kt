@@ -292,13 +292,18 @@ class GameSheepFragment : AbstractGameFragment() {
 
         when (trend) {
             SensorTrends.LOWEST -> {
-                startIntroductionAnimation()
+                if (!wasPreviouslowest) {
+                    wasPreviouslowest = true
+                    startIntroductionAnimation()
+                }
                 layoutParams.setMargins(layoutParams.leftMargin, sheepInitialYposition, layoutParams.rightMargin, layoutParams.bottomMargin)
             }
             SensorTrends.HIGHEST -> {
+                wasPreviouslowest = false
                 layoutParams.setMargins(layoutParams.leftMargin, 0, layoutParams.rightMargin, layoutParams.bottomMargin)
             }
             else -> {
+                wasPreviouslowest = false
                 stopIntroductionAnimation()
                 sheepView.imageResource = R.mipmap.ic_sheep_jump
                 val newMarginTop = layoutParams.topMargin + offsetY
@@ -310,6 +315,8 @@ class GameSheepFragment : AbstractGameFragment() {
         sheepView.layoutParams = layoutParams
 
     }
+
+    private var wasPreviouslowest: Boolean = false
 
     /**
      * Makes the fences images move above the floor from the right to the left
