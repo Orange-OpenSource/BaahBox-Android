@@ -55,7 +55,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.2.0
+ * @version 2.3.0
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
@@ -260,14 +260,16 @@ class GameSheepFragment : AbstractGameFragment() {
 
     /**
      * The logic of this game.
-     * According to the gotten sensor value, will do things (display score, congratulation message, ...)
+     * Records the new input sent by the Baah Box (or the gesture listeners in demo mode).
+     * Define then a trend for the sheep (rising, falling, staying at its coordinates-.
+     * Move the sheep following this trend.
      *
      * @param userInput The data given by the Baah box, i.e. the sensor value
      */
     private fun processBaahBoxData(userInput: Int) {
         lastPoints.addRecord(userInput)
         val trend = lastPoints.trendOfRecordedData()
-        Logger.d("Sheep game - sensor data: received $userInput, trend is $trend ")
+        //Logger.d("Sheep game - sensor data: received $userInput, trend is $trend ")
         moveSheep(trend)
     }
 
