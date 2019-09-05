@@ -55,7 +55,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.1.0
+ * @version 2.2.0
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
@@ -166,6 +166,7 @@ class GameSheepFragment : AbstractGameFragment() {
      * Uses an [IconAnimator] to display several images in the gameicon widget
      */
     override fun startIntroductionAnimation() {
+        stopIntroductionAnimation()
         gameIconAnimator = IconAnimator()
         val period = context!!.readSheepGameConfiguration().walkAnimationPeriod
         gameIconAnimator.animateGameIcon((activity as AppCompatActivity), gameIcon, period,
@@ -291,12 +292,15 @@ class GameSheepFragment : AbstractGameFragment() {
 
         when (trend) {
             SensorTrends.LOWEST -> {
+                startIntroductionAnimation()
                 layoutParams.setMargins(layoutParams.leftMargin, sheepInitialYposition, layoutParams.rightMargin, layoutParams.bottomMargin)
             }
             SensorTrends.HIGHEST -> {
                 layoutParams.setMargins(layoutParams.leftMargin, 0, layoutParams.rightMargin, layoutParams.bottomMargin)
             }
             else -> {
+                stopIntroductionAnimation()
+                sheepView.imageResource = R.mipmap.ic_sheep_jump
                 val newMarginTop = layoutParams.topMargin + offsetY
                 if (newMarginTop < 0 || newMarginTop > sheepInitialYposition) return
                 layoutParams.setMargins(layoutParams.leftMargin, newMarginTop, layoutParams.rightMargin, layoutParams.bottomMargin)

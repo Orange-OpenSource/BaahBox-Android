@@ -66,7 +66,7 @@ class IconAnimator {
         period.takeIf { it >= 0 } ?: throw IllegalArgumentException("The period cannot be negative")
         if (timer != null) stopAnimateGameIcon()
         timer = Timer()
-        timer?.schedule(delay=300, period=period) {
+        timer?.schedule(delay=0, period=period) {
             context.runOnUiThread {
                 displaySuitableImage(imageView, images)
             }
