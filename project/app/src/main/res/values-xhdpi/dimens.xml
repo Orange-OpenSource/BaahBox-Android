@@ -1,0 +1,39 @@
+<!--
+    Orange Baah Box
+    Copyright (C) 2017 – 2019 Orange SA
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!-- For devices Nexus 4 -->
+
+<resources>
+
+    <!-- Sheep game -->
+
+    <dimen name="game_sheep_image_icon_margin_top">245dp</dimen>
+    <dimen name="game_sheep_line1_margin_top">0dp</dimen>
+    <dimen name="game_sheep_line1_margin_bottom">128dp</dimen>
+    <dimen name="game_sheep_line2_margin_bottom">80dp</dimen>
+    <dimen name="game_sheep_floor_margin_top">128dp</dimen>
+    <dimen name="game_sheep_btn_play_margin_start_stop">32dp</dimen>
+    <dimen name="game_sheep_btn_play_margin_bottom">16dp</dimen>
+
+    <dimen name="game_sheep_line0_text_size">16sp</dimen>
+    <dimen name="game_sheep_line1_text_size">22sp</dimen>
+    <dimen name="game_sheep_line2_text_size">18sp</dimen>
+
+    <dimen name="game_sheep_fence_margin_top">220dp</dimen>
+
+</resources>

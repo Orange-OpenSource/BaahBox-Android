@@ -42,8 +42,8 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        versionCode 24
-        versionName "0.7.0"
+        versionCode 28
+        versionName "0.6.0"
         vectorDrawables.useSupportLibrary true
     }
 
@@ -72,6 +72,10 @@ android {
             applicationIdSuffix ".pz"
             versionNameSuffix "-pz"
         }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
 
 }
@@ -116,13 +120,26 @@ dependencies {
     // LicensesDialog: to display third party contents
     implementation "de.psdev.licensesdialog:licensesdialog:$rootProject.licensesDialogVersion"
 
-    // Tests
+    // Unit tests
     testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+
+    // Instrumented tests
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$rootProject.navigationVersion"
-
+    androidTestImplementation "org.mockito:mockito-android:$rootProject.mockitoVersion"
+    androidTestImplementation ('com.android.support.test:rules:0.5'){
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation ('com.android.support.test.espresso:espresso-core:2.2.2'){
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation ('com.android.support.test:runner:0.5'){
+        exclude module: 'support-annotations'
+    }
+    
 }
 
 // *****
@@ -161,7 +178,7 @@ propertieschecker {
 copyrightchecker {
     folderToCheck "app/src/main/res"
     creditLineToFind "Baah Box, (c) Copyright Orange SA 2017-2019, CC-BY-SA 4.0"
-    verbose true
+    verbose false
 }
 
 // To customize the icons with ribbons

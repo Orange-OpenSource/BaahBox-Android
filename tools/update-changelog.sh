@@ -40,4 +40,4 @@ echo -e "\n\n" >> "$changelog"
 cat "$tempChangelog" >> "$changelog"
 rm $tempChangelog
 
-echo ">>>>> Completed!"
+echo -e "\n>>>>> Completed!"

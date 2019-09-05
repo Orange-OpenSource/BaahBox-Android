@@ -16,10 +16,9 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.orange.labs.orangetrainingbox.tools.properties
+package com.orange.labs.orangetrainingbox.utils.properties
 
 import android.content.Context
-import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import java.util.*
 
 /**
@@ -28,27 +27,39 @@ import java.util.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 2.1.0
+ * @version 2.4.0
  */
 
+// Compile-time constants
 
-private const val filename = "app_configuration.properties"
-private const val delimiter = ";"
-private const val difficulty_low = "low"
-private const val difficulty_medium = "medium"
-private const val difficulty_high = "high"
+private const val DEFAULT_FILENAME = "app_configuration.properties"
+private const val DELIMITER = ";"
+private const val DIFFICULTY_LOW = "low"
+private const val DIFFICULTY_MEDIUM = "medium"
+private const val DIFFICULTY_HIGH = "high"
 
 /**
  * Load the properties in the reader
  *
+ * @param filename The proeprties file to load
  * @return Properties The read data
  */
-private fun Context.loadProperties(): Properties {
+fun Context.loadProperties(filename: String = DEFAULT_FILENAME): Properties {
     val assetManager = this.assets
     val inputStream = assetManager.open(filename)
     val properties = Properties()
     properties.load(inputStream)
     return properties
+}
+
+/**
+ * Reads from properties file in assets flag dor demo purposes
+ *
+ * @return Boolean - True enable swipes, false disable them
+ */
+fun Context.isDemoFeatureEnabled(): Boolean {
+    val properties = loadProperties()
+    return properties.getProperty(PropertiesKeys.ENABLE_DEMO_FEATURE.key).toBoolean()
 }
 
 /**
@@ -80,26 +91,6 @@ fun Context.readAppGamesConfiguration(): AppGamesConfiguration {
 }
 
 /**
- * Reads from properties file assets.
- * If the entry for "difficulty_factor" is not defined or does not match "low", "medium" or "high", will be defined
- * to DifficultyFactor.MEDIUM.
- *
- * @return GameDetailsConfiguration The configuration
- */
-fun Context.readGameDetailsConfiguration(): GameDetailsConfiguration {
-    val properties = loadProperties()
-    val rawDifficultyFactor = properties.getProperty(PropertiesKeys.DIFFICULTY_FACTOR.key)
-    val difficultyFactor = when (rawDifficultyFactor.toLowerCase()) {
-        difficulty_low -> DifficultyFactor.LOW
-        difficulty_medium -> DifficultyFactor.MEDIUM
-        difficulty_high -> DifficultyFactor.HIGH
-        else -> DifficultyFactor.MEDIUM
-    }
-    return GameDetailsConfiguration(difficultyFactor)
-}
-
-
-/**
  * Reads from properties file assets configuration elements for the star game.
  *
  * @return DifficultyDetailsConfiguration The configuration
@@ -107,7 +98,7 @@ fun Context.readGameDetailsConfiguration(): GameDetailsConfiguration {
 fun Context.readDifficultyDetailsConfiguration(): DifficultyDetailsConfiguration {
     val properties = loadProperties()
     val difficultyConfiguration = properties.getProperty(PropertiesKeys.DIFFICULTY_NUMERIC_VALUES.key)
-    val configurationItems = difficultyConfiguration.split(delimiter)
+    val configurationItems = difficultyConfiguration.split(DELIMITER)
     if (configurationItems.size != 3) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 3")
     return DifficultyDetailsConfiguration(
         configurationItems[0].toDouble(), configurationItems[1].toDouble(),
@@ -123,7 +114,7 @@ fun Context.readDifficultyDetailsConfiguration(): DifficultyDetailsConfiguration
 fun Context.readStarGameConfiguration(): StarGameConfiguration {
     val properties = loadProperties()
     val starGameRawConfiguration = properties.getProperty(PropertiesKeys.GAME_STAR_THRESHOLD.key)
-    val configurationItems = starGameRawConfiguration.split(delimiter)
+    val configurationItems = starGameRawConfiguration.split(DELIMITER)
     if (configurationItems.size != 4) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 4")
     return StarGameConfiguration(
         configurationItems[0].toInt(), configurationItems[1].toInt() - 1,
@@ -140,7 +131,7 @@ fun Context.readStarGameConfiguration(): StarGameConfiguration {
 fun Context.readBalloonGameConfiguration(): BalloonGameConfiguration {
     val properties = loadProperties()
     val starGameRawConfiguration = properties.getProperty(PropertiesKeys.GAME_BALLOON_THRESHOLD.key)
-    val configurationItems = starGameRawConfiguration.split(delimiter)
+    val configurationItems = starGameRawConfiguration.split(DELIMITER)
     if (configurationItems.size != 5) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 5")
     return BalloonGameConfiguration(
         configurationItems[0].toInt(), configurationItems[1].toInt() - 1,
@@ -162,33 +153,56 @@ fun Context.readBalloonAdditionalConfiguration(): Long {
 
 /**
  * Reads from properties file assets configuration elements for the sheep game.
+ * Return configuration details with:
+ *
+ <ul>
+    <li>The offset to use for each sheep move</li>
+    <li>The period to use to animate the sheep (in walking mode, for introduction screen...)</li>
+    <li>The duration for sheep move animation</li>
+ </ul>
  *
  * @return SheepGameConfiguration The configuration
  */
 fun Context.readSheepGameConfiguration(): SheepGameConfiguration {
-    // TODO Parse properties and package them in the configuration object
     val properties = loadProperties()
-    val sheepGameRawConfiguration = properties.getProperty(PropertiesKeys.GAME_SHEEP_THRESHOLD.key)
-    val configurationItems = sheepGameRawConfiguration.split(delimiter)
-    // FIXME Check with the good amount of params
-    if(configurationItems.size != 5) throw InvalidConfigurationException("Found ${configurationItems.size} values, expected 5")
-    return SheepGameConfiguration(0, 0)
+    val sheepMoveOffset = properties.getProperty(PropertiesKeys.GAME_SHEEP_MOVE_OFFSET.key).toInt()
+    if (sheepMoveOffset <= 0) throw InvalidConfigurationException("Sheep move offset value must be an integer greater than 0")
+    val animationPeriod = properties.getProperty(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
+    if (animationPeriod <= 0) throw InvalidConfigurationException("Sheep animation period value must be a long greater than 0")
+    val moveDuration = properties.getProperty(PropertiesKeys.GAME_SHEEP_MOVE_DURATION.key).toLong()
+    if (moveDuration <= 0) throw InvalidConfigurationException("Sheep move duration value must be a long greater than 0")
+    return SheepGameConfiguration(sheepMoveOffset, animationPeriod, moveDuration)
 }
 
 /**
  * Reads from properties file assets additional configuration elements for the sheep game.
  *
- * @return Long Just the period for animations of the game icon in the introduction screen
+ * @return SheepGameDefaultConfiguration A bundle with default fences number and speed
  */
-fun Context.readSheepAdditionalConfiguration(): Long {
+fun Context.readSheepDefaultConfiguration(): SheepGameDefaultConfiguration {
     val properties = loadProperties()
-    return properties.getProperty(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
+    val defaultFencesNumber = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
+    val defaultSpeed = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
+    return SheepGameDefaultConfiguration(defaultFencesNumber, defaultSpeed)
+}
+
+/**
+ * Reads from properties file assets configuration details for recorded sensor data.
+ *
+ * @return SensorDataSeriesConfiguration A bundle with details about how recorded data can be used
+ */
+fun Context.readSensorDataSeriesConfiguration(): SensorDataSeriesConfiguration {
+    val properties = loadProperties()
+    val queueSize = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_QUEUE_SIZE.key).toInt()
+    val intervalForUpdate = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_INTERVAL_FOR_UPDATE.key).toInt()
+    val trendThreshold = properties.getProperty(PropertiesKeys.SENSOR_DATA_SERIES_TREND_THRESHOLD.key).toInt()
+    return SensorDataSeriesConfiguration(queueSize, intervalForUpdate, trendThreshold)
 }
 
 /**
  * Exception to throw if a configuration is not suitable in the properties file
  */
-class InvalidConfigurationException(override var message:String): Exception(message)
+class InvalidConfigurationException(override var message: String): Exception(message)
 
 
 // ************
@@ -215,13 +229,6 @@ data class BleConfiguration(val serviceUUID: String, val sensorsCharUUID: String
  */
 data class AppGamesConfiguration(val enableStarGame: Boolean, val enableBalloonGame: Boolean,
                                  val enableSheepGame: Boolean, val enableSpaceGame: Boolean, val enableToadGame: Boolean)
-
-/**
- * Models a bundle of game configuration
- *
- * @param difficultyFactor The hardness value to apply to calculations
- */
-data class GameDetailsConfiguration(val difficultyFactor: DifficultyFactor)
 
 /**
  * Models a bundle of game configuration
@@ -275,8 +282,24 @@ data class BalloonGameConfiguration(val minThreshold1: Int, val maxThreshold1: I
 
 /**
  * Models a bundle of sheep game configuration elements.
- * @param fenceNumber The number of fences to add in the game
- * @param fenceSpeed The elapsed time between two fences
+ * @param moveOffset The move the sheep should make for each rise or fall event, in px
+ * @param walkAnimationPeriod Each "frame" of the game icon is animated with this period (in ms)
+ * @param moveDuration The duration of each move used by the animator in charge of the sheep icon
  */
-// TODO Enrich with suitable parameters
-data class SheepGameConfiguration(val fenceNumber: Int, val fenceSpeed: Int)
+data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: Long, val moveDuration: Long)
+
+/**
+ * Models a bundle of sheep game default configuration values..
+ * @param defaultFencesCount The default number of fences to display
+ * @param defaultSpeed The default speed for the floor and fences
+ */
+data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultSpeed: String)
+
+/**
+ * Models a bundle of configuration details for sensor data series
+ *
+ * @param queueSize The size fo te queue stored sensor data. Higher it is, more records stored
+ * @param intervalForUpdate Each interval-th items, compute a ne average of recorded sensor data and store it
+ * @param trendThreshold The trend threshold defining if trend is increasing, freezing or decreasing
+ */
+data class SensorDataSeriesConfiguration(val queueSize: Int, val intervalForUpdate: Int, val trendThreshold: Int)

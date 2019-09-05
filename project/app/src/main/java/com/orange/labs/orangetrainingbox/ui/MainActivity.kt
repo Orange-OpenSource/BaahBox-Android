@@ -46,12 +46,14 @@ import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import com.orange.labs.orangetrainingbox.game.InputsParser
-import com.orange.labs.orangetrainingbox.tools.logs.Logger
-import com.orange.labs.orangetrainingbox.tools.properties.BleConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.PropertiesKeys
-import com.orange.labs.orangetrainingbox.tools.properties.readBleSensorsConfiguration
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import com.orange.labs.orangetrainingbox.utils.properties.BleConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
+import com.orange.labs.orangetrainingbox.utils.properties.readBleSensorsConfiguration
 import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
+import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.longToast
 
 // **********
 // Properties
@@ -73,7 +75,7 @@ private val BluetoothAdapter.isDisabled: Boolean
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.1.1
+ * @version 2.2.0
  */
 class MainActivity : AppCompatActivity() {
 
@@ -228,6 +230,8 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Activity lifecycle.
+     * Check if Bluetooth Low Energy permissions (BLE) are still enabled.
+     * Check if demo mode has be activated in settings or not (so as to get rid of BLUE things and just use gestures, or not)
      */
     override fun onResume() {
         super.onResume()
@@ -310,7 +314,7 @@ class MainActivity : AppCompatActivity() {
                                 2 -> model.difficultyFactor = DifficultyFactor.HIGH
                                 else /* and 1 */ -> model.difficultyFactor = DifficultyFactor.MEDIUM
                         }
-                        toast(this.getString(R.string.toast_hardness_factor_changed, model.difficultyFactor))
+                        toast(this.getString(R.string.toast_difficulty_factor_changed, model.difficultyFactor))
                         Logger.d("Hardness factor has been changed: ${model.difficultyFactor}")
                     }
                 }

@@ -53,7 +53,8 @@
             android:name=".ui.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="sensorPortrait">
+            android:screenOrientation="sensorPortrait"
+            android:configChanges="orientation">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

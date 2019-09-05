@@ -16,7 +16,7 @@ The common training tools are not fun, there are no games. We provide with Baah 
 * a lovely assets
 
 
-Sensorsor koystick have to be plugged to the box communicating with the apps using Bluetooth Low Energy.
+Sensors or joystick have to be plugged to the box communicating with the apps using Bluetooth Low Energy.
 
 
 ## Pictures of the project

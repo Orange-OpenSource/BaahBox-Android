@@ -61,10 +61,10 @@ Once your work is done, and the project is building and the app well running, yo
 Before doing such operations, you should run the command:
 
 ```shell
-./prepare-push.sh
+./prepare-release.sh
 ```
 
-This command will increase by 1 the version code of the app, build the HTML documentation, check configuration file for the app and update the changelog with the last commits. Have a look on the changelog to ensure it's clean.
+This command will increase by 1 the version code of the app, build the HTML documentation, check configuration file for the app and update the changelog with the last commits. Have a look on the changelog to ensure it's clean. It will also check if images have copyrights notices in metadata, run unit tests and run instrumented tests.
 
 The version name follows the pattern X.Y.Z, where Z is a value to increment for fixes, Y for minor evolutions and X for major evolutions. This value should be modified manually by you when you completed a release or a merge in the _dev_ branch.
 

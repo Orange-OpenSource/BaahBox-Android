@@ -21,11 +21,13 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
-import com.orange.labs.orangetrainingbox.tools.properties.readDifficultyDetailsConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readDifficultyDetailsConfiguration
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import kotlinx.android.synthetic.main.fragment_game_star_outro.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.view.*
+import androidx.preference.PreferenceManager
+import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 
 
 /**
@@ -36,7 +38,7 @@ import android.view.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 23/05/2019
- * @version 2.0.0
+ * @version 2.1.1
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
@@ -94,7 +96,6 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
 
         super.onResume()
 
-
         // If not playing, start animation and prepare play button if introduction screen, else prepare for restart
         if (!playing) {
 
@@ -108,7 +109,7 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
                     stopIntroductionAnimation()
                 }
 
-                // Restart the game
+            // Restart the game
             } else {
                 btnRestart.onClick {
                     val bundle = Bundle()
@@ -118,9 +119,10 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
                 }
             }
 
-            // Otherwise define the model and the sensor observer for the game
+        // Otherwise define the model and the sensor observer for the game
         } else {
             prepareSensorObserver()
+            prepareGameLayout()
         }
 
     }
@@ -138,6 +140,18 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
             DifficultyFactor.MEDIUM -> difficultyConfigurationValues.difficultyFactorMedium
             DifficultyFactor.HIGH -> difficultyConfigurationValues.difficultyFactorHigh
         }
+    }
+
+    /**
+     * If demo feature enabled (project settings) and demo mode activated (app preferences), returns true.
+     * Otherwise returns false.
+     *
+     * @return Boolean
+     */
+    protected fun isDemoModeActivated(): Boolean {
+        if (activity?.isDemoFeatureEnabled() == false) return false
+        val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+        return preferences.getBoolean("preferences_demo_mode_enabled", false)
     }
 
     /**
@@ -169,8 +183,18 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
     /**
      * Prepares the observer for the sensor which will receive the data broadcast by the Baah Box sensors.
      * The game logic starts there.
+     * This method is called when the activity is resuming.
+     * Called before _prepareGameLayout_.
      */
     abstract fun prepareSensorObserver()
+
+    /**
+     * Prepares the inheriting classes for the game logic, the animations and other logic for the game.
+     * The game animations start here.
+     * This method is called when the activity is resuming.
+     * Called after _prepareSensorObserver_.
+     */
+    abstract fun prepareGameLayout()
 
 }
 

@@ -32,4 +32,4 @@ cd $GRADLE_PATH
 ./$GRADLE_DOC
 cd ..
 
-echo ">>>>> Completed!"
+echo -e "\n>>>>> Completed!"

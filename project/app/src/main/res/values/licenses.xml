@@ -24,10 +24,12 @@
         <item>Orange Baah Box</item>
         <item>Anko</item>
         <item>Dokka</item>
+        <item>Easylauncher-gradle-plugin</item>
         <item>Gradle changelog plugin</item>
         <item>JUnit</item>
         <item>Kotlin</item>
         <item>Licenses Dialog</item>
+        <item>Mockito</item>
         <item>Copyright Checker</item>
         <item>Properties File Checker</item>
     </string-array>
@@ -37,10 +39,12 @@
         <item>Copyright &#169; 2017 &#8211; 2019 Orange SA</item>
         <item>Copyright &#169; 2016 JetBrains s.r.o.</item>
         <item>Copyright &#169; 2018 JetBrains s.r.o.</item>
+        <item>Copyright &#169; 2018 Mikel</item>
         <item>Copyright &#169; 2017 Marc Poppleton</item>
         <item>Copyright &#169; 2009 The JUnit Team</item>
         <item>Copyright &#169; 2000 &#8211; 2018 JetBrains s.r.o.</item>
         <item>Copyright &#169; 2013 Philip Schiffer</item>
+        <item>Copyright &#169; 2007 Mockito contributors</item>
         <item>Copyright &#169; 2019 Orange SA</item>
         <item>Copyright &#169; 2019 Orange SA</item>
     </string-array>
@@ -51,9 +55,11 @@
         <item>https://github.com/Kotlin/anko</item>
         <item>https://github.com/Kotlin/dokka</item>
         <item>https://github.com/marcpoppleton/gradle-changelog-plugin</item>
+        <item>https://github.com/akaita/easylauncher-gradle-plugin</item>
         <item>https://github.com/junit-team/junit4</item>
         <item>https://github.com/JetBrains/kotlin</item>
         <item>https://github.com/PSDev/LicensesDialog</item>
+        <item>https://github.com/mockito/mockito</item>
         <item>https://github.com/Orange-OpenSource/copyright-checker</item>
         <item>https://github.com/Orange-OpenSource/gradle-properties-checker</item>
     </string-array>
@@ -64,12 +70,13 @@
         <item>Apache 2.0</item>
         <item>Apache 2.0</item>
         <item>Apache 2.0</item>
+        <item>Apache 2.0</item>
         <item>EPL 1.0</item>
         <item>Apache 2.0</item>
         <item>Apache 2.0</item>
         <item>MIT</item>
         <item>MIT</item>
+        <item>MIT</item>
     </string-array>
-
 
 </resources>

@@ -38,6 +38,7 @@ import com.orange.labs.orangetrainingbox.game.DifficultyFactor
  */
 class TrainingBoxViewModel : ViewModel() {
 
+
     // **********
     // Properties
     // **********
@@ -63,6 +64,7 @@ class TrainingBoxViewModel : ViewModel() {
      */
     var difficultyFactor: DifficultyFactor = DifficultyFactor.MEDIUM
 
+
     // *******
     // Methods
     // *******
@@ -74,7 +76,7 @@ class TrainingBoxViewModel : ViewModel() {
      * @see [BluetoothDevice]
      */
     fun addBox(box: BluetoothDevice) {
-        if(!::boxes.isInitialized){
+        if (!::boxes.isInitialized) {
             boxes = MutableLiveData()
             boxes.postValue(mutableSetOf(box))
         }
