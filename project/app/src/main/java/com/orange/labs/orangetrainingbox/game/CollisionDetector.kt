@@ -19,17 +19,7 @@ package com.orange.labs.orangetrainingbox.game
 
 import android.os.Handler
 import android.view.View
-import com.orange.labs.orangetrainingbox.utils.logs.Logger
-
-
-// **********************
-// Compile-time constants
-// **********************
-
-/**
- * Each COLLISION_DETECTION_INTERVAL millisecond, detect if there are collisions
- */
-private const val COLLISION_DETECTION_INTERVAL = 1000L
+import androidx.lifecycle.MutableLiveData
 
 
 // *******
@@ -47,8 +37,10 @@ private const val COLLISION_DETECTION_INTERVAL = 1000L
  *
  * @param first One of the view to use for collision detections
  * @param second One of the view to use for collision detections
+ * @param detectionInterval The interval in ms where collision detection is processed (default: 500ms)
  */
-class CollisionDetector(val first: View, val second: View) {
+class CollisionDetector(private val first: View, private val second: View,
+                        private val detectionInterval: Long = 500L) {
 
 
     // **********
@@ -66,13 +58,17 @@ class CollisionDetector(val first: View, val second: View) {
     private val task: Runnable by lazy {
         Runnable {
             try {
-                val flag = isCollision()
-                Logger.d("Collision detection: $flag")
+                isCollisionDetected.postValue(isCollision())
             } finally {
-                handler.postDelayed(task, COLLISION_DETECTION_INTERVAL)
+                handler.postDelayed(task, detectionInterval)
             }
         }
     }
+
+    /**
+     * Flag updated regularly by _task_ indicating if a collision occurred
+     */
+    val isCollisionDetected: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
 
 
     // *******
@@ -105,6 +101,8 @@ class CollisionDetector(val first: View, val second: View) {
 
         val (firstMinX, firstMaxX, firstMinY, firstMaxY) = first.computeHitbox()
         val (secondMinX, secondMaxX, secondMinY, secondMaxY) = second.computeHitbox()
+
+        if (secondMinX == 0 && secondMaxX == 0) return false
 
         // Case where object hits the other in one of its corners
         if (firstMinX in secondMinX..secondMaxX && firstMaxY in secondMinY..secondMaxY) return true
@@ -145,10 +143,10 @@ data class Hitbox(val minX: Int, val maxX: Int, val minY: Int, val maxY: Int)
  * Will get the coordinates of the view in the device landmark (location on screen),
  * and use its width and height.
  *
- * minX = this.x - width / 2
- * maxX = this.x + width / 2
- * minY = this.y - height / 2
- * maxY = this.y + height / 2
+ * minX = this.x
+ * maxX = this.x + width
+ * minY = this.y
+ * maxY = this.y + height
  *
  */
 fun View.computeHitbox(): Hitbox {

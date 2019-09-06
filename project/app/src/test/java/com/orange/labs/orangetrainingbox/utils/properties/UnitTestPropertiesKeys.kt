@@ -27,7 +27,7 @@ import org.junit.Assert.assertEquals
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.2.0
+ * @version 1.4.0
  */
 class UnitTestPropertiesKeys {
 
@@ -81,6 +81,9 @@ class UnitTestPropertiesKeys {
 
         // Demo
         assertEquals(PropertiesKeys.ENABLE_DEMO_FEATURE.key, "enable_demo_feature")
+
+        // Interval for collision detection
+        assertEquals(PropertiesKeys.COLLISION_DETECTION_INTERVAL.key, "collision_detection_interval")
 
     }
 

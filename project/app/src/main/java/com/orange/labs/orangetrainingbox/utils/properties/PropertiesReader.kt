@@ -27,7 +27,7 @@ import java.util.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 2.4.0
+ * @version 2.5.0
  */
 
 // Compile-time constants
@@ -53,13 +53,23 @@ fun Context.loadProperties(filename: String = DEFAULT_FILENAME): Properties {
 }
 
 /**
- * Reads from properties file in assets flag dor demo purposes
+ * Reads from properties file in assets flag for demo purposes
  *
  * @return Boolean - True enable swipes, false disable them
  */
 fun Context.isDemoFeatureEnabled(): Boolean {
     val properties = loadProperties()
     return properties.getProperty(PropertiesKeys.ENABLE_DEMO_FEATURE.key).toBoolean()
+}
+
+/**
+ * Reads from properties file in assets the interval for collision detection
+ *
+ * @return Long -
+ */
+fun Context.readCollisionDetectionInterval(): Long {
+    val properties = loadProperties()
+    return properties.getProperty(PropertiesKeys.COLLISION_DETECTION_INTERVAL.key).toLong()
 }
 
 /**

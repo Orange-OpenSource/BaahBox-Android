@@ -33,7 +33,7 @@ import org.junit.runner.RunWith
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.2.0
+ * @version 1.3.0
  */
 @RunWith(AndroidJUnit4::class)
 class InstrumentedTestPropertiesReader {
@@ -255,6 +255,20 @@ class InstrumentedTestPropertiesReader {
         val config = appContext!!.isDemoFeatureEnabled()
 
         assertEquals(expectedFlag, config)
+
+    }
+
+    /**
+     * Test the readCollisionDetectionInterval() Context extension
+     */
+    @Test
+    fun readCollisionDetectionInterval() {
+
+        val expectedInterval = appContext!!.loadProperties().getProperty(PropertiesKeys.COLLISION_DETECTION_INTERVAL.key).toLong()
+
+        val config = appContext!!.readCollisionDetectionInterval()
+
+        assertTrue(expectedInterval == config)
 
     }
 

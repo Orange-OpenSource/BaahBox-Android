@@ -38,10 +38,11 @@ import android.util.TypedValue
 import android.util.DisplayMetrics
 import com.orange.labs.orangetrainingbox.game.CollisionDetector
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
-import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.properties.*
 import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
+import org.jetbrains.anko.backgroundColor
 
 
 // *******
@@ -102,9 +103,15 @@ class GameSheepFragment : AbstractGameFragment() {
     private var sheepInitialYPosition = -1
 
     /**
+     * Flag indicating if the sheep was still in its lowest position.
+     * Used when sensor data are received, and a LOWEST trend is compute dmanu
+     */
+    private var wasAlreadyInLowestPosition: Boolean = false
+
+    /**
      * The object which looks periodically for collisions between the sheep and the fences
      */
-    private var collisionDetector: CollisionDetector? = null
+    private lateinit var collisionDetector: CollisionDetector
 
 
     // ***********************************
@@ -277,6 +284,17 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
+     * Triggered a collision has been detected by the [CollisionDetector] between the sheep view and
+     * a fence view.
+     */
+    private fun processCollision() {
+        Logger.d("Collision detected")
+
+        gameIconAnimator.stopAnimateGameIcon()
+        fencesAnimator.cancel()
+    }
+
+    /**
      * Moves the sheep with an Y-axis translation using an offset based on uer input / sensor value
      *
      * @param trend The value saying if the sheep should rise (INCREASE), stay (EQUAL) or fall (DECREASE)
@@ -297,18 +315,18 @@ class GameSheepFragment : AbstractGameFragment() {
 
         when (trend) {
             SensorTrends.LOWEST -> {
-                if (!wasPreviouslowest) {
-                    wasPreviouslowest = true
+                if (!wasAlreadyInLowestPosition) {
+                    wasAlreadyInLowestPosition = true
                     startIntroductionAnimation()
                 }
                 layoutParams.setMargins(layoutParams.leftMargin, sheepInitialYPosition, layoutParams.rightMargin, layoutParams.bottomMargin)
             }
             SensorTrends.HIGHEST -> {
-                wasPreviouslowest = false
+                wasAlreadyInLowestPosition = false
                 layoutParams.setMargins(layoutParams.leftMargin, 0, layoutParams.rightMargin, layoutParams.bottomMargin)
             }
             else -> {
-                wasPreviouslowest = false
+                wasAlreadyInLowestPosition = false
                 stopIntroductionAnimation()
                 sheepView.imageResource = R.mipmap.ic_sheep_jump
                 val newMarginTop = layoutParams.topMargin + offsetY
@@ -320,8 +338,6 @@ class GameSheepFragment : AbstractGameFragment() {
         sheepView.layoutParams = layoutParams
 
     }
-
-    private var wasPreviouslowest: Boolean = false
 
     /**
      * Makes the fences images move above the floor from the right to the left
@@ -361,7 +377,7 @@ class GameSheepFragment : AbstractGameFragment() {
         fenceImageView.id = View.generateViewId()
         fenceImageView.imageResource = R.mipmap.ic_sheep_fence
 
-        val layoutParams = ConstraintLayout.LayoutParams(toDp(100f), toDp(100f))
+        val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, toDp(100f))
         val marginTop = resources.getDimension(R.dimen.game_sheep_fence_margin_top).toInt()
         layoutParams.setMargins(toDp(0f), marginTop, toDp(0f), toDp(0f))
         fenceImageView.layoutParams = layoutParams
@@ -379,10 +395,10 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
-     * Creates and returns an animator which will make X-axis translations to animate an image view using
-     * its parent layout. The parent layout is used to remove the view once animation ended.
+     * Creates and returns an animator which will make X-axis translations to animate an image view (the fence)
+     * using its parent layout. The parent layout is used to remove the view once animation ended.
      * Uses configuration details picked from preferences or in-app config.
-     * This animator is more for fences.
+     * Call logic parts within animator so as to deal with collisions, repetition, UI update etc.
      *
      * @param fence The image view to animate
      * @return [ObjectAnimator] The animator dealing with the view
@@ -392,29 +408,37 @@ class GameSheepFragment : AbstractGameFragment() {
         val metrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
 
-        fencesAnimator = ObjectAnimator.ofFloat(fence, "translationX", metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
+        fencesAnimator = ObjectAnimator.ofFloat(fence, "translationX",
+            metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
         // TODO: Load/update duration and fences count from preferences
         fencesAnimator.duration = defaultGameConfiguration.defaultSpeed.toLong()
         fencesAnimator.repeatCount = defaultGameConfiguration.defaultFencesCount - 1 // For k fences, repeat k-1 times
         fencesAnimator.repeatMode = ValueAnimator.RESTART
 
+        // The listener dealing with fences views
         fencesAnimator.addListener(object : Animator.AnimatorListener {
 
+            // If animation of fences is started, fences may be added, thus we can detect collisions
             override fun onAnimationStart(animation: Animator) {
-                collisionDetector = CollisionDetector(find<ImageView>(R.id.gameIcon), fence)
-                collisionDetector?.startDetection()
+                collisionDetector = CollisionDetector(find<ImageView>(R.id.gameIcon), fence, context!!.readCollisionDetectionInterval())
+                collisionDetector.isCollisionDetected.observe(this@GameSheepFragment,
+                    Observer<Boolean> { t -> if (t == true) processCollision() }
+                )
+                collisionDetector.startDetection()
             }
 
+            // Remove views and load final view once animations completed
             override fun onAnimationEnd(animation: Animator) {
-                collisionDetector?.stopDetection()
+                collisionDetector.stopDetection()
                 parent.removeView(view)
                 // TODO: If no fence has been touched, load success view
             }
 
             override fun onAnimationCancel(animation: Animator) { }
 
+            // Update GUI with score
             override fun onAnimationRepeat(animation: Animator) {
-                // TODO: If no collision has been made, update text of UI  about remaining fences to jump over``
+                // TODO: If no collision has been made, update text of UI  about remaining fences to jump over
             }
 
         })
