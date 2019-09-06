@@ -146,6 +146,55 @@ class UnitTestCollisionDetector {
 
     }
 
+    /**
+     * Test the startDetection() method
+     */
+    @Test
+    fun startDetection() {
+
+        val first = createMockView(80, 60, 50, 50)
+        val second = createMockView(500, 600, 10, 10)
+
+        // Simple call
+        var detector = CollisionDetector(first, second)
+        detector.startDetection()
+
+        // Spamming
+        detector = CollisionDetector(first, second)
+        for (i in 0..1000) {
+            detector.startDetection()
+        }
+
+    }
+
+    /**
+     * Test the stopDetection() method
+     */
+    @Test
+    fun stopDetection() {
+
+        val first = createMockView(80, 60, 50, 50)
+        val second = createMockView(500, 600, 10, 10)
+
+        // Simple call
+        var detector = CollisionDetector(first, second)
+        detector.stopDetection()
+
+        // Spamming
+        detector = CollisionDetector(first, second)
+        for (i in 0..1000) {
+            detector.stopDetection()
+        }
+
+        // Spamming again :)
+        detector = CollisionDetector(first, second)
+        for (i in 0..1000) {
+            detector.startDetection()
+            detector.stopDetection()
+        }
+
+    }
+
     // Helper functions
 
     /**

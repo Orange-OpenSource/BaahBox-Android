@@ -17,7 +17,24 @@
  */
 package com.orange.labs.orangetrainingbox.game
 
+import android.os.Handler
 import android.view.View
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
+
+
+// **********************
+// Compile-time constants
+// **********************
+
+/**
+ * Each COLLISION_DETECTION_INTERVAL millisecond, detect if there are collisions
+ */
+private const val COLLISION_DETECTION_INTERVAL = 1000L
+
+
+// *******
+// Classes
+// *******
 
 /**
  * Class which allows to make assertions on objects so as to check if there is a collision
@@ -32,6 +49,49 @@ import android.view.View
  * @param second One of the view to use for collision detections
  */
 class CollisionDetector(val first: View, val second: View) {
+
+
+    // **********
+    // Properties
+    // **********
+
+    /**
+     * The handler managing the task which regularly will check if _first_ and _second_ collides
+     */
+    private val handler: Handler by lazy { Handler() }
+
+    /**
+     * The task which make assertions to check if collisions occur
+     */
+    private val task: Runnable by lazy {
+        Runnable {
+            try {
+                val flag = isCollision()
+                Logger.d("Collision detection: $flag")
+            } finally {
+                handler.postDelayed(task, COLLISION_DETECTION_INTERVAL)
+            }
+        }
+    }
+
+
+    // *******
+    // Methods
+    // *******
+
+    /**
+     * Starts the task which looks regularly for collisions between first_ and _second_
+     */
+    fun startDetection() {
+        task.run()
+    }
+
+    /**
+     * Stops the task which looks regularly for collisions between first_ and _second_
+     */
+    fun stopDetection() {
+        handler.removeCallbacks(task)
+    }
 
     /**
      * Returns true if _first_ and _second_ collides using their hitboxes, false otherwise.
@@ -64,11 +124,6 @@ class CollisionDetector(val first: View, val second: View) {
     }
 
 }
-
-
-// *******
-// Classes
-// *******
 
 /**
  * Models an hitbox, i.e. a range of coordinates where an object can be touched by another.

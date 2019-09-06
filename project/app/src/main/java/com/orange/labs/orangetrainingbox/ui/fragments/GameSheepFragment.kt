@@ -36,6 +36,7 @@ import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
+import com.orange.labs.orangetrainingbox.game.CollisionDetector
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
@@ -98,7 +99,12 @@ class GameSheepFragment : AbstractGameFragment() {
     /**
      * Initial position on Y-axis of the sheep game icon
      */
-    private var sheepInitialYposition = -1
+    private var sheepInitialYPosition = -1
+
+    /**
+     * The object which looks periodically for collisions between the sheep and the fences
+     */
+    private var collisionDetector: CollisionDetector? = null
 
 
     // ***********************************
@@ -232,7 +238,6 @@ class GameSheepFragment : AbstractGameFragment() {
         }
         startIntroductionAnimation()
         moveFences()
-        // TODO Check if collisions
         // TODO Display final animation (collision or all fences jumped)
     }
 
@@ -255,8 +260,6 @@ class GameSheepFragment : AbstractGameFragment() {
     // **********
     // Game logic
     // **********
-
-    // TODO Enrich this doc
 
     /**
      * The logic of this game.
@@ -290,7 +293,7 @@ class GameSheepFragment : AbstractGameFragment() {
 
         val sheepView = find<ImageView>(R.id.gameIcon)
         val layoutParams = sheepView.layoutParams as ConstraintLayout.LayoutParams
-        if (sheepInitialYposition == -1) sheepInitialYposition = layoutParams.topMargin
+        if (sheepInitialYPosition == -1) sheepInitialYPosition = layoutParams.topMargin
 
         when (trend) {
             SensorTrends.LOWEST -> {
@@ -298,7 +301,7 @@ class GameSheepFragment : AbstractGameFragment() {
                     wasPreviouslowest = true
                     startIntroductionAnimation()
                 }
-                layoutParams.setMargins(layoutParams.leftMargin, sheepInitialYposition, layoutParams.rightMargin, layoutParams.bottomMargin)
+                layoutParams.setMargins(layoutParams.leftMargin, sheepInitialYPosition, layoutParams.rightMargin, layoutParams.bottomMargin)
             }
             SensorTrends.HIGHEST -> {
                 wasPreviouslowest = false
@@ -309,7 +312,7 @@ class GameSheepFragment : AbstractGameFragment() {
                 stopIntroductionAnimation()
                 sheepView.imageResource = R.mipmap.ic_sheep_jump
                 val newMarginTop = layoutParams.topMargin + offsetY
-                if (newMarginTop < 0 || newMarginTop > sheepInitialYposition) return
+                if (newMarginTop < 0 || newMarginTop > sheepInitialYPosition) return
                 layoutParams.setMargins(layoutParams.leftMargin, newMarginTop, layoutParams.rightMargin, layoutParams.bottomMargin)
             }
         }
@@ -381,15 +384,15 @@ class GameSheepFragment : AbstractGameFragment() {
      * Uses configuration details picked from preferences or in-app config.
      * This animator is more for fences.
      *
-     * @param view The image view to animate
+     * @param fence The image view to animate
      * @return [ObjectAnimator] The animator dealing with the view
      */
-    private fun createFenceAnimator(view: ImageView, parent: ConstraintLayout): ObjectAnimator {
+    private fun createFenceAnimator(fence: ImageView, parent: ConstraintLayout): ObjectAnimator {
 
         val metrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
 
-        fencesAnimator = ObjectAnimator.ofFloat(view, "translationX", metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
+        fencesAnimator = ObjectAnimator.ofFloat(fence, "translationX", metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
         // TODO: Load/update duration and fences count from preferences
         fencesAnimator.duration = defaultGameConfiguration.defaultSpeed.toLong()
         fencesAnimator.repeatCount = defaultGameConfiguration.defaultFencesCount - 1 // For k fences, repeat k-1 times
@@ -398,29 +401,26 @@ class GameSheepFragment : AbstractGameFragment() {
         fencesAnimator.addListener(object : Animator.AnimatorListener {
 
             override fun onAnimationStart(animation: Animator) {
-                Logger.d(">>>>> Fence animation started")
+                collisionDetector = CollisionDetector(find<ImageView>(R.id.gameIcon), fence)
+                collisionDetector?.startDetection()
             }
 
             override fun onAnimationEnd(animation: Animator) {
-                Logger.d(">>>>> Fence animation ended")
+                collisionDetector?.stopDetection()
                 parent.removeView(view)
                 // TODO: If no fence has been touched, load success view
             }
 
-            override fun onAnimationCancel(animation: Animator) {
-                Logger.d(">>>>> Fence animation canceled")
-            }
+            override fun onAnimationCancel(animation: Animator) { }
 
             override fun onAnimationRepeat(animation: Animator) {
-                Logger.d(">>>>> Fence animation repeated")
-                // TODO: If no collision has been made, update text of UI  about remaining fences to jump over
+                // TODO: If no collision has been made, update text of UI  about remaining fences to jump over``
             }
 
         })
 
         return fencesAnimator
 
-        // TODO: Check collisions
     }
 
 }
