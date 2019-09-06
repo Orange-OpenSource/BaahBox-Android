@@ -46,10 +46,18 @@ class CollisionDetector(val first: View, val second: View) {
         val (firstMinX, firstMaxX, firstMinY, firstMaxY) = first.computeHitbox()
         val (secondMinX, secondMaxX, secondMinY, secondMaxY) = second.computeHitbox()
 
+        // Case where object hits the other in one of its corners
         if (firstMinX in secondMinX..secondMaxX && firstMaxY in secondMinY..secondMaxY) return true
         if (firstMaxX in secondMinX..secondMaxX && firstMaxY in secondMinY..secondMaxY) return true
         if (firstMinX in secondMinX..secondMaxX && firstMinY in secondMinY..secondMaxY) return true
         if (firstMaxX in secondMinX..secondMaxX && firstMinY in secondMinY..secondMaxY) return true
+
+        // Case where one object is inside another
+        if (secondMinX in firstMinX..firstMaxX && secondMaxX in firstMinX..firstMaxX
+            && secondMinY in firstMinY..firstMaxY && secondMaxX in firstMinY..firstMaxY) return true
+
+        // For the case where one object touches another on its side without entering in it
+        // we are cool B-)
 
         return false
 
