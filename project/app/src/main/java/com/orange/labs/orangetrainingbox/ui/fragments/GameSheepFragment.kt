@@ -20,6 +20,7 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -36,13 +37,12 @@ import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
+import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.game.CollisionDetector
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
-import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.properties.*
 import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
-import org.jetbrains.anko.backgroundColor
 
 
 // *******
@@ -288,10 +288,13 @@ class GameSheepFragment : AbstractGameFragment() {
      * a fence view.
      */
     private fun processCollision() {
-        Logger.d("Collision detected")
-
-        gameIconAnimator.stopAnimateGameIcon()
+        stopIntroductionAnimation()
         fencesAnimator.cancel()
+        find<ImageView>(R.id.gameIcon).imageResource = R.mipmap.ic_sheep_bump
+        val bundle = Bundle()
+        bundle.putBoolean("introducing", false)
+        bundle.putBoolean("playing", false)
+        findNavController().navigate(actionGoToPlaying, bundle)
     }
 
     /**
@@ -387,7 +390,7 @@ class GameSheepFragment : AbstractGameFragment() {
         val constraintSet = ConstraintSet()
         constraintSet.clone(parent)
         constraintSet.connect(fenceImageView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
-        constraintSet.connect(fenceImageView.id, ConstraintSet.END, R.id.gameSheepFloor, ConstraintSet.END)
+        constraintSet.connect(fenceImageView.id, ConstraintSet.END, R.id.ivGameSheepFloor, ConstraintSet.END)
         constraintSet.applyTo(parent)
 
         return fenceImageView

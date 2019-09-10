@@ -56,7 +56,7 @@
             android:layout_marginTop="@dimen/game_sheep_line1_margin_top"
             android:layout_marginBottom="@dimen/game_sheep_line1_margin_bottom"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/gameSheepFloor" />
+            app:layout_constraintBottom_toBottomOf="@+id/ivGameSheepFloor" />
 
     <TextView
             android:id="@+id/tvLine2"
@@ -72,7 +72,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLine1"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
 
     <!-- Shaun the sheep -->
 
@@ -93,7 +92,7 @@
     <!-- The floor -->
 
     <ImageView
-            android:id="@+id/gameSheepFloor"
+            android:id="@+id/ivGameSheepFloor"
             android:src="@mipmap/ic_sheep_floor"
             android:layout_width="@dimen/game_sheep_floor_width"
             android:layout_height="@dimen/game_sheep_floor_height"
