@@ -27,7 +27,7 @@ import org.junit.Assert.assertEquals
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.4.0
+ * @version 1.5.0
  */
 class UnitTestPropertiesKeys {
 
@@ -66,6 +66,7 @@ class UnitTestPropertiesKeys {
         assertEquals(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key, "game_sheep_introduction_animation_period")
         assertEquals(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key, "game_sheep_fences_default_speed")
         assertEquals(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key, "game_sheep_fences_default_number")
+        assertEquals(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key, "game_sheep_fences_max_number")
 
         // Sensor data series
 

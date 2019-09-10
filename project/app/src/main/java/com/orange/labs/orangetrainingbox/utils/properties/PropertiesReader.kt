@@ -27,7 +27,7 @@ import java.util.*
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 2.5.0
+ * @version 2.6.0
  */
 
 // Compile-time constants
@@ -192,8 +192,9 @@ fun Context.readSheepGameConfiguration(): SheepGameConfiguration {
 fun Context.readSheepDefaultConfiguration(): SheepGameDefaultConfiguration {
     val properties = loadProperties()
     val defaultFencesNumber = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
+    val defaultFencesMaxNumber = properties.getProperty(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key).toInt()
     val defaultSpeed = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
-    return SheepGameDefaultConfiguration(defaultFencesNumber, defaultSpeed)
+    return SheepGameDefaultConfiguration(defaultFencesNumber, defaultFencesMaxNumber, defaultSpeed)
 }
 
 /**
@@ -301,9 +302,10 @@ data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: 
 /**
  * Models a bundle of sheep game default configuration values..
  * @param defaultFencesCount The default number of fences to display
+ * @param defaultMaxFencesCount The highest number of fences to display
  * @param defaultSpeed The default speed for the floor and fences
  */
-data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultSpeed: String)
+data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultMaxFencesCount: Int, val defaultSpeed: String)
 
 /**
  * Models a bundle of configuration details for sensor data series

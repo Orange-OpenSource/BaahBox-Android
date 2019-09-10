@@ -24,7 +24,7 @@ package com.orange.labs.orangetrainingbox.utils.properties
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 1.8.0
+ * @version 1.9.0
  */
 enum class PropertiesKeys(val key: String) {
 
@@ -114,6 +114,10 @@ enum class PropertiesKeys(val key: String) {
      * Defines the default number of fences to jump over
      */
     GAME_SHEEP_DEFAULT_FENCES_NUMBER("game_sheep_fences_default_number"),
+    /**
+     * Defines the max number of fences to jump over
+     */
+    GAME_SHEEP_MAX_FENCES_NUMBER("game_sheep_fences_max_number"),
 
     /* Sensor data series */
 

@@ -33,7 +33,7 @@ import org.junit.runner.RunWith
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.3.0
+ * @version 1.4.0
  */
 @RunWith(AndroidJUnit4::class)
 class InstrumentedTestPropertiesReader {
@@ -216,11 +216,13 @@ class InstrumentedTestPropertiesReader {
     fun readSheepDefaultConfiguration() {
 
         val defaultFencesNumber = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
+        val defaultMaxNumber = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key).toInt()
         val defaultSpeed = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
 
         val sheepDefaultGameConfiguration = appContext!!.readSheepDefaultConfiguration()
 
         assertTrue(defaultFencesNumber == sheepDefaultGameConfiguration.defaultFencesCount)
+        assertTrue(defaultMaxNumber == sheepDefaultGameConfiguration.defaultMaxFencesCount)
         assertTrue(defaultSpeed == sheepDefaultGameConfiguration.defaultSpeed)
 
     }

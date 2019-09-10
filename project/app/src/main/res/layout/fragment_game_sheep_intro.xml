@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="@string/game_sheep_instructions_line_0"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/game_sheep_line0_text_size"
             android:textStyle="normal"

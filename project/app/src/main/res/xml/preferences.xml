@@ -48,6 +48,23 @@
 
     </PreferenceCategory>
 
+    <!-- **************************** -->
+    <!-- Section dedicated sheep game -->
+    <!-- ****************************- -->
+
+    <PreferenceCategory
+            android:title="@string/preferences_game_sheep_title"
+            android:key="pref_key_settings_sheep_game">
+
+        <SeekBarPreference
+                android:title="@string/preferences_game_sheep_fences_number_title"
+                android:summary="@string/preferences_game_sheep_fences_number_summary"
+                android:key="pref_key_settings_game_sheep_fences_number">
+
+        </SeekBarPreference>
+
+    </PreferenceCategory>
+
     <!-- ************* -->
     <!-- Section about -->
     <!-- ************* -->

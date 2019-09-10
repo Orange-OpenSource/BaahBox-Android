@@ -37,7 +37,9 @@ import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.game.CollisionDetector
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
@@ -49,10 +51,13 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
 // Classes
 // *******
 
-// TODO Enrich this doc
 /**
- * A simple [Fragment] subclass.
- * Use the [GameSheepFragment.newInstance] factory method to create an instance of this fragment.
+ * A fragment which embeds the logic of the sheep game.
+ * Possesses animators to make the sheep walk, jump and fall, and move the fences.
+ * Receives data from the Baah Box through the model, parse them and make the sheep move.
+ * Use configuration defined by the user in the preferences and also in the app config.
+ *
+ * <b>The animations are not efficient and the move of the sheep should be improved</b>
  *
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
@@ -78,14 +83,15 @@ class GameSheepFragment : AbstractGameFragment() {
     private lateinit var fencesAnimator: ObjectAnimator
 
     /**
-     * The default configuration for this game
+     * Initial position on Y-axis of the sheep game icon
      */
-    private lateinit var defaultGameConfiguration: SheepGameDefaultConfiguration
+    private var sheepInitialYPosition = -1
 
     /**
-     * The global configuration for this game
+     * Flag indicating if the sheep was still in its lowest position.
+     * Used when sensor data are received, and a LOWEST trend is compute dmanu
      */
-    private lateinit var gameConfiguration: SheepGameConfiguration
+    private var wasAlreadyInLowestPosition: Boolean = false
 
     /**
      * The difficulty factor to apply
@@ -98,20 +104,36 @@ class GameSheepFragment : AbstractGameFragment() {
     private lateinit var lastPoints: SensorDataSeries
 
     /**
-     * Initial position on Y-axis of the sheep game icon
-     */
-    private var sheepInitialYPosition = -1
-
-    /**
-     * Flag indicating if the sheep was still in its lowest position.
-     * Used when sensor data are received, and a LOWEST trend is compute dmanu
-     */
-    private var wasAlreadyInLowestPosition: Boolean = false
-
-    /**
      * The object which looks periodically for collisions between the sheep and the fences
      */
     private lateinit var collisionDetector: CollisionDetector
+
+    /**
+     * The default configuration for this game
+     */
+    private lateinit var defaultGameConfiguration: SheepGameDefaultConfiguration
+
+    /**
+     * The global configuration for this game
+     */
+    private lateinit var gameConfiguration: SheepGameConfiguration
+
+    /**
+     * The total number of fences to jump over
+     */
+    private val totalNumberOfFences: Int by lazy  {
+        PreferenceManager.getDefaultSharedPreferences(activity).getInt("pref_key_settings_game_sheep_fences_number", 0)
+    }
+
+    /**
+     * The remaining number of fences to jump over.
+     * If changed makes the GUI updated with the new value.
+     */
+    private var remainingNumberOfFences: Int = 0
+        set (value) {
+            field = value
+            updateRemainingFencesMessage()
+        }
 
 
     // ***********************************
@@ -243,6 +265,7 @@ class GameSheepFragment : AbstractGameFragment() {
                 context!!
             )
         }
+        updateRemainingFencesMessage()
         startIntroductionAnimation()
         moveFences()
         // TODO Display final animation (collision or all fences jumped)
@@ -415,7 +438,7 @@ class GameSheepFragment : AbstractGameFragment() {
             metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
         // TODO: Load/update duration and fences count from preferences
         fencesAnimator.duration = defaultGameConfiguration.defaultSpeed.toLong()
-        fencesAnimator.repeatCount = defaultGameConfiguration.defaultFencesCount - 1 // For k fences, repeat k-1 times
+        fencesAnimator.repeatCount = totalNumberOfFences - 1 // For k fences, repeat k-1 times
         fencesAnimator.repeatMode = ValueAnimator.RESTART
 
         // The listener dealing with fences views
@@ -423,6 +446,7 @@ class GameSheepFragment : AbstractGameFragment() {
 
             // If animation of fences is started, fences may be added, thus we can detect collisions
             override fun onAnimationStart(animation: Animator) {
+                remainingNumberOfFences = totalNumberOfFences
                 collisionDetector = CollisionDetector(find<ImageView>(R.id.gameIcon), fence, context!!.readCollisionDetectionInterval())
                 collisionDetector.isCollisionDetected.observe(this@GameSheepFragment,
                     Observer<Boolean> { t -> if (t == true) processCollision() }
@@ -441,13 +465,22 @@ class GameSheepFragment : AbstractGameFragment() {
 
             // Update GUI with score
             override fun onAnimationRepeat(animation: Animator) {
-                // TODO: If no collision has been made, update text of UI  about remaining fences to jump over
+                remainingNumberOfFences--
             }
 
         })
 
         return fencesAnimator
 
+    }
+
+    /**
+     * Changes the message indicating the number of remaining fences to jump over.
+     */
+    private fun updateRemainingFencesMessage() {
+        val tvLine0 = find<TextView>(R.id.tvLine0)
+        tvLine0.text = resources.getQuantityString(R.plurals.game_sheep_instructions_line_0,
+            remainingNumberOfFences, remainingNumberOfFences)
     }
 
 }
