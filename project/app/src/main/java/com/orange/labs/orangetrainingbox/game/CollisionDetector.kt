@@ -20,6 +20,7 @@ package com.orange.labs.orangetrainingbox.game
 import android.os.Handler
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
 
 
 // *******
@@ -105,17 +106,16 @@ class CollisionDetector(private val first: View, private val second: View,
         if (secondMinX == 0 && secondMaxX == 0) return false
 
         // Case where object hits the other in one of its corners
-        if (firstMinX in secondMinX..secondMaxX && firstMaxY in secondMinY..secondMaxY) return true
-        if (firstMaxX in secondMinX..secondMaxX && firstMaxY in secondMinY..secondMaxY) return true
-        if (firstMinX in secondMinX..secondMaxX && firstMinY in secondMinY..secondMaxY) return true
-        if (firstMaxX in secondMinX..secondMaxX && firstMinY in secondMinY..secondMaxY) return true
+        if (secondMinX in firstMinX..firstMaxX && secondMaxY in firstMinY..firstMaxY) return true
+        if (secondMaxX in firstMinX..firstMaxX && secondMaxY in firstMinY..firstMaxY) return true
+        if (secondMinX in firstMinX..firstMaxX && secondMinY in firstMinY..firstMaxY) return true
+        if (secondMaxX in firstMinX..firstMaxX && secondMinY in firstMinY..firstMaxY) return true
 
         // Case where one object is inside another
         if (secondMinX in firstMinX..firstMaxX && secondMaxX in firstMinX..firstMaxX
             && secondMinY in firstMinY..firstMaxY && secondMaxX in firstMinY..firstMaxY) return true
 
-        // For the case where one object touches another on its side without entering in it
-        // we are cool B-)
+        // TODO Case where one object touches another on its side without entering in it
 
         return false
 
