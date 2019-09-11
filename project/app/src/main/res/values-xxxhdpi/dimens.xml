@@ -36,4 +36,7 @@
 
     <dimen name="game_sheep_fence_margin_top">234dp</dimen>
 
+    <dimen name="game_sheep_victory_welcome_padding_end">135dp</dimen>
+    <dimen name="game_sheep_victory_welcome_padding_bottom">55dp</dimen>
+
 </resources>

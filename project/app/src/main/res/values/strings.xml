@@ -66,9 +66,13 @@
     <string name="game_balloon_instructions">Blow the balloon up!</string>
 
     <string name="game_sheep_instructions">Jump Sheep!</string>
-    <plurals name="game_sheep_instructions_line_0">
+    <plurals name="game_sheep_instructions_line_0_start">
         <item quantity="one">Try to jump over %1$d fence</item>
         <item quantity="other">Try to jump over %1$d fences</item>
+    </plurals>
+    <plurals name="game_sheep_instructions_line_0_started">
+        <item quantity="one">You jumped %1$d fence ! It remains %2$d.</item>
+        <item quantity="other">You jumped %1$d fences ! It remains %2$d.</item>
     </plurals>
     <string name="game_sheep_instructions_line_1">Make the sheep jump</string>
     <string name="game_sheep_instructions_line_2">by contracting your muscles to make him jump over fences.</string>

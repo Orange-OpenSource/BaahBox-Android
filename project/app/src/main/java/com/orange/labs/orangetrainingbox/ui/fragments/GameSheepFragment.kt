@@ -287,7 +287,7 @@ class GameSheepFragment : AbstractGameFragment() {
 
     /**
      * Firstly calls the super.onResume() method so as to inflate layouts, prepare observers...
-     * Then check if the game is ended, and in this case update the widgets with details.
+     * Then checks if the game is ended, and in this case update the widgets with details.
      */
     override fun onResume() {
 
@@ -297,18 +297,32 @@ class GameSheepFragment : AbstractGameFragment() {
         if (!loadFromArgsFlagIntroducing()
             && !loadFromArgsFlagPlaying()) {
 
-            // If the player has won
+            // If the player has won, display victory image
             if (GameSheepFragmentArgs.fromBundle(arguments).victory) {
-                find<ImageView>(R.id.ivGameSheepBang).imageResource = R.mipmap.ic_sheep_moving_1
+
+                find<ImageView>(R.id.ivGameSheepFloor).visibility = View.INVISIBLE
+                val gameIcon = find<ImageView>(R.id.ivGameSheepVictory)
+                gameIcon.visibility = View.VISIBLE
+
                 find<TextView>(R.id.tvLine1).text = getString(R.string.game_sheep_congratulations)
                 find<TextView>(R.id.tvLine2).text = getString(R.string.game_sheep_score_success)
-            // Else the player has lost
+
+                gameIconAnimator = IconAnimator()
+                gameIconAnimator.animateGameIcon((activity as AppCompatActivity), gameIcon, 1000,
+                    arrayOf(R.mipmap.ic_sheep_welcome_1, R.mipmap.ic_sheep_welcome_2))
+
+            // Else the player has lost, display score and bang image
             } else {
+
+                find<ImageView>(R.id.ivGameSheepFloor).visibility = View.VISIBLE
+                find<ImageView>(R.id.ivGameSheepBang).visibility = View.VISIBLE
+
                 val jumpedFences = GameSheepFragmentArgs.fromBundle(arguments).numberOfJumpedFences
                 val totalFences = GameSheepFragmentArgs.fromBundle(arguments).totalNumberOfFences
                 find<TextView>(R.id.tvLine1).text = getString(R.string.game_sheep_comforting)
                 find<TextView>(R.id.tvLine2).text = resources.getQuantityString(R.plurals.game_sheep_score_details,
                     totalFences, jumpedFences, totalFences)
+
             }
 
         }
@@ -524,8 +538,16 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     private fun updateRemainingFencesMessage() {
         val tvLine0 = find<TextView>(R.id.tvLine0)
-        tvLine0.text = resources.getQuantityString(R.plurals.game_sheep_instructions_line_0,
-            remainingNumberOfFences, remainingNumberOfFences)
+        // Just started, no fences jumped
+        if (remainingNumberOfFences == totalNumberOfFences) {
+            tvLine0.text = resources.getQuantityString(R.plurals.game_sheep_instructions_line_0_start,
+                remainingNumberOfFences, remainingNumberOfFences)
+        // Already jumped at least one fence
+        } else {
+            val jumped = totalNumberOfFences - remainingNumberOfFences
+            tvLine0.text = resources.getQuantityString(R.plurals.game_sheep_instructions_line_0_started,
+                jumped, jumped, remainingNumberOfFences)
+        }
     }
 
 }

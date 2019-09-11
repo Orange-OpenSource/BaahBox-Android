@@ -72,11 +72,27 @@
             app:layout_constraintTop_toBottomOf="@+id/tvLine1"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <!-- Bang! -->
+    <!-- Victory! or Bang? -->
+
+    <ImageView
+            android:id="@+id/ivGameSheepVictory"
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="@dimen/game_sheep_victory_welcome_padding_end"
+            android:paddingBottom="@dimen/game_sheep_victory_welcome_padding_bottom"
+            android:src="@mipmap/ic_sheep_welcome_1"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
             android:id="@+id/ivGameSheepBang"
             android:src="@mipmap/ic_sheep_bang"
+            android:visibility="invisible"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/game_sheep_image_bang_margin_start"
@@ -93,6 +109,7 @@
     <ImageView
             android:id="@+id/ivGameSheepFloor"
             android:src="@mipmap/ic_sheep_floor"
+            android:visibility="invisible"
             android:layout_width="@dimen/game_sheep_floor_width"
             android:layout_height="@dimen/game_sheep_floor_height"
             android:layout_marginTop="@dimen/game_sheep_floor_margin_top"

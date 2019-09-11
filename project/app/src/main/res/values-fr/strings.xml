@@ -66,9 +66,13 @@
     <string name="game_balloon_instructions">Gonfle le ballon</string>
 
     <string name="game_sheep_instructions">Saute Mouton !</string>
-    <plurals name="game_sheep_instructions_line_0">
+    <plurals name="game_sheep_instructions_line_0_start">
         <item quantity="one">Essaie de franchir %1$d barrière</item>
         <item quantity="other">Essaie de franchir %1$d barrières</item>
+    </plurals>
+    <plurals name="game_sheep_instructions_line_0_started">
+        <item quantity="one">Tu as franchi %1$d barrière ! Il en reste %2$d</item>
+        <item quantity="other">Tu as franchi %1$d barrières ! Il en reste %2$d</item>
     </plurals>
     <string name="game_sheep_instructions_line_1">Fais sauter le mouton</string>
     <string name="game_sheep_instructions_line_2">en contractant tes muscles pour lui faire sauter les barrières.</string>
