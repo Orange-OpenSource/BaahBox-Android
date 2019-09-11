@@ -65,6 +65,7 @@ class UnitTestPropertiesKeys {
         assertEquals(PropertiesKeys.GAME_SHEEP_MOVE_DURATION.key, "game_sheep_move_duration")
         assertEquals(PropertiesKeys.GAME_SHEEP_INTRODUCTION_ANIMATION_PERIOD.key, "game_sheep_introduction_animation_period")
         assertEquals(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key, "game_sheep_fences_default_speed")
+        assertEquals(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_FACTOR.key, "game_sheep_fences_default_speed_factor")
         assertEquals(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key, "game_sheep_fences_default_number")
         assertEquals(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key, "game_sheep_fences_max_number")
 

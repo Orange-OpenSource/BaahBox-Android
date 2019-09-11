@@ -193,8 +193,11 @@ fun Context.readSheepDefaultConfiguration(): SheepGameDefaultConfiguration {
     val properties = loadProperties()
     val defaultFencesNumber = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
     val defaultFencesMaxNumber = properties.getProperty(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key).toInt()
-    val defaultSpeed = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
-    return SheepGameDefaultConfiguration(defaultFencesNumber, defaultFencesMaxNumber, defaultSpeed)
+    val defaultSpeed = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key).toLong()
+    val speedFactors = properties.getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_FACTOR.key).split(DELIMITER)
+    return SheepGameDefaultConfiguration(defaultFencesNumber, defaultFencesMaxNumber, defaultSpeed,
+        Triple(speedFactors[0].toFloat(), speedFactors[1].toFloat(), speedFactors[2].toFloat())
+    )
 }
 
 /**
@@ -303,9 +306,11 @@ data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: 
  * Models a bundle of sheep game default configuration values..
  * @param defaultFencesCount The default number of fences to display
  * @param defaultMaxFencesCount The highest number of fences to display
- * @param defaultSpeed The default speed for the floor and fences
+ * @param defaultSpeed The default speed for the floor and fences (in ms)
+ * @param speedFactors A triple with factors to apply to default speed (low, medium and high)
  */
-data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultMaxFencesCount: Int, val defaultSpeed: String)
+data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultMaxFencesCount: Int,
+                                         val defaultSpeed: Long, val speedFactors: Triple<Float, Float, Float>)
 
 /**
  * Models a bundle of configuration details for sensor data series

@@ -496,7 +496,7 @@ class GameSheepFragment : AbstractGameFragment() {
 
         fencesAnimator = ObjectAnimator.ofFloat(fence, "translationX",
             metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
-        fencesAnimator.duration = defaultGameConfiguration.defaultSpeed.toLong()
+        fencesAnimator.duration = computeFencesSpeed()
         fencesAnimator.repeatCount = totalNumberOfFences - 1 // For k fences, repeat k-1 times
         fencesAnimator.repeatMode = ValueAnimator.RESTART
 
@@ -548,6 +548,24 @@ class GameSheepFragment : AbstractGameFragment() {
             tvLine0.text = resources.getQuantityString(R.plurals.game_sheep_instructions_line_0_started,
                 jumped, jumped, remainingNumberOfFences)
         }
+    }
+
+    /**
+     * Reads from preferences the speed of fences.
+     * Then get from app config the values to apply to compute this speed, i.e. the default speed
+     * and the speed factor
+     *
+     * @return Long The speed for the fences
+     */
+    private fun computeFencesSpeed(): Long {
+        val speedPreference = PreferenceManager.getDefaultSharedPreferences(activity).getInt("pref_key_settings_game_sheep_fences_speed", 0)
+        val speedFactor = when(speedPreference) {
+            1 -> defaultGameConfiguration.speedFactors.second
+            2 -> defaultGameConfiguration.speedFactors.third
+            else /* including 0 */  -> defaultGameConfiguration.speedFactors.first
+        }
+        return (defaultGameConfiguration.defaultSpeed * speedFactor).toLong()
+
     }
 
 }

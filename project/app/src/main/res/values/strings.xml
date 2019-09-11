@@ -43,6 +43,8 @@
     <string name="preferences_game_sheep_title">Sheep game</string>
     <string name="preferences_game_sheep_fences_number_title">Fences to jump over</string>
     <string name="preferences_game_sheep_fences_number_summary">How many?</string>
+    <string name="preferences_game_sheep_fences_speed_title">Speed of fences</string>
+    <string name="preferences_game_sheep_fences_speed_summary">Slow, medium, high</string>
 
     <string name="selector_connect_hand_title">Select a box to connected to</string>
 

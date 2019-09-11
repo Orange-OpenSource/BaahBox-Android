@@ -112,7 +112,8 @@ class SettingsActivity : AppCompatActivity() {
             prepareVersionPreference()
             prepare3rdPartyPreference()
             prepareDifficultyFactorPreference()
-            prepareSheepGamePreference()
+            prepareSheepGameFencesPreference()
+            prepareSheepGameSpeedPreference()
         }
 
         /**
@@ -170,7 +171,7 @@ class SettingsActivity : AppCompatActivity() {
         /**
          * Defines minimum, maximum and defaults values for the slider
          */
-        private fun prepareSheepGamePreference() {
+        private fun prepareSheepGameFencesPreference() {
             val sheepGameDefaultConfiguration = activity!!.readSheepDefaultConfiguration()
             val numberOfFencesPreferences = findPreference("pref_key_settings_game_sheep_fences_number") as SeekBarPreference
             // TODO If never defined use default value from properties
@@ -184,6 +185,20 @@ class SettingsActivity : AppCompatActivity() {
             numberOfFencesPreferences.min = 1
             numberOfFencesPreferences.max = sheepGameDefaultConfiguration.defaultMaxFencesCount
             numberOfFencesPreferences.setDefaultValue(sheepGameDefaultConfiguration.defaultFencesCount)
+        }
+
+        /**
+         * Defines minimum, maximum and defaults values for the slider
+         */
+        private fun prepareSheepGameSpeedPreference() {
+            val speedPreference = findPreference("pref_key_settings_game_sheep_fences_speed") as SeekBarPreference
+            speedPreference.setOnPreferenceChangeListener { _, newValue ->
+                val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+                val editor = preferences.edit()
+                editor.putInt("pref_key_settings_game_sheep_fences_speed", newValue as Int)
+                editor.apply()
+                true
+            }
         }
 
     } // End of class MySettingsFragment

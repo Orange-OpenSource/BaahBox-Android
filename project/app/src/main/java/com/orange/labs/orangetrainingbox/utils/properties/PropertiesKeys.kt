@@ -111,6 +111,10 @@ enum class PropertiesKeys(val key: String) {
      */
     GAME_SHEEP_DEFAULT_SPEED_VALUE("game_sheep_fences_default_speed"),
     /**
+     * The numeric values for the factor to apply to the default speed (low, medium and high).
+     */
+    GAME_SHEEP_DEFAULT_SPEED_FACTOR("game_sheep_fences_default_speed_factor"),
+    /**
      * Defines the default number of fences to jump over
      */
     GAME_SHEEP_DEFAULT_FENCES_NUMBER("game_sheep_fences_default_number"),

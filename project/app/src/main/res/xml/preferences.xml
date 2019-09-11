@@ -63,6 +63,14 @@
 
         </SeekBarPreference>
 
+        <SeekBarPreference
+                android:title="@string/preferences_game_sheep_fences_speed_title"
+                android:summary="@string/preferences_game_sheep_fences_speed_summary"
+                android:key="pref_key_settings_game_sheep_fences_speed"
+                android:max="2">
+
+        </SeekBarPreference>
+
     </PreferenceCategory>
 
     <!-- ************* -->

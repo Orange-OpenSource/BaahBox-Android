@@ -43,6 +43,8 @@
     <string name="preferences_game_sheep_title">Saute mouton</string>
     <string name="preferences_game_sheep_fences_number_title">Barrières à franchir</string>
     <string name="preferences_game_sheep_fences_number_summary">Combien ?</string>
+    <string name="preferences_game_sheep_fences_speed_title">Vitesse des barrières</string>
+    <string name="preferences_game_sheep_fences_speed_summary">Lente, moyenne, forte</string>
 
     <string name="selector_connect_hand_title">Choisi une boîte à utiliser</string>
 

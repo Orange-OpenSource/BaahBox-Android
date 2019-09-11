@@ -217,13 +217,17 @@ class InstrumentedTestPropertiesReader {
 
         val defaultFencesNumber = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
         val defaultMaxNumber = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key).toInt()
-        val defaultSpeed = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
+        val defaultSpeed = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key).toLong()
+        val speedFactors = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_FACTOR.key).split(";")
 
         val sheepDefaultGameConfiguration = appContext!!.readSheepDefaultConfiguration()
 
         assertTrue(defaultFencesNumber == sheepDefaultGameConfiguration.defaultFencesCount)
         assertTrue(defaultMaxNumber == sheepDefaultGameConfiguration.defaultMaxFencesCount)
         assertTrue(defaultSpeed == sheepDefaultGameConfiguration.defaultSpeed)
+        assertTrue(sheepDefaultGameConfiguration.speedFactors.first == speedFactors[0].toFloat())
+        assertTrue(sheepDefaultGameConfiguration.speedFactors.second == speedFactors[1].toFloat())
+        assertTrue(sheepDefaultGameConfiguration.speedFactors.third == speedFactors[2].toFloat())
 
     }
 
