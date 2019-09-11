@@ -73,8 +73,11 @@
     <string name="game_sheep_instructions_line_1">Make the sheep jump</string>
     <string name="game_sheep_instructions_line_2">by contracting your muscles to make him jump over fences.</string>
     <string name="game_sheep_congratulations">Congratulations!!!</string>
-    <string name="game_sheep_comforting">Try with more fences!&#8230;</string>
-    <string name="game_sheep_score_details">You jumped %1$d/%1$d fences!</string>
+    <string name="game_sheep_comforting">Try again!</string>
+    <plurals name="game_sheep_score_details">
+        <item quantity="one">You jumped %1$d/%2$d fence!</item>
+        <item quantity="other">You jumped %1$d/%2$d fences!</item>
+    </plurals>
 
     <string name="game_space_instructions">Space war</string>
     <string name="game_space_instructions_line_1">Avoid meteorites</string>

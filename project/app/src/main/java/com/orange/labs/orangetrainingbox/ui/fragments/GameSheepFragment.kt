@@ -26,7 +26,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.orange.labs.orangetrainingbox.R
@@ -52,7 +51,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
 // *******
 
 /**
- * A fragment which embeds the logic of the sheep game.
+ * A fragment which embeds the logic of the sheep game and the GUI part.
  * Possesses animators to make the sheep walk, jump and fall, and move the fences.
  * Receives data from the Baah Box through the model, parse them and make the sheep move.
  * Use configuration defined by the user in the preferences and also in the app config.
@@ -83,43 +82,43 @@ class GameSheepFragment : AbstractGameFragment() {
     private lateinit var fencesAnimator: ObjectAnimator
 
     /**
-     * Initial position on Y-axis of the sheep game icon
+     * Initial position on Y-axis of the sheep game icon.
      */
     private var sheepInitialYPosition = -1
 
     /**
      * Flag indicating if the sheep was still in its lowest position.
-     * Used when sensor data are received, and a LOWEST trend is compute dmanu
+     * Used when sensor data are received, and a LOWEST trend is computed again.
      */
     private var wasAlreadyInLowestPosition: Boolean = false
 
     /**
-     * The difficulty factor to apply
+     * The difficulty factor to apply.
      */
     private var difficultyFactor: Double = 0.0
 
     /**
-     * The registry for sensor data records
+     * The registry for sensor data records.
      */
     private lateinit var lastPoints: SensorDataSeries
 
     /**
-     * The object which looks periodically for collisions between the sheep and the fences
+     * The object which looks periodically for collisions between the sheep and the fences.
      */
     private lateinit var collisionDetector: CollisionDetector
 
     /**
-     * The default configuration for this game
+     * The default configuration for this game.
      */
     private lateinit var defaultGameConfiguration: SheepGameDefaultConfiguration
 
     /**
-     * The global configuration for this game
+     * The global configuration for this game.
      */
     private lateinit var gameConfiguration: SheepGameConfiguration
 
     /**
-     * The total number of fences to jump over
+     * The total number of fences to jump over.
      */
     private val totalNumberOfFences: Int by lazy  {
         PreferenceManager.getDefaultSharedPreferences(activity).getInt("pref_key_settings_game_sheep_fences_number", 0)
@@ -141,13 +140,13 @@ class GameSheepFragment : AbstractGameFragment() {
     // ***********************************
 
     /**
-     * Identifier of the layout introducing the game
+     * Identifier of the layout introducing the game.
      */
     override val introductionLayout: Int
         get() = R.layout.fragment_game_sheep_intro
 
     /**
-     * Identifier of the layout with the game itself, where the user can play
+     * Identifier of the layout with the game itself, where the user can play.
      */
     override val playingLayout: Int
         get() = R.layout.fragment_game_sheep_playing
@@ -159,46 +158,47 @@ class GameSheepFragment : AbstractGameFragment() {
         get() = R.layout.fragment_game_sheep_outro
 
     /**
-     * Identifier of the game's theming color
+     * Identifier of the game's theming color.
      */
     override val themingColor: Int
         get() = R.color.pink
 
     /**
-     * Identifier of the game's title
+     * Identifier of the game's title.
      */
     override val screenTitle: Int
         get() = R.string.title_game_sheep
 
     /**
-     * An action define in the navigation graph to use to go from the introduction screen to the
+     * An action defined in the navigation graph to use to go from the introduction screen to the
      * playing screen.
      */
     override val actionFromIntroductionToPlaying: Int
         get() = R.id.action_gameSheepFragment_to_gameSheepPlayingFragment
 
     /**
-     * An action to trigger to go back to the playing screen, e.g. for restart of the game
+     * An action to trigger to go back to the playing screen, e.g. for restart of the game after a win
+     * or a loose.
      */
     override val actionGoToPlaying: Int
         get() = R.id.action_global_gameSheepPlayingFragment
 
     /**
-     * Loads from the SafeArgs the argument "playing"
+     * Loads from the SafeArgs the argument "playing".
      */
     override fun loadFromArgsFlagPlaying(): Boolean {
         return GameSheepFragmentArgs.fromBundle(arguments).playing
     }
 
     /**
-     * Loads from the SafeArgs the argument "introducing"
+     * Loads from the SafeArgs the argument "introducing".
      */
     override fun loadFromArgsFlagIntroducing(): Boolean {
         return GameSheepFragmentArgs.fromBundle(arguments).introducing
     }
 
     /**
-     * Uses an [IconAnimator] to display several images in the gameicon widget
+     * Uses an [IconAnimator] to display several images in the gameicon widget.
      */
     override fun startIntroductionAnimation() {
         stopIntroductionAnimation()
@@ -209,7 +209,7 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
-     * Stops the [IconAnimator]
+     * Stops the [IconAnimator] which makes the sheep "walk".
      */
     override fun stopIntroductionAnimation() {
         if (::gameIconAnimator.isInitialized) gameIconAnimator.stopAnimateGameIcon()
@@ -249,7 +249,7 @@ class GameSheepFragment : AbstractGameFragment() {
 
     /**
      * Defines, if defined in app config, a gesture listener with [GesturesDemo] to fake
-     * sensors and sends data from manual tests.
+     * sensors and sends data from manual gestures.
      * Prepares the inheriting classes for the game logic, the animations and other logic for the game.
      * The game animations start here (sheep icon, fences).
      * This method is triggered from the super-class when the activity is resuming.
@@ -268,7 +268,6 @@ class GameSheepFragment : AbstractGameFragment() {
         updateRemainingFencesMessage()
         startIntroductionAnimation()
         moveFences()
-        // TODO Display final animation (collision or all fences jumped)
     }
 
 
@@ -277,8 +276,8 @@ class GameSheepFragment : AbstractGameFragment() {
     // *****************
 
     /**
-     * Fragment lifecycle>.
-     * Stops animations if running.
+     * Fragment lifecycle.
+     * Stops animations (walking sheep and sliding fences).
      */
     override fun onPause() {
         super.onPause()
@@ -286,6 +285,37 @@ class GameSheepFragment : AbstractGameFragment() {
         if (::fencesAnimator.isInitialized) fencesAnimator.pause()
     }
 
+    /**
+     * Firstly calls the super.onResume() method so as to inflate layouts, prepare observers...
+     * Then check if the game is ended, and in this case update the widgets with details.
+     */
+    override fun onResume() {
+
+        super.onResume()
+
+        // If game ended
+        if (!loadFromArgsFlagIntroducing()
+            && !loadFromArgsFlagPlaying()) {
+
+            var jumpedFences = GameSheepFragmentArgs.fromBundle(arguments).numberOfJumpedFences
+            val totalFences = GameSheepFragmentArgs.fromBundle(arguments).totalNumberOfFences
+
+            // If the player has won
+            if (GameSheepFragmentArgs.fromBundle(arguments).victory) {
+                find<ImageView>(R.id.ivGameSheepBang).imageResource = R.mipmap.ic_sheep_moving_1
+                find<TextView>(R.id.tvLine1).text = getString(R.string.game_sheep_congratulations)
+                jumpedFences = totalFences
+            // Else the player has lost
+            } else {
+                find<TextView>(R.id.tvLine1).text = getString(R.string.game_sheep_comforting)
+            }
+
+            find<TextView>(R.id.tvLine2).text = resources.getQuantityString(R.plurals.game_sheep_score_details,
+                totalFences, jumpedFences, totalFences)
+
+        }
+
+    }
 
     // **********
     // Game logic
@@ -294,8 +324,8 @@ class GameSheepFragment : AbstractGameFragment() {
     /**
      * The logic of this game.
      * Records the new input sent by the Baah Box (or the gesture listeners in demo mode).
-     * Define then a trend for the sheep (rising, falling, staying at its coordinates-.
-     * Move the sheep following this trend.
+     * Defines then a trend for the sheep (rising, falling, staying at its coordinates).
+     * Moves the sheep following this trend.
      *
      * @param userInput The data given by the Baah box, i.e. the sensor value
      */
@@ -307,7 +337,7 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
-     * Triggered a collision has been detected by the [CollisionDetector] between the sheep view and
+     * Triggered when a collision has been detected by the [CollisionDetector] between the sheep view and
      * a fence view.
      */
     private fun processCollision() {
@@ -317,15 +347,35 @@ class GameSheepFragment : AbstractGameFragment() {
         val bundle = Bundle()
         bundle.putBoolean("introducing", false)
         bundle.putBoolean("playing", false)
+        bundle.putBoolean("victory", false)
+        bundle.putInt("totalNumberOfFences", totalNumberOfFences)
+        bundle.putInt("numberOfJumpedFences", totalNumberOfFences - remainingNumberOfFences)
         findNavController().navigate(actionGoToPlaying, bundle)
     }
 
     /**
-     * Moves the sheep with an Y-axis translation using an offset based on uer input / sensor value
-     *
-     * @param trend The value saying if the sheep should rise (INCREASE), stay (EQUAL) or fall (DECREASE)
+     * Triggered when all fences have been jumped by the sheep.
      */
-    private fun moveSheep(trend: SensorTrends){
+    private fun processVictory() {
+        stopIntroductionAnimation()
+        fencesAnimator.cancel()
+        val bundle = Bundle()
+        bundle.putBoolean("introducing", false)
+        bundle.putBoolean("playing", false)
+        bundle.putBoolean("victory", true)
+        bundle.putInt("totalNumberOfFences", totalNumberOfFences)
+        bundle.putInt("numberOfJumpedFences", totalNumberOfFences - remainingNumberOfFences)
+        findNavController().navigate(actionGoToPlaying, bundle)
+    }
+
+    /**
+     * Moves the sheep with an Y-axis translation using an offset based on user input / sensor value.
+     * Modifies thus the top margin of the game icon.
+     *
+     * @param trend The value saying if the sheep should rise (INCREASE), stay (EQUAL) or fall (DECREASE),
+     * or if the sheep is as its HIGHEST or LOWEST position.
+     */
+    private fun moveSheep(trend: SensorTrends) {
 
         if (trend == SensorTrends.EQUAL) return
 
@@ -366,7 +416,7 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
-     * Makes the fences images move above the floor from the right to the left
+     * Makes the fences images move on the floor from the right to the left.
      */
     private fun moveFences() {
 
@@ -424,7 +474,7 @@ class GameSheepFragment : AbstractGameFragment() {
      * Creates and returns an animator which will make X-axis translations to animate an image view (the fence)
      * using its parent layout. The parent layout is used to remove the view once animation ended.
      * Uses configuration details picked from preferences or in-app config.
-     * Call logic parts within animator so as to deal with collisions, repetition, UI update etc.
+     * Calls logic parts within animator so as to deal with collisions, repetition, UI update etc.
      *
      * @param fence The image view to animate
      * @return [ObjectAnimator] The animator dealing with the view
@@ -436,7 +486,6 @@ class GameSheepFragment : AbstractGameFragment() {
 
         fencesAnimator = ObjectAnimator.ofFloat(fence, "translationX",
             metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
-        // TODO: Load/update duration and fences count from preferences
         fencesAnimator.duration = defaultGameConfiguration.defaultSpeed.toLong()
         fencesAnimator.repeatCount = totalNumberOfFences - 1 // For k fences, repeat k-1 times
         fencesAnimator.repeatMode = ValueAnimator.RESTART
@@ -458,7 +507,7 @@ class GameSheepFragment : AbstractGameFragment() {
             override fun onAnimationEnd(animation: Animator) {
                 collisionDetector.stopDetection()
                 parent.removeView(view)
-                // TODO: If no fence has been touched, load success view
+                processVictory()
             }
 
             override fun onAnimationCancel(animation: Animator) { }
