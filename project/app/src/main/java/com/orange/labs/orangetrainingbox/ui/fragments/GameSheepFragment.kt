@@ -297,21 +297,19 @@ class GameSheepFragment : AbstractGameFragment() {
         if (!loadFromArgsFlagIntroducing()
             && !loadFromArgsFlagPlaying()) {
 
-            var jumpedFences = GameSheepFragmentArgs.fromBundle(arguments).numberOfJumpedFences
-            val totalFences = GameSheepFragmentArgs.fromBundle(arguments).totalNumberOfFences
-
             // If the player has won
             if (GameSheepFragmentArgs.fromBundle(arguments).victory) {
                 find<ImageView>(R.id.ivGameSheepBang).imageResource = R.mipmap.ic_sheep_moving_1
                 find<TextView>(R.id.tvLine1).text = getString(R.string.game_sheep_congratulations)
-                jumpedFences = totalFences
+                find<TextView>(R.id.tvLine2).text = getString(R.string.game_sheep_score_success)
             // Else the player has lost
             } else {
+                val jumpedFences = GameSheepFragmentArgs.fromBundle(arguments).numberOfJumpedFences
+                val totalFences = GameSheepFragmentArgs.fromBundle(arguments).totalNumberOfFences
                 find<TextView>(R.id.tvLine1).text = getString(R.string.game_sheep_comforting)
+                find<TextView>(R.id.tvLine2).text = resources.getQuantityString(R.plurals.game_sheep_score_details,
+                    totalFences, jumpedFences, totalFences)
             }
-
-            find<TextView>(R.id.tvLine2).text = resources.getQuantityString(R.plurals.game_sheep_score_details,
-                totalFences, jumpedFences, totalFences)
 
         }
 
@@ -363,8 +361,6 @@ class GameSheepFragment : AbstractGameFragment() {
         bundle.putBoolean("introducing", false)
         bundle.putBoolean("playing", false)
         bundle.putBoolean("victory", true)
-        bundle.putInt("totalNumberOfFences", totalNumberOfFences)
-        bundle.putInt("numberOfJumpedFences", totalNumberOfFences - remainingNumberOfFences)
         findNavController().navigate(actionGoToPlaying, bundle)
     }
 

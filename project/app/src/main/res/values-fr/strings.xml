@@ -72,12 +72,13 @@
     </plurals>
     <string name="game_sheep_instructions_line_1">Fais sauter le mouton</string>
     <string name="game_sheep_instructions_line_2">en contractant tes muscles pour lui faire sauter les barrières.</string>
-    <string name="game_sheep_congratulations">Bravo !</string>
+    <string name="game_sheep_congratulations">Gagné !</string>
     <string name="game_sheep_comforting">Essaye encore !</string>
     <plurals name="game_sheep_score_details">
         <item quantity="one">Tu as sauté %1$d/%2$d barrière !</item>
         <item quantity="other">Tu as sauté %1$d/%2$d barrières !</item>
     </plurals>
+    <string name="game_sheep_score_success">Tu as franchi toutes les barrières !</string>
 
     <string name="game_space_instructions">Bataille de l\'espace</string>
     <string name="game_space_instructions_line_1">Evite les météorites</string>

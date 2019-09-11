@@ -78,6 +78,7 @@
         <item quantity="one">You jumped %1$d/%2$d fence!</item>
         <item quantity="other">You jumped %1$d/%2$d fences!</item>
     </plurals>
+    <string name="game_sheep_score_success">You jumped over all fences!</string>
 
     <string name="game_space_instructions">Space war</string>
     <string name="game_space_instructions_line_1">Avoid meteorites</string>
