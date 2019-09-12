@@ -200,3 +200,28 @@
 * project - ⭕ GameSheepFragment
 * project - ⭕ factorisation
 * project - ⭕ GesturesDemo
+
+
+
+<a name="0.7.0"></a>
+## 0.7.0 "- version code: 29" (2019/09/12)
+
+
+## Bug Fixes
+
+* #6 - ❌ collision detection ([b8afb2a8](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/b8afb2a8))
+* #6 - ❌ wording ([f832a844](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/f832a844))
+* #6 - ❌ icon animator ([b242fe71](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/b242fe71))
+
+## Features
+
+* #19 - Sheep game layout ([fd71b734](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/fd71b734))
+* project - 🆕 detection of collisions between 2 views ([863b2ce5](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/863b2ce5))
+* #6 - 🆕 collision detection in game ([a1746ccc](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/a1746ccc))
+* #6- 🆕 game logic for sheep game ([8fafc906](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/8fafc906))
+* #6- 🆕 game layout and text contents ([4902b4b1](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/4902b4b1))
+* #7 - 🆕 speed of fences in preferences ([fb5d284c](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/fb5d284c))
+
+## Test
+
+* #6 - ⭕ CollisionDetector
