@@ -34,7 +34,7 @@ import com.orange.labs.orangetrainingbox.utils.logs.Logger
  *
  * @author Pierre-Yves Lapersonne
  * @since 05/09/2019
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @param first One of the view to use for collision detections
  * @param second One of the view to use for collision detections
@@ -111,14 +111,16 @@ class CollisionDetector(private val first: View, private val second: View,
         if (secondMinX in firstMinX..firstMaxX && secondMinY in firstMinY..firstMaxY) return true
         if (secondMaxX in firstMinX..firstMaxX && secondMinY in firstMinY..firstMaxY) return true
 
+        // TODO More cases to deal with?
+        /*
         // Case with object with unequal sizes
         if (firstMinY in secondMinX..secondMaxY
             && (secondMaxX in firstMinX..firstMaxX || secondMinX in firstMinX..firstMaxX)) return true
-        // TODO More cases to deal with?
 
         // Case where one object is inside another
         if (secondMinX in firstMinX..firstMaxX && secondMaxX in firstMinX..firstMaxX
             && secondMinY in firstMinY..firstMaxY && secondMaxX in firstMinY..firstMaxY) return true
+        */
 
         return false
 

@@ -225,3 +225,14 @@
 ## Test
 
 * #6 - ⭕ CollisionDetector
+
+
+
+<a name="0.7.1"></a>
+# 0.7.1 "- version code: 30" (2019/09/12)
+
+
+## Bug Fixes
+
+* collisions detection - no mangement of padding ([cc64fb52](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/cc64fb52))
+
