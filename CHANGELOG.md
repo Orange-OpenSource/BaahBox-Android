@@ -100,20 +100,128 @@
 
 
 <a name="0.6.0"></a>
-## 0.6.0 "- version code: 21" (2019/07/22)
+## 0.6.0 "- version code: 26" (2019/08/23)
 
+
+## Bug Fixes
+
+* #16 - lateinit proeprty used and not initialized ([ed672bd3](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/ed672bd3))
+* #5 - size of sheep ([94222066](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/94222066))
+* #5 - wording and text fields ([7e6df844](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/7e6df844))
+* project - logs ([505a42ef](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/505a42ef))
+* project - english i18n ([1dcf9a00](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/1dcf9a00))
+* project - properties key use ([0eef3bc3](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/0eef3bc3))
 
 ## Features
 
-* licenses - add ref to Orange Baah Boox GPL 3.0 license in the notices of the app ([5c9699dd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/5c9699dd))
-* licenses - more entries ([93cf2ded](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/93cf2ded))
+* tool - add plugin for images metadata ([c8ab8bfd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/c8ab8bfd))
+* #15 - ribbons on app icons for aplha, beta and Orange PrimeZone ([05edb442](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/05edb442))
+* #5 - sheep legs animation on the floor of intro screen ([bcab5edf](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/bcab5ed)
+* #5 - sheep game properties ([4b01c87a](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/4b01c87a))
+* #5 - sheep moves in playing mode ([e09f1382](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/e09f1382))
+* #5 - move fences programatically only hard-coded config ([3b2c2df8](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/3b2c2df8))
+* #5 - display fences with dedicated speed from in-app config ([199777f2](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/199777f2))
+* project - remove parasites from sensor data records ([2652341c](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/2652341c))
+* #5 - move sheep with sensors (raugh implemantation) ([bb3ee556](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/bb3ee556))
+
+## Test
+
+* project - Logger
+* project - PropertiesKeys
+* project - PropertiesReader
+* project - Queue
+* project - SensorDataSeries
+* project - InputsParser
+* project - InputsParser, PropertiesKeys
 
 
 
 <a name="0.6.0"></a>
-## 0.6.0 "- version code: 22" (2019/07/24)
+## 0.6.0 "- version code: 27" (2019/08/29)
 
+
+## Bug Fixes
+
+* #5 - ❌  positions of florr, sheep, fences and widgets for x/xx/xxx-hdpi screens ([572a6096](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/572a6096))
+* SensorDataSeries - ❌  parasite removal when 0 as max ([59b05cc4](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/59b05cc4))
+* SensorDataSeries - ❌  parasite factor ([13d1bc8d](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/13d1bc8d))
+* SensorDataSeries - ❌  parasite detection ([b4d42d8b](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/b4d42d8b))
+* SensorDataSeries - ❌  parasite detection ([6a8d255b](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/6a8d255b))
+* SensorDataSeries - ❌  parasite detection ([f46c52ff](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/f46c52ff))
+* #5 - ❌  positions of sheep when sensor data to low ([22808e19](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/22808e19))
+* #5 - ❌  positions of sheep when sensor data are very high ([7e63e88a](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/7e63e88a))
+* tools - ❌  command status ([9f491f16](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/9f491f16))
 
 ## Features
 
-* tool - 🔨 add plugin for images metadata ([c8ab8bfd](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/c8ab8bfd))
+* tool - 🔨 add Shell script to run unit tests and check reports ([e68c59b6](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/e68c59b6))
+* tool - 🔨 add Shell script to run instrumented tests and check reports ([dd99d079](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/dd99d079))
+
+## Refactor
+
+* project - 📦 TrainingBox
+
+## Test
+
+* project - ⭕ TrainingBoxViewModel
+* project - ⭕ IconAnimator
+* project - ⭕ IconAnimator
+* project - ⭕ IconAnimator
+* project - ⭕ GzmeStarFragment
+* project - ⭕ GameBalloonFragment
+* project - ⭕ GameSheepFragment
+* project - ⭕ MainActivityFragment
+
+
+
+<a name="0.6.0"></a>
+## 0.6.0 "- version code: 28" (2019/09/03)
+
+
+## Bug Fixes
+
+* l10n - ❌ typo in french strings ([cd3154d0](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/cd3154d0))
+
+## Features
+
+* project - 🆕 demo mode ([6bd73d78](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/6bd73d78))
+
+## Refactor
+
+* #5 - 🔩 sheep game layout dimensions and game properties
+* project - 🔩 tests
+
+## Test
+
+* project - ⭕ PropertiesReader
+* project - ⭕ MainActivity
+* project - ⭕ GameStarFragment
+* project - ⭕ GameBalloonFragment
+* project - ⭕ GameSheepFragment
+* project - ⭕ factorisation
+* project - ⭕ GesturesDemo
+
+
+
+<a name="0.7.0"></a>
+## 0.7.0 "- version code: 29" (2019/09/12)
+
+
+## Bug Fixes
+
+* #6 - ❌ collision detection ([b8afb2a8](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/b8afb2a8))
+* #6 - ❌ wording ([f832a844](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/f832a844))
+* #6 - ❌ icon animator ([b242fe71](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/b242fe71))
+
+## Features
+
+* #19 - Sheep game layout ([fd71b734](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/fd71b734))
+* project - 🆕 detection of collisions between 2 views ([863b2ce5](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/863b2ce5))
+* #6 - 🆕 collision detection in game ([a1746ccc](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/a1746ccc))
+* #6- 🆕 game logic for sheep game ([8fafc906](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/8fafc906))
+* #6- 🆕 game layout and text contents ([4902b4b1](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/4902b4b1))
+* #7 - 🆕 speed of fences in preferences ([fb5d284c](https://gitlab.forge.orange-labs.fr/3dhandz/training-box/commits/fb5d284c))
+
+## Test
+
+* #6 - ⭕ CollisionDetector

@@ -19,8 +19,8 @@ package com.orange.labs.orangetrainingbox.ui.animations
 
 import android.app.Activity
 import android.widget.ImageView
-import com.orange.labs.orangetrainingbox.tools.properties.readBalloonAdditionalConfiguration
 import org.jetbrains.anko.imageResource
+import java.lang.IllegalArgumentException
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -29,7 +29,7 @@ import kotlin.concurrent.schedule
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/05/20190
- * @version 1.1.0
+ * @version 1.2.1
  */
 class IconAnimator {
 
@@ -63,9 +63,12 @@ class IconAnimator {
      * @param images The images to display in the image view
      */
     fun animateGameIcon(context: Activity, imageView: ImageView, period: Long, images: Array<Int>) {
+        period.takeIf { it >= 0 } ?: throw IllegalArgumentException("The period cannot be negative")
+        images.takeIf { it.isNotEmpty() } ?: throw IllegalArgumentException("The array of images is empty. What should be displayed? O_o")
         if (timer != null) stopAnimateGameIcon()
+        ticker = 0
         timer = Timer()
-        timer?.schedule(delay=300, period=period) {
+        timer?.schedule(delay=0, period=period) {
             context.runOnUiThread {
                 displaySuitableImage(imageView, images)
             }

@@ -19,16 +19,19 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.graphics.drawable.Animatable
 import android.os.Bundle
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.InputsParser
-import com.orange.labs.orangetrainingbox.tools.properties.StarGameConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.readStarGameConfiguration
+import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
+import com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readStarGameConfiguration
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
 import kotlinx.android.synthetic.main.fragment_game_star_playing.*
+import org.jetbrains.anko.support.v4.find
 
 
 /**
@@ -38,7 +41,7 @@ import kotlinx.android.synthetic.main.fragment_game_star_playing.*
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.3.0
+ * @version 2.5.0
  * @see [AbstractGameFragment]
  */
 class GameStarFragment : AbstractGameFragment() {
@@ -144,6 +147,24 @@ class GameStarFragment : AbstractGameFragment() {
         model.sensorB.observe(this, sensorBObserver)
 
     }
+
+    /**
+     * Defines, if demo feature enabled (project settings) and demo mode activated (app preferences)
+     * a gesture listener with [GesturesDemo] to fake sensors and sends data from manual tests.
+     */
+    override fun prepareGameLayout() {
+        if (isDemoModeActivated()) {
+            // Reset layout to default state
+            model.sensorA.postValue(0)
+            model.sensorB.postValue(0)
+            // Define listeners
+            GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
+                find<ConstraintLayout>(R.id.clStarGamePlaying),
+                context!!
+            )
+        }
+    }
+
 
     // **********
     // Game logic

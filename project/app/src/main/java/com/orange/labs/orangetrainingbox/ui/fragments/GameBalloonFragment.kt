@@ -19,20 +19,23 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.InputsParser
-import com.orange.labs.orangetrainingbox.tools.properties.BalloonGameConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.readBalloonAdditionalConfiguration
-import com.orange.labs.orangetrainingbox.tools.properties.readBalloonGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.BalloonGameConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readBalloonAdditionalConfiguration
+import com.orange.labs.orangetrainingbox.utils.properties.readBalloonGameConfiguration
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
+import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import kotlinx.android.synthetic.main.fragment_game_balloon_playing.*
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
 import kotlinx.android.synthetic.main.fragment_game_star_playing.tv_congratulations
 import org.jetbrains.anko.imageResource
+import org.jetbrains.anko.support.v4.find
 
 
 /**
@@ -42,10 +45,11 @@ import org.jetbrains.anko.imageResource
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.1.0
+ * @version 2.4.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
+
 
     // **********
     // Properties
@@ -55,6 +59,7 @@ class GameBalloonFragment : AbstractGameFragment() {
      * Permits to play some kind of animations for the game icon
      */
     private var gameIconAnimator: IconAnimator? = null
+
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -175,6 +180,24 @@ class GameBalloonFragment : AbstractGameFragment() {
         model.sensorB.observe(this, sensorBObserver)
 
     }
+
+    /**
+     * Defines, if defined in app config, a gesture listener with [GesturesDemo] to fake
+     * sensors and sends data from manual tests.
+     */
+    override fun prepareGameLayout() {
+        if (isDemoModeActivated()) {
+            // Reset layout to default state
+            model.sensorA.postValue(0)
+            model.sensorB.postValue(0)
+            // Define listeners
+            GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
+                find<ConstraintLayout>(R.id.clBalloonGamePlaying),
+                context!!
+            )
+        }
+    }
+
 
     // **********
     // Game logic

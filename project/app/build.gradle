@@ -26,6 +26,7 @@ apply plugin: 'changelog'
 
 apply plugin: 'com.orange.labs.properties-file-checker'
 apply plugin: 'com.orange.labs.copyright-checker'
+apply plugin: 'com.akaita.android.easylauncher'
 
 
 // *****************
@@ -33,22 +34,50 @@ apply plugin: 'com.orange.labs.copyright-checker'
 // *****************
 
 android {
+
     compileSdkVersion 28
+
     defaultConfig {
-        applicationId "com.orange.labs.orangetrainingbox"
+        applicationId "com.orange.labs.orangetrainingbox" + applicationIdSuffix
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        versionCode 22
-        versionName "0.6.0"
+        versionCode 29
+        versionName "0.7.0"
         vectorDrawables.useSupportLibrary true
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        alpha {
+            dimension "version"
+            applicationIdSuffix ".alpha"
+            versionNameSuffix "-alpha"
+        }
+        beta {
+            dimension "version"
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+        }
+        primezone {
+            dimension "version"
+            applicationIdSuffix ".pz"
+            versionNameSuffix "-pz"
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 // *******************
@@ -91,19 +120,33 @@ dependencies {
     // LicensesDialog: to display third party contents
     implementation "de.psdev.licensesdialog:licensesdialog:$rootProject.licensesDialogVersion"
 
-    // Tests
+    // Unit tests
     testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+
+    // Instrumented tests
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$rootProject.navigationVersion"
-
+    androidTestImplementation "org.mockito:mockito-android:$rootProject.mockitoVersion"
+    androidTestImplementation ('com.android.support.test:rules:0.5'){
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation ('com.android.support.test.espresso:espresso-core:2.2.2'){
+        exclude module: 'support-annotations'
+    }
+    androidTestImplementation ('com.android.support.test:runner:0.5'){
+        exclude module: 'support-annotations'
+    }
+    
 }
 
 // *****
 // Tasks
 // *****
 
+// TO generated HTML documentation
 dokka {
     moduleName = 'data'
     outputFormat = 'javadoc'
@@ -112,6 +155,7 @@ dokka {
     sourceDirs = files('src/main/java')
 }
 
+// To keep a changelog up-to-date
 changelog {
     file "../CHANGELOG-temp.md"
     appName "Orange Baah Box"
@@ -124,13 +168,33 @@ changelog {
     match "^fix|^doc|^test|^feat|^fix|^perf|^refactor|BREAKING" // style and chore are not parsed
 }
 
+// To check if properties file are will formatted
 propertieschecker {
     rulesFile "app/src/main/assets/app_configuration.rules.properties"
     targetFile "app/src/main/assets/app_configuration.properties"
 }
 
+// To check if assets are copyrighted
 copyrightchecker {
     folderToCheck "app/src/main/res"
     creditLineToFind "Baah Box, (c) Copyright Orange SA 2017-2019, CC-BY-SA 4.0"
-    verbose true
+    verbose false
+}
+
+// To customize the icons with ribbons
+easylauncher {
+    iconNames "@mipmap/ic_launcher"
+    foregroundIconNames "@mipmap/ic_launcher"
+    defaultFlavorNaming = true
+    productFlavors {
+        alpha {
+            filters = redRibbonFilter()
+        }
+        beta {
+            filters = blueRibbonFilter()
+        }
+        primezone {
+            filters = orangeRibbonFilter()
+        }
+    }
 }

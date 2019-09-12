@@ -23,9 +23,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import com.orange.labs.orangetrainingbox.tools.properties.PropertiesKeys
+import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import android.app.Activity
 import android.content.Intent
+import androidx.preference.SeekBarPreference
+import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
+import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfiguration
 
 
 /**
@@ -33,7 +36,7 @@ import android.content.Intent
  *
  * @author Pierre-Yves Lapersonne
  * @since 24/05/2019
- * @version 1.0.0
+ * @version 1.2.0
  */
 class SettingsActivity : AppCompatActivity() {
 
@@ -55,16 +58,12 @@ class SettingsActivity : AppCompatActivity() {
      * Activity lifecycle.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         versionRelease = buildReleaseString()
-
         supportFragmentManager
             .beginTransaction()
             .replace(android.R.id.content, SettingsFragment())
             .commit()
-
     }
 
     /**
@@ -100,7 +99,7 @@ class SettingsActivity : AppCompatActivity() {
      *
      * @author Pierre-Yves Lapersonne
      * @since 24/05/2019
-     * @version 1.0.0
+     * @version 1.1.0
      */
     class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -108,33 +107,101 @@ class SettingsActivity : AppCompatActivity() {
          * Fragment lifecycle
          */
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-
             setPreferencesFromResource(com.orange.labs.orangetrainingbox.R.xml.preferences, rootKey)
+            prepareDemoPreference()
+            prepareVersionPreference()
+            prepare3rdPartyPreference()
+            prepareDifficultyFactorPreference()
+            prepareSheepGameFencesPreference()
+            prepareSheepGameSpeedPreference()
+        }
 
-            // Version name and code
+        /**
+         * If enabled in config file, display the demo switcg
+         */
+        private fun prepareDemoPreference() {
+            val demoPreference = findPreference("preferences_demo_mode_enabled")
+            if (activity?.isDemoFeatureEnabled() == false) {
+                demoPreference.isVisible = false
+            } else {
+                demoPreference.setOnPreferenceChangeListener { _, newValue ->
+                    val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+                    val editor = preferences.edit()
+                    editor.putBoolean(PropertiesKeys.ENABLE_DEMO_FEATURE.key, newValue as Boolean)
+                    editor.apply()
+                    true
+                }
+            }
+        }
+
+        /**
+         *
+         */
+        private fun prepareVersionPreference() {
             val versionPreference = findPreference("pref_key_about_app")
             versionPreference.summary = versionRelease
+        }
 
-            // 3rd party licenses
+        /**
+         * Prepares the widget related to 3rd party licenses
+         */
+        private fun prepare3rdPartyPreference() {
             val licensesPreference = findPreference("pref_key_about_licenses")
             licensesPreference.setOnPreferenceClickListener {
                 LicensesDisplayer().displayLicenses(activity!!)
                 true
             }
+        }
 
-            // Hardness factor
-            val hardnessPreference = findPreference("pref_key_settings_sensors_hardness")
-            hardnessPreference.setOnPreferenceChangeListener { _, newValue ->
+        /**
+         *
+         */
+        private fun prepareDifficultyFactorPreference(){
+            val difficultyPreference = findPreference("pref_key_settings_sensors_difficulty")
+            // TODO If never defined use default value from properties
+            difficultyPreference.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
                 val editor = preferences.edit()
                 editor.putInt(PropertiesKeys.DIFFICULTY_FACTOR.key, newValue as Int)
                 editor.apply()
                 true
             }
+        }
 
+        /**
+         * Defines minimum, maximum and defaults values for the slider
+         */
+        private fun prepareSheepGameFencesPreference() {
+            val sheepGameDefaultConfiguration = activity!!.readSheepDefaultConfiguration()
+            val numberOfFencesPreferences = findPreference("pref_key_settings_game_sheep_fences_number") as SeekBarPreference
+            // TODO If never defined use default value from properties
+            numberOfFencesPreferences.setOnPreferenceChangeListener { _, newValue ->
+                val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+                val editor = preferences.edit()
+                editor.putInt("pref_key_settings_game_sheep_fences_number", newValue as Int)
+                editor.apply()
+                true
+            }
+            numberOfFencesPreferences.min = 1
+            numberOfFencesPreferences.max = sheepGameDefaultConfiguration.defaultMaxFencesCount
+            numberOfFencesPreferences.setDefaultValue(sheepGameDefaultConfiguration.defaultFencesCount)
+        }
+
+        /**
+         * Defines minimum, maximum and defaults values for the slider
+         */
+        private fun prepareSheepGameSpeedPreference() {
+            val speedPreference = findPreference("pref_key_settings_game_sheep_fences_speed") as SeekBarPreference
+            speedPreference.setOnPreferenceChangeListener { _, newValue ->
+                val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+                val editor = preferences.edit()
+                editor.putInt("pref_key_settings_game_sheep_fences_speed", newValue as Int)
+                editor.apply()
+                true
+            }
         }
 
     } // End of class MySettingsFragment
 
-}
+} // End of class SettingsActivity : AppCompatActivity()
 

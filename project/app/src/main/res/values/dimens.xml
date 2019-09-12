@@ -16,6 +16,28 @@
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 
+<!-- Global configuration for dimensions -->
+
 <resources>
+
+    <!-- Misc -->
+
     <dimen name="menu_item_height">160dp</dimen>
+
+    <!-- Sheep game -->
+
+    <dimen name="game_sheep_line1_margin_start">32dp</dimen>
+    <dimen name="game_sheep_line1_margin_bottom">64dp</dimen>
+    <dimen name="game_sheep_line2_margin_start">16dp</dimen>
+    <dimen name="game_sheep_line2_margin_top">0dp</dimen>
+    <dimen name="game_sheep_image_bang_margin_start">100dp</dimen>
+    <dimen name="game_sheep_image_bang_margin_end">100dp</dimen>
+    <dimen name="game_sheep_image_bang_margin_top">100dp</dimen>
+    <dimen name="game_sheep_image_icon_width">0dp</dimen>
+    <dimen name="game_sheep_image_icon_height">0dp</dimen>
+    <dimen name="game_sheep_image_icon_margin_start_end">150dp</dimen>
+    <dimen name="game_sheep_floor_width">0dp</dimen>
+    <dimen name="game_sheep_floor_height">0dp</dimen>
+    <dimen name="game_sheep_btn_play_margin_start_stop">32dp</dimen>
+
 </resources>

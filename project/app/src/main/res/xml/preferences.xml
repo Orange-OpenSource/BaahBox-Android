@@ -26,15 +26,48 @@
     <!-- ******************************** -->
 
     <PreferenceCategory
-            android:title="@string/preferences_sensors_section"
-            android:key="pref_key_settings_sensors">
+            android:title="@string/preferences_general_section"
+            android:key="pref_key_settings_general">
+
+        <SwitchPreference
+                android:title="@string/preferences_demo_mode_enabled_title"
+                android:summary="@string/preferences_demo_mode_enabled_summary"
+                android:key="preferences_demo_mode_enabled"
+                android:defaultValue="false">
+
+        </SwitchPreference>
 
         <SeekBarPreference
-                android:title="@string/preferences_sensors_hardness_title"
-                android:key="pref_key_settings_sensors_hardness"
-                android:summary="@string/preferences_sensors_hardness_summary"
+                android:title="@string/preferences_sensors_difficulty_title"
+                android:key="pref_key_settings_sensors_difficulty"
+                android:summary="@string/preferences_sensors_difficulty_summary"
                 android:max="2"
                 android:defaultValue="1">
+
+        </SeekBarPreference>
+
+    </PreferenceCategory>
+
+    <!-- **************************** -->
+    <!-- Section dedicated sheep game -->
+    <!-- ****************************- -->
+
+    <PreferenceCategory
+            android:title="@string/preferences_game_sheep_title"
+            android:key="pref_key_settings_sheep_game">
+
+        <SeekBarPreference
+                android:title="@string/preferences_game_sheep_fences_number_title"
+                android:summary="@string/preferences_game_sheep_fences_number_summary"
+                android:key="pref_key_settings_game_sheep_fences_number">
+
+        </SeekBarPreference>
+
+        <SeekBarPreference
+                android:title="@string/preferences_game_sheep_fences_speed_title"
+                android:summary="@string/preferences_game_sheep_fences_speed_summary"
+                android:key="pref_key_settings_game_sheep_fences_speed"
+                android:max="2">
 
         </SeekBarPreference>
 

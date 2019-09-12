@@ -18,13 +18,14 @@
 package com.orange.labs.orangetrainingbox.game
 
 import android.bluetooth.BluetoothGattCharacteristic
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
 
 /**
  * Utility class allowing to prepare raw sensors inputs for game logic.
  *
  * @author Pierre-Yves Lapersonne
  * @since 16/05/2019
- * @version 1.1.0
+ * @version 1.2.0
  */
 class InputsParser {
 
@@ -40,8 +41,8 @@ class InputsParser {
          * Will be divided by 10 and multiplied by a factor.
          * A [DifficultyFactor.MEDIUM] will be applied.
          *
-         * @param sensorValue The integer to parsed, should be between [0 ; 1000]
-         * @param factor The factor to apply for the hardness difficulty
+         * @param sensorValue The integer to parse, should be between [0 ; 1024]
+         * @param factor The factor to apply for the difficulty
          * @return Int The game-logic value
          */
         fun prepareValue(sensorValue: Int, factor: Double): Int {
@@ -51,7 +52,23 @@ class InputsParser {
         /**
          * Using a BLE frame, extracts from it integer values, parse them and return suitable data.
          * Returns a bundle of data with cleaned and computed values for muscles and joystick.
-         * If these values are equal to 1, the frame is null.
+         * If these values are equal to -1, the frame is null.
+         *
+         * This implementation follows the frame format of version v2.0.0 of Arduino firmware embedded in the
+         * Baah box (see https://github.com/Orange-OpenSource/BaahBox-Arduino/releases).
+         *
+         * In a nutshell, a frame with 6 bytes like:
+         <pre>
+
+            C1|a1|C2|a2|JBin|90
+
+            Where:
+                - muscle1 = C1 x 32 + a1
+                - muscle2 = C2 x 32 + a2
+                - joystic = JBin
+                - EndOfFrame = 90 -> '\n', end of frame
+
+         </pre>
          *
          * @param frame The object where the data must be extracted
          * @return MuscleData The bundle of data
@@ -79,11 +96,12 @@ class InputsParser {
             val c2 = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,2)
             val a2 = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,3)
             val joystick = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,4)
-            //val stop = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,5)
+            val stop = frame.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,5)
 
             val muscle1 = c1 * 32 + a1
             val muscle2 = c2 * 32 + a2
 
+            Logger.d("BLE characteristic for sensor - <$c1 | $a1 | $c2 | $a2 | $joystick | $stop>, giving muscle 1 = $muscle1, muscle 2 = $muscle2")
             return MuscleData(muscle1, muscle2, joystick)
 
         }

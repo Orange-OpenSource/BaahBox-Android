@@ -30,19 +30,26 @@
     <string name="action_settings">Settings</string>
     <string name="action_bluetooth_devices">Bluetooth LE devices</string>
 
-    <string name="preferences_sensors_section">Sensors</string>
+    <string name="preferences_general_section">Global</string>
     <string name="preferences_about_section">About this app</string>
     <string name="preferences_about_version_title">Baah !</string>
     <string name="preferences_about_version_summary">😀</string>
     <string name="preferences_about_licenses_title">Licenses</string>
     <string name="preferences_about_licenses_summary">Tap to get details about third-party tools we use</string>
-    <string name="preferences_sensors_hardness_title">Hardness factor</string>
-    <string name="preferences_sensors_hardness_summary">Weak, medium, hard</string>
+    <string name="preferences_sensors_difficulty_title">Sensors reactivity</string>
+    <string name="preferences_sensors_difficulty_summary">Weak, medium, hard</string>
+    <string name="preferences_demo_mode_enabled_title">Demo mode</string>
+    <string name="preferences_demo_mode_enabled_summary">Check to play to games using swipe gestures on the screen</string>
+    <string name="preferences_game_sheep_title">Sheep game</string>
+    <string name="preferences_game_sheep_fences_number_title">Fences to jump over</string>
+    <string name="preferences_game_sheep_fences_number_summary">How many?</string>
+    <string name="preferences_game_sheep_fences_speed_title">Speed of fences</string>
+    <string name="preferences_game_sheep_fences_speed_summary">Slow, medium, high</string>
 
     <string name="selector_connect_hand_title">Select a box to connected to</string>
 
     <string name="toast_connected_to_hand">Connected to box %1$s (with MAC address %2$s)</string>
-    <string name="toast_hardness_factor_changed">Changed hardness to %1$s</string>
+    <string name="toast_difficulty_factor_changed">Changed difficulty to %1$s</string>
 
     <string name="game_star_instructions_line_1">Make the star shine</string>
     <string name="game_star_instructions_line_2">by contracting your muscle&#8230;</string>
@@ -61,11 +68,23 @@
     <string name="game_balloon_instructions">Blow the balloon up!</string>
 
     <string name="game_sheep_instructions">Jump Sheep!</string>
+    <plurals name="game_sheep_instructions_line_0_start">
+        <item quantity="one">Try to jump over %1$d fence</item>
+        <item quantity="other">Try to jump over %1$d fences</item>
+    </plurals>
+    <plurals name="game_sheep_instructions_line_0_started">
+        <item quantity="one">You jumped %1$d fence ! It remains %2$d.</item>
+        <item quantity="other">You jumped %1$d fences ! It remains %2$d.</item>
+    </plurals>
     <string name="game_sheep_instructions_line_1">Make the sheep jump</string>
-    <string name="game_sheep_instructions_line_2">by contracting your muscles..</string>
+    <string name="game_sheep_instructions_line_2">by contracting your muscles to make him jump over fences.</string>
     <string name="game_sheep_congratulations">Congratulations!!!</string>
-    <string name="game_sheep_comforting">Try again&#8230;</string>
-    <string name="game_sheep_score_details">You jumped %1$d/%1$d fences!</string>
+    <string name="game_sheep_comforting">Try again!</string>
+    <plurals name="game_sheep_score_details">
+        <item quantity="one">You jumped %1$d/%2$d fence!</item>
+        <item quantity="other">You jumped %1$d/%2$d fences!</item>
+    </plurals>
+    <string name="game_sheep_score_success">You jumped over all fences!</string>
 
     <string name="game_space_instructions">Space war</string>
     <string name="game_space_instructions_line_1">Avoid meteorites</string>

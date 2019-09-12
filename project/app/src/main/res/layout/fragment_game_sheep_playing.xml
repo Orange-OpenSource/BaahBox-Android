@@ -18,12 +18,87 @@
 -->
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/pink"
-    tools:context=".ui.fragments.GameSheepFragment">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/clSheepGamePlaying"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        tools:context=".ui.fragments.GameSheepFragment">
+
+    <!-- Game details -->
+
+    <TextView
+            android:id="@+id/tvLine0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/game_sheep_line0_text_size"
+            android:textStyle="normal"
+            android:typeface="sans"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/tvLine1"
+            android:text="@string/game_sheep_instructions_line_1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/game_sheep_line1_text_size"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/game_sheep_line1_margin_start"
+            android:layout_marginTop="@dimen/game_sheep_line1_margin_top"
+            android:layout_marginBottom="@dimen/game_sheep_line1_margin_bottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/ivGameSheepFloor" />
+
+    <TextView
+            android:id="@+id/tvLine2"
+            android:text="@string/game_sheep_instructions_line_2"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/game_sheep_line2_text_size"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/game_sheep_line2_margin_start"
+            android:layout_marginTop="@dimen/game_sheep_line2_margin_top"
+            android:layout_marginBottom="@dimen/game_sheep_line2_margin_bottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvLine1"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!-- Shaun the sheep -->
+
+    <ImageView
+            android:id="@+id/gameIcon"
+            android:src="@mipmap/ic_sheep_moving_1"
+            android:layout_width="@dimen/game_sheep_image_icon_width"
+            android:layout_height="@dimen/game_sheep_image_icon_height"
+            android:layout_marginStart="@dimen/game_sheep_image_icon_margin_start_end"
+            android:layout_marginEnd="@dimen/game_sheep_image_icon_margin_start_end"
+            android:layout_marginTop="@dimen/game_sheep_image_icon_margin_top"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- The floor -->
+
+    <ImageView
+            android:id="@+id/ivGameSheepFloor"
+            android:src="@mipmap/ic_sheep_floor"
+            android:layout_width="@dimen/game_sheep_floor_width"
+            android:layout_height="@dimen/game_sheep_floor_height"
+            android:layout_marginTop="@dimen/game_sheep_floor_margin_top"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
