@@ -141,7 +141,7 @@ class UnitTestCollisionDetector {
         // Case when second touches first in one of its side without entering in it
         // No collisions because not entered (yep, we are cool with sheeps and space ships)
         second = createMockView(130, 70, 90, 10 )
-        assertFalse("${first.computeHitbox()} vs ${second.computeHitbox()}",
+        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}",
             CollisionDetector(first, second).isCollision())
 
     }

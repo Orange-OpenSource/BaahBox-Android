@@ -111,11 +111,14 @@ class CollisionDetector(private val first: View, private val second: View,
         if (secondMinX in firstMinX..firstMaxX && secondMinY in firstMinY..firstMaxY) return true
         if (secondMaxX in firstMinX..firstMaxX && secondMinY in firstMinY..firstMaxY) return true
 
+        // Case with object with unequal sizes
+        if (firstMinY in secondMinX..secondMaxY
+            && (secondMaxX in firstMinX..firstMaxX || secondMinX in firstMinX..firstMaxX)) return true
+        // TODO More cases to deal with?
+
         // Case where one object is inside another
         if (secondMinX in firstMinX..firstMaxX && secondMaxX in firstMinX..firstMaxX
             && secondMinY in firstMinY..firstMaxY && secondMaxX in firstMinY..firstMaxY) return true
-
-        // TODO Case where one object touches another on its side without entering in it
 
         return false
 
