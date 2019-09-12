@@ -24,16 +24,21 @@ package com.orange.labs.orangetrainingbox.utils.properties
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019
- * @version 1.7.0
+ * @version 1.9.0
  */
 enum class PropertiesKeys(val key: String) {
 
-    /* Demo */
+    /* Misc. */
 
     /**
-     * Enagles demo interaction with swipes faking baah box data
+     * Enables demo interaction with swipes faking baah box data
      */
     ENABLE_DEMO_FEATURE("enable_demo_feature"),
+
+    /**
+     * The interval in ms where collision detection is done
+     */
+    COLLISION_DETECTION_INTERVAL("collision_detection_interval"),
 
     /* Games */
 
@@ -106,9 +111,17 @@ enum class PropertiesKeys(val key: String) {
      */
     GAME_SHEEP_DEFAULT_SPEED_VALUE("game_sheep_fences_default_speed"),
     /**
+     * The numeric values for the factor to apply to the default speed (low, medium and high).
+     */
+    GAME_SHEEP_DEFAULT_SPEED_FACTOR("game_sheep_fences_default_speed_factor"),
+    /**
      * Defines the default number of fences to jump over
      */
     GAME_SHEEP_DEFAULT_FENCES_NUMBER("game_sheep_fences_default_number"),
+    /**
+     * Defines the max number of fences to jump over
+     */
+    GAME_SHEEP_MAX_FENCES_NUMBER("game_sheep_fences_max_number"),
 
     /* Sensor data series */
 

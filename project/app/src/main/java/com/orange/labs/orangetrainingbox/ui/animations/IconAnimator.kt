@@ -29,7 +29,7 @@ import kotlin.concurrent.schedule
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/05/20190
- * @version 1.2.0
+ * @version 1.2.1
  */
 class IconAnimator {
 
@@ -64,7 +64,9 @@ class IconAnimator {
      */
     fun animateGameIcon(context: Activity, imageView: ImageView, period: Long, images: Array<Int>) {
         period.takeIf { it >= 0 } ?: throw IllegalArgumentException("The period cannot be negative")
+        images.takeIf { it.isNotEmpty() } ?: throw IllegalArgumentException("The array of images is empty. What should be displayed? O_o")
         if (timer != null) stopAnimateGameIcon()
+        ticker = 0
         timer = Timer()
         timer?.schedule(delay=0, period=period) {
             context.runOnUiThread {

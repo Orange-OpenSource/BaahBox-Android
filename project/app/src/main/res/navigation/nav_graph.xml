@@ -170,7 +170,7 @@
                 android:defaultValue="false" />
     </fragment>
 
-    <!-- The playing screen -->
+    <!-- The playing screen and also the end game screen -->
     <fragment
             android:id="@+id/gameSheepPlayingFragment"
             android:name="com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment"
@@ -184,6 +184,18 @@
                 android:name="introducing"
                 app:argType="boolean"
                 android:defaultValue="true"/>
+        <argument
+                android:name="victory"
+                app:argType="boolean"
+                android:defaultValue="false"/>
+        <argument
+                android:name="totalNumberOfFences"
+                app:argType="integer"
+                android:defaultValue="-1"/>
+        <argument
+                android:name="numberOfJumpedFences"
+                app:argType="integer"
+                android:defaultValue="-1"/>
     </fragment>
 
     <action

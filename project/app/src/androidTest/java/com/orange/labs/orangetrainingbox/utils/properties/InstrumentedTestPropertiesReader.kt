@@ -33,7 +33,7 @@ import org.junit.runner.RunWith
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.2.0
+ * @version 1.4.0
  */
 @RunWith(AndroidJUnit4::class)
 class InstrumentedTestPropertiesReader {
@@ -216,12 +216,18 @@ class InstrumentedTestPropertiesReader {
     fun readSheepDefaultConfiguration() {
 
         val defaultFencesNumber = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_FENCES_NUMBER.key).toInt()
-        val defaultSpeed = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key)
+        val defaultMaxNumber = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key).toInt()
+        val defaultSpeed = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_VALUE.key).toLong()
+        val speedFactors = appContext!!.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_DEFAULT_SPEED_FACTOR.key).split(";")
 
         val sheepDefaultGameConfiguration = appContext!!.readSheepDefaultConfiguration()
 
         assertTrue(defaultFencesNumber == sheepDefaultGameConfiguration.defaultFencesCount)
+        assertTrue(defaultMaxNumber == sheepDefaultGameConfiguration.defaultMaxFencesCount)
         assertTrue(defaultSpeed == sheepDefaultGameConfiguration.defaultSpeed)
+        assertTrue(sheepDefaultGameConfiguration.speedFactors.first == speedFactors[0].toFloat())
+        assertTrue(sheepDefaultGameConfiguration.speedFactors.second == speedFactors[1].toFloat())
+        assertTrue(sheepDefaultGameConfiguration.speedFactors.third == speedFactors[2].toFloat())
 
     }
 
@@ -255,6 +261,20 @@ class InstrumentedTestPropertiesReader {
         val config = appContext!!.isDemoFeatureEnabled()
 
         assertEquals(expectedFlag, config)
+
+    }
+
+    /**
+     * Test the readCollisionDetectionInterval() Context extension
+     */
+    @Test
+    fun readCollisionDetectionInterval() {
+
+        val expectedInterval = appContext!!.loadProperties().getProperty(PropertiesKeys.COLLISION_DETECTION_INTERVAL.key).toLong()
+
+        val config = appContext!!.readCollisionDetectionInterval()
+
+        assertTrue(expectedInterval == config)
 
     }
 

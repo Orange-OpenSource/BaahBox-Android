@@ -19,10 +19,13 @@ package com.orange.labs.orangetrainingbox.ui.animations
 
 import android.app.Activity
 import android.widget.ImageView
+import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import com.orange.labs.orangetrainingbox.R
+import com.orange.labs.orangetrainingbox.ui.MainActivity
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
@@ -32,11 +35,17 @@ import org.mockito.Mockito.mock
  *
  * @author Pierre-Yves Lapersonne
  * @since 28/08/2019
- * @version 1.0.0
+ * @version 1.1.0
  */
 @RunWith(AndroidJUnit4::class)
 class InstrumentedTestIconAnimator {
 
+
+    /**
+     * Activity to play with
+     */
+    @Rule
+    @JvmField var activityActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     /**
      * The object to test
@@ -67,7 +76,7 @@ class InstrumentedTestIconAnimator {
     fun animateGameIcon() {
 
         // First call
-        val activity: Activity = mock(Activity::class.java)
+        val activity = activityActivityTestRule.activity
         val imageView: ImageView = mock(ImageView::class.java)
         iconAnimator?.animateGameIcon(activity, imageView, 500, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
 
@@ -76,9 +85,16 @@ class InstrumentedTestIconAnimator {
             iconAnimator?.animateGameIcon(activity, imageView, 500, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
         }
 
-        // Empty array of images
-        iconAnimator?.animateGameIcon(activity, imageView, 500, arrayOf())
+    }
 
+    /**
+     * Test the animateGameIcon() with an array of images... without images.
+     */
+    @Test (expected = IllegalArgumentException::class)
+    fun animateIconWithEmptyArrayOfImages() {
+        val activity = activityActivityTestRule.activity
+        val imageView: ImageView = mock(ImageView::class.java)
+        iconAnimator?.animateGameIcon(activity, imageView, 500, arrayOf())
     }
 
     /**
@@ -86,7 +102,7 @@ class InstrumentedTestIconAnimator {
      */
     @Test (expected = IllegalArgumentException::class)
     fun animateIconWithNegativePeriod() {
-        val activity: Activity = mock(Activity::class.java)
+        val activity = activityActivityTestRule.activity
         val imageView: ImageView = mock(ImageView::class.java)
         iconAnimator?.animateGameIcon(activity, imageView, -1, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
     }
@@ -101,7 +117,7 @@ class InstrumentedTestIconAnimator {
         iconAnimator?.stopAnimateGameIcon()
 
         // Call after started animation
-        val activity: Activity = mock(Activity::class.java)
+        val activity = activityActivityTestRule.activity
         val imageView: ImageView = mock(ImageView::class.java)
         iconAnimator?.animateGameIcon(activity, imageView, 500, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
         iconAnimator?.stopAnimateGameIcon()

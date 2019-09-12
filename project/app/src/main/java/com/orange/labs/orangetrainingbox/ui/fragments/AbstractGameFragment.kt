@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_game_star_outro.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.view.*
 import androidx.preference.PreferenceManager
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 
 

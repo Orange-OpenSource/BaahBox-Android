@@ -40,6 +40,11 @@
     <string name="preferences_sensors_difficulty_summary">Faible, moyenne ou forte</string>
     <string name="preferences_demo_mode_enabled_title">Mode démo</string>
     <string name="preferences_demo_mode_enabled_summary">Cocher pour jouer aux jeux avec des gestes sur l\'écran</string>
+    <string name="preferences_game_sheep_title">Saute mouton</string>
+    <string name="preferences_game_sheep_fences_number_title">Barrières à franchir</string>
+    <string name="preferences_game_sheep_fences_number_summary">Combien ?</string>
+    <string name="preferences_game_sheep_fences_speed_title">Vitesse des barrières</string>
+    <string name="preferences_game_sheep_fences_speed_summary">Lente, moyenne, forte</string>
 
     <string name="selector_connect_hand_title">Choisi une boîte à utiliser</string>
 
@@ -63,12 +68,23 @@
     <string name="game_balloon_instructions">Gonfle le ballon</string>
 
     <string name="game_sheep_instructions">Saute Mouton !</string>
-    <string name="game_sheep_instructions_line_0">Essaie de franchir %1$d barrières</string>
+    <plurals name="game_sheep_instructions_line_0_start">
+        <item quantity="one">Essaie de franchir %1$d barrière</item>
+        <item quantity="other">Essaie de franchir %1$d barrières</item>
+    </plurals>
+    <plurals name="game_sheep_instructions_line_0_started">
+        <item quantity="one">Tu as franchi %1$d barrière ! Il en reste %2$d</item>
+        <item quantity="other">Tu as franchi %1$d barrières ! Il en reste %2$d</item>
+    </plurals>
     <string name="game_sheep_instructions_line_1">Fais sauter le mouton</string>
     <string name="game_sheep_instructions_line_2">en contractant tes muscles pour lui faire sauter les barrières.</string>
-    <string name="game_sheep_congratulations">Bravo !</string>
-    <string name="game_sheep_comforting">Essaie encore&#8230;</string>
-    <string name="game_sheep_score_details">Tu as sauté %1$d/%1$d barrières !</string>
+    <string name="game_sheep_congratulations">Gagné !</string>
+    <string name="game_sheep_comforting">Essaye encore !</string>
+    <plurals name="game_sheep_score_details">
+        <item quantity="one">Tu as sauté %1$d/%2$d barrière !</item>
+        <item quantity="other">Tu as sauté %1$d/%2$d barrières !</item>
+    </plurals>
+    <string name="game_sheep_score_success">Tu as franchi toutes les barrières !</string>
 
     <string name="game_space_instructions">Bataille de l\'espace</string>
     <string name="game_space_instructions_line_1">Evite les météorites</string>
