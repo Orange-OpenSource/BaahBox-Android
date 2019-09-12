@@ -13,7 +13,7 @@ The common training tools are not fun, there are no games. We provide with Baah 
 * an Android app
 * an iOS app
 * a box with Arduino ships and a 3D printable shield
-* a lovely assets
+* a set of lovely assets
 
 
 Sensors or joystick have to be plugged to the box communicating with the apps using Bluetooth Low Energy.
@@ -28,14 +28,15 @@ Sensors or joystick have to be plugged to the box communicating with the apps us
 		<td>
 			<img
 				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_device_menu.png" 
-				title="The main menu (version 0.6.0 of the app)"alt="The main menu (version 0.6.0 of the app)"
+				title="The main menu (version 0.7.1 of the app)"
+				alt="The main menu (version 0.7.1 of the app)"
 				width="300">
 		</td>
 		<td>
 			<img
-				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_device_game_balloon.png"
-				title="The balloon game (version 0.6.0 of the app)"
-				alt="The balloon game (version 0.6.0 of the app)"
+				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_device_game_sheep.png"
+				title="The balloon game (version 0.7.1 of the app)"
+				alt="The balloon game (version 0.7.1 of the app)"
 				width="300">
 		</td>
 	</tr>
@@ -49,8 +50,8 @@ Sensors or joystick have to be plugged to the box communicating with the apps us
 		<td>
 			<img 
 				src="https://github.com/Orange-OpenSource/BaahBox-Android/blob/master/doc/img_baahbox.jpg"
-				title="The Baah Box with 3Dprintable shield conncted in BLE to apps"
-				alt="The Baah Box with 3Dprintable shield conncted in BLE to apps"
+				title="The Baah Box with its 3D-printable shield connected in BLE to apps"
+				alt="The Baah Box with its 3D-printable shield connected in BLE to apps"
 				width="400">
 		</td>
 	</tr>
