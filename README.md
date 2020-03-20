@@ -82,3 +82,5 @@ Here are some steps to reach:
 * improve move of avatars
 * improve sensor frames processing
 * deal with iOS app and box evolutions (more up to date)
+
+Please refer to issues: https://github.com/Orange-OpenSource/BaahBox-Android/issues
