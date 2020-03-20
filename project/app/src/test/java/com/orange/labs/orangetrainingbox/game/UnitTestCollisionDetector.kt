@@ -17,15 +17,10 @@
  */
 package com.orange.labs.orangetrainingbox.game
 
-import android.view.View
+import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockView
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.doAnswer
-
 
 /**
  * To test [CollisionDetector] class.
@@ -60,11 +55,19 @@ class UnitTestCollisionDetector {
     }
 
     /**
-     * Test the computeHitbox() extension functions of View class
+     * Test the computeHitbox() extension functions of View class.
+     * The hitbox of a view must be computed from its 2D location, its width and height following:
+     <pre>
+        minX = x
+        maxX = x + width
+        minY = y
+        maxY = y + height
+     </pre>
      */
     @Test
-    fun computeHitbox() {
+    fun `hitbox must be computed from view coordinates, width and height`() {
 
+        // Closure to compute an expected hitbox
         val defineExpectedHitbox: (Int, Int, Int, Int) -> Hitbox = { x, y, width, height ->
             Hitbox (
                 // See [View.computeHitbox(): Hitbox in CollisionDetector v1.0.0
@@ -75,14 +78,19 @@ class UnitTestCollisionDetector {
             )
         }
 
+        // Closure which will computed expected hitbox and view's hitbox defined with parameters
         val testComputeHitbox: (Int, Int, Int, Int) -> Unit = { x, y, width, height ->
-            val view = createMockView(x, y, width, height)
+            val view = mockView(x, y, width, height)
             val expectedHitbox = defineExpectedHitbox(x, y, width, height)
             val actualHitbox = view.computeHitbox()
-            assertTrue("${expectedHitbox.minX} != ${actualHitbox.minX}", expectedHitbox.minX == actualHitbox.minX)
-            assertTrue("${expectedHitbox.maxX } != ${actualHitbox.maxX}", expectedHitbox.maxX == actualHitbox.maxX)
-            assertTrue("${expectedHitbox.minY } != ${actualHitbox.minY}", expectedHitbox.minY == actualHitbox.minY)
-            assertTrue("${expectedHitbox.maxY} != ${actualHitbox.maxY}", expectedHitbox.maxY == actualHitbox.maxY)
+            assertTrue("${expectedHitbox.minX} != ${actualHitbox.minX}",
+                expectedHitbox.minX == actualHitbox.minX)
+            assertTrue("${expectedHitbox.maxX } != ${actualHitbox.maxX}",
+                expectedHitbox.maxX == actualHitbox.maxX)
+            assertTrue("${expectedHitbox.minY } != ${actualHitbox.minY}",
+                expectedHitbox.minY == actualHitbox.minY)
+            assertTrue("${expectedHitbox.maxY} != ${actualHitbox.maxY}",
+                expectedHitbox.maxY == actualHitbox.maxY)
         }
 
         testComputeHitbox(128, 128, 50, 50)
@@ -96,55 +104,101 @@ class UnitTestCollisionDetector {
     }
 
     /**
-     * Test the isCollision() method
+     * Checks collision with two views: the second far from the first
      */
     @Test
-    fun isCollision() {
+    fun `two distant views must not be in collision`() {
+        // Given
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(500, 600, 10, 10)
+        // When
+        val collides = CollisionDetector(first, second).isCollision()
+        // Then
+        assertFalse("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
+    }
 
-        val first = createMockView(80, 60, 50, 50)
-        var second = createMockView(500, 600, 10, 10)
+    /**
+     * Checks where second hits first in its top right corner
+     */
+    @Test
+    fun `must collide if second hits first's top right corner`() {
+        // Given
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(110, 50, 20, 20)
+        // When
+        val collides = CollisionDetector(first, second).isCollision()
+        // Then
+        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
+    }
 
-        // Case where second is too far from first
-        assertFalse("${first.computeHitbox()} vs ${second.computeHitbox()}",
-            CollisionDetector(first, second).isCollision())
+    /**
+     * Checks where second hits first in its bottom right corner
+     */
+    @Test
+    fun `must collide if second hits first's bottom right corner`() {
+        // Given
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(110, 90, 30, 30)
+        // When
+        val collides = CollisionDetector(first, second).isCollision()
+        // Then
+        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
+    }
 
-        /*
-        // Case where second hits first in its top left corner
-        second = createMockView(40, 30, 60, 100)
-        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}",
-            CollisionDetector(first, second).isCollision())
-        */
-        // Case where second hits first in its top right corner
-        second = createMockView(110, 50, 20, 20)
-        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}",
-            CollisionDetector(first, second).isCollision())
+    /**
+     * Checks where second hits first in its bottom left corner
+     */
+    @Test
+    fun `must collide if second hits first in its bottom left corner`() {
+        // Given
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(60, 10, 30, 70)
+        // When
+        val collides = CollisionDetector(first, second).isCollision()
+        // Then
+        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
+    }
 
-        // Case where second hits first in its bottom right corner
-        second = createMockView(110, 90, 30, 30)
-        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}",
-            CollisionDetector(first, second).isCollision())
+    /**
+     * Checks where second hits first at only one point (bottom right corner)
+     */
+    @Test
+    fun `must collide if second hits first at only one point in its bottom left corner`() {
+        // Given
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(130, 110, 10, 10)
+        // When
+        val collides = CollisionDetector(first, second).isCollision()
+        // Then
+        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
+    }
 
-        // Case where second hits first in its bottom left corner
-        second = createMockView(60, 10, 30, 70 )
-        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}",
-            CollisionDetector(first, second).isCollision())
+    /**
+     * Checks where second is embedded in first
+     */
+    @Test
+    fun `must collide if second is embedded in first`() {
+        // Given
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(90, 80, 10, 10)
+        // When
+        val collides = CollisionDetector(first, second).isCollision()
+        // Then
+        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
+    }
 
-        // Case where second hits first at only one point (bottom right corner)
-        second = createMockView(130, 110, 10, 10 )
-        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}",
-            CollisionDetector(first, second).isCollision())
-
-        // Case where second is embedded in first
-        second = createMockView(90, 80, 10, 10 )
-        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}",
-            CollisionDetector(first, second).isCollision())
-
-        // Case when second touches first in one of its side without entering in it
-        // No collisions because not entered (yep, we are cool with sheeps and space ships)
-        second = createMockView(130, 70, 90, 10 )
-        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}",
-            CollisionDetector(first, second).isCollision())
-
+    /**
+     * Case when second touches first in one of its side without entering in it
+     */
+    @Test
+    fun `must collide if second touches first in one of its side without going further`() {
+        // Given
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(130, 70, 90, 10)
+        // When
+        val collides = CollisionDetector(first, second).isCollision()
+        // Then
+        assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
     }
 
     /**
@@ -153,8 +207,8 @@ class UnitTestCollisionDetector {
     @Test
     fun startDetection() {
 
-        val first = createMockView(80, 60, 50, 50)
-        val second = createMockView(500, 600, 10, 10)
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(500, 600, 10, 10)
 
         // Simple call
         var detector = CollisionDetector(first, second)
@@ -174,8 +228,8 @@ class UnitTestCollisionDetector {
     @Test
     fun stopDetection() {
 
-        val first = createMockView(80, 60, 50, 50)
-        val second = createMockView(500, 600, 10, 10)
+        val first = mockView(80, 60, 50, 50)
+        val second = mockView(500, 600, 10, 10)
 
         // Simple call
         var detector = CollisionDetector(first, second)
@@ -194,32 +248,6 @@ class UnitTestCollisionDetector {
             detector.stopDetection()
         }
 
-    }
-
-    // Helper functions
-
-    /**
-     * Creates a mock view
-     *
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @return View
-     */
-    private fun createMockView(x: Int, y: Int, width: Int, height: Int): View {
-        val view = mock(View::class.java)
-        // Mock getLocationOnScreen() because it does not return anything and modify array in param
-        doAnswer { invocation ->
-            val args = invocation.arguments[0] as IntArray
-            args[0] = x
-            args[1] = y
-            args
-        }.`when`(view).getLocationOnScreen(any(IntArray::class.java))
-        // Mock properties
-        `when`(view.width).thenReturn(width)
-        `when`(view.height).thenReturn(height)
-        return view
     }
 
 }

@@ -18,7 +18,7 @@
 package com.orange.labs.orangetrainingbox.btle
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.orange.labs.orangetrainingbox.btle.MockUtils.Companion.mockBluetoothDevice
+import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockBluetoothDevice
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import org.junit.Assert.*
 import org.junit.Rule
