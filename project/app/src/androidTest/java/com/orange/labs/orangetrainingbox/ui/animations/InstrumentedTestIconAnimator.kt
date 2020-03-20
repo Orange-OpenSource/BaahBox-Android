@@ -1,6 +1,6 @@
 /**
     Orange Baah Box
-    Copyright (C) 2017 – 2019 Orange SA
+    Copyright (C) 2017 – 2020 Orange SA
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
  */
 package com.orange.labs.orangetrainingbox.ui.animations
 
-import android.app.Activity
 import android.widget.ImageView
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4

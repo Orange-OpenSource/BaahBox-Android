@@ -1,6 +1,6 @@
 /**
     Orange Baah Box
-    Copyright (C) 2017 – 2019 Orange SA
+    Copyright (C) 2017 – 2020 Orange SA
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 
 /**
- * Class providing method to detec gestures so as to fake sensor data, for demo purposes
+ * Class providing method to detect gestures so as to fake sensor data, for demo purposes
  *
  * @author Pierre-Yves Lapersonne
  * @since 30/08/2019
