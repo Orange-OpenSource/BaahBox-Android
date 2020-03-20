@@ -76,6 +76,9 @@ Update the version code which mus tbe at a specific line defined in the script.
 ## Roadmap
 
 Here are some steps to reach:
+* improve code coverage with unit and functional tests
+* update dependancies
+* improve Dokka doc
 * implement spaceship game
 * implement toad game
 * deal with joystick
