@@ -66,7 +66,7 @@ abstract class AbstractThemedFragment : Fragment() {
     /**
      * Deals with the option menu, and applies to menu items the colors.
      */
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu?.forEach { menuItem ->
             menuItem.icon?.let {

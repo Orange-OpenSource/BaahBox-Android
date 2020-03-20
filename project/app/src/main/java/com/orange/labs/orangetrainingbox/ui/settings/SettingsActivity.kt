@@ -21,12 +21,10 @@ package com.orange.labs.orangetrainingbox.ui.settings
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import android.app.Activity
 import android.content.Intent
-import androidx.preference.SeekBarPreference
+import androidx.preference.*
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfiguration
 
@@ -36,7 +34,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfig
  *
  * @author Pierre-Yves Lapersonne
  * @since 24/05/2019
- * @version 1.2.0
+ * @version 1.3.0
  */
 class SettingsActivity : AppCompatActivity() {
 
@@ -117,10 +115,10 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         /**
-         * If enabled in config file, display the demo switcg
+         * If enabled in config file, display the demo switch
          */
         private fun prepareDemoPreference() {
-            val demoPreference = findPreference("preferences_demo_mode_enabled")
+            val demoPreference: SwitchPreference = findPreference("preferences_demo_mode_enabled")!!
             if (activity?.isDemoFeatureEnabled() == false) {
                 demoPreference.isVisible = false
             } else {
@@ -138,7 +136,7 @@ class SettingsActivity : AppCompatActivity() {
          *
          */
         private fun prepareVersionPreference() {
-            val versionPreference = findPreference("pref_key_about_app")
+            val versionPreference: Preference = findPreference("pref_key_about_app")!!
             versionPreference.summary = versionRelease
         }
 
@@ -146,7 +144,7 @@ class SettingsActivity : AppCompatActivity() {
          * Prepares the widget related to 3rd party licenses
          */
         private fun prepare3rdPartyPreference() {
-            val licensesPreference = findPreference("pref_key_about_licenses")
+            val licensesPreference: Preference = findPreference("pref_key_about_licenses")!!
             licensesPreference.setOnPreferenceClickListener {
                 LicensesDisplayer().displayLicenses(activity!!)
                 true
@@ -157,7 +155,8 @@ class SettingsActivity : AppCompatActivity() {
          *
          */
         private fun prepareDifficultyFactorPreference(){
-            val difficultyPreference = findPreference("pref_key_settings_sensors_difficulty")
+            val difficultyPreference: SeekBarPreference =
+                                            findPreference("pref_key_settings_sensors_difficulty")!!
             // TODO If never defined use default value from properties
             difficultyPreference.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -173,7 +172,8 @@ class SettingsActivity : AppCompatActivity() {
          */
         private fun prepareSheepGameFencesPreference() {
             val sheepGameDefaultConfiguration = activity!!.readSheepDefaultConfiguration()
-            val numberOfFencesPreferences = findPreference("pref_key_settings_game_sheep_fences_number") as SeekBarPreference
+            val numberOfFencesPreferences: SeekBarPreference =
+                                    findPreference("pref_key_settings_game_sheep_fences_number")!!
             // TODO If never defined use default value from properties
             numberOfFencesPreferences.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -191,7 +191,7 @@ class SettingsActivity : AppCompatActivity() {
          * Defines minimum, maximum and defaults values for the slider
          */
         private fun prepareSheepGameSpeedPreference() {
-            val speedPreference = findPreference("pref_key_settings_game_sheep_fences_speed") as SeekBarPreference
+            val speedPreference: SeekBarPreference = findPreference("pref_key_settings_game_sheep_fences_speed")!!
             speedPreference.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
                 val editor = preferences.edit()
