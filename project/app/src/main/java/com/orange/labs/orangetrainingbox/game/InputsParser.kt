@@ -19,6 +19,12 @@ package com.orange.labs.orangetrainingbox.game
 
 import android.bluetooth.BluetoothGattCharacteristic
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import java.lang.IllegalArgumentException
+
+/**
+ * A divider to make the sensor value more suitable for game logics
+ */
+const val GAME_LOGIC_DIVIDER: Int = 10
 
 /**
  * Utility class allowing to prepare raw sensors inputs for game logic.
@@ -38,15 +44,37 @@ class InputsParser {
 
         /**
          * Parses a raw value returned by sensors to a game-logic suitable value.
-         * Will be divided by 10 and multiplied by a factor.
-         * A [DifficultyFactor.MEDIUM] will be applied.
+         * Will be divided by [GAME_LOGIC_DIVIDER] and multiplied by a [factor].
+         *
+         * Thus three cases occur:
+         * - First, the [factor] is equal to [GAME_LOGIC_DIVIDER], then the game-logic value will be equal to the sensor value
+         * - Second, the [factor] is greater than [GAME_LOGIC_DIVIDER], then the game-logic value will be greater than the sensor value
+         * - Third, the [factor] is lower than [GAME_LOGIC_DIVIDER], then the game-logic value will be lower than the sensor value.
+         *
+         * In fact the lower is the factor the harder may be the game.
          *
          * @param sensorValue The integer to parse, should be between [0 ; 1024]
-         * @param factor The factor to apply for the difficulty
+         * @param factor The factor to apply for the difficulty, must be >= 0
          * @return Int The game-logic value
          */
-        fun prepareValue(sensorValue: Int, factor: Double): Int {
-            return (sensorValue / 10 * factor).toInt()
+        fun prepareValue(sensorValue: Int, factor: Double): Double {
+            return prepareValue(sensorValue.toDouble(), factor)
+        }
+
+        /**
+         * Needs to have [Double] values on both sides so as to keep information.
+         *
+         * In fact, if [sensorValue] were an [Int], in the case where [factor] might be equal to [GAME_LOGIC_DIVIDER],
+         * the game-logic value will be lower than the sensor value ; it may be a non-sense because
+         * (x / y * z) == x if y == z
+         *
+         * @param sensorValue The integer to parse, should be between [0 ; 1024]
+         * @param factor The factor to apply for the difficulty, must be >= 0
+         * @return Int The game-logic value
+         */
+        private fun prepareValue(sensorValue: Double, factor: Double): Double {
+            if (factor <= 0) throw IllegalArgumentException("The factor must not be negative or null")
+            return (sensorValue / GAME_LOGIC_DIVIDER * factor)
         }
 
         /**

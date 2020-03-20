@@ -173,7 +173,7 @@ class GameStarFragment : AbstractGameFragment() {
     /**
      * The logic of this game.
      * Get from properties the thresholds to apply for the game.
-     * According to the gotten sensor value, will display the sutable congratulation message and change the star transparency
+     * According to the gotten sensor value, will display the suitable congratulation message and change the star transparency
      * to make it shine.
      *
      * @param configuration The game configuration
@@ -185,7 +185,7 @@ class GameStarFragment : AbstractGameFragment() {
 
         val parsedSensorValue = InputsParser.prepareValue(userInput, difficultyFactor)
         val (a, b, c, d, e, f) = configuration
-        starPlaying.alpha = parsedSensorValue / f.toFloat()
+        starPlaying.alpha = parsedSensorValue.toFloat() / f.toFloat()
 
         when (parsedSensorValue) {
             in a..b -> {
