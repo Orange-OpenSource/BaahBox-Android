@@ -72,3 +72,13 @@ Updates the documentation ussing Dokka and produce HTML content.
 ### update-versioncode.sh
 
 Update the version code which mus tbe at a specific line defined in the script.
+
+## Roadmap
+
+Here are some steps to reach:
+* implement spaceship game
+* implement toad game
+* deal with joystick
+* improve move of avatars
+* improve sensor frames processing
+* deal with iOS app and box evolutions (more up to date)
