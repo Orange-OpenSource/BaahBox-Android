@@ -123,7 +123,7 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.materialVersion"
 
     // Anko: to make things easier with Android and Kotlin
-    implementation "org.jetbrains.anko:anko:$anko_version"
+    implementation "org.jetbrains.anko:anko:$ankoVersion"
 
     // LicensesDialog: to display third party contents
     implementation "de.psdev.licensesdialog:licensesdialog:$rootProject.licensesDialogVersion"
@@ -131,6 +131,7 @@ dependencies {
     // Unit tests
     testImplementation "junit:junit:$rootProject.junitVersion"
     testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
 
     // Instrumented tests
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
