@@ -146,15 +146,6 @@ dependencies {
 // Tasks
 // *****
 
-// TO generated HTML documentation
-dokka {
-    moduleName = 'data'
-    outputFormat = 'javadoc'
-    outputDirectory = '../doc/dokka'
-    processConfigurations = ['compile']
-    sourceDirs = files('src/main/java')
-}
-
 // To keep a changelog up-to-date
 changelog {
     file "../CHANGELOG-temp.md"
@@ -196,5 +187,36 @@ easylauncher {
         primezone {
             filters = orangeRibbonFilter()
         }
+    }
+}
+
+// To generated HTML documentation
+// See https://www.kotlinresources.com/library/dokka/
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "../doc/dokka"
+
+    configuration {
+        moduleName = "data"
+
+        includeNonPublic = true
+        skipDeprecated = false
+        reportUndocumented = true
+        skipEmptyPackages = false
+
+        targets = ["JVM"]
+        platform = "JVM"
+
+        classpath = [new File("$buildDir/other.jar")]
+
+        sourceRoot {
+            path = "src"
+        }
+
+        jdkVersion = 6
+
+        noStdlibLink = false
+        noJdkLink = false
+
     }
 }
