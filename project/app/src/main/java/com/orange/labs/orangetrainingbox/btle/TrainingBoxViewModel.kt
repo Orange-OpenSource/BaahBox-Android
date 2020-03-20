@@ -55,12 +55,12 @@ class TrainingBoxViewModel : ViewModel() {
 
     /**
      * One of the two objects modeling a BLE sensors data source of the baah box.
-     * This sensor is used for the star game.
+     * This sensor is used for the star game and also balloon and sheep.
      */
     val sensorB: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
 
     /**
-     * The global hardness factor to apply to computations for games
+     * The global difficulty factor to apply to computations for games
      */
     var difficultyFactor: DifficultyFactor = DifficultyFactor.MEDIUM
 
