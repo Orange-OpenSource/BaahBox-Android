@@ -21,6 +21,7 @@ import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGattCharacteristic
 import android.content.Context
+import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.Lifecycle
@@ -169,6 +170,24 @@ class MockUtils {
 
             return mock
 
+        }
+
+        // *******
+        // Motions
+        // *******
+
+        /**
+         * Creates a mock [MotionEvent] which returns the given value for x and y when called
+         *
+         * @param fakeX The value to return for X property
+         * @param fakeY The value to return for Y property
+         * @return MotionEvent The mock object
+         */
+        fun mockMotionEven(fakeX: Float, fakeY: Float): MotionEvent {
+            val mockMotionEvent = Mockito.mock(MotionEvent::class.java)
+            `when`(mockMotionEvent.x).thenReturn(fakeX)
+            `when`(mockMotionEvent.y).thenReturn(fakeY)
+            return mockMotionEvent
         }
 
     }

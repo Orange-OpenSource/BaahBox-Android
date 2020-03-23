@@ -18,14 +18,13 @@
 package com.orange.labs.orangetrainingbox.ui.demo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockContext
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockLifecycleOwner
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockView
 import org.jetbrains.anko.runOnUiThread
-
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
@@ -48,12 +47,12 @@ class UnitTestGesturesDemo {
     // ************
     // GesturesDemo
     // ************
-    
+
     /**
      * Test the constructors for the object
      */
     @Test
-    fun constructor() {
+    fun gesturesDemoConstructor() {
 
         // Test with virgin sensors
         var sensorA = MutableLiveData<Int>()
@@ -87,6 +86,147 @@ class UnitTestGesturesDemo {
             gesturesDemo.addGestureListeners(mockedView, appContext)
         }
 
+    }
+
+    // ********************
+    // GesturesDemoListener
+    // ********************
+
+    /**
+     * Test the constructors for the object
+     */
+    @Test
+    fun gestureDemoListenerConstructor() {
+        // Test with virgin sensors
+        createUnobservedDetector()
+        // Test with sensors having observers
+        createObservedDetector()
+    }
+
+    /**
+     * Test the onShowPress() method
+     */
+    @Test
+    fun onShowPress() {
+        var gesturesDemoListener = createUnobservedDetector()
+        gesturesDemoListener.onShowPress(null)
+        gesturesDemoListener = createObservedDetector()
+        gesturesDemoListener.onShowPress(null)
+    }
+
+    /**
+     * Test the onSingleTapUp() method
+     */
+    @Test
+    fun onSingleTapUp() {
+        var gesturesDemoListener = createUnobservedDetector()
+        assertTrue(gesturesDemoListener.onSingleTapUp(null))
+        gesturesDemoListener = createObservedDetector()
+        assertTrue(gesturesDemoListener.onSingleTapUp(null))
+    }
+
+    /**
+     * Test the onDown() method
+     */
+    @Test
+    fun onDown() {
+        var gesturesDemoListener = createUnobservedDetector()
+        assertTrue(gesturesDemoListener.onDown(null))
+        gesturesDemoListener = createObservedDetector()
+        assertTrue(gesturesDemoListener.onDown(null))
+    }
+
+    /**
+     * Test the onLongPress() method
+     */
+    @Test
+    fun onLongPress() {
+        var gesturesDemoListener = createUnobservedDetector()
+        gesturesDemoListener.onLongPress(null)
+        gesturesDemoListener = createObservedDetector()
+        gesturesDemoListener.onLongPress(null)
+    }
+
+    /**
+     * Test the onFling() method
+     */
+    @Test
+    fun onFling() {
+        var gesturesDemoListener = createUnobservedDetector()
+        assertTrue(
+            gesturesDemoListener.onFling(
+                null,
+                null,
+                Float.MIN_VALUE,
+                Float.MAX_VALUE
+            )
+        )
+        gesturesDemoListener = createObservedDetector()
+        assertTrue(
+            gesturesDemoListener.onFling(
+                null,
+                null,
+                Float.MIN_VALUE,
+                Float.MAX_VALUE
+            )
+        )
+    }
+
+    /**
+     * Test the onScroll() method
+     */
+    @Test
+    fun onScroll() {
+        var gesturesDemoListener = createUnobservedDetector()
+        assertTrue(
+            gesturesDemoListener.onScroll(
+                null,
+                null,
+                Float.MIN_VALUE,
+                Float.MAX_VALUE
+            )
+        )
+        gesturesDemoListener = createObservedDetector()
+        assertTrue(
+            gesturesDemoListener.onScroll(
+                null,
+                null,
+                Float.MIN_VALUE,
+                Float.MAX_VALUE
+            )
+        )
+    }
+
+    // ****************
+    // Helper functions
+    // ****************
+
+    /**
+     * Creates an instance of [GesturesDemoListener] with sensors which do not have observers
+     *
+     * @return GesturesDemoListener
+     */
+    private fun createUnobservedDetector(): GesturesDemoListener {
+        val sensorA = MutableLiveData<Int>()
+        val sensorB = MutableLiveData<Int>()
+        return GesturesDemoListener(sensorA, sensorB)
+    }
+
+    /**
+     * Creates an instance of [GesturesDemoListener] with sensors which have observers
+     *
+     * @return GesturesDemoListener
+     */
+    private fun createObservedDetector(): GesturesDemoListener {
+        val sensorA = MutableLiveData<Int>()
+        val sensorB = MutableLiveData<Int>()
+        val appContext = mockContext()
+        val observer = Observer<Int> {}
+        appContext.runOnUiThread {
+            sensorA.observe(mockLifecycleOwner(), observer)
+            sensorB.observe(mockLifecycleOwner(), observer)
+        }
+        return GesturesDemoListener(sensorA, sensorB)
     }
 
 }
