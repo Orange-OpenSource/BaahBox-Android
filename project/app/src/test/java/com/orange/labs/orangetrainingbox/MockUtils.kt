@@ -17,9 +17,11 @@
  */
 package com.orange.labs.orangetrainingbox
 
+import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGattCharacteristic
 import android.view.View
+import android.widget.ImageView
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -36,17 +38,9 @@ class MockUtils {
 
     companion object {
 
-        /**
-         * Provides a mock [BluetoothDevice] given a name
-         *
-         * @param name - A string to identify the mock device, default valued to "mock_BluetoothDevice"
-         * @return BluetoothDevice - The fake object
-         */
-        fun mockBluetoothDevice(name: String = "mock_BluetoothDevice"): BluetoothDevice {
-            val device: BluetoothDevice = mock(BluetoothDevice::class.java)
-            `when`(device.name).thenReturn(name)
-            return device
-        }
+        // *****
+        // Views
+        // *****
 
         /**
          * Creates a mock view
@@ -70,6 +64,38 @@ class MockUtils {
             `when`(view.width).thenReturn(width)
             `when`(view.height).thenReturn(height)
             return view
+        }
+
+        /**
+         * Creates a dumb mock [Activity]
+         * @return Activity
+         */
+        fun mockActivity(): Activity {
+            return mock(Activity::class.java)
+        }
+
+        /**
+        * Creates a dumb mock [Activity]
+        * @return Activity
+        */
+        fun mockImageView(): ImageView {
+            return mock(ImageView::class.java)
+        }
+
+        // *********
+        // Bluetooth
+        // *********
+
+        /**
+         * Provides a mock [BluetoothDevice] given a name
+         *
+         * @param name - A string to identify the mock device, default valued to "mock_BluetoothDevice"
+         * @return BluetoothDevice - The fake object
+         */
+        fun mockBluetoothDevice(name: String = "mock_BluetoothDevice"): BluetoothDevice {
+            val device: BluetoothDevice = mock(BluetoothDevice::class.java)
+            `when`(device.name).thenReturn(name)
+            return device
         }
 
         /**
