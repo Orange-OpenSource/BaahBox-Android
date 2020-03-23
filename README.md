@@ -73,6 +73,33 @@ Updates the documentation ussing Dokka and produce HTML content.
 
 Update the version code which mus tbe at a specific line defined in the script.
 
+## Tools in use
+
+So as to generated HTML doc, Dokka tool and KDoc format are used:
+* https://kotlinlang.org/docs/reference/kotlin-doc.html
+* https://github.com/Kotlin/dokka
+
+## Properties management
+
+So as to export configuration from source code, properties files are stored in _assets_.
+Such files allow to define configuration for the app or the games.
+One file defines the configuration to apply ("app_configuration.properties") and the other defines
+the rules this file must follow ("app_configuration.rules.properties").
+A _Gradle_ task named "propertieschecker" will process these files to verify if the configuration is well defined.
+
+## Copyright management
+
+Because the project embeds assets designed by Orange designers, the _Gradle_ plugin with the task "copyrightchecker" will look in metadata for legal mentions.
+
+## Changelog management
+
+The changelog can be updated thanks to a _Gradle_ plugin with a task "changelog". It will parse the _Git_ history so as to update the file.
+However tyou should read that and correct it if needed ; the plugin is not yet perfect.
+
+## Icons and ribbons
+
+A task "easylauncher" will update the app icons with ribbons. 3 ribbons have been defined reagrding the mode to use.
+
 ## Roadmap
 
 Here are some steps to reach:
