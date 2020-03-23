@@ -65,6 +65,13 @@ import org.jetbrains.anko.longToast
 private val BluetoothAdapter.isDisabled: Boolean
     get() = !isEnabled
 
+/*
+ * Requests codes
+ */
+const val REQUEST_ENABLE_BT = 42
+const val REQUEST_BT_PERMISSION = 41
+const val REQUEST_SETTINGS = 1337
+
 // *******
 // Classes
 // *******
@@ -72,10 +79,10 @@ private val BluetoothAdapter.isDisabled: Boolean
 /**
  * Main activity of the application.
  *
- * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
+ * @author Marc Poppleton
  * @since 23/10/2018
- * @version 2.2.0
+ * @version 2.3.0
  */
 class MainActivity : AppCompatActivity() {
 
@@ -84,7 +91,14 @@ class MainActivity : AppCompatActivity() {
     // **********
 
     /**
-     * Flag indicating if the pop-up for appearing should be displayed or not
+     * A reference to the model of the app, here with references to the BLE devices.
+     */
+    private lateinit var model: TrainingBoxViewModel
+
+    // Bluetooth
+
+    /**
+     * Flag indicating if the pop-up for pairing should be displayed or not
      */
     private var showingPopup = false
 
@@ -92,16 +106,6 @@ class MainActivity : AppCompatActivity() {
      * Flag indicating if a BLE connection is on going
      */
     private var connected: Boolean = false
-
-    private val REQUEST_ENABLE_BT = 42
-    private val REQUEST_BT_PERMISSION = 41
-    private val REQUEST_SETTINGS = 1337
-
-
-    /**
-     * A reference to the model of the app, here with references to the BLE devices.
-     */
-    private lateinit var model: TrainingBoxViewModel
 
     /**
      * The BLE configuration to apply for sensors and callbacks
@@ -116,7 +120,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bluetoothGatt: BluetoothGatt
 
     /**
-     * A reference to the Bluetooth adapter so as tod eal with its feature
+     * A reference to the Bluetooth adapter so as to deal with its feature
      */
     private val bluetoothAdapter: BluetoothAdapter? by lazy(LazyThreadSafetyMode.NONE) {
         val bluetoothManager = applicationContext.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
