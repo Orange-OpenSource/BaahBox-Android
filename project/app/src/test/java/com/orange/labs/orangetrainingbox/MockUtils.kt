@@ -21,12 +21,14 @@ import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGattCharacteristic
 import android.content.Context
+import android.content.res.Resources
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
+import de.psdev.licensesdialog.LicensesDialog
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -87,11 +89,103 @@ class MockUtils {
         }
 
         /**
+         * Creates a dumb mock of [Resources]
+         * @return Resources
+         */
+        fun mockResources(): Resources {
+            return mock(Resources::class.java)
+        }
+
+        /**
+         * Creates a mock [Activity] used for [LicenseDisplayer] tests.
+         * Will embeds mock data for 4 entries with managed licenses (if flag set to true, or not if false)
+         *
+         * @param containsUnmanagedLicense -
+         * @return Activity
+         */
+        fun mockActivityWithGoodLicenses(containsUnmanagedLicense: Boolean): Activity {
+
+            // Mocks
+            val activity = mockActivity()
+            val resources = mockResources()
+            `when`(activity.resources).thenReturn(resources)
+
+            // Return the array of licences names
+            `when`(resources.getStringArray(ArgumentMatchers.eq(R.array.credits_names)))
+                .thenReturn(
+                    if (containsUnmanagedLicense) {
+                        arrayOf("Apache 2.0", "EPL 1.0", "GPL 3.0", "MIT", "Dummy license")
+                    } else {
+                        arrayOf("Apache 2.0", "EPL 1.0", "GPL 3.0", "MIT")
+                    }
+                )
+
+            // Return the array for credits lines
+            `when`(resources.getStringArray(ArgumentMatchers.eq(R.array.credits_copyrights)))
+                .thenReturn(
+                    if (containsUnmanagedLicense) {
+                        arrayOf("Foo", "Bar", "Wizz", "Yolo", "Dummy")
+                    } else {
+                        arrayOf("Foo", "Bar", "Wizz", "Yolo")
+                    }
+                )
+
+            // Returns the licences body in an array
+            `when`(resources.getStringArray(ArgumentMatchers.eq(R.array.credits_licenses)))
+                .thenReturn(
+                    if (containsUnmanagedLicense) {
+                        arrayOf("Apache 2.0", "EPL 1.0", "GPL 3.0", "MIT", "Dummy license")
+                    } else {
+                        arrayOf("Apache 2.0", "EPL 1.0", "GPL 3.0", "MIT")
+                    }
+                )
+
+            // Returns the URL
+            `when`(resources.getStringArray(ArgumentMatchers.eq(R.array.credits_url)))
+                .thenReturn(
+                    if (containsUnmanagedLicense) {
+                        arrayOf("https://github.com/Orange-OpenSource/BaahBox-Android/blob/dev/LICENSE.txt",
+                            "https://github.com/Orange-OpenSource/BaahBox-Android/blob/dev/LICENSE.txt",
+                            "https://github.com/Orange-OpenSource/BaahBox-Android/blob/dev/LICENSE.txt",
+                            "https://github.com/Orange-OpenSource/BaahBox-Android/blob/dev/LICENSE.txt")
+                    } else {
+                        arrayOf("https://github.com/Orange-OpenSource/BaahBox-Android/blob/dev/LICENSE.txt",
+                            "https://github.com/Orange-OpenSource/BaahBox-Android/blob/dev/LICENSE.txt",
+                            "https://github.com/Orange-OpenSource/BaahBox-Android/blob/dev/LICENSE.txt",
+                            "https://github.com/Orange-OpenSource/BaahBox-Android/blob/dev/LICENSE.txt",
+                            "dummy")
+                    }
+            )
+
+
+            // Mock the values which will be used for the dialog
+            `when`(activity.getString(ArgumentMatchers.eq(de.psdev.licensesdialog.R.string.notices_title)))
+                .thenReturn("Notice title text")
+            `when`(activity.getString(ArgumentMatchers.eq(de.psdev.licensesdialog.R.string.notices_close)))
+                .thenReturn("Notice close text")
+            `when`(activity.getString(ArgumentMatchers.eq(de.psdev.licensesdialog.R.string.notices_default_style)))
+                .thenReturn("Notices style")
+            `when`(activity.getString(ArgumentMatchers.eq(de.psdev.licensesdialog.R.string.notices_title)))
+                .thenReturn("Notice title")
+
+            return activity
+        }
+
+        /**
         * Creates a dumb mock [Activity]
         * @return Activity
         */
         fun mockImageView(): ImageView {
             return mock(ImageView::class.java)
+        }
+
+
+        /**
+         * Creates a mock of [LicensesDialog]
+         * @return LicensesDialog
+         */
+        fun mockLicenseDialog(): LicensesDialog {
+            return mock(LicensesDialog::class.java)
         }
 
         // ********

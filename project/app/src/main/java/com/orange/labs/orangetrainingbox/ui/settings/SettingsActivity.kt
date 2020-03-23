@@ -34,7 +34,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfig
  *
  * @author Pierre-Yves Lapersonne
  * @since 24/05/2019
- * @version 1.3.0
+ * @version 1.4.0
  */
 class SettingsActivity : AppCompatActivity() {
 
@@ -146,7 +146,9 @@ class SettingsActivity : AppCompatActivity() {
         private fun prepare3rdPartyPreference() {
             val licensesPreference: Preference = findPreference("pref_key_about_licenses")!!
             licensesPreference.setOnPreferenceClickListener {
-                LicensesDisplayer().displayLicenses(activity!!)
+                val displayer = LicensesDisplayer()
+                val notices = displayer.prepareNotices(activity!!)
+                displayer.displayNotices(activity!!, notices)
                 true
             }
         }

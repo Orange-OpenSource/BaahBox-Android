@@ -36,11 +36,12 @@ import java.lang.Exception
 class LicensesDisplayer {
 
     /**
-     * Displays the licenses in use
+     * Prepares the [Notices] of the licenses in use to display.
      *
      * @param context - The context to use, the Activity where the display starts
+     * @return Notices - The items to use for the [LicensesDialog]
      */
-    fun displayLicenses(context: Activity) {
+    fun prepareNotices(context: Activity): Notices {
 
         // The data to display
 
@@ -66,15 +67,23 @@ class LicensesDisplayer {
             notices.addNotice(Notice(names[i], urls[i], copyrights[i], licence))
         }
 
-        // Display them
+        return notices
 
+    }
+
+    /**
+     * Displays the notices previously defined for example with [prepareNotices]
+     *
+     * @param context - The context in use for the [Builder]
+     * @param notices - The items to display
+     */
+    fun displayNotices(context: Activity, notices: Notices) {
         LicensesDialog.Builder(context)
             .setNotices(notices)
             .setIncludeOwnLicense(false)
             .setThemeResourceId(R.style.LicensesDialogTheme)
             .build()
             .show()
-
     }
 
     /**
