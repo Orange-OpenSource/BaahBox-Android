@@ -20,8 +20,7 @@ package com.orange.labs.orangetrainingbox.game
 import android.bluetooth.BluetoothGattCharacteristic
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockBluetoothGattCharacteristic
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
@@ -37,6 +36,10 @@ import java.lang.IllegalArgumentException
 * @version 1.0.0
 */
 class UnitTestInputsParser {
+
+    // ************
+    // InputsParser
+    // ************
 
     /**
      * The object to test
@@ -218,6 +221,82 @@ class UnitTestInputsParser {
         testFrameParsing(20, 0, 90, 0, 3)
         testFrameParsing(85, 4, 42, 3, 4)
 
+    }
+
+    // **********
+    // MuscleData
+    // **********
+
+    /**
+     *
+     */
+    @Test
+    fun `muscle1 can be equal to 0`(){
+        assertNotNull(MuscleData(0, 1, 1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `muscle1 can be negative`(){
+        assertNotNull(MuscleData(-1, 1, 1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `muscle1 can be positive`(){
+        assertNotNull(MuscleData(1, 1, 1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `muscle2 can be equal to 0`(){
+        assertNotNull(MuscleData(1, 0, 1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `muscle2 can be negative`(){
+        assertNotNull(MuscleData(1, -1, 1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `muscle2 can be positive`(){
+        assertNotNull(MuscleData(1, 1, 1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `joystick can be equal to 0`(){
+        assertNotNull(MuscleData(1, 1, 0))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `joystick can be negative`(){
+        assertNotNull(MuscleData(1, 1, -1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `joystick can be positive`(){
+        assertNotNull(MuscleData(1, 1, 1))
     }
 
 }
