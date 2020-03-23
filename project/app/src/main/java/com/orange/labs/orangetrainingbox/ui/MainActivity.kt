@@ -155,6 +155,8 @@ class MainActivity : AppCompatActivity() {
      */
     private val btleGattCallback: BluetoothGattCallback = object : BluetoothGattCallback() {
 
+        val inputsParser = InputsParser()
+
         /**
          * Triggered if the connection state has been changed.
          * If connected, update flag and look for services.
@@ -208,7 +210,7 @@ class MainActivity : AppCompatActivity() {
          */
         override fun onCharacteristicChanged(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?) {
             super.onCharacteristicChanged(gatt, characteristic)
-            val (muscle1, _, _) = InputsParser.extractValuesCharacteristic(characteristic)
+            val (muscle1, _, _) = inputsParser.extractValuesCharacteristic(characteristic)
             model.sensorB.postValue(muscle1)
         }
 

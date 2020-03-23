@@ -45,7 +45,7 @@ import org.jetbrains.anko.support.v4.find
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.4.0
+ * @version 2.5.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
@@ -218,7 +218,7 @@ class GameBalloonFragment : AbstractGameFragment() {
 
         val (a, b, c, d, e, f, g, h) = configuration
 
-        when (InputsParser.prepareValue(userInput, difficultyFactor)) {
+        when (inputsParser.prepareValue(userInput, difficultyFactor)) {
             in a..b -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_1)
                 balloonPlaying.imageResource = R.mipmap.ic_balloon_0

@@ -183,7 +183,7 @@ class GameStarFragment : AbstractGameFragment() {
     private fun processBaahBoxData(configuration: StarGameConfiguration, userInput: Int,
                                    difficultyFactor: Double) {
 
-        val parsedSensorValue = InputsParser.prepareValue(userInput, difficultyFactor)
+        val parsedSensorValue = inputsParser.prepareValue(userInput, difficultyFactor)
         val (a, b, c, d, e, f) = configuration
         starPlaying.alpha = parsedSensorValue.toFloat() / f.toFloat()
 
