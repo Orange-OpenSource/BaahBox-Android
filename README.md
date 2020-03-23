@@ -103,9 +103,7 @@ A task "easylauncher" will update the app icons with ribbons. 3 ribbons have bee
 ## Roadmap
 
 Here are some steps to reach:
-* improve code coverage with unit and functional tests
-* update dependancies
-* improve Dokka doc
+* fix display bugs on large screens
 * implement spaceship game
 * implement toad game
 * deal with joystick
