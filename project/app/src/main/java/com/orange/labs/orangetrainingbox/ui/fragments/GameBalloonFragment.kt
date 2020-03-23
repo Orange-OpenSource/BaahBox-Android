@@ -25,7 +25,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
-import com.orange.labs.orangetrainingbox.game.InputsParser
 import com.orange.labs.orangetrainingbox.utils.properties.BalloonGameConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readBalloonAdditionalConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readBalloonGameConfiguration
@@ -123,7 +122,7 @@ class GameBalloonFragment : AbstractGameFragment() {
     }
 
     /**
-     * Uses an [IconAnimator] to display several images in the gameicon widget
+     * Uses an [IconAnimator] to display several images in the game icon widget
      */
     override fun startIntroductionAnimation() {
         gameIconAnimator = IconAnimator()

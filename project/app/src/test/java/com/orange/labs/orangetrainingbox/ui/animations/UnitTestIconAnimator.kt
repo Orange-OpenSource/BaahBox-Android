@@ -74,7 +74,7 @@ class UnitTestIconAnimator {
     fun stopAnimateGameIcon() {
 
         // First call
-        iconAnimator?.stopAnimateGameIcon()
+        iconAnimator.stopAnimateGameIcon()
 
         // Call after started animation
         val activity = mockActivity()
@@ -93,11 +93,11 @@ class UnitTestIconAnimator {
         // First call
         val activity = mockActivity()
         val imageView = mockImageView()
-        iconAnimator?.animateGameIcon(activity, imageView, 500, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
+        iconAnimator.animateGameIcon(activity, imageView, 500, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
 
         // Stressing
         for (i in 0..100){
-            iconAnimator?.animateGameIcon(activity, imageView, 500, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
+            iconAnimator.animateGameIcon(activity, imageView, 500, arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
         }
 
     }

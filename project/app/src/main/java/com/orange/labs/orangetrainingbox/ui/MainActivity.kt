@@ -51,9 +51,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.BleConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import com.orange.labs.orangetrainingbox.utils.properties.readBleSensorsConfiguration
 import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
-import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.longToast
 
 // **********
 // Properties
@@ -65,11 +63,17 @@ import org.jetbrains.anko.longToast
 private val BluetoothAdapter.isDisabled: Boolean
     get() = !isEnabled
 
-/*
- * Requests codes
+/**
+ * Result code for BLE enabling
  */
 const val REQUEST_ENABLE_BT = 42
+/**
+ * Result code for BLE permission
+ */
 const val REQUEST_BT_PERMISSION = 41
+/**
+ * Result code for settings screen
+ */
 const val REQUEST_SETTINGS = 1337
 
 // *******

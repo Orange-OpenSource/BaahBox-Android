@@ -43,7 +43,7 @@ buildscript {
         legacySupportVersion = '1.0.0'
         licensesDialogVersion = '1.8.3'
         lifecycleVersion = '2.2.0'
-        materialVersion = '1.0.0'
+        materialVersion = '1.1.0'
         mockitoVersion = '3.0.0'
         navigationVersion = '1.0.0-alpha06'
         preferencesVersion = '1.1.0'

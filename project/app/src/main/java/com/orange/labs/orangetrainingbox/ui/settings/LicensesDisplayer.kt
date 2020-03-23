@@ -56,7 +56,7 @@ class LicensesDisplayer {
 
         // Assuming the developer of this feature is not a jackass and has written the same
         // amount of entries in each array
-        for (i in 0 until names.size) {
+        for (i in names.indices) {
             val licence: License = when (licenses[i]) {
                 "Apache 2.0" -> ApacheSoftwareLicense20()
                 "EPL 1.0" -> EclipsePublicLicense10()
@@ -74,7 +74,7 @@ class LicensesDisplayer {
     /**
      * Displays the notices previously defined for example with [prepareNotices]
      *
-     * @param context - The context in use for the [Builder]
+     * @param context - The context in use for the [LicensesDialog.Builder]
      * @param notices - The items to display
      */
     fun displayNotices(context: Activity, notices: Notices) {

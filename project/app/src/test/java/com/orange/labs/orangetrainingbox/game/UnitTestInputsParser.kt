@@ -19,13 +19,9 @@ package com.orange.labs.orangetrainingbox.game
 
 import android.bluetooth.BluetoothGattCharacteristic
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockBluetoothGattCharacteristic
-import org.junit.After
 import org.junit.Assert.*
-import org.junit.Before
-import org.junit.BeforeClass
 import org.junit.Test
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+
 import java.lang.IllegalArgumentException
 
 /**
@@ -173,13 +169,12 @@ class UnitTestInputsParser {
     @Test
     fun `joystick should be equal to jbin`(){
         // Given
-        val joystick = 42
+        val joystick = 42 // expected and for mock
         val frame = mockBluetoothGattCharacteristic(0, 0, 0, 0, joystick)
-        val expected = joystick
         // When
         val muscleData = inputsParser.extractValuesCharacteristic(frame)
         // Then
-        assertEquals("${muscleData.joystick} != $expected", muscleData.joystick, expected)
+        assertEquals("${muscleData.joystick} != $joystick", muscleData.joystick, joystick)
     }
 
     /**
@@ -207,7 +202,7 @@ class UnitTestInputsParser {
         val testFrameParsing: (Int, Int, Int, Int, Int) -> Unit = {
             c1, a1, c2, a2, joystick ->
             val (expectedMuscle, bluetoothMock) = mockAndCheck(c1, a1, c2, a2, joystick)
-            val gottenMuscle = inputsParser?.extractValuesCharacteristic(bluetoothMock)
+            val gottenMuscle = inputsParser.extractValuesCharacteristic(bluetoothMock)
             assertEquals(expectedMuscle.muscle1, gottenMuscle.muscle1)
             assertEquals(expectedMuscle.muscle2, gottenMuscle.muscle2)
             assertEquals(expectedMuscle.joystick, gottenMuscle.joystick)

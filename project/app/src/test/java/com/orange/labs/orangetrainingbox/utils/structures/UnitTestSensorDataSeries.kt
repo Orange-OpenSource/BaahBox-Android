@@ -135,7 +135,7 @@ class UnitTestSensorDataSeries {
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.LOWEST)
 
         sensorDataSeries = SensorDataSeries(20, 2, 5)
-        var highestTrend = mutableListOf(1024, 1022, 1020, 1022, 1023, 1022, 1024)
+        val highestTrend = mutableListOf(1024, 1022, 1020, 1022, 1023, 1022, 1024)
         highestTrend.forEach { sensorDataSeries.addRecord(it) }
         assertTrue(sensorDataSeries.trendOfRecordedData() == SensorTrends.HIGHEST)
 

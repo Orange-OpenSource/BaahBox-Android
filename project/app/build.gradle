@@ -119,7 +119,7 @@ dependencies {
     implementation "androidx.preference:preference:$rootProject.preferencesVersion"
 
     // Material Design
-    implementation "androidx.legacy:legacy-support-core-utils:$rootProject.materialVersion"
+    implementation "androidx.legacy:legacy-support-core-utils:$rootProject.legacySupportVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
 
     // Anko: to make things easier with Android and Kotlin

@@ -21,6 +21,8 @@ package com.orange.labs.orangetrainingbox.utils.properties
 /**
  * Enumeration defining objects for properties to configure the app.
  *
+ * @property key - The key used in the properties file which matches this property
+ *
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 20/05/2019

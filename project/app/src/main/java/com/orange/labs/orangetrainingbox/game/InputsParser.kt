@@ -43,7 +43,7 @@ class InputsParser {
     /**
      * Parses a raw value returned by sensors to a game-logic suitable value.
      *
-     * @param sensorValue The integer to parse, should be between [0 ; 1024]
+     * @param sensorValue The integer to parse, should be between [ 0 ; 1024 ]
      * @param factor The factor to apply for the difficulty, must be >= 0
      * @return Int The game-logic value
      */
@@ -94,7 +94,7 @@ class InputsParser {
         Where:
             - muscle1 = C1 x 32 + a1
             - muscle2 = C2 x 32 + a2
-            - joystic = JBin
+            - joystick = JBin
             - EndOfFrame = 90 -> '\n', end of frame
 
      </pre>
@@ -109,11 +109,11 @@ class InputsParser {
 
         C1|a1|C2|a2|JBin|90
 
-        It models data like <muscle1, muscle2, Joystic=JBin, EndOfFrame>
+        It models data like <muscle1, muscle2, Joystick=JBin, EndOfFrame>
         Where:
             - muscle1 = C1 x 32 + a1
             - muscle2 = C2 x 32 + a2
-            - joystic = JBin
+            - joystick = JBin
             - EndOfFrame = 90 -> '\n'
 
         */

@@ -25,7 +25,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
-import com.orange.labs.orangetrainingbox.game.InputsParser
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readStarGameConfiguration
@@ -36,7 +35,7 @@ import org.jetbrains.anko.support.v4.find
 
 /**
  * A subclass of [AbstractGameFragment] implementing the star game.
- * Player should contract one muscle strnger and stronger so as to make a star shine.
+ * Player should contract one muscle stronger and stronger so as to make a star shine.
  *
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
@@ -109,7 +108,7 @@ class GameStarFragment : AbstractGameFragment() {
     }
 
     /**
-     * Get the drawable content of the gameicon widget and makes it start its animation
+     * Get the drawable content of the game icon widget and makes it start its animation
      */
     override fun startIntroductionAnimation() {
         (gameIcon.drawable as Animatable).start()

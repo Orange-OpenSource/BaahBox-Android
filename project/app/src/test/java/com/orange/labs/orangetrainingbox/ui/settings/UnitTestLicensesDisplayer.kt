@@ -6,13 +6,13 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * To test [LicenseDisplayer] class.
+ * To test [LicensesDisplayer] class.
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/03/2019
  * @version 1.0.0
  */
-class UnitTestLicenseDisplayer {
+class UnitTestLicensesDisplayer {
 
     /**
      * Test the prepareNotices() method.

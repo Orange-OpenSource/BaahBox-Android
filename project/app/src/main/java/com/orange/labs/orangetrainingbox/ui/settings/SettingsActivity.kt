@@ -18,7 +18,6 @@
 
 package com.orange.labs.orangetrainingbox.ui.settings
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys

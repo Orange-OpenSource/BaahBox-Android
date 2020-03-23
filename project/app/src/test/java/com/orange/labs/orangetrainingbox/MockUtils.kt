@@ -109,7 +109,7 @@ class MockUtils {
         }
 
         /**
-         * Creates a mock [Activity] used for [LicenseDisplayer] tests.
+         * Creates a mock [Activity] used for [LicensesDisplayer] tests.
          * Will embeds mock data for 4 entries with managed licenses (if flag set to true, or not if false)
          *
          * @param containsUnmanagedLicense -
@@ -189,15 +189,6 @@ class MockUtils {
         */
         fun mockImageView(): ImageView {
             return mock(ImageView::class.java)
-        }
-
-
-        /**
-         * Creates a mock of [LicensesDialog]
-         * @return LicensesDialog
-         */
-        fun mockLicenseDialog(): LicensesDialog {
-            return mock(LicensesDialog::class.java)
         }
 
         // ********
@@ -282,19 +273,19 @@ class MockUtils {
         // Motions
         // *******
 
-        /**
-         * Creates a mock [MotionEvent] which returns the given value for x and y when called
-         *
-         * @param fakeX The value to return for X property
-         * @param fakeY The value to return for Y property
-         * @return MotionEvent The mock object
-         */
-        fun mockMotionEven(fakeX: Float, fakeY: Float): MotionEvent {
-            val mockMotionEvent = Mockito.mock(MotionEvent::class.java)
-            `when`(mockMotionEvent.x).thenReturn(fakeX)
-            `when`(mockMotionEvent.y).thenReturn(fakeY)
-            return mockMotionEvent
-        }
+//        /**
+//         * Creates a mock [MotionEvent] which returns the given value for x and y when called
+//         *
+//         * @param fakeX The value to return for X property
+//         * @param fakeY The value to return for Y property
+//         * @return MotionEvent The mock object
+//         */
+//        fun mockMotionEvent(fakeX: Float, fakeY: Float): MotionEvent {
+//            val mockMotionEvent = mock(MotionEvent::class.java)
+//            `when`(mockMotionEvent.x).thenReturn(fakeX)
+//            `when`(mockMotionEvent.y).thenReturn(fakeY)
+//            return mockMotionEvent
+//        }
 
     }
 }

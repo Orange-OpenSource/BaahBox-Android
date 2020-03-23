@@ -198,7 +198,7 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
-     * Uses an [IconAnimator] to display several images in the gameicon widget.
+     * Uses an [IconAnimator] to display several images in the game icon widget.
      */
     override fun startIntroductionAnimation() {
         stopIntroductionAnimation()
@@ -558,8 +558,8 @@ class GameSheepFragment : AbstractGameFragment() {
      * @return Long The speed for the fences
      */
     private fun computeFencesSpeed(): Long {
-        val speedPreference = PreferenceManager.getDefaultSharedPreferences(activity).getInt("pref_key_settings_game_sheep_fences_speed", 0)
-        val speedFactor = when(speedPreference) {
+        val speedFactor = when(PreferenceManager.getDefaultSharedPreferences(activity)
+            .getInt("pref_key_settings_game_sheep_fences_speed", 0)) {
             1 -> defaultGameConfiguration.speedFactors.second
             2 -> defaultGameConfiguration.speedFactors.third
             else /* including 0 */  -> defaultGameConfiguration.speedFactors.first
