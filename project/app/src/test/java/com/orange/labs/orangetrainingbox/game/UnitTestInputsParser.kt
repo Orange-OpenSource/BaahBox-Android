@@ -19,8 +19,11 @@ package com.orange.labs.orangetrainingbox.game
 
 import android.bluetooth.BluetoothGattCharacteristic
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockBluetoothGattCharacteristic
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
@@ -36,6 +39,11 @@ import java.lang.IllegalArgumentException
 class UnitTestInputsParser {
 
     /**
+     * The object to test
+     */
+    private var inputsParser = InputsParser()
+
+    /**
      * A negative factor can't be used
      */
     @Test (expected = IllegalArgumentException::class)
@@ -44,7 +52,7 @@ class UnitTestInputsParser {
         val sensorValue = 888
         val factor = -888.0
         // When - Then
-        InputsParser.prepareValue(sensorValue, factor)
+        inputsParser.prepareValue(sensorValue, factor)
     }
 
     /**
@@ -56,7 +64,7 @@ class UnitTestInputsParser {
         val sensorValue = 888
         val factor = 0.0
         // When - Then
-        InputsParser.prepareValue(sensorValue, factor)
+        inputsParser.prepareValue(sensorValue, factor)
     }
 
     /**
@@ -68,7 +76,7 @@ class UnitTestInputsParser {
         val sensorValue = 237
         val factor = GAME_LOGIC_DIVIDER.toDouble()
         // When
-        val gameValue = InputsParser.prepareValue(sensorValue, factor)
+        val gameValue = inputsParser.prepareValue(sensorValue, factor)
         // Then
         assertTrue("$sensorValue != $gameValue", sensorValue.toDouble() == gameValue)
     }
@@ -82,7 +90,7 @@ class UnitTestInputsParser {
         val sensorValue = 237
         val factor = GAME_LOGIC_DIVIDER.toDouble() * 2
         // When
-        val gameValue = InputsParser.prepareValue(sensorValue, factor)
+        val gameValue = inputsParser.prepareValue(sensorValue, factor)
         // Then
         assertTrue("$sensorValue >= $gameValue", gameValue > sensorValue.toDouble())
     }
@@ -96,19 +104,89 @@ class UnitTestInputsParser {
         val sensorValue = 237
         val factor = GAME_LOGIC_DIVIDER.toDouble() * 0.5
         // When
-        val gameValue = InputsParser.prepareValue(sensorValue, factor)
+        val gameValue = inputsParser.prepareValue(sensorValue, factor)
         // Then
         assertTrue("$sensorValue <= $gameValue", gameValue < sensorValue.toDouble())
     }
 
     /**
-     * Test the extractValuesCharacteristic() method
+     * Ensures the [GAME_LOGIC_DIVIDER] factor ha snot been changed without care
+     */
+    @Test
+    fun `the game logic divider should be equal to 10`() {
+        assertTrue("$GAME_LOGIC_DIVIDER != 10", GAME_LOGIC_DIVIDER == 10)
+    }
+
+    /**
+     * If no frame is processed, returns default muscle data
+     */
+    @Test
+    fun `muscle data should be -1 if not frame is processed`(){
+        // Given
+        val frame: BluetoothGattCharacteristic? = null
+        // When
+        val muscleData = inputsParser.extractValuesCharacteristic(frame)
+        // Then
+        assertTrue(muscleData.muscle1 == -1)
+        assertTrue(muscleData.muscle2 == -1)
+        assertTrue(muscleData.joystick == -1)
+    }
+
+    /**
+     * Checks if the muscle 1 value if computed using c1 multiplied by 32 and with added a1
+     */
+    @Test
+    fun `muscle1 should be equal to c1 * 32 + a1`(){
+        // Given
+        val c1 = 5
+        val a1 = 6
+        val expected = c1 * 32 + a1
+        val frame = mockBluetoothGattCharacteristic(c1, a1, 0, 0, 0)
+        // When
+        val muscleData = inputsParser.extractValuesCharacteristic(frame)
+        // Then
+        assertEquals("${muscleData.muscle1} != $expected", muscleData.muscle1, expected)
+    }
+
+    /**
+     * Checks if the muscle 2 value if computed using c2 multiplied by 32 and with added a2
+     */
+    @Test
+    fun `muscle2 should be equal to c2 * 32 + a2`(){
+        // Given
+        val c2 = 64
+        val a2 = 9
+        val expected = c2 * 32 + a2
+        val frame = mockBluetoothGattCharacteristic(0, 0, c2, a2, 0)
+        // When
+        val muscleData = inputsParser.extractValuesCharacteristic(frame)
+        // Then
+        assertEquals("${muscleData.muscle2} != $expected", muscleData.muscle2, expected)
+    }
+
+    /**
+     * Checks if the joystick value is equal to jbin
+     */
+    @Test
+    fun `joystick should be equal to jbin`(){
+        // Given
+        val joystick = 42
+        val frame = mockBluetoothGattCharacteristic(0, 0, 0, 0, joystick)
+        val expected = joystick
+        // When
+        val muscleData = inputsParser.extractValuesCharacteristic(frame)
+        // Then
+        assertEquals("${muscleData.joystick} != $expected", muscleData.joystick, expected)
+    }
+
+    /**
+     * Test the extractValuesCharacteristic() method with limit and random values (defined or null).
      */
     @Test
     fun extractValuesCharacteristic() {
 
         // Null frame
-        val muscleData = InputsParser.extractValuesCharacteristic(null)
+        val muscleData = inputsParser.extractValuesCharacteristic(null)
         assertTrue(muscleData.muscle1 == -1)
         assertTrue(muscleData.muscle2 == -1)
         assertTrue(muscleData.joystick == -1)
@@ -126,7 +204,7 @@ class UnitTestInputsParser {
         val testFrameParsing: (Int, Int, Int, Int, Int) -> Unit = {
             c1, a1, c2, a2, joystick ->
             val (expectedMuscle, bluetoothMock) = mockAndCheck(c1, a1, c2, a2, joystick)
-            val gottenMuscle = InputsParser.extractValuesCharacteristic(bluetoothMock)
+            val gottenMuscle = inputsParser?.extractValuesCharacteristic(bluetoothMock)
             assertEquals(expectedMuscle.muscle1, gottenMuscle.muscle1)
             assertEquals(expectedMuscle.muscle2, gottenMuscle.muscle2)
             assertEquals(expectedMuscle.joystick, gottenMuscle.joystick)
@@ -141,7 +219,5 @@ class UnitTestInputsParser {
         testFrameParsing(85, 4, 42, 3, 4)
 
     }
-
-    // TODO Test extractValuesCharacteristic in details
 
 }
