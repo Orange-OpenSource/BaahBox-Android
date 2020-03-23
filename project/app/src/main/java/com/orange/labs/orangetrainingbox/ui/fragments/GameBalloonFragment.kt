@@ -21,7 +21,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
@@ -44,7 +44,7 @@ import org.jetbrains.anko.support.v4.find
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.5.0
+ * @version 2.56.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
@@ -160,9 +160,9 @@ class GameBalloonFragment : AbstractGameFragment() {
      */
     override fun prepareSensorObserver() {
 
-        // Get the ViewModel.
+        // Get the ViewModel
         model = activity?.run {
-            ViewModelProviders.of(this).get(TrainingBoxViewModel::class.java)
+            ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         val gameConfiguration = context!!.readBalloonGameConfiguration()
@@ -170,9 +170,7 @@ class GameBalloonFragment : AbstractGameFragment() {
 
         // Define the observer
         val sensorBObserver = Observer<Int> { sensorValue ->
-
             processBaahBoxData(gameConfiguration, sensorValue, difficultyFactor)
-
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.

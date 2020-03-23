@@ -21,7 +21,7 @@ import android.graphics.drawable.Animatable
 import android.os.Bundle
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
@@ -40,7 +40,7 @@ import org.jetbrains.anko.support.v4.find
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.5.0
+ * @version 2.6.0
  * @see [AbstractGameFragment]
  */
 class GameStarFragment : AbstractGameFragment() {
@@ -129,7 +129,7 @@ class GameStarFragment : AbstractGameFragment() {
 
         // Get the ViewModel.
         model = activity?.run {
-            ViewModelProviders.of(this).get(TrainingBoxViewModel::class.java)
+            ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         val gameConfiguration = context!!.readStarGameConfiguration()
