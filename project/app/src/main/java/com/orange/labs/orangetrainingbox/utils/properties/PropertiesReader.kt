@@ -36,12 +36,12 @@ import java.util.*
 /**
  * Default file name used for properties file
  */
-private const val DEFAULT_FILENAME = "app_configuration.properties"
+const val DEFAULT_FILENAME = "app_configuration.properties"
 
 /**
  * Delimiter for properties file entries to split values used for games -configurations
  */
-private const val DELIMITER = ";"
+const val DELIMITER = ";"
 
 /**
  * Load the properties in the reader
