@@ -28,6 +28,7 @@ import android.widget.ImageView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
+import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
 import de.psdev.licensesdialog.LicensesDialog
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
@@ -89,10 +90,21 @@ class MockUtils {
         }
 
         /**
+         * Create a mock [SettingsActivity] with details to display about version.
+         *
+         * @param fakeVersionName -
+         * @param fakeVersionCode -
+         * @return SettingsActivity
+         */
+        fun mockSettingsActivity(fakeVersionName: String, fakeVersionCode: Int): SettingsActivity {
+            return mock(SettingsActivity::class.java)
+        }
+
+        /**
          * Creates a dumb mock of [Resources]
          * @return Resources
          */
-        fun mockResources(): Resources {
+        private fun mockResources(): Resources {
             return mock(Resources::class.java)
         }
 
