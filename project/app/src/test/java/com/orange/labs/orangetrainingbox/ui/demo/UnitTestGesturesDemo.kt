@@ -17,30 +17,38 @@
  */
 package com.orange.labs.orangetrainingbox.ui.demo
 
-import android.view.View
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockContext
+import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockLifecycleOwner
+import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockView
 import org.jetbrains.anko.runOnUiThread
+
+import org.junit.Assert.assertNotNull
+import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mockito
 
 /**
  * To test [GesturesDemo] class.
  *
  * @author Pierre-Yves Lapersonne
- * @since 03/09/2019
+ * @since 23/03/2020
  * @version 1.0.0
  */
-@RunWith(AndroidJUnit4::class)
-class InstrumentedTestGesturesDemo {
+class UnitTestGesturesDemo {
 
+    /**
+     * Rule to use to deal with MutableLiveData objects.
+     */
+    @Rule
+    @JvmField
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    // ************
+    // GesturesDemo
+    // ************
+    
     /**
      * Test the constructors for the object
      */
@@ -50,48 +58,35 @@ class InstrumentedTestGesturesDemo {
         // Test with virgin sensors
         var sensorA = MutableLiveData<Int>()
         var sensorB = MutableLiveData<Int>()
-        GesturesDemoListener(sensorA,sensorB)
+        assertNotNull(GesturesDemoListener(sensorA, sensorB))
 
         // Test with sensors having observers
         sensorA = MutableLiveData()
         sensorB = MutableLiveData()
-        val appContext =  InstrumentationRegistry.getTargetContext()
+        val appContext = mockContext()
         val observer = Observer<Int> {}
-        appContext!!.runOnUiThread {
+        appContext.runOnUiThread {
             sensorA.observe(mockLifecycleOwner(), observer)
             sensorB.observe(mockLifecycleOwner(), observer)
         }
 
-        GesturesDemo(sensorA, sensorB)
+        assertNotNull(GesturesDemo(sensorA, sensorB))
 
     }
 
     /**
-     * Test the addGestureListeners() method
+     * Test the addGestureListeners() method by just calling it.
      */
     @Test
     fun addGestureListeners() {
 
-        val mockedView = Mockito.mock(View::class.java)
+        val mockedView = mockView()
         val gesturesDemo = GesturesDemo(MutableLiveData(),MutableLiveData())
-        val appContext =  InstrumentationRegistry.getTargetContext()
-        appContext!!.runOnUiThread {
+        val appContext = mockContext()
+        appContext.runOnUiThread {
             gesturesDemo.addGestureListeners(mockedView, appContext)
         }
 
-    }
-
-    // Helper functions
-
-    /**
-     * Helper function creating a mock object of [LifecycleOwner] for live data observers
-     */
-    private fun mockLifecycleOwner(): LifecycleOwner {
-        val owner = Mockito.mock(LifecycleOwner::class.java)
-        val lifecycle = LifecycleRegistry(owner)
-        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
-        Mockito.`when`(owner.lifecycle).thenReturn(lifecycle)
-        return owner
     }
 
 }

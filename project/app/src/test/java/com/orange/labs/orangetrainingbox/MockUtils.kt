@@ -20,8 +20,12 @@ package com.orange.labs.orangetrainingbox
 import android.app.Activity
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGattCharacteristic
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -41,6 +45,13 @@ class MockUtils {
         // *****
         // Views
         // *****
+
+        /**
+         * Creates a mock view
+         */
+        fun mockView(): View {
+            return mock(View::class.java)
+        }
 
         /**
          * Creates a mock view
@@ -80,6 +91,28 @@ class MockUtils {
         */
         fun mockImageView(): ImageView {
             return mock(ImageView::class.java)
+        }
+
+        // ********
+        // LiveData
+        // ********
+
+        /**
+         * Mocks a [Context] object
+         */
+        fun mockContext(): Context {
+            return mock(Context::class.java)
+        }
+
+        /**
+         * Helper function creating a mock object of [LifecycleOwner] for live data observers
+         */
+        fun mockLifecycleOwner(): LifecycleOwner {
+            val owner = mock(LifecycleOwner::class.java)
+            val lifecycle = LifecycleRegistry(owner)
+            lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+            `when`(owner.lifecycle).thenReturn(lifecycle)
+            return owner
         }
 
         // *********
