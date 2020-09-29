@@ -1,0 +1,68 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GameWith3Screens - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.ui.fragments</a>&nbsp;/&nbsp;<a href="./index.html">GameWith3Screens</a><br/>
+<br/>
+<h1>GameWith3Screens</h1>
+(JVM) <code><span class="keyword">interface </span><span class="identifier">GameWith3Screens</span></code>
+<p>Interface to use to get attributes of a game fragment which contains several layouts</p>
+<p><strong>Author</strong><br/>
+Pierre-Yves Lapersonne</p>
+<p><strong>Since</strong><br/>
+23/05/2019</p>
+<p><strong>Version</strong><br/>
+1.0.0</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="introduction-layout.html">introductionLayout</a></h4>
+</td>
+<td>
+<p>The identifier of the layout to inflate containing the introduction screen</p>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">introductionLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="playing-layout.html">playingLayout</a></h4>
+</td>
+<td>
+<p>The identifier of the layout to inflate containing the playing screen</p>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">playingLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="restart-layout.html">restartLayout</a></h4>
+</td>
+<td>
+<p>The identifier of the layout to inflate containing the restart screen</p>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">restartLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../-abstract-game-fragment/index.html">AbstractGameFragment</a></h4>
+</td>
+<td>
+<p>Class which models a fragment to use in the navigation graph which embed a game.
+Factorizes a lot of behaviours about the navigation or the Bluetooth data.
+Each new game fragment must inherit from this class.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractGameFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-themed-fragment/index.html"><span class="identifier">AbstractThemedFragment</span></a><span class="symbol">, </span><a href="./index.html"><span class="identifier">GameWith3Screens</span></a><span class="symbol">, </span><a href="../-navigable-game/index.html"><span class="identifier">NavigableGame</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,158 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.orange.labs.orangetrainingbox.utils.properties - data</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">data</a>&nbsp;/&nbsp;<a href="./index.html">com.orange.labs.orangetrainingbox.utils.properties</a><br/>
+<br/>
+<h2>Package com.orange.labs.orangetrainingbox.utils.properties</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-app-games-configuration/index.html">AppGamesConfiguration</a></h4>
+</td>
+<td>
+<p>Models the app configuration for games</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">AppGamesConfiguration</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-balloon-game-configuration/index.html">BalloonGameConfiguration</a></h4>
+</td>
+<td>
+<p>Models a bundle of balloon game configuration elements.
+These values defines steps of progression :
+    - <a href="#">minThreshold1;maxThreshold1</a> is the first step
+    - <a href="#">minThreshold2;maxThreshold2</a> is the second step
+    - <a href="#">minThreshold3;maxThreshold3</a> is the third step,
+    - [ minThreshold4 ; maxThreshold4[ is the fourth step, the final before the congratulations!</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">BalloonGameConfiguration</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-ble-configuration/index.html">BleConfiguration</a></h4>
+</td>
+<td>
+<ul><li></li>
+</ul>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">BleConfiguration</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-difficulty-details-configuration/index.html">DifficultyDetailsConfiguration</a></h4>
+</td>
+<td>
+<p>Models a bundle of game configuration</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">DifficultyDetailsConfiguration</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-properties-keys/index.html">PropertiesKeys</a></h4>
+</td>
+<td>
+<p>Enumeration defining objects for properties to configure the app.</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">PropertiesKeys</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-sensor-data-series-configuration/index.html">SensorDataSeriesConfiguration</a></h4>
+</td>
+<td>
+<p>Models a bundle of configuration details for sensor data series</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SensorDataSeriesConfiguration</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-sheep-game-configuration/index.html">SheepGameConfiguration</a></h4>
+</td>
+<td>
+<p>Models a bundle of sheep game configuration elements.</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SheepGameConfiguration</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-sheep-game-default-configuration/index.html">SheepGameDefaultConfiguration</a></h4>
+</td>
+<td>
+<p>Models a bundle of sheep game default configuration values..</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SheepGameDefaultConfiguration</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-star-game-configuration/index.html">StarGameConfiguration</a></h4>
+</td>
+<td>
+<p>Models a bundle of star game configuration elements.
+These values defines steps of progression :
+    - <a href="#">minThreshold1;maxThreshold1</a> is the first step
+    - <a href="#">minThreshold2;maxThreshold2</a> is the second step
+    - [ minThreshold3 ; maxThreshold3[ is the third step, the final before the congratulations!</p>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">StarGameConfiguration</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-invalid-configuration-exception/index.html">InvalidConfigurationException</a></h4>
+</td>
+<td>
+<p>Exception to throw if a configuration is not suitable in the properties file</p>
+<code><span class="keyword">class </span><span class="identifier">InvalidConfigurationException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="android.content.-context/index.html">android.content.Context</a></h4>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-d-e-f-a-u-l-t_-f-i-l-e-n-a-m-e.html">DEFAULT_FILENAME</a></h4>
+</td>
+<td>
+<p>Default file name used for properties file</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">DEFAULT_FILENAME</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-d-e-l-i-m-i-t-e-r.html">DELIMITER</a></h4>
+</td>
+<td>
+<p>Delimiter for properties file entries to split values used for games -configurations</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">DELIMITER</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

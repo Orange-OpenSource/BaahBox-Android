@@ -1,0 +1,25 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>InputsParser.extractValuesCharacteristic - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.game</a>&nbsp;/&nbsp;<a href="index.html">InputsParser</a>&nbsp;/&nbsp;<a href="./extract-values-characteristic.html">extractValuesCharacteristic</a><br/>
+<br/>
+<h1>extractValuesCharacteristic</h1>
+(JVM) <a name="com.orange.labs.orangetrainingbox.game.InputsParser$extractValuesCharacteristic(android.bluetooth.BluetoothGattCharacteristic)"></a>
+<code><span class="keyword">fun </span><span class="identifier">extractValuesCharacteristic</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.InputsParser$extractValuesCharacteristic(android.bluetooth.BluetoothGattCharacteristic)/frame">frame</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/bluetooth/BluetoothGattCharacteristic.html"><span class="identifier">BluetoothGattCharacteristic</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-muscle-data/index.html"><span class="identifier">MuscleData</span></a></code>
+<p>Using a BLE frame, extracts from it integer values, parse them and return suitable data.
+Returns a bundle of data with cleaned and computed values for muscles and joystick.
+If these values are equal to -1, the frame is null.</p>
+<p>This implementation follows the frame format of version v2.0.0 of Arduino firmware embedded in the
+Baah box (see https://github.com/Orange-OpenSource/BaahBox-Arduino/releases).</p>
+<p>In a nutshell, a frame with 6 bytes like:</p>
+<h3>Parameters</h3>
+<p><a name="frame"></a>
+<code>frame</code> - The object where the data must be extracted</p>
+<p><strong>Return</strong><br/>
+MuscleData The bundle of data</p>
+</BODY>
+</HTML>

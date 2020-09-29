@@ -1,0 +1,235 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>MainActivity - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.ui</a>&nbsp;/&nbsp;<a href="./index.html">MainActivity</a><br/>
+<br/>
+<h1>MainActivity</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">MainActivity</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AppCompatActivity</span></code>
+<p>Main activity of the application.</p>
+<p><strong>Author</strong><br/>
+Pierre-Yves Lapersonne</p>
+<p><strong>Author</strong><br/>
+Marc Poppleton</p>
+<p><strong>Since</strong><br/>
+23/10/2018</p>
+<p><strong>Version</strong><br/>
+2.3.0</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Main activity of the application.</p>
+<code><span class="identifier">MainActivity</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="ble-configuration.html">bleConfiguration</a></h4>
+</td>
+<td>
+<p>The BLE configuration to apply for sensors and callbacks</p>
+<code><span class="keyword">val </span><span class="identifier">bleConfiguration</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.utils.properties/-ble-configuration/index.html"><span class="identifier">BleConfiguration</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="bluetooth-adapter.html">bluetoothAdapter</a></h4>
+</td>
+<td>
+<p>A reference to the Bluetooth adapter so as to deal with its feature</p>
+<code><span class="keyword">val </span><span class="identifier">bluetoothAdapter</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/bluetooth/BluetoothAdapter.html"><span class="identifier">BluetoothAdapter</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="bluetooth-gatt.html">bluetoothGatt</a></h4>
+</td>
+<td>
+<p>The object providing features for the Bluetooth things</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">bluetoothGatt</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/bluetooth/BluetoothGatt.html"><span class="identifier">BluetoothGatt</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="btle-gatt-callback.html">btleGattCallback</a></h4>
+</td>
+<td>
+<p>Callback dedicated to Bluetooth services management with trigger for connection states,
+changes of services etc.</p>
+<code><span class="keyword">val </span><span class="identifier">btleGattCallback</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/bluetooth/BluetoothGattCallback.html"><span class="identifier">BluetoothGattCallback</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="btle-scan-callback.html">btleScanCallback</a></h4>
+</td>
+<td>
+<p>Callback used for Bluetooth Low Energy scan with triggers for failed scan and scanned results.</p>
+<code><span class="keyword">val </span><span class="identifier">btleScanCallback</span><span class="symbol">: </span><span class="identifier">&lt;no name provided&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="connected.html">connected</a></h4>
+</td>
+<td>
+<p>Flag indicating if a BLE connection is on going</p>
+<code><span class="keyword">var </span><span class="identifier">connected</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="model.html">model</a></h4>
+</td>
+<td>
+<p>A reference to the model of the app, here with references to the BLE devices.</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">model</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.btle/-training-box-view-model/index.html"><span class="identifier">TrainingBoxViewModel</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="showing-popup.html">showingPopup</a></h4>
+</td>
+<td>
+<p>Flag indicating if the pop-up for pairing should be displayed or not</p>
+<code><span class="keyword">var </span><span class="identifier">showingPopup</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="check-btle-config.html">checkBtleConfig</a></h4>
+</td>
+<td>
+<p>Checks the Bluetooth configuration.
+Starts the dedicated activity if needed, scans devices and check connections.</p>
+<code><span class="keyword">fun </span><span class="identifier">checkBtleConfig</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="check-btle-connection.html">checkBtleConnection</a></h4>
+</td>
+<td>
+<p>Checks the Bluetooth connection and the devices.
+If nothing is connected and no pop-up displayed, get the devices, ask for appearing
+and process the connection.</p>
+<code><span class="keyword">fun </span><span class="identifier">checkBtleConnection</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="check-btle-permissions.html">checkBtlePermissions</a></h4>
+</td>
+<td>
+<p>Checks and asks for permissions if needed.
+Requested permission are mainly for Bluetooth.</p>
+<code><span class="keyword">fun </span><span class="identifier">checkBtlePermissions</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="display-device-selector-dialog.html">displayDeviceSelectorDialog</a></h4>
+</td>
+<td>
+<p>Displays in a dialog the list of available devices which can be selected</p>
+<code><span class="keyword">fun </span><span class="identifier">displayDeviceSelectorDialog</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.MainActivity$displayDeviceSelectorDialog(kotlin.collections.List((kotlin.String)))/devices">devices</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html"><span class="identifier">List</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-activity-result.html">onActivityResult</a></h4>
+</td>
+<td>
+<p>Activity lifecycle.
+Using the result of the started activity, scans BLE devices if BLE permission enabled, or check
+BLE configurations.</p>
+<code><span class="keyword">fun </span><span class="identifier">onActivityResult</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.MainActivity$onActivityResult(kotlin.Int, kotlin.Int, android.content.Intent)/requestCode">requestCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.MainActivity$onActivityResult(kotlin.Int, kotlin.Int, android.content.Intent)/resultCode">resultCode</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.MainActivity$onActivityResult(kotlin.Int, kotlin.Int, android.content.Intent)/data">data</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/content/Intent.html"><span class="identifier">Intent</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-create.html">onCreate</a></h4>
+</td>
+<td>
+<p>Activity lifecycle.</p>
+<code><span class="keyword">fun </span><span class="identifier">onCreate</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.MainActivity$onCreate(android.os.Bundle)/savedInstanceState">savedInstanceState</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html"><span class="identifier">Bundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-create-options-menu.html">onCreateOptionsMenu</a></h4>
+</td>
+<td>
+<p>Inflates the menu.</p>
+<code><span class="keyword">fun </span><span class="identifier">onCreateOptionsMenu</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.MainActivity$onCreateOptionsMenu(android.view.Menu)/menu">menu</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/Menu.html"><span class="identifier">Menu</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-destroy.html">onDestroy</a></h4>
+</td>
+<td>
+<p>Activity lifecycle.</p>
+<code><span class="keyword">fun </span><span class="identifier">onDestroy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-options-item-selected.html">onOptionsItemSelected</a></h4>
+</td>
+<td>
+<p>Triggered when an option in the menu has been selected</p>
+<code><span class="keyword">fun </span><span class="identifier">onOptionsItemSelected</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.MainActivity$onOptionsItemSelected(android.view.MenuItem)/item">item</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MenuItem.html"><span class="identifier">MenuItem</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-pause.html">onPause</a></h4>
+</td>
+<td>
+<p>Activity lifecycle.</p>
+<code><span class="keyword">fun </span><span class="identifier">onPause</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-resume.html">onResume</a></h4>
+</td>
+<td>
+<p>Activity lifecycle.
+Check if Bluetooth Low Energy permissions (BLE) are still enabled.
+Check if demo mode has be activated in settings or not (so as to get rid of BLUE things and just use gestures, or not)</p>
+<code><span class="keyword">fun </span><span class="identifier">onResume</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="scan-le-device.html">scanLeDevice</a></h4>
+</td>
+<td>
+<p>Starts or stops the scan of Bluetooth LE devices</p>
+<code><span class="keyword">fun </span><span class="identifier">scanLeDevice</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.MainActivity$scanLeDevice(kotlin.Boolean)/enable">enable</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

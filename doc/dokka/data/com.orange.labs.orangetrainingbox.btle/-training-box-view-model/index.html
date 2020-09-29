@@ -1,0 +1,103 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TrainingBoxViewModel - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.btle</a>&nbsp;/&nbsp;<a href="./index.html">TrainingBoxViewModel</a><br/>
+<br/>
+<h1>TrainingBoxViewModel</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">TrainingBoxViewModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewModel</span></code>
+<p>View model for the training box based on the Android ViewModel design pattern
+(https://developer.android.com/topic/libraries/architecture/viewmodel)</p>
+<p><strong>Author</strong><br/>
+Marc Poppleton</p>
+<p><strong>Author</strong><br/>
+Pierre-Yves Lapersonne</p>
+<p><strong>Since</strong><br/>
+20/11/2018</p>
+<p><strong>Version</strong><br/>
+2.0.0</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>View model for the training box based on the Android ViewModel design pattern
+(https://developer.android.com/topic/libraries/architecture/viewmodel)</p>
+<code><span class="identifier">TrainingBoxViewModel</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="boxes.html">boxes</a></h4>
+</td>
+<td>
+<p>A set of Bluetooth Low Energy (BLE) devices, thus the set of Baah Boxes</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">boxes</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/index.html"><span class="identifier">MutableSet</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html"><span class="identifier">BluetoothDevice</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="difficulty-factor.html">difficultyFactor</a></h4>
+</td>
+<td>
+<p>The global difficulty factor to apply to computations for games</p>
+<code><span class="keyword">var </span><span class="identifier">difficultyFactor</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.game/-difficulty-factor/index.html"><span class="identifier">DifficultyFactor</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="sensor-a.html">sensorA</a></h4>
+</td>
+<td>
+<p>One of the two object modeling a BLE sensors data source of the baah box</p>
+<code><span class="keyword">val </span><span class="identifier">sensorA</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="sensor-b.html">sensorB</a></h4>
+</td>
+<td>
+<p>One of the two objects modeling a BLE sensors data source of the baah box.
+This sensor is used for the star game and also balloon and sheep.</p>
+<code><span class="keyword">val </span><span class="identifier">sensorB</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="add-box.html">addBox</a></h4>
+</td>
+<td>
+<p>Adds a new Bluetooth device to use for the app</p>
+<code><span class="keyword">fun </span><span class="identifier">addBox</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel$addBox(android.bluetooth.BluetoothDevice)/box">box</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html"><span class="identifier">BluetoothDevice</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-boxes.html">getBoxes</a></h4>
+</td>
+<td>
+<p>Returns the list of registered Bluetooth devices</p>
+<code><span class="keyword">fun </span><span class="identifier">getBoxes</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">LiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/index.html"><span class="identifier">MutableSet</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/bluetooth/BluetoothDevice.html"><span class="identifier">BluetoothDevice</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,121 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GesturesDemoListener - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.ui.demo</a>&nbsp;/&nbsp;<a href="./index.html">GesturesDemoListener</a><br/>
+<br/>
+<h1>GesturesDemoListener</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">GesturesDemoListener</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/GestureDetector/OnGestureListener.html"><span class="identifier">OnGestureListener</span></a></code>
+<p>A listener to attach to a view with callbacks triggered when a gesture is done.
+Once the gesture ( a scroll) is made, will compute the difference between start and end points on X and Y axis
+and send results to sensors.</p>
+<h3>Parameters</h3>
+<p><a name="sensorA"></a>
+<code>sensorA</code> - One of the muscle sensor, as a source of data, with delta of points in X axis</p>
+<p><a name="sensorB"></a>
+<code>sensorB</code> - One of the muscle sensor, as a source of data, with delta of points in Y axis</p>
+<p><strong>Version</strong><br/>
+1.0.0</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>A listener to attach to a view with callbacks triggered when a gesture is done.
+Once the gesture ( a scroll) is made, will compute the difference between start and end points on X and Y axis
+and send results to sensors.</p>
+<code><span class="identifier">GesturesDemoListener</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$<init>(androidx.lifecycle.MutableLiveData((kotlin.Int)), androidx.lifecycle.MutableLiveData((kotlin.Int)))/sensorA">sensorA</span><span class="symbol">:</span>&nbsp;<span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$<init>(androidx.lifecycle.MutableLiveData((kotlin.Int)), androidx.lifecycle.MutableLiveData((kotlin.Int)))/sensorB">sensorB</span><span class="symbol">:</span>&nbsp;<span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="sensor-a.html">sensorA</a></h4>
+</td>
+<td>
+<p>One of the muscle sensor, as a source of data, with delta of points in X axis</p>
+<code><span class="keyword">val </span><span class="identifier">sensorA</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="sensor-b.html">sensorB</a></h4>
+</td>
+<td>
+<p>One of the muscle sensor, as a source of data, with delta of points in Y axis</p>
+<code><span class="keyword">val </span><span class="identifier">sensorB</span><span class="symbol">: </span><span class="identifier">MutableLiveData</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-down.html">onDown</a></h4>
+</td>
+<td>
+<p>Not used</p>
+<code><span class="keyword">fun </span><span class="identifier">onDown</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onDown(android.view.MotionEvent)/e">e</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html"><span class="identifier">MotionEvent</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-fling.html">onFling</a></h4>
+</td>
+<td>
+<p>Not used</p>
+<code><span class="keyword">fun </span><span class="identifier">onFling</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onFling(android.view.MotionEvent, android.view.MotionEvent, kotlin.Float, kotlin.Float)/e1">e1</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html"><span class="identifier">MotionEvent</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onFling(android.view.MotionEvent, android.view.MotionEvent, kotlin.Float, kotlin.Float)/e2">e2</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html"><span class="identifier">MotionEvent</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onFling(android.view.MotionEvent, android.view.MotionEvent, kotlin.Float, kotlin.Float)/velocityX">velocityX</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onFling(android.view.MotionEvent, android.view.MotionEvent, kotlin.Float, kotlin.Float)/velocityY">velocityY</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-long-press.html">onLongPress</a></h4>
+</td>
+<td>
+<p>Not used</p>
+<code><span class="keyword">fun </span><span class="identifier">onLongPress</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onLongPress(android.view.MotionEvent)/e">e</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html"><span class="identifier">MotionEvent</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-scroll.html">onScroll</a></h4>
+</td>
+<td>
+<p>Triggered when a scroll or a swipe is done (on Y or X axis).</p>
+<code><span class="keyword">fun </span><span class="identifier">onScroll</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onScroll(android.view.MotionEvent, android.view.MotionEvent, kotlin.Float, kotlin.Float)/e1">e1</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html"><span class="identifier">MotionEvent</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onScroll(android.view.MotionEvent, android.view.MotionEvent, kotlin.Float, kotlin.Float)/e2">e2</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html"><span class="identifier">MotionEvent</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onScroll(android.view.MotionEvent, android.view.MotionEvent, kotlin.Float, kotlin.Float)/distanceX">distanceX</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onScroll(android.view.MotionEvent, android.view.MotionEvent, kotlin.Float, kotlin.Float)/distanceY">distanceY</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-show-press.html">onShowPress</a></h4>
+</td>
+<td>
+<p>Not used</p>
+<code><span class="keyword">fun </span><span class="identifier">onShowPress</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onShowPress(android.view.MotionEvent)/e">e</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html"><span class="identifier">MotionEvent</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-single-tap-up.html">onSingleTapUp</a></h4>
+</td>
+<td>
+<p>Not used</p>
+<code><span class="keyword">fun </span><span class="identifier">onSingleTapUp</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener$onSingleTapUp(android.view.MotionEvent)/e">e</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MotionEvent.html"><span class="identifier">MotionEvent</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

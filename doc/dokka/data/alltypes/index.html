@@ -1,0 +1,235 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>alltypes - data</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<h3>All Types</h3>
+<table>
+<tbody>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-abstract-game-fragment/index.html">com.orange.labs.orangetrainingbox.ui.fragments.AbstractGameFragment</a></h5>
+<p>Class which models a fragment to use in the navigation graph which embed a game.
+Factorizes a lot of behaviours about the navigation or the Bluetooth data.
+Each new game fragment must inherit from this class.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-abstract-themed-fragment/index.html">com.orange.labs.orangetrainingbox.ui.fragments.AbstractThemedFragment</a></h5>
+<p>Class which models a fragment with a customizable theme.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-app-games-configuration/index.html">com.orange.labs.orangetrainingbox.utils.properties.AppGamesConfiguration</a></h5>
+<p>Models the app configuration for games</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-balloon-game-configuration/index.html">com.orange.labs.orangetrainingbox.utils.properties.BalloonGameConfiguration</a></h5>
+<p>Models a bundle of balloon game configuration elements.
+These values defines steps of progression :
+    - <a href="#">minThreshold1;maxThreshold1</a> is the first step
+    - <a href="#">minThreshold2;maxThreshold2</a> is the second step
+    - <a href="#">minThreshold3;maxThreshold3</a> is the third step,
+    - [ minThreshold4 ; maxThreshold4[ is the fourth step, the final before the congratulations!</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-ble-configuration/index.html">com.orange.labs.orangetrainingbox.utils.properties.BleConfiguration</a></h5>
+<ul><li></li>
+</ul>
+</tr>
+<tr>
+(JVM)  (extensions in package com.orange.labs.orangetrainingbox.ui)
+<h5><a href="../com.orange.labs.orangetrainingbox.ui/android.bluetooth.-bluetooth-adapter/index.html">android.bluetooth.BluetoothAdapter</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.game/-collision-detector/index.html">com.orange.labs.orangetrainingbox.game.CollisionDetector</a></h5>
+<p>Class which allows to make assertions on objects so as to check if there is a collision
+including them or not.
+Computes hitboxes using locations and dimensions, and compare.</p>
+</tr>
+<tr>
+(JVM)  (extensions in package com.orange.labs.orangetrainingbox.utils.properties)
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/index.html">android.content.Context</a></h5>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-difficulty-details-configuration/index.html">com.orange.labs.orangetrainingbox.utils.properties.DifficultyDetailsConfiguration</a></h5>
+<p>Models a bundle of game configuration</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.game/-difficulty-factor/index.html">com.orange.labs.orangetrainingbox.game.DifficultyFactor</a></h5>
+<p>Enumeration defining the factor to apply to sensor inputs.
+The highest the value is, the lowest is the difficulty coefficient.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-game-balloon-fragment/index.html">com.orange.labs.orangetrainingbox.ui.fragments.GameBalloonFragment</a></h5>
+<p>A subclass of <a href="../com.orange.labs.orangetrainingbox.ui.fragments/-abstract-game-fragment/index.html">AbstractGameFragment</a> for the balloon game.
+Player must contract one muscle so as to blow up a balloon and make it explode.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-game-sheep-fragment/index.html">com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment</a></h5>
+<p>A fragment which embeds the logic of the sheep game and the GUI part.
+Possesses animators to make the sheep walk, jump and fall, and move the fences.
+Receives data from the Baah Box through the model, parse them and make the sheep move.
+Use configuration defined by the user in the preferences and also in the app config.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-game-space-fragment/index.html">com.orange.labs.orangetrainingbox.ui.fragments.GameSpaceFragment</a></h5>
+<p>A simple <a href="#">Fragment</a> subclass.
+Use the <a href="../com.orange.labs.orangetrainingbox.ui.fragments/-game-space-fragment/new-instance.html">GameSpaceFragment.newInstance</a> factory method to create an instance of this fragment.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-game-star-fragment/index.html">com.orange.labs.orangetrainingbox.ui.fragments.GameStarFragment</a></h5>
+<p>A subclass of <a href="../com.orange.labs.orangetrainingbox.ui.fragments/-abstract-game-fragment/index.html">AbstractGameFragment</a> implementing the star game.
+Player should contract one muscle stronger and stronger so as to make a star shine.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-game-toad-fragment/index.html">com.orange.labs.orangetrainingbox.ui.fragments.GameToadFragment</a></h5>
+<p>A simple <a href="#">Fragment</a> subclass.
+Use the <a href="../com.orange.labs.orangetrainingbox.ui.fragments/-game-toad-fragment/new-instance.html">GameToadFragment.newInstance</a> factory method to create an instance of this fragment.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-game-with3-screens/index.html">com.orange.labs.orangetrainingbox.ui.fragments.GameWith3Screens</a></h5>
+<p>Interface to use to get attributes of a game fragment which contains several layouts</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.demo/-gestures-demo/index.html">com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo</a></h5>
+<p>Class providing method to detect gestures so as to fake sensor data, for demo purposes</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.demo/-gestures-demo-listener/index.html">com.orange.labs.orangetrainingbox.ui.demo.GesturesDemoListener</a></h5>
+<p>A listener to attach to a view with callbacks triggered when a gesture is done.
+Once the gesture ( a scroll) is made, will compute the difference between start and end points on X and Y axis
+and send results to sensors.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.game/-hitbox/index.html">com.orange.labs.orangetrainingbox.game.Hitbox</a></h5>
+<p>Models an hitbox, i.e. a range of coordinates where an object can be touched by another.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.animations/-icon-animator/index.html">com.orange.labs.orangetrainingbox.ui.animations.IconAnimator</a></h5>
+<p>Simple utility object dealing with animations of icons</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.game/-inputs-parser/index.html">com.orange.labs.orangetrainingbox.game.InputsParser</a></h5>
+<p>Utility class allowing to prepare raw sensors inputs for game logic.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-invalid-configuration-exception/index.html">com.orange.labs.orangetrainingbox.utils.properties.InvalidConfigurationException</a></h5>
+<p>Exception to throw if a configuration is not suitable in the properties file</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.settings/-licenses-displayer/index.html">com.orange.labs.orangetrainingbox.ui.settings.LicensesDisplayer</a></h5>
+<p>Displays using the LicensesDialog library (https://github.com/PSDev/LicensesDialog) the third party licenses we use.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.logs/-logger/index.html">com.orange.labs.orangetrainingbox.utils.logs.Logger</a></h5>
+<p>Class dedicated for logs. It provides simple methods with more visible and cooler traces, as a kind of proxy.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui/-main-activity/index.html">com.orange.labs.orangetrainingbox.ui.MainActivity</a></h5>
+<p>Main activity of the application.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-main-activity-fragment/index.html">com.orange.labs.orangetrainingbox.ui.fragments.MainActivityFragment</a></h5>
+<p>A placeholder fragment containing a simple view.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.game/-muscle-data/index.html">com.orange.labs.orangetrainingbox.game.MuscleData</a></h5>
+<p>Models a bundle of data extracted from a BLE device frame.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.fragments/-navigable-game/index.html">com.orange.labs.orangetrainingbox.ui.fragments.NavigableGame</a></h5>
+<p>Interface to use to get attributes to use for navigation between fragments using the Navigation graph pattern.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-properties-keys/index.html">com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys</a></h5>
+<p>Enumeration defining objects for properties to configure the app.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.structures/-queue/index.html">com.orange.labs.orangetrainingbox.utils.structures.Queue</a></h5>
+<p>Data structure acting as a FIFO structure.
+The first element saved in this list will be the first out.
+Contains a maximum size. If a new element should be added and the queue is full, the first item will be removed.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.structures/-sensor-data-series/index.html">com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries</a></h5>
+<p>Class containing a series of sensor data stored in a <a href="../com.orange.labs.orangetrainingbox.utils.structures/-queue/index.html">Queue</a>, and providing methods for averages and trends.
+It contains also a swap for data stored before being added in the queue.
+This structure allows to check if data are parasites, powerful move or simple move.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-sensor-data-series-configuration/index.html">com.orange.labs.orangetrainingbox.utils.properties.SensorDataSeriesConfiguration</a></h5>
+<p>Models a bundle of configuration details for sensor data series</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.structures/-sensor-trends/index.html">com.orange.labs.orangetrainingbox.utils.structures.SensorTrends</a></h5>
+<p>Enumeration modeling trends about the computed metrics using sensor data records</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.ui.settings/-settings-activity/index.html">com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity</a></h5>
+<p>Activity dedicated to preferences</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-sheep-game-configuration/index.html">com.orange.labs.orangetrainingbox.utils.properties.SheepGameConfiguration</a></h5>
+<p>Models a bundle of sheep game configuration elements.</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-sheep-game-default-configuration/index.html">com.orange.labs.orangetrainingbox.utils.properties.SheepGameDefaultConfiguration</a></h5>
+<p>Models a bundle of sheep game default configuration values..</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.utils.properties/-star-game-configuration/index.html">com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration</a></h5>
+<p>Models a bundle of star game configuration elements.
+These values defines steps of progression :
+    - <a href="#">minThreshold1;maxThreshold1</a> is the first step
+    - <a href="#">minThreshold2;maxThreshold2</a> is the second step
+    - [ minThreshold3 ; maxThreshold3[ is the third step, the final before the congratulations!</p>
+</tr>
+<tr>
+(JVM) 
+<h5><a href="../com.orange.labs.orangetrainingbox.btle/-training-box-view-model/index.html">com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel</a></h5>
+<p>View model for the training box based on the Android ViewModel design pattern
+(https://developer.android.com/topic/libraries/architecture/viewmodel)</p>
+</tr>
+<tr>
+(JVM)  (extensions in package com.orange.labs.orangetrainingbox.game)
+<h5><a href="../com.orange.labs.orangetrainingbox.game/android.view.-view/index.html">android.view.View</a></h5>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

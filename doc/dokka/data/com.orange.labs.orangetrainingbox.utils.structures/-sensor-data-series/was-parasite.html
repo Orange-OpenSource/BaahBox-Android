@@ -1,0 +1,18 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SensorDataSeries.wasParasite - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.utils.structures</a>&nbsp;/&nbsp;<a href="index.html">SensorDataSeries</a>&nbsp;/&nbsp;<a href="./was-parasite.html">wasParasite</a><br/>
+<br/>
+<h1>wasParasite</h1>
+(JVM) <a name="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$wasParasite"></a>
+<code><span class="keyword">private</span> <span class="keyword">val </span><span class="identifier">wasParasite</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Check in the swap if a parasite value has been stored.
+If the swap is not empty (no -1 stored), check if the 1st value is far higher (using PARASITE_MAX_FACTOR)
+than the 2nd. In this case returns true, otherwise false.</p>
+<p>Please note that this code works for Arduino firmware v2.0.0 which sends bad values</p>
+</BODY>
+</HTML>

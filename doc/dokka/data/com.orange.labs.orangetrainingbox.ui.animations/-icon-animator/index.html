@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>IconAnimator - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.ui.animations</a>&nbsp;/&nbsp;<a href="./index.html">IconAnimator</a><br/>
+<br/>
+<h1>IconAnimator</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">IconAnimator</span></code>
+<p>Simple utility object dealing with animations of icons</p>
+<p><strong>Author</strong><br/>
+Pierre-Yves Lapersonne</p>
+<p><strong>Since</strong><br/>
+23/05/20190</p>
+<p><strong>Version</strong><br/>
+1.2.1</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Simple utility object dealing with animations of icons</p>
+<code><span class="identifier">IconAnimator</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="ticker.html">ticker</a></h4>
+</td>
+<td>
+<p>Just a simple ticker to known which image should be displayed</p>
+<code><span class="keyword">var </span><span class="identifier">ticker</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="timer.html">timer</a></h4>
+</td>
+<td>
+<p>The timer scheduling the tasks for animations</p>
+<code><span class="keyword">var </span><span class="identifier">timer</span><span class="symbol">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Timer.html"><span class="identifier">Timer</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="animate-game-icon.html">animateGameIcon</a></h4>
+</td>
+<td>
+<p>Animates the game icon in the introduction screen.
+Displays several bitmap files' contents.</p>
+<code><span class="keyword">fun </span><span class="identifier">animateGameIcon</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.animations.IconAnimator$animateGameIcon(android.app.Activity, android.widget.ImageView, kotlin.Long, kotlin.Array((kotlin.Int)))/context">context</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/app/Activity.html"><span class="identifier">Activity</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.animations.IconAnimator$animateGameIcon(android.app.Activity, android.widget.ImageView, kotlin.Long, kotlin.Array((kotlin.Int)))/imageView">imageView</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/ImageView.html"><span class="identifier">ImageView</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.animations.IconAnimator$animateGameIcon(android.app.Activity, android.widget.ImageView, kotlin.Long, kotlin.Array((kotlin.Int)))/period">period</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.animations.IconAnimator$animateGameIcon(android.app.Activity, android.widget.ImageView, kotlin.Long, kotlin.Array((kotlin.Int)))/images">images</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="display-suitable-image.html">displaySuitableImage</a></h4>
+</td>
+<td>
+<p>Displays in the image view, using the ticker and the array of images resources, the good image</p>
+<code><span class="keyword">fun </span><span class="identifier">displaySuitableImage</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.animations.IconAnimator$displaySuitableImage(android.widget.ImageView, kotlin.Array((kotlin.Int)))/imageView">imageView</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/ImageView.html"><span class="identifier">ImageView</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.animations.IconAnimator$displaySuitableImage(android.widget.ImageView, kotlin.Array((kotlin.Int)))/images">images</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="stop-animate-game-icon.html">stopAnimateGameIcon</a></h4>
+</td>
+<td>
+<p>Stops the timer and its work</p>
+<code><span class="keyword">fun </span><span class="identifier">stopAnimateGameIcon</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
