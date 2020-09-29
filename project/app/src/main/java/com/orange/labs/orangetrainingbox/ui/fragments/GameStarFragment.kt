@@ -40,7 +40,7 @@ import org.jetbrains.anko.support.v4.find
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.6.0
+ * @version 2.7.0
  * @see [AbstractGameFragment]
  */
 class GameStarFragment : AbstractGameFragment() {
@@ -132,7 +132,7 @@ class GameStarFragment : AbstractGameFragment() {
             ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val gameConfiguration = context!!.readStarGameConfiguration()
+        val gameConfiguration = requireContext().readStarGameConfiguration()
         val difficultyFactor = getDifficultyNumericValue()
 
         // Define the observer
@@ -159,7 +159,7 @@ class GameStarFragment : AbstractGameFragment() {
             // Define listeners
             GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
                 find<ConstraintLayout>(R.id.clStarGamePlaying),
-                context!!
+                requireContext()
             )
         }
     }
@@ -187,13 +187,13 @@ class GameStarFragment : AbstractGameFragment() {
         starPlaying.alpha = parsedSensorValue.toFloat() / f.toFloat()
 
         when (parsedSensorValue) {
-            in a..b -> {
+            in a.toFloat()..b.toFloat() -> {
                 tv_congratulations.text = getString(R.string.game_star_congratulations_level_1)
             }
-            in c..d -> {
+            in c.toFloat()..d.toFloat() -> {
                 tv_congratulations.text = getString(R.string.game_star_congratulations_level_2)
             }
-            in e until f -> {
+            in e.toFloat()..f.toFloat() -> {
                 tv_congratulations.text = getString(R.string.game_star_congratulations_level_3)
             }
             else -> { // Should be only >= 60

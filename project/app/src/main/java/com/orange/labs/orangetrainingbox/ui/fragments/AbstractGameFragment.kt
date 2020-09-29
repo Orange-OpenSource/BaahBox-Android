@@ -39,7 +39,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 23/05/2019
- * @version 2.2.0
+ * @version 2.3.0
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
@@ -139,7 +139,7 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
      * @return Double The value to apply to calculations
      */
     protected fun getDifficultyNumericValue(): Double {
-        val difficultyConfigurationValues = context!!.readDifficultyDetailsConfiguration()
+        val difficultyConfigurationValues = requireContext().readDifficultyDetailsConfiguration()
         return when (model.difficultyFactor) {
             DifficultyFactor.LOW -> difficultyConfigurationValues.difficultyFactorLow
             DifficultyFactor.MEDIUM -> difficultyConfigurationValues.difficultyFactorMedium

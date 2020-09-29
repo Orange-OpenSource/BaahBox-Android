@@ -34,7 +34,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 1.1.1
+ * @version 1.2.0
  */
 class MainActivityFragment : AbstractThemedFragment() {
 
@@ -64,7 +64,7 @@ class MainActivityFragment : AbstractThemedFragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val (enableStar, enableBalloon, enableSheep, enableSpace, enableToad) = context!!.readAppGamesConfiguration()
+        val (enableStar, enableBalloon, enableSheep, enableSpace, enableToad) = requireContext().readAppGamesConfiguration()
 
         if (enableStar) {
             menu_star.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameStarFragment) }

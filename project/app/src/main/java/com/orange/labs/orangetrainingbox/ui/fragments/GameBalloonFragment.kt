@@ -44,7 +44,7 @@ import org.jetbrains.anko.support.v4.find
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.56.0
+ * @version 2.7.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
@@ -126,7 +126,7 @@ class GameBalloonFragment : AbstractGameFragment() {
      */
     override fun startIntroductionAnimation() {
         gameIconAnimator = IconAnimator()
-        val period = context!!.readBalloonAdditionalConfiguration()
+        val period = requireContext().readBalloonAdditionalConfiguration()
         gameIconAnimator!!.animateGameIcon((activity as AppCompatActivity), gameIcon, period,
             arrayOf(R.mipmap.ic_balloon_0, R.mipmap.ic_balloon_1, R.mipmap.ic_balloon_2, R.mipmap.ic_balloon_3, R.mipmap.ic_balloon_4))
     }
@@ -165,7 +165,7 @@ class GameBalloonFragment : AbstractGameFragment() {
             ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val gameConfiguration = context!!.readBalloonGameConfiguration()
+        val gameConfiguration = requireContext().readBalloonGameConfiguration()
         val difficultyFactor = getDifficultyNumericValue()
 
         // Define the observer
@@ -190,7 +190,7 @@ class GameBalloonFragment : AbstractGameFragment() {
             // Define listeners
             GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
                 find<ConstraintLayout>(R.id.clBalloonGamePlaying),
-                context!!
+                requireContext()
             )
         }
     }
@@ -216,19 +216,19 @@ class GameBalloonFragment : AbstractGameFragment() {
         val (a, b, c, d, e, f, g, h) = configuration
 
         when (inputsParser.prepareValue(userInput, difficultyFactor)) {
-            in a..b -> {
+            in a.toDouble()..b.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_1)
                 balloonPlaying.imageResource = R.mipmap.ic_balloon_0
             }
-            in c..d -> {
+            in c.toDouble()..d.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_2)
                 balloonPlaying.imageResource = R.mipmap.ic_balloon_1
             }
-            in e..f -> {
+            in e.toDouble()..f.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_3)
                 balloonPlaying.imageResource = R.mipmap.ic_balloon_2
             }
-            in g until h -> {
+            in g.toDouble()..h.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_4)
                 balloonPlaying.imageResource = R.mipmap.ic_balloon_3
             }

@@ -61,7 +61,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.4.0
+ * @version 2.5.0
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
@@ -203,7 +203,7 @@ class GameSheepFragment : AbstractGameFragment() {
     override fun startIntroductionAnimation() {
         stopIntroductionAnimation()
         gameIconAnimator = IconAnimator()
-        val period = context!!.readSheepGameConfiguration().walkAnimationPeriod
+        val period = requireContext().readSheepGameConfiguration().walkAnimationPeriod
         gameIconAnimator.animateGameIcon((activity as AppCompatActivity), gameIcon, period,
             arrayOf(R.mipmap.ic_sheep_moving_1, R.mipmap.ic_sheep_moving_2))
     }
@@ -228,11 +228,11 @@ class GameSheepFragment : AbstractGameFragment() {
             ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        defaultGameConfiguration = context!!.readSheepDefaultConfiguration()
-        gameConfiguration = context!!.readSheepGameConfiguration()
+        defaultGameConfiguration = requireContext().readSheepDefaultConfiguration()
+        gameConfiguration = requireContext().readSheepGameConfiguration()
         difficultyFactor = getDifficultyNumericValue()
 
-        val sensorDataSeriesConfiguration = context!!.readSensorDataSeriesConfiguration()
+        val sensorDataSeriesConfiguration = requireContext().readSensorDataSeriesConfiguration()
         lastPoints = SensorDataSeries(sensorDataSeriesConfiguration.queueSize,
                                         sensorDataSeriesConfiguration.intervalForUpdate,
                                         sensorDataSeriesConfiguration.trendThreshold)
@@ -262,7 +262,7 @@ class GameSheepFragment : AbstractGameFragment() {
             // Define listeners
             GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
                 find<ConstraintLayout>(R.id.clSheepGamePlaying),
-                context!!
+                requireContext()
             )
         }
         updateRemainingFencesMessage()
@@ -506,9 +506,9 @@ class GameSheepFragment : AbstractGameFragment() {
             // If animation of fences is started, fences may be added, thus we can detect collisions
             override fun onAnimationStart(animation: Animator) {
                 remainingNumberOfFences = totalNumberOfFences
-                collisionDetector = CollisionDetector(find<ImageView>(R.id.gameIcon), fence, context!!.readCollisionDetectionInterval())
+                collisionDetector = CollisionDetector(find<ImageView>(R.id.gameIcon), fence, requireContext().readCollisionDetectionInterval())
                 collisionDetector.isCollisionDetected.observe(this@GameSheepFragment,
-                    Observer<Boolean> { t -> if (t == true) processCollision() }
+                    { t -> if (t == true) processCollision() }
                 )
                 collisionDetector.startDetection()
             }
