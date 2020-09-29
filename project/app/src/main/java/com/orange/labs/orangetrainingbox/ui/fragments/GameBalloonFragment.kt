@@ -21,11 +21,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
-import com.orange.labs.orangetrainingbox.game.InputsParser
 import com.orange.labs.orangetrainingbox.utils.properties.BalloonGameConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readBalloonAdditionalConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readBalloonGameConfiguration
@@ -45,7 +44,7 @@ import org.jetbrains.anko.support.v4.find
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.4.0
+ * @version 2.56.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
@@ -123,7 +122,7 @@ class GameBalloonFragment : AbstractGameFragment() {
     }
 
     /**
-     * Uses an [IconAnimator] to display several images in the gameicon widget
+     * Uses an [IconAnimator] to display several images in the game icon widget
      */
     override fun startIntroductionAnimation() {
         gameIconAnimator = IconAnimator()
@@ -161,9 +160,9 @@ class GameBalloonFragment : AbstractGameFragment() {
      */
     override fun prepareSensorObserver() {
 
-        // Get the ViewModel.
+        // Get the ViewModel
         model = activity?.run {
-            ViewModelProviders.of(this).get(TrainingBoxViewModel::class.java)
+            ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         val gameConfiguration = context!!.readBalloonGameConfiguration()
@@ -171,9 +170,7 @@ class GameBalloonFragment : AbstractGameFragment() {
 
         // Define the observer
         val sensorBObserver = Observer<Int> { sensorValue ->
-
             processBaahBoxData(gameConfiguration, sensorValue, difficultyFactor)
-
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
@@ -218,7 +215,7 @@ class GameBalloonFragment : AbstractGameFragment() {
 
         val (a, b, c, d, e, f, g, h) = configuration
 
-        when (InputsParser.prepareValue(userInput, difficultyFactor)) {
+        when (inputsParser.prepareValue(userInput, difficultyFactor)) {
             in a..b -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_1)
                 balloonPlaying.imageResource = R.mipmap.ic_balloon_0

@@ -1,19 +1,19 @@
 /**
-Orange Baah Box
-Copyright (C) 2017 – 2020 Orange SA
+    Orange Baah Box
+    Copyright (C) 2017 – 2020 Orange SA
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.orange.labs.orangetrainingbox.utils.properties
@@ -22,7 +22,8 @@ import android.content.Context
 import java.util.*
 
 /**
- * Extension functions to use so as to parse a configuration file in order to define features of configuration elements for the app.
+ * Extension functions to use so as to parse a configuration file in order to define features
+ * configurations.
  *
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
@@ -32,16 +33,20 @@ import java.util.*
 
 // Compile-time constants
 
-private const val DEFAULT_FILENAME = "app_configuration.properties"
-private const val DELIMITER = ";"
-private const val DIFFICULTY_LOW = "low"
-private const val DIFFICULTY_MEDIUM = "medium"
-private const val DIFFICULTY_HIGH = "high"
+/**
+ * Default file name used for properties file
+ */
+const val DEFAULT_FILENAME = "app_configuration.properties"
+
+/**
+ * Delimiter for properties file entries to split values used for games -configurations
+ */
+const val DELIMITER = ";"
 
 /**
  * Load the properties in the reader
  *
- * @param filename The proeprties file to load
+ * @param filename The properties file to load
  * @return Properties The read data
  */
 fun Context.loadProperties(filename: String = DEFAULT_FILENAME): Properties {
@@ -59,7 +64,7 @@ fun Context.loadProperties(filename: String = DEFAULT_FILENAME): Properties {
  */
 fun Context.isDemoFeatureEnabled(): Boolean {
     val properties = loadProperties()
-    return properties.getProperty(PropertiesKeys.ENABLE_DEMO_FEATURE.key).toBoolean()
+    return properties.getProperty(PropertiesKeys.ENABLE_DEMO_FEATURE.key)!!.toBoolean()
 }
 
 /**
@@ -69,7 +74,7 @@ fun Context.isDemoFeatureEnabled(): Boolean {
  */
 fun Context.readCollisionDetectionInterval(): Long {
     val properties = loadProperties()
-    return properties.getProperty(PropertiesKeys.COLLISION_DETECTION_INTERVAL.key).toLong()
+    return properties.getProperty(PropertiesKeys.COLLISION_DETECTION_INTERVAL.key)!!.toLong()
 }
 
 /**
@@ -215,6 +220,8 @@ fun Context.readSensorDataSeriesConfiguration(): SensorDataSeriesConfiguration {
 
 /**
  * Exception to throw if a configuration is not suitable in the properties file
+ *
+ * @property message - The text to display four this exception
  */
 class InvalidConfigurationException(override var message: String): Exception(message)
 
@@ -230,7 +237,8 @@ class InvalidConfigurationException(override var message: String): Exception(mes
  * @param sensorsCharUUID The UUID of the sensor providing data
  * @param sensorCharDescriptorUUID The descriptor of the sensor providing data
  */
-data class BleConfiguration(val serviceUUID: String, val sensorsCharUUID: String, val sensorCharDescriptorUUID: String)
+data class BleConfiguration(val serviceUUID: String, val sensorsCharUUID: String,
+                            val sensorCharDescriptorUUID: String)
 
 /**
  * Models the app configuration for games
@@ -242,7 +250,8 @@ data class BleConfiguration(val serviceUUID: String, val sensorsCharUUID: String
  * @param enableToadGame True to enable the game, false to hide it
  */
 data class AppGamesConfiguration(val enableStarGame: Boolean, val enableBalloonGame: Boolean,
-                                 val enableSheepGame: Boolean, val enableSpaceGame: Boolean, val enableToadGame: Boolean)
+                                 val enableSheepGame: Boolean, val enableSpaceGame: Boolean,
+                                 val enableToadGame: Boolean)
 
 /**
  * Models a bundle of game configuration
@@ -251,7 +260,8 @@ data class AppGamesConfiguration(val enableStarGame: Boolean, val enableBalloonG
  * @param difficultyFactorMedium The difficulty value to apply to calculations for medium level
  * @param difficultyFactorHigh The difficulty value to apply to calculations for high level
  */
-data class DifficultyDetailsConfiguration(val difficultyFactorLow: Double, val difficultyFactorMedium: Double,
+data class DifficultyDetailsConfiguration(val difficultyFactorLow: Double,
+                                          val difficultyFactorMedium: Double,
                                           val difficultyFactorHigh: Double)
 
 /**
@@ -300,7 +310,8 @@ data class BalloonGameConfiguration(val minThreshold1: Int, val maxThreshold1: I
  * @param walkAnimationPeriod Each "frame" of the game icon is animated with this period (in ms)
  * @param moveDuration The duration of each move used by the animator in charge of the sheep icon
  */
-data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: Long, val moveDuration: Long)
+data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: Long,
+                                  val moveDuration: Long)
 
 /**
  * Models a bundle of sheep game default configuration values..
@@ -310,7 +321,8 @@ data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: 
  * @param speedFactors A triple with factors to apply to default speed (low, medium and high)
  */
 data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaultMaxFencesCount: Int,
-                                         val defaultSpeed: Long, val speedFactors: Triple<Float, Float, Float>)
+                                         val defaultSpeed: Long,
+                                         val speedFactors: Triple<Float, Float, Float>)
 
 /**
  * Models a bundle of configuration details for sensor data series
@@ -319,4 +331,5 @@ data class SheepGameDefaultConfiguration(val defaultFencesCount: Int, val defaul
  * @param intervalForUpdate Each interval-th items, compute a ne average of recorded sensor data and store it
  * @param trendThreshold The trend threshold defining if trend is increasing, freezing or decreasing
  */
-data class SensorDataSeriesConfiguration(val queueSize: Int, val intervalForUpdate: Int, val trendThreshold: Int)
+data class SensorDataSeriesConfiguration(val queueSize: Int, val intervalForUpdate: Int,
+                                         val trendThreshold: Int)

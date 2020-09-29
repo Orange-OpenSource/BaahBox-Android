@@ -27,7 +27,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
@@ -37,6 +36,7 @@ import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.game.CollisionDetector
@@ -61,7 +61,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.3.0
+ * @version 2.4.0
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
@@ -198,7 +198,7 @@ class GameSheepFragment : AbstractGameFragment() {
     }
 
     /**
-     * Uses an [IconAnimator] to display several images in the gameicon widget.
+     * Uses an [IconAnimator] to display several images in the game icon widget.
      */
     override fun startIntroductionAnimation() {
         stopIntroductionAnimation()
@@ -225,7 +225,7 @@ class GameSheepFragment : AbstractGameFragment() {
 
         // Get the ViewModel
         model = activity?.run {
-            ViewModelProviders.of(this).get(TrainingBoxViewModel::class.java)
+            ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         defaultGameConfiguration = context!!.readSheepDefaultConfiguration()
@@ -558,8 +558,8 @@ class GameSheepFragment : AbstractGameFragment() {
      * @return Long The speed for the fences
      */
     private fun computeFencesSpeed(): Long {
-        val speedPreference = PreferenceManager.getDefaultSharedPreferences(activity).getInt("pref_key_settings_game_sheep_fences_speed", 0)
-        val speedFactor = when(speedPreference) {
+        val speedFactor = when(PreferenceManager.getDefaultSharedPreferences(activity)
+            .getInt("pref_key_settings_game_sheep_fences_speed", 0)) {
             1 -> defaultGameConfiguration.speedFactors.second
             2 -> defaultGameConfiguration.speedFactors.third
             else /* including 0 */  -> defaultGameConfiguration.speedFactors.first

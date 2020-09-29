@@ -18,7 +18,6 @@
 
 package com.orange.labs.orangetrainingbox.ui.settings
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
@@ -34,9 +33,9 @@ import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfig
  *
  * @author Pierre-Yves Lapersonne
  * @since 24/05/2019
- * @version 1.3.0
+ * @version 1.5.0
  */
-class SettingsActivity : AppCompatActivity() {
+open class SettingsActivity : AppCompatActivity() {
 
 
     /**
@@ -57,7 +56,8 @@ class SettingsActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        versionRelease = buildReleaseString()
+        val pi = packageManager.getPackageInfo(packageName, 0)
+        versionRelease = buildReleaseString(pi.versionName, pi.versionCode)
         supportFragmentManager
             .beginTransaction()
             .replace(android.R.id.content, SettingsFragment())
@@ -75,19 +75,14 @@ class SettingsActivity : AppCompatActivity() {
     /**
      * Procedure which will build a user-friendly string describing the version of the app
      *
+     * @param versionName - The name of the version
+     * @param versionCode - The build code
      * @return String A string with version name and version code
      */
-    private fun buildReleaseString(): String {
+    fun buildReleaseString(versionName: String, versionCode: Int): String {
         val sb = StringBuilder()
-        try {
-            val pi = packageManager.getPackageInfo(packageName, 0)
-            val versionName = pi.versionName
-            sb.append("Version ").append(versionName)
-            val versionCode = pi.versionCode
-            sb.append(" - Build ").append(versionCode)
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
+        sb.append("Version ").append(versionName)
+        sb.append(" - Build ").append(versionCode)
         return sb.toString()
     }
 
@@ -146,7 +141,9 @@ class SettingsActivity : AppCompatActivity() {
         private fun prepare3rdPartyPreference() {
             val licensesPreference: Preference = findPreference("pref_key_about_licenses")!!
             licensesPreference.setOnPreferenceClickListener {
-                LicensesDisplayer().displayLicenses(activity!!)
+                val displayer = LicensesDisplayer()
+                val notices = displayer.prepareNotices(activity!!)
+                displayer.displayNotices(activity!!, notices)
                 true
             }
         }
@@ -201,7 +198,7 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-    } // End of class MySettingsFragment
+    } // End of class SettingsFragment
 
 } // End of class SettingsActivity : AppCompatActivity()
 

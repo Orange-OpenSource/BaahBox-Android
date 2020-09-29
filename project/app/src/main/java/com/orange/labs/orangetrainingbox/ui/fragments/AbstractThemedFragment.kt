@@ -68,7 +68,7 @@ abstract class AbstractThemedFragment : Fragment() {
      */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu?.forEach { menuItem ->
+        menu.forEach { menuItem ->
             menuItem.icon?.let {
                 it.mutate()
                 it.setColorFilter(resources.getColor(themingColor), PorterDuff.Mode.SRC_ATOP)

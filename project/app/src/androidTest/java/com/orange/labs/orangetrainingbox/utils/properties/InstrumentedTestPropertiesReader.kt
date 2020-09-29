@@ -28,7 +28,7 @@ import org.junit.runner.RunWith
 
 
 /**
- * To test [PropertiesReader] class.
+ * To test [Context] extensions to use for properties loading.
  * See [testing documentation](http://d.android.com/tools/testing).
  *
  * @author Pierre-Yves Lapersonne
@@ -58,16 +58,21 @@ class InstrumentedTestPropertiesReader {
     }
 
     /**
-     * Test the loastProperties() Context extension.
+     * Test the loadProperties() Context extension.
      */
-    @Test (expected=java.io.FileNotFoundException::class)
+    @Test
     fun loadProperties() {
-
         val props = appContext!!.loadProperties()
         assertNotNull(props)
-        appContext!!.loadProperties("foo-bar-wizz.properties")
-        // Must throw java.io.FileNotFoundException:
+    }
 
+    /**
+     * The loadProperties() method must throw a [java.io.FileNotFoundException] if the properties
+     * file name does not point to anything existing.
+     */
+    @Test (expected=java.io.FileNotFoundException::class)
+    fun loadPropertiesWithBadFileName() {
+        appContext!!.loadProperties("foo-bar-wizz.properties")
     }
 
     /**
@@ -181,14 +186,10 @@ class InstrumentedTestPropertiesReader {
      */
     @Test
     fun readBalloonAdditionalConfiguration() {
-
         val expectedConfig = appContext!!.loadProperties()
             .getProperty(PropertiesKeys.GAME_BALLOON_INTRODUCTION_ANIMATION_PERIOD.key).toLong()
-
         val balloonAdditionalConfig = appContext!!.readBalloonAdditionalConfiguration()
-
         assertTrue(expectedConfig == balloonAdditionalConfig)
-
     }
 
     /**
@@ -255,13 +256,9 @@ class InstrumentedTestPropertiesReader {
      */
     @Test
     fun isDemoModeActivated() {
-
         val expectedFlag = appContext!!.loadProperties().getProperty(PropertiesKeys.ENABLE_DEMO_FEATURE.key).toBoolean()
-
         val config = appContext!!.isDemoFeatureEnabled()
-
         assertEquals(expectedFlag, config)
-
     }
 
     /**
@@ -269,13 +266,9 @@ class InstrumentedTestPropertiesReader {
      */
     @Test
     fun readCollisionDetectionInterval() {
-
         val expectedInterval = appContext!!.loadProperties().getProperty(PropertiesKeys.COLLISION_DETECTION_INTERVAL.key).toLong()
-
         val config = appContext!!.readCollisionDetectionInterval()
-
         assertTrue(expectedInterval == config)
-
     }
 
 }

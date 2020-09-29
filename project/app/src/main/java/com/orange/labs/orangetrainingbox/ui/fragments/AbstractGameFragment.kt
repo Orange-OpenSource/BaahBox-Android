@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_game_star_outro.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.view.*
 import androidx.preference.PreferenceManager
-import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import com.orange.labs.orangetrainingbox.game.InputsParser
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 
 
@@ -39,7 +39,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 23/05/2019
- * @version 2.1.1
+ * @version 2.2.0
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
@@ -64,6 +64,10 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
      */
     protected lateinit var model: TrainingBoxViewModel
 
+    /**
+     * The object which will process the data received from the box
+     */
+    protected val inputsParser: InputsParser by lazy { InputsParser() }
 
     // *******
     // Methods

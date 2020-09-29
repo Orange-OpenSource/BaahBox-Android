@@ -17,10 +17,6 @@
  */
 package com.orange.labs.orangetrainingbox.utils.structures
 
-import android.annotation.SuppressLint // YOLO
-import com.orange.labs.orangetrainingbox.utils.logs.Logger
-
-
 // **********************
 // Compile-time constants
 // **********************
@@ -53,7 +49,7 @@ private const val POWERFUL_MOVE_DIFF = 200
  * This structure allows to check if data are parasites, powerful move or simple move.
  *
  * @param historySize Higher is this value, bigger is the number of sensor data records
- * @param intervalForUpdate All INTERVAL_FOR_UPDATEth items, compute a new average and store it.
+ * @param intervalForUpdate All INTERVAL_FOR_UPDATE-th items, compute a new average and store it.
  * @param trendThreshold The trend threshold defining if trend is increasing, freezing or decreasing
  *
  * @author Pierre-Yves Lapersonne
@@ -128,9 +124,8 @@ class SensorDataSeries(private val historySize: Int,
      * Adds a new record of sensor data in the queue.
      * The [Queue] object will do the job of checking the size and cleaning.
      *
-     * @param record The new record to record      ┬─┬﻿ ︵ /(.□. \）
+     * @param record The new record to record
      */
-    @SuppressLint("ByteOrderMark")
     fun addRecord(record: Int) {
 
         countDownForAverage--
@@ -172,7 +167,7 @@ class SensorDataSeries(private val historySize: Int,
      * @return Int
      */
     fun computeAverage(): Int {
-        return sensorDataQueue.average<Int>()
+        return sensorDataQueue.average()
     }
 
     /**

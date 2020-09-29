@@ -39,7 +39,7 @@ class Logger {
         private const val TAG = "BaahBox"
 
         /**
-         * Use the common logger to log a message in the verbsose channel, prefixed with ✏️
+         * Use the common logger to log a message in the verbose channel, prefixed with ✏️
          * @param message The message to log
          */
         @Suppress("unused")

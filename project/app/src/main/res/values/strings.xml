@@ -105,6 +105,8 @@
     <string name="iv_balloon_description">image of a balloon</string>
     <string name="iv_toad_description">image of a toad</string>
     <string name="iv_sheep_description">image of a sheep</string>
+    <string name="iv_sheep_bang_description">image of a bang</string>
+    <string name="iv_sheep_floor_description">image of the floor</string>
     <string name="iv_space_description">image of a spaceship</string>
 
     <string name="btn_start">Start</string>

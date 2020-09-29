@@ -26,7 +26,7 @@ import java.lang.IllegalArgumentException
  *
  * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.0.0
+ * @version 1.1.0
  */
 class UnitTestQueue {
 
@@ -253,17 +253,17 @@ class UnitTestQueue {
         // Limitless queue
         var queue = Queue<Int>(0)
         queue.enqueueAll(list)
-        assertTrue(queue.average<Int>() == average)
+        assertTrue(queue.average() == average)
 
         // Limited queue - limit not reached
         queue = Queue(10)
         queue.enqueueAll(list)
-        assertTrue(queue.average<Int>() == average)
+        assertTrue(queue.average() == average)
 
         // Limited queue - reached limit
         queue = Queue(3)
         queue.enqueueAll(list)
-        assertTrue(queue.average<Int>() == 5) // average(4, 5, 6) = 5
+        assertTrue(queue.average() == 5) // average(4, 5, 6) = 5
 
     }
 

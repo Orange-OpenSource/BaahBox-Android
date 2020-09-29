@@ -41,6 +41,7 @@
         android:id="@+id/gameIcon"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/iv_space_description"
         app:layout_constraintDimensionRatio="H, 1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

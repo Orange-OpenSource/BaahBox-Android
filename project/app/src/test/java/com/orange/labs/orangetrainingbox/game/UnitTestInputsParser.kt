@@ -18,11 +18,11 @@
 package com.orange.labs.orangetrainingbox.game
 
 import android.bluetooth.BluetoothGattCharacteristic
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockBluetoothGattCharacteristic
+import org.junit.Assert.*
 import org.junit.Test
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+
+import java.lang.IllegalArgumentException
 
 /**
 * To test [InputsParser] class.
@@ -33,52 +33,168 @@ import org.mockito.Mockito.mock
 */
 class UnitTestInputsParser {
 
+    // ************
+    // InputsParser
+    // ************
+
     /**
-     * Test the prepareValue() method
+     * The object to test
      */
-    @Test
-    fun prepareValue() {
+    private var inputsParser = InputsParser()
 
-        //                                              Picked from prepareValue() definition
-        val expectedPreparedValue: (Int, Double) -> Int = { value, factor -> ((value / 10) * factor).toInt() }
-
-        // Be lazy ;-)
-        val assertEqualsForValues: (Int, Double) -> Unit = { value, factor ->
-            assertEquals(InputsParser.prepareValue(value, factor), expectedPreparedValue(value, factor))
-        }
-
-        assertEqualsForValues(0, 0.0)
-        assertEqualsForValues(Int.MIN_VALUE, Double.MIN_VALUE)
-        assertEqualsForValues(Int.MAX_VALUE, Double.MAX_VALUE)
-        assertEqualsForValues(0, 10.0)
-        assertEqualsForValues(10, 0.0)
-        assertEqualsForValues(10, 10.0)
-        assertEqualsForValues(1023, 1023.0)
-        assertEqualsForValues(1024, 1024.0)
-        assertEqualsForValues(1024, 1.5)
-        assertEqualsForValues(2022, 0.9)
-        assertEqualsForValues(888, 0.7)
-
+    /**
+     * A negative factor can't be used
+     */
+    @Test (expected = IllegalArgumentException::class)
+    fun `should throw exception if factor is negative`() {
+        // Given
+        val sensorValue = 888
+        val factor = -888.0
+        // When - Then
+        inputsParser.prepareValue(sensorValue, factor)
     }
 
     /**
-     * Test the extractValuesCharacteristic() method
+     * A null factor can't be used
+     */
+    @Test (expected = IllegalArgumentException::class)
+    fun `should throw exception if factor is null`() {
+        // Given
+        val sensorValue = 888
+        val factor = 0.0
+        // When - Then
+        inputsParser.prepareValue(sensorValue, factor)
+    }
+
+    /**
+     * A prepared value must be equal to sensor value if factor is equal to [GAME_LOGIC_DIVIDER]
+     */
+    @Test
+    fun `prepared value should be equal to sensor value if factor equal to divider`() {
+        // Given
+        val sensorValue = 237
+        val factor = GAME_LOGIC_DIVIDER.toDouble()
+        // When
+        val gameValue = inputsParser.prepareValue(sensorValue, factor)
+        // Then
+        assertTrue("$sensorValue != $gameValue", sensorValue.toDouble() == gameValue)
+    }
+
+    /**
+     * A prepared value must be greater than sensor value if factor is greater than [GAME_LOGIC_DIVIDER]
+     */
+    @Test
+    fun `prepared value should be greater than sensor value if factor greater than divider`() {
+        // Given
+        val sensorValue = 237
+        val factor = GAME_LOGIC_DIVIDER.toDouble() * 2
+        // When
+        val gameValue = inputsParser.prepareValue(sensorValue, factor)
+        // Then
+        assertTrue("$sensorValue >= $gameValue", gameValue > sensorValue.toDouble())
+    }
+
+    /**
+     * A prepared value must be lower than sensor value if factor is lower than [GAME_LOGIC_DIVIDER]
+     */
+    @Test
+    fun `prepared value should be lower than sensor value if factor lower than divider`() {
+        // Given
+        val sensorValue = 237
+        val factor = GAME_LOGIC_DIVIDER.toDouble() * 0.5
+        // When
+        val gameValue = inputsParser.prepareValue(sensorValue, factor)
+        // Then
+        assertTrue("$sensorValue <= $gameValue", gameValue < sensorValue.toDouble())
+    }
+
+    /**
+     * Ensures the [GAME_LOGIC_DIVIDER] factor ha snot been changed without care
+     */
+    @Test
+    fun `the game logic divider should be equal to 10`() {
+        assertTrue("$GAME_LOGIC_DIVIDER != 10", GAME_LOGIC_DIVIDER == 10)
+    }
+
+    /**
+     * If no frame is processed, returns default muscle data
+     */
+    @Test
+    fun `muscle data should be -1 if not frame is processed`(){
+        // Given
+        val frame: BluetoothGattCharacteristic? = null
+        // When
+        val muscleData = inputsParser.extractValuesCharacteristic(frame)
+        // Then
+        assertTrue(muscleData.muscle1 == -1)
+        assertTrue(muscleData.muscle2 == -1)
+        assertTrue(muscleData.joystick == -1)
+    }
+
+    /**
+     * Checks if the muscle 1 value if computed using c1 multiplied by 32 and with added a1
+     */
+    @Test
+    fun `muscle1 should be equal to c1 * 32 + a1`(){
+        // Given
+        val c1 = 5
+        val a1 = 6
+        val expected = c1 * 32 + a1
+        val frame = mockBluetoothGattCharacteristic(c1, a1, 0, 0, 0)
+        // When
+        val muscleData = inputsParser.extractValuesCharacteristic(frame)
+        // Then
+        assertEquals("${muscleData.muscle1} != $expected", muscleData.muscle1, expected)
+    }
+
+    /**
+     * Checks if the muscle 2 value if computed using c2 multiplied by 32 and with added a2
+     */
+    @Test
+    fun `muscle2 should be equal to c2 * 32 + a2`(){
+        // Given
+        val c2 = 64
+        val a2 = 9
+        val expected = c2 * 32 + a2
+        val frame = mockBluetoothGattCharacteristic(0, 0, c2, a2, 0)
+        // When
+        val muscleData = inputsParser.extractValuesCharacteristic(frame)
+        // Then
+        assertEquals("${muscleData.muscle2} != $expected", muscleData.muscle2, expected)
+    }
+
+    /**
+     * Checks if the joystick value is equal to jbin
+     */
+    @Test
+    fun `joystick should be equal to jbin`(){
+        // Given
+        val joystick = 42 // expected and for mock
+        val frame = mockBluetoothGattCharacteristic(0, 0, 0, 0, joystick)
+        // When
+        val muscleData = inputsParser.extractValuesCharacteristic(frame)
+        // Then
+        assertEquals("${muscleData.joystick} != $joystick", muscleData.joystick, joystick)
+    }
+
+    /**
+     * Test the extractValuesCharacteristic() method with limit and random values (defined or null).
      */
     @Test
     fun extractValuesCharacteristic() {
 
         // Null frame
-        val muscleData = InputsParser.extractValuesCharacteristic(null)
+        val muscleData = inputsParser.extractValuesCharacteristic(null)
         assertTrue(muscleData.muscle1 == -1)
         assertTrue(muscleData.muscle2 == -1)
         assertTrue(muscleData.joystick == -1)
 
         // To compute our own muscle data and ensure the BluetoothGattCharacteristic computes another object with the
-        // ame raw values
+        // same raw values
         val mockAndCheck: (Int, Int, Int, Int, Int) -> Pair<MuscleData, BluetoothGattCharacteristic> = {
             c1, a1, c2, a2, joystick ->
             val expectedMuscleData = MuscleData( c1 * 32 + a1, c2 * 32 + a2, joystick)
-            val mock = createMockCharacteristic(c1, a1, c2, a2, joystick)
+            val mock = mockBluetoothGattCharacteristic(c1, a1, c2, a2, joystick)
             Pair(expectedMuscleData, mock)
         }
 
@@ -86,7 +202,7 @@ class UnitTestInputsParser {
         val testFrameParsing: (Int, Int, Int, Int, Int) -> Unit = {
             c1, a1, c2, a2, joystick ->
             val (expectedMuscle, bluetoothMock) = mockAndCheck(c1, a1, c2, a2, joystick)
-            val gottenMuscle = InputsParser.extractValuesCharacteristic(bluetoothMock)
+            val gottenMuscle = inputsParser.extractValuesCharacteristic(bluetoothMock)
             assertEquals(expectedMuscle.muscle1, gottenMuscle.muscle1)
             assertEquals(expectedMuscle.muscle2, gottenMuscle.muscle2)
             assertEquals(expectedMuscle.joystick, gottenMuscle.joystick)
@@ -102,48 +218,80 @@ class UnitTestInputsParser {
 
     }
 
-    // ****************
-    // Helper functions
-    // ****************
+    // **********
+    // MuscleData
+    // **********
 
     /**
-     * Creates using Mockito library a mock object for class BluetoothGattCharacteristic.
      *
-     * This mock will return the same frame with raw values.
-     * The format of the frame follows implementation of the v2.0.0 protocol of Arduino firmware embedded in
-     * the Baah Box (https://github.com/Orange-OpenSource/BaahBox-Arduino/releases).
-     *
-     * Thus the frame contains 6 bytes like:
-     <pre>
-        It models data like <muscle1, muscle2, Joystic=JBin, EndOfFrame>
-        Where:
-            - muscle1 = C1 x 32 + a1
-            - muscle2 = C2 x 32 + a2
-            - joystic = JBin
-            - EndOfFrame = 90 -> '\n'
-     </pre>
-     *
-     * See: https://site.mockito.org/
-     *
-     * @param c1 Used to compute the muscle 1 value, multiplied by 32
-     * @param a1 Added to result of c1 x 32 to compute muscle 1 value
-     * @param c2 Used to compute the muscle 2 value, multiplied by 32
-     * @param a2 Added to result of c2 x 32 to compute muscle 2 value
-     * @param joystick Joystick value
-     * @return BluetoothGattCharacteristic The mocked object
      */
-    private fun createMockCharacteristic(c1: Int, a1: Int, c2: Int, a2: Int, joystick: Int): BluetoothGattCharacteristic {
+    @Test
+    fun `muscle1 can be equal to 0`(){
+        assertNotNull(MuscleData(0, 1, 1))
+    }
 
-        val mock: BluetoothGattCharacteristic = mock(BluetoothGattCharacteristic::class.java)
+    /**
+     *
+     */
+    @Test
+    fun `muscle1 can be negative`(){
+        assertNotNull(MuscleData(-1, 1, 1))
+    }
 
-        `when`(mock.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,0)).thenReturn(c1)
-        `when`(mock.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,1)).thenReturn(a1)
-        `when`(mock.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,2)).thenReturn(c2)
-        `when`(mock.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,3)).thenReturn(a2)
-        `when`(mock.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8,4)).thenReturn(joystick)
+    /**
+     *
+     */
+    @Test
+    fun `muscle1 can be positive`(){
+        assertNotNull(MuscleData(1, 1, 1))
+    }
 
-        return mock
+    /**
+     *
+     */
+    @Test
+    fun `muscle2 can be equal to 0`(){
+        assertNotNull(MuscleData(1, 0, 1))
+    }
 
+    /**
+     *
+     */
+    @Test
+    fun `muscle2 can be negative`(){
+        assertNotNull(MuscleData(1, -1, 1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `muscle2 can be positive`(){
+        assertNotNull(MuscleData(1, 1, 1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `joystick can be equal to 0`(){
+        assertNotNull(MuscleData(1, 1, 0))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `joystick can be negative`(){
+        assertNotNull(MuscleData(1, 1, -1))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `joystick can be positive`(){
+        assertNotNull(MuscleData(1, 1, 1))
     }
 
 }

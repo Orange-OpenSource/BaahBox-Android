@@ -1,0 +1,26 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.orange.labs.orangetrainingbox.game$computeHitbox(android.view.View)com.orange.labs.orangetrainingbox.game/android.view.-view/compute-hitbox.html
+$dokka.location:com.orange.labs.orangetrainingbox.ui$isDisabled#android.bluetooth.BluetoothAdaptercom.orange.labs.orangetrainingbox.ui/android.bluetooth.-bluetooth-adapter/is-disabled.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$isDemoFeatureEnabled(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/is-demo-feature-enabled.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$loadProperties(android.content.Context, kotlin.String)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/load-properties.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readAppGamesConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-app-games-configuration.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readBalloonAdditionalConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-balloon-additional-configuration.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readBalloonGameConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-balloon-game-configuration.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readBleSensorsConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-ble-sensors-configuration.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readCollisionDetectionInterval(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-collision-detection-interval.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readDifficultyDetailsConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-difficulty-details-configuration.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readSensorDataSeriesConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-sensor-data-series-configuration.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readSheepDefaultConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-sheep-default-configuration.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readSheepGameConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-sheep-game-configuration.html
+$dokka.location:com.orange.labs.orangetrainingbox.utils.properties$readStarGameConfiguration(android.content.Context)com.orange.labs.orangetrainingbox.utils.properties/android.content.-context/read-star-game-configuration.html
+com.orange.labs.orangetrainingbox.btle
+com.orange.labs.orangetrainingbox.game
+com.orange.labs.orangetrainingbox.ui
+com.orange.labs.orangetrainingbox.ui.animations
+com.orange.labs.orangetrainingbox.ui.demo
+com.orange.labs.orangetrainingbox.ui.fragments
+com.orange.labs.orangetrainingbox.ui.settings
+com.orange.labs.orangetrainingbox.utils.logs
+com.orange.labs.orangetrainingbox.utils.properties
+com.orange.labs.orangetrainingbox.utils.structures

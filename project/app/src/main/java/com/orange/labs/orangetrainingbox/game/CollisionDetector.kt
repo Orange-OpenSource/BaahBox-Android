@@ -20,7 +20,6 @@ package com.orange.labs.orangetrainingbox.game
 import android.os.Handler
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import com.orange.labs.orangetrainingbox.utils.logs.Logger
 
 
 // *******

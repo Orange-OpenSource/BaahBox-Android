@@ -51,9 +51,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.BleConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import com.orange.labs.orangetrainingbox.utils.properties.readBleSensorsConfiguration
 import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
-import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.longToast
 
 // **********
 // Properties
@@ -65,6 +63,19 @@ import org.jetbrains.anko.longToast
 private val BluetoothAdapter.isDisabled: Boolean
     get() = !isEnabled
 
+/**
+ * Result code for BLE enabling
+ */
+const val REQUEST_ENABLE_BT = 42
+/**
+ * Result code for BLE permission
+ */
+const val REQUEST_BT_PERMISSION = 41
+/**
+ * Result code for settings screen
+ */
+const val REQUEST_SETTINGS = 1337
+
 // *******
 // Classes
 // *******
@@ -72,10 +83,10 @@ private val BluetoothAdapter.isDisabled: Boolean
 /**
  * Main activity of the application.
  *
- * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
+ * @author Marc Poppleton
  * @since 23/10/2018
- * @version 2.2.0
+ * @version 2.3.0
  */
 class MainActivity : AppCompatActivity() {
 
@@ -84,7 +95,14 @@ class MainActivity : AppCompatActivity() {
     // **********
 
     /**
-     * Flag indicating if the pop-up for appearing should be displayed or not
+     * A reference to the model of the app, here with references to the BLE devices.
+     */
+    private lateinit var model: TrainingBoxViewModel
+
+    // Bluetooth
+
+    /**
+     * Flag indicating if the pop-up for pairing should be displayed or not
      */
     private var showingPopup = false
 
@@ -92,16 +110,6 @@ class MainActivity : AppCompatActivity() {
      * Flag indicating if a BLE connection is on going
      */
     private var connected: Boolean = false
-
-    private val REQUEST_ENABLE_BT = 42
-    private val REQUEST_BT_PERMISSION = 41
-    private val REQUEST_SETTINGS = 1337
-
-
-    /**
-     * A reference to the model of the app, here with references to the BLE devices.
-     */
-    private lateinit var model: TrainingBoxViewModel
 
     /**
      * The BLE configuration to apply for sensors and callbacks
@@ -116,7 +124,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bluetoothGatt: BluetoothGatt
 
     /**
-     * A reference to the Bluetooth adapter so as tod eal with its feature
+     * A reference to the Bluetooth adapter so as to deal with its feature
      */
     private val bluetoothAdapter: BluetoothAdapter? by lazy(LazyThreadSafetyMode.NONE) {
         val bluetoothManager = applicationContext.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
@@ -154,6 +162,8 @@ class MainActivity : AppCompatActivity() {
      * changes of services etc.
      */
     private val btleGattCallback: BluetoothGattCallback = object : BluetoothGattCallback() {
+
+        val inputsParser = InputsParser()
 
         /**
          * Triggered if the connection state has been changed.
@@ -208,7 +218,7 @@ class MainActivity : AppCompatActivity() {
          */
         override fun onCharacteristicChanged(gatt: BluetoothGatt?, characteristic: BluetoothGattCharacteristic?) {
             super.onCharacteristicChanged(gatt, characteristic)
-            val (muscle1, _, _) = InputsParser.extractValuesCharacteristic(characteristic)
+            val (muscle1, _, _) = inputsParser.extractValuesCharacteristic(characteristic)
             model.sensorB.postValue(muscle1)
         }
 

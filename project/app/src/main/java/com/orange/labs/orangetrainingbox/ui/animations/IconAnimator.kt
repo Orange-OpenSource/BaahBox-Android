@@ -75,7 +75,7 @@ class IconAnimator {
         }
     }
 
-    /***
+    /**
      * Stops the timer and its work
      */
     fun stopAnimateGameIcon() {

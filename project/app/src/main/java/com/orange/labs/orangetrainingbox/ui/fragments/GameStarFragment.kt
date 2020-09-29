@@ -21,11 +21,10 @@ import android.graphics.drawable.Animatable
 import android.os.Bundle
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
-import com.orange.labs.orangetrainingbox.game.InputsParser
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readStarGameConfiguration
@@ -36,12 +35,12 @@ import org.jetbrains.anko.support.v4.find
 
 /**
  * A subclass of [AbstractGameFragment] implementing the star game.
- * Player should contract one muscle strnger and stronger so as to make a star shine.
+ * Player should contract one muscle stronger and stronger so as to make a star shine.
  *
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.5.0
+ * @version 2.6.0
  * @see [AbstractGameFragment]
  */
 class GameStarFragment : AbstractGameFragment() {
@@ -109,7 +108,7 @@ class GameStarFragment : AbstractGameFragment() {
     }
 
     /**
-     * Get the drawable content of the gameicon widget and makes it start its animation
+     * Get the drawable content of the game icon widget and makes it start its animation
      */
     override fun startIntroductionAnimation() {
         (gameIcon.drawable as Animatable).start()
@@ -130,7 +129,7 @@ class GameStarFragment : AbstractGameFragment() {
 
         // Get the ViewModel.
         model = activity?.run {
-            ViewModelProviders.of(this).get(TrainingBoxViewModel::class.java)
+            ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
         val gameConfiguration = context!!.readStarGameConfiguration()
@@ -173,7 +172,7 @@ class GameStarFragment : AbstractGameFragment() {
     /**
      * The logic of this game.
      * Get from properties the thresholds to apply for the game.
-     * According to the gotten sensor value, will display the sutable congratulation message and change the star transparency
+     * According to the gotten sensor value, will display the suitable congratulation message and change the star transparency
      * to make it shine.
      *
      * @param configuration The game configuration
@@ -183,9 +182,9 @@ class GameStarFragment : AbstractGameFragment() {
     private fun processBaahBoxData(configuration: StarGameConfiguration, userInput: Int,
                                    difficultyFactor: Double) {
 
-        val parsedSensorValue = InputsParser.prepareValue(userInput, difficultyFactor)
+        val parsedSensorValue = inputsParser.prepareValue(userInput, difficultyFactor)
         val (a, b, c, d, e, f) = configuration
-        starPlaying.alpha = parsedSensorValue / f.toFloat()
+        starPlaying.alpha = parsedSensorValue.toFloat() / f.toFloat()
 
         when (parsedSensorValue) {
             in a..b -> {

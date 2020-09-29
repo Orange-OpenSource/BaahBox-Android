@@ -130,11 +130,11 @@ class Queue<T>(private val maxSize: Int) {
 // **********************************
 
 /**
- * Computes an average fior a queue of integers.
+ * Computes an average for a queue of integers.
  *
  * @return Int The average of items in this list
  */
-fun <Int> Queue<kotlin.Int>.average(): kotlin.Int {
+fun Queue<Int>.average(): Int {
     val count = count()
     if (count <= 0) return 0
     var sum = 0
