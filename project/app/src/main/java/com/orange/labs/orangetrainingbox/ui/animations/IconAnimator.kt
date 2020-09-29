@@ -19,7 +19,6 @@ package com.orange.labs.orangetrainingbox.ui.animations
 
 import android.app.Activity
 import android.widget.ImageView
-import org.jetbrains.anko.imageResource
 import java.lang.IllegalArgumentException
 import java.util.*
 import kotlin.concurrent.schedule
@@ -92,7 +91,7 @@ class IconAnimator {
     private fun displaySuitableImage(imageView: ImageView, images: Array<Int>)  {
         val maxIndex = images.size - 1
         if (ticker > maxIndex) ticker = 0
-        imageView.imageResource = images[ticker]
+        imageView.setImageResource(images[ticker])
         ticker++
     }
 

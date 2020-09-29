@@ -43,7 +43,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionCode 31
-        versionName "0.7.2"
+        versionName "0.8.0"
         vectorDrawables.useSupportLibrary true
     }
 
@@ -122,9 +122,6 @@ dependencies {
     // Material Design
     implementation "androidx.legacy:legacy-support-core-utils:$rootProject.coreUtilsVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
-
-    // Anko: to make things easier with Android and Kotlin
-    implementation "org.jetbrains.anko:anko:$rootProject.ankoVersion"
 
     // LicensesDialog: to display third party contents
     implementation "de.psdev.licensesdialog:licensesdialog:$rootProject.licensesDialogVersion"

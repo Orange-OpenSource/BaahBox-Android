@@ -18,14 +18,13 @@
 package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.os.Bundle
-import androidx.navigation.findNavController
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import com.orange.labs.orangetrainingbox.utils.properties.readDifficultyDetailsConfiguration
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import kotlinx.android.synthetic.main.fragment_game_star_outro.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.view.*
+import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.game.InputsParser
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
@@ -39,7 +38,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 23/05/2019
- * @version 2.3.0
+ * @version 2.4.0
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
@@ -106,17 +105,14 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
 
             // First start of the game
             if (introducing) {
-
                 startIntroductionAnimation()
-
-                btnPlay.onClick {
+                btnPlay.setOnClickListener {
                     it!!.findNavController().navigate(actionFromIntroductionToPlaying)
                     stopIntroductionAnimation()
                 }
-
             // Restart the game
             } else {
-                btnRestart.onClick {
+                btnRestart.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putBoolean("introducing", false)
                     bundle.putBoolean("playing", true)

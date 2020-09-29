@@ -35,13 +35,13 @@ import android.os.ParcelUuid
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.preference.PreferenceManager
 import java.util.*
-import org.jetbrains.anko.toast
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
@@ -86,7 +86,7 @@ const val REQUEST_SETTINGS = 1337
  * @author Pierre-Yves Lapersonne
  * @author Marc Poppleton
  * @since 23/10/2018
- * @version 2.3.0
+ * @version 2.4.0
  */
 class MainActivity : AppCompatActivity() {
 
@@ -324,7 +324,7 @@ class MainActivity : AppCompatActivity() {
                                 2 -> model.difficultyFactor = DifficultyFactor.HIGH
                                 else /* and 1 */ -> model.difficultyFactor = DifficultyFactor.MEDIUM
                         }
-                        toast(this.getString(R.string.toast_difficulty_factor_changed, model.difficultyFactor))
+                        Toast.makeText(this@MainActivity, this.getString(R.string.toast_difficulty_factor_changed, model.difficultyFactor), Toast.LENGTH_LONG).show()
                         Logger.d("Hardness factor has been changed: ${model.difficultyFactor}")
                     }
                 }
@@ -419,7 +419,7 @@ class MainActivity : AppCompatActivity() {
             val device = model.getBoxes().value?.let { value -> value.toTypedArray()[i] }
             device?.let { it ->
                 bluetoothGatt = it.connectGatt(this, false, btleGattCallback)
-                toast(this@MainActivity.getString(R.string.toast_connected_to_hand, it.name, it.address))
+                Toast.makeText(this@MainActivity, this.getString(R.string.toast_connected_to_hand, it.name, it.address), Toast.LENGTH_LONG).show()
             }
             showingPopup = false
         }

@@ -26,7 +26,6 @@ import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import com.orange.labs.orangetrainingbox.utils.properties.readAppGamesConfiguration
 import kotlinx.android.synthetic.main.fragment_main.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 
 /**
  * A placeholder fragment containing a simple view.
@@ -34,7 +33,7 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 1.2.0
+ * @version 1.3.0
  */
 class MainActivityFragment : AbstractThemedFragment() {
 
@@ -67,35 +66,35 @@ class MainActivityFragment : AbstractThemedFragment() {
         val (enableStar, enableBalloon, enableSheep, enableSpace, enableToad) = requireContext().readAppGamesConfiguration()
 
         if (enableStar) {
-            menu_star.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameStarFragment) }
+            menu_star.setOnClickListener { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameStarFragment) }
         } else {
             Logger.i("Star game is not enabled")
             menu_star.alpha = 0.1f
         }
 
         if (enableBalloon) {
-            menu_balloon.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameBalloonFragment) }
+            menu_balloon.setOnClickListener { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameBalloonFragment) }
         } else {
             Logger.i("Balloon game is not enabled")
             menu_balloon.alpha = 0.1f
         }
 
         if (enableSheep) {
-            menu_sheep.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameSheepFragment) }
+            menu_sheep.setOnClickListener { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameSheepFragment) }
         } else {
             Logger.i("Sheep game is not enabled")
             menu_sheep.alpha = 0.1f
         }
 
         if (enableSpace) {
-            menu_space.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameSpaceFragment) }
+            menu_space.setOnClickListener { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameSpaceFragment) }
         } else {
             Logger.i("Space game is not enabled")
             menu_space.alpha = 0.1f
         }
 
         if (enableToad) {
-            menu_toad.onClick { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameToadFragment) }
+            menu_toad.setOnClickListener { it!!.findNavController().navigate(R.id.action_mainActivityFragment_to_gameToadFragment) }
         } else {
             Logger.i("Toad game is not enabled")
             menu_toad.alpha = 0.1f

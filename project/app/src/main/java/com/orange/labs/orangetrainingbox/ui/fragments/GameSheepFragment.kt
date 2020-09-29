@@ -31,8 +31,6 @@ import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
-import org.jetbrains.anko.imageResource
-import org.jetbrains.anko.support.v4.find
 import android.util.TypedValue
 import android.util.DisplayMetrics
 import android.widget.TextView
@@ -61,7 +59,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.5.0
+ * @version 2.6.0
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
@@ -261,7 +259,7 @@ class GameSheepFragment : AbstractGameFragment() {
             model.sensorB.postValue(0)
             // Define listeners
             GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
-                find<ConstraintLayout>(R.id.clSheepGamePlaying),
+                requireActivity().findViewById(R.id.clSheepGamePlaying),
                 requireContext()
             )
         }
@@ -297,15 +295,22 @@ class GameSheepFragment : AbstractGameFragment() {
         if (!loadFromArgsFlagIntroducing()
             && !loadFromArgsFlagPlaying()) {
 
+            val activity = requireActivity()
+            val ivSheepFloor: ImageView =  activity.findViewById(R.id.ivGameSheepFloor)
+            val ivSheepGameResult: ImageView
+            val tvLine1: TextView =  activity.findViewById(R.id.tvLine1)
+            val tvLine2: TextView =  activity.findViewById(R.id.tvLine2)
+
             // If the player has won, display victory image
             if (GameSheepFragmentArgs.fromBundle(arguments).victory) {
 
-                find<ImageView>(R.id.ivGameSheepFloor).visibility = View.INVISIBLE
-                val gameIcon = find<ImageView>(R.id.ivGameSheepVictory)
-                gameIcon.visibility = View.VISIBLE
+                ivSheepFloor.visibility = View.INVISIBLE
 
-                find<TextView>(R.id.tvLine1).text = getString(R.string.game_sheep_congratulations)
-                find<TextView>(R.id.tvLine2).text = getString(R.string.game_sheep_score_success)
+                ivSheepGameResult = activity.findViewById(R.id.ivGameSheepVictory)
+                ivSheepGameResult.visibility = View.VISIBLE
+
+                tvLine1.text = getString(R.string.game_sheep_congratulations)
+                tvLine2.text = getString(R.string.game_sheep_score_success)
 
                 gameIconAnimator = IconAnimator()
                 gameIconAnimator.animateGameIcon((activity as AppCompatActivity), gameIcon, 1000,
@@ -314,13 +319,15 @@ class GameSheepFragment : AbstractGameFragment() {
             // Else the player has lost, display score and bang image
             } else {
 
-                find<ImageView>(R.id.ivGameSheepFloor).visibility = View.VISIBLE
-                find<ImageView>(R.id.ivGameSheepBang).visibility = View.VISIBLE
+                ivSheepFloor.visibility = View.VISIBLE
+
+                ivSheepGameResult = activity.findViewById(R.id.ivGameSheepBang)
+                ivSheepGameResult.visibility = View.VISIBLE
 
                 val jumpedFences = GameSheepFragmentArgs.fromBundle(arguments).numberOfJumpedFences
                 val totalFences = GameSheepFragmentArgs.fromBundle(arguments).totalNumberOfFences
-                find<TextView>(R.id.tvLine1).text = getString(R.string.game_sheep_comforting)
-                find<TextView>(R.id.tvLine2).text = resources.getQuantityString(R.plurals.game_sheep_score_details,
+                tvLine1.text = getString(R.string.game_sheep_comforting)
+                tvLine2.text = resources.getQuantityString(R.plurals.game_sheep_score_details,
                     totalFences, jumpedFences, totalFences)
 
             }
@@ -355,7 +362,7 @@ class GameSheepFragment : AbstractGameFragment() {
     private fun processCollision() {
         stopIntroductionAnimation()
         fencesAnimator.cancel()
-        find<ImageView>(R.id.gameIcon).imageResource = R.mipmap.ic_sheep_bump
+        requireActivity().findViewById<ImageView>(R.id.gameIcon).setImageResource(R.mipmap.ic_sheep_bump)
         val bundle = Bundle()
         bundle.putBoolean("introducing", false)
         bundle.putBoolean("playing", false)
@@ -395,7 +402,7 @@ class GameSheepFragment : AbstractGameFragment() {
             else -> 0
         }
 
-        val sheepView = find<ImageView>(R.id.gameIcon)
+        val sheepView = requireActivity().findViewById<ImageView>(R.id.gameIcon)
         val layoutParams = sheepView.layoutParams as ConstraintLayout.LayoutParams
         if (sheepInitialYPosition == -1) sheepInitialYPosition = layoutParams.topMargin
 
@@ -414,7 +421,7 @@ class GameSheepFragment : AbstractGameFragment() {
             else -> {
                 wasAlreadyInLowestPosition = false
                 stopIntroductionAnimation()
-                sheepView.imageResource = R.mipmap.ic_sheep_jump
+                sheepView.setImageResource(R.mipmap.ic_sheep_jump)
                 val newMarginTop = layoutParams.topMargin + offsetY
                 if (newMarginTop < 0 || newMarginTop > sheepInitialYPosition) return
                 layoutParams.setMargins(layoutParams.leftMargin, newMarginTop, layoutParams.rightMargin, layoutParams.bottomMargin)
@@ -436,7 +443,7 @@ class GameSheepFragment : AbstractGameFragment() {
         // Prepare animation of the fence, which will be repeated
         } else {
             // Loads and adds the fence asset in a dedicated image view
-            val parentLayout = find<ConstraintLayout>(R.id.clSheepGamePlaying)
+            val parentLayout = requireActivity().findViewById<ConstraintLayout>(R.id.clSheepGamePlaying)
             val fenceImageView = addNewFenceView(parentLayout)
             fencesAnimator = createFenceAnimator(fenceImageView, parentLayout)
             fencesAnimator.start()
@@ -461,7 +468,7 @@ class GameSheepFragment : AbstractGameFragment() {
         // Create the new image view
         val fenceImageView = ImageView(this@GameSheepFragment.context)
         fenceImageView.id = View.generateViewId()
-        fenceImageView.imageResource = R.mipmap.ic_sheep_fence
+        fenceImageView.setImageResource(R.mipmap.ic_sheep_fence)
 
         val layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, toDp(100f))
         val marginTop = resources.getDimension(R.dimen.game_sheep_fence_margin_top).toInt()
@@ -506,7 +513,7 @@ class GameSheepFragment : AbstractGameFragment() {
             // If animation of fences is started, fences may be added, thus we can detect collisions
             override fun onAnimationStart(animation: Animator) {
                 remainingNumberOfFences = totalNumberOfFences
-                collisionDetector = CollisionDetector(find<ImageView>(R.id.gameIcon), fence, requireContext().readCollisionDetectionInterval())
+                collisionDetector = CollisionDetector(requireActivity().findViewById<ImageView>(R.id.gameIcon), fence, requireContext().readCollisionDetectionInterval())
                 collisionDetector.isCollisionDetected.observe(this@GameSheepFragment,
                     { t -> if (t == true) processCollision() }
                 )
@@ -537,7 +544,7 @@ class GameSheepFragment : AbstractGameFragment() {
      * Changes the message indicating the number of remaining fences to jump over.
      */
     private fun updateRemainingFencesMessage() {
-        val tvLine0 = find<TextView>(R.id.tvLine0)
+        val tvLine0 = requireActivity().findViewById<TextView>(R.id.tvLine0)
         // Just started, no fences jumped
         if (remainingNumberOfFences == totalNumberOfFences) {
             tvLine0.text = resources.getQuantityString(R.plurals.game_sheep_instructions_line_0_start,

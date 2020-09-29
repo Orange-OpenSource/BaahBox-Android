@@ -33,9 +33,6 @@ import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import kotlinx.android.synthetic.main.fragment_game_balloon_playing.*
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
 import kotlinx.android.synthetic.main.fragment_game_star_playing.tv_congratulations
-import org.jetbrains.anko.imageResource
-import org.jetbrains.anko.support.v4.find
-
 
 /**
  * A subclass of [AbstractGameFragment] for the balloon game.
@@ -44,7 +41,7 @@ import org.jetbrains.anko.support.v4.find
  * @author Marc Poppleton
  * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.7.0
+ * @version 2.8.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
@@ -189,7 +186,7 @@ class GameBalloonFragment : AbstractGameFragment() {
             model.sensorB.postValue(0)
             // Define listeners
             GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
-                find<ConstraintLayout>(R.id.clBalloonGamePlaying),
+                requireActivity().findViewById(R.id.clBalloonGamePlaying),
                 requireContext()
             )
         }
@@ -218,19 +215,19 @@ class GameBalloonFragment : AbstractGameFragment() {
         when (inputsParser.prepareValue(userInput, difficultyFactor)) {
             in a.toDouble()..b.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_1)
-                balloonPlaying.imageResource = R.mipmap.ic_balloon_0
+                balloonPlaying.setImageResource(R.mipmap.ic_balloon_0)
             }
             in c.toDouble()..d.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_2)
-                balloonPlaying.imageResource = R.mipmap.ic_balloon_1
+                balloonPlaying.setImageResource(R.mipmap.ic_balloon_1)
             }
             in e.toDouble()..f.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_3)
-                balloonPlaying.imageResource = R.mipmap.ic_balloon_2
+                balloonPlaying.setImageResource(R.mipmap.ic_balloon_2)
             }
             in g.toDouble()..h.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_4)
-                balloonPlaying.imageResource = R.mipmap.ic_balloon_3
+                balloonPlaying.setImageResource(R.mipmap.ic_balloon_3)
             }
             else -> {
                 val bundle = Bundle()

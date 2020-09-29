@@ -27,7 +27,6 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        ankoVersion = '0.10.8'
         archCoreTestingVersion = '2.1.0'
         constraintLayoutVersion = '2.0.1'
         coreTestingVersion = '2.1.0'
