@@ -36,6 +36,7 @@ private const val PARASITE_MAX_FACTOR = 8
  * So as to check if we are in this case, a difference is made between values in the swap.
  * If the absolute value fo the result is lower than this constant, we are in a powerful move
  */
+@Suppress("unused")
 private const val POWERFUL_MOVE_DIFF = 200
 
 

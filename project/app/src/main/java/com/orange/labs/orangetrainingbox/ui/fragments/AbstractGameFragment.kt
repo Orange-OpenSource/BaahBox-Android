@@ -57,7 +57,7 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
     /**
      * Flag indicating if the game has not been started or has been ended. Permits to display the suitable layout.
      */
-    protected var introducing: Boolean = false
+    private var introducing: Boolean = false
 
     /**
      * A reference to the model of the app (using the BLE devices)
