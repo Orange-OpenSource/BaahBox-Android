@@ -27,16 +27,13 @@ import androidx.preference.*
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfiguration
 
-
 /**
  * Activity dedicated to preferences
  *
- * @author Pierre-Yves Lapersonne
  * @since 24/05/2019
  * @version 1.5.0
  */
 open class SettingsActivity : AppCompatActivity() {
-
 
     /**
      * A simple companion object
@@ -49,7 +46,6 @@ open class SettingsActivity : AppCompatActivity() {
         private var versionRelease: String? = null
 
     }
-
 
     /**
      * Activity lifecycle.

@@ -37,14 +37,11 @@ import kotlinx.android.synthetic.main.fragment_game_star_playing.tv_congratulati
  * A subclass of [AbstractGameFragment] for the balloon game.
  * Player must contract one muscle so as to blow up a balloon and make it explode.
  *
- * @author Marc Poppleton
- * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
  * @version 2.8.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
-
 
     // **********
     // Properties
@@ -54,7 +51,6 @@ class GameBalloonFragment : AbstractGameFragment() {
      * Permits to play some kind of animations for the game icon
      */
     private var gameIconAnimator: IconAnimator? = null
-
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -134,7 +130,6 @@ class GameBalloonFragment : AbstractGameFragment() {
         gameIconAnimator!!.stopAnimateGameIcon()
     }
 
-
     // *******
     // Methods
     // *******
@@ -190,7 +185,6 @@ class GameBalloonFragment : AbstractGameFragment() {
             )
         }
     }
-
 
     // **********
     // Game logic

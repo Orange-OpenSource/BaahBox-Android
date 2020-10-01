@@ -30,8 +30,6 @@ import kotlinx.android.synthetic.main.fragment_main.*
 /**
  * A placeholder fragment containing a simple view.
  *
- * @author Marc Poppleton
- * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
  * @version 1.3.0
  */

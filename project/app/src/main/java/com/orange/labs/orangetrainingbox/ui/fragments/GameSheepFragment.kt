@@ -43,7 +43,6 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.properties.*
 import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
 
-
 // *******
 // Classes
 // *******
@@ -54,16 +53,15 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * Receives data from the Baah Box through the model, parse them and make the sheep move.
  * Use configuration defined by the user in the preferences and also in the app config.
  *
- * <b>The animations are not efficient and the move of the sheep should be improved</b>
+ * <b>The animations are not efficient and the move of the sheep must be improved</b>
  *
- * @author Marc Poppleton
- * @author Pierre-Yves Lapersonne
+ * <b>The game cannot be used with ome devices, we have to refactor the positionning</b>
+ *
  * @since 23/10/2018
  * @version 2.6.0
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
-
 
     // **********
     // Properties
@@ -131,7 +129,6 @@ class GameSheepFragment : AbstractGameFragment() {
             field = value
             updateRemainingFencesMessage()
         }
-
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -267,7 +264,6 @@ class GameSheepFragment : AbstractGameFragment() {
         startIntroductionAnimation()
         moveFences()
     }
-
 
     // *****************
     // Lifecycle methods

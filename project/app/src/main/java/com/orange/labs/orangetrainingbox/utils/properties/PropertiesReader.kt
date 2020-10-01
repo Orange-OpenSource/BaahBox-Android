@@ -25,8 +25,6 @@ import java.util.*
  * Extension functions to use so as to parse a configuration file in order to define features
  * configurations.
  *
- * @author Pierre-Yves Lapersonne
- * @author Marc Poppleton
  * @since 20/05/2019
  * @version 2.6.0
  */

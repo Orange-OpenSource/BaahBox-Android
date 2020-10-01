@@ -26,12 +26,10 @@ import kotlin.concurrent.schedule
 /**
  * Simple utility object dealing with animations of icons
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/05/20190
  * @version 1.2.1
  */
 class IconAnimator {
-
 
     // **********
     // Properties
@@ -46,7 +44,6 @@ class IconAnimator {
      * The timer scheduling the tasks for animations
      */
     private var timer: Timer? = null
-
 
     // *******
     // Methods

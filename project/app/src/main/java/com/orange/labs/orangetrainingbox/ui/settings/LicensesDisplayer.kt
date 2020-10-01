@@ -29,7 +29,6 @@ import java.lang.Exception
 /**
  * Displays using the LicensesDialog library (https://github.com/PSDev/LicensesDialog) the third party licenses we use.
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/05/2019
  * @version 2.0.0
  */

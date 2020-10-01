@@ -29,20 +29,16 @@ import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.game.InputsParser
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 
-
 /**
  * Class which models a fragment to use in the navigation graph which embed a game.
  * Factorizes a lot of behaviours about the navigation or the Bluetooth data.
  * Each new game fragment must inherit from this class.
  *
- * @author Pierre-Yves Lapersonne
- * @author Marc Poppleton
  * @since 23/05/2019
  * @version 2.4.0
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
-
 
     // **********
     // Properties
@@ -202,7 +198,6 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
 /**
  * Interface to use to get attributes of a game fragment which contains several layouts
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/05/2019
  * @version 1.0.0
  */
@@ -228,7 +223,6 @@ interface GameWith3Screens {
 /**
  * Interface to use to get attributes to use for navigation between fragments using the Navigation graph pattern.
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/05/2019
  * @version 1.0.0
  */

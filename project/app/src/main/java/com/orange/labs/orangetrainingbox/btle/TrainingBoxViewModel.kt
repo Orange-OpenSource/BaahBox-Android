@@ -31,13 +31,10 @@ import com.orange.labs.orangetrainingbox.game.DifficultyFactor
  * View model for the training box based on the Android ViewModel design pattern
  * (https://developer.android.com/topic/libraries/architecture/viewmodel)
  *
- * @author Marc Poppleton
- * @author Pierre-Yves Lapersonne
  * @since 20/11/2018
  * @version 2.0.0
  */
 class TrainingBoxViewModel : ViewModel() {
-
 
     // **********
     // Properties
@@ -63,7 +60,6 @@ class TrainingBoxViewModel : ViewModel() {
      * The global difficulty factor to apply to computations for games
      */
     var difficultyFactor: DifficultyFactor = DifficultyFactor.MEDIUM
-
 
     // *******
     // Methods

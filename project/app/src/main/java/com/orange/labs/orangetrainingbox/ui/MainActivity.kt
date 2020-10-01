@@ -83,8 +83,6 @@ const val REQUEST_SETTINGS = 1337
 /**
  * Main activity of the application.
  *
- * @author Pierre-Yves Lapersonne
- * @author Marc Poppleton
  * @since 23/10/2018
  * @version 2.4.0
  */

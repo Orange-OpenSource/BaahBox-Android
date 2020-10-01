@@ -24,10 +24,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.orange.labs.orangetrainingbox.R
 
-
-// ***************************************
-// The fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-// ***************************************
+// **************************************
+// The fragment initialization parameters
+// **************************************
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"

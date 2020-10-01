@@ -26,12 +26,10 @@ import java.lang.IllegalArgumentException
  *
  * @param maxSize The highest number of items this queue can have. If 0, no maximal size is defined.
  *
- * @author Pierre-Yves Lapersonne
  * @since 22/08/2019
  * @version 1.0.0
  */
 class Queue<T>(private val maxSize: Int) {
-
 
     // **********
     // Properties
@@ -47,7 +45,6 @@ class Queue<T>(private val maxSize: Int) {
      */
     val isLimitless = (maxSize == 0)
 
-
     // ****
     // Init
     // ****
@@ -55,7 +52,6 @@ class Queue<T>(private val maxSize: Int) {
     init {
         if (maxSize < 0) throw IllegalArgumentException("The size must be >= 0")
     }
-
 
     // *******
     // Methods

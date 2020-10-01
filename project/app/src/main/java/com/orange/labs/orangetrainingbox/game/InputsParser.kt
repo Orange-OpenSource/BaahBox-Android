@@ -29,12 +29,10 @@ const val GAME_LOGIC_DIVIDER: Int = 10
 /**
  * Utility class allowing to prepare raw sensors inputs for game logic.
  *
- * @author Pierre-Yves Lapersonne
  * @since 16/05/2019
  * @version 1.3.0
  */
 class InputsParser {
-
 
     // *******
     // Methods

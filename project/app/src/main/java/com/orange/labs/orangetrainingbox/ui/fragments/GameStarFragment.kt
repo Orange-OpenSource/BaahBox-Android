@@ -36,14 +36,11 @@ import kotlinx.android.synthetic.main.fragment_game_star_playing.*
  * A subclass of [AbstractGameFragment] implementing the star game.
  * Player should contract one muscle stronger and stronger so as to make a star shine.
  *
- * @author Marc Poppleton
- * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
  * @version 2.8s.0
  * @see [AbstractGameFragment]
  */
 class GameStarFragment : AbstractGameFragment() {
-
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -162,7 +159,6 @@ class GameStarFragment : AbstractGameFragment() {
             )
         }
     }
-
 
     // **********
     // Game logic
