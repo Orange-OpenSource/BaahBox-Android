@@ -26,7 +26,6 @@ import androidx.lifecycle.MutableLiveData
 /**
  * Class providing method to detect gestures so as to fake sensor data, for demo purposes
  *
- * @author Pierre-Yves Lapersonne
  * @since 30/08/2019
  * @version 1.0.0
  *

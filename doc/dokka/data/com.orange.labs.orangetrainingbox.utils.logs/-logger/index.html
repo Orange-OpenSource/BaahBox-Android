@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Logger - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.utils.logs</a>&nbsp;/&nbsp;<a href="./index.html">Logger</a><br/>
+<br/>
+<h1>Logger</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">Logger</span></code>
+<p>Class dedicated for logs. It provides simple methods with more visible and cooler traces, as a kind of proxy.</p>
+<p><strong>Since</strong><br/>
+21/05/2019</p>
+<p><strong>Version</strong><br/>
+1.0.0</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Class dedicated for logs. It provides simple methods with more visible and cooler traces, as a kind of proxy.</p>
+<code><span class="identifier">Logger</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-t-a-g.html">TAG</a></h4>
+</td>
+<td>
+<p>The ta gin use for logs</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">TAG</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="d.html">d</a></h4>
+</td>
+<td>
+<p>Use the common logger to log a message in the debug channel, prefixed with ▫️</p>
+<code><span class="keyword">fun </span><span class="identifier">d</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.logs.Logger.Companion$d(kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="e.html">e</a></h4>
+</td>
+<td>
+<p>Use the common logger to log a message in the warning channel, prefixed with ‼️</p>
+<code><span class="keyword">fun </span><span class="identifier">e</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.logs.Logger.Companion$e(kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="i.html">i</a></h4>
+</td>
+<td>
+<p>Use the common logger to log a message in the info channel, prefixed with ➡</p>
+<code><span class="keyword">fun </span><span class="identifier">i</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.logs.Logger.Companion$i(kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="v.html">v</a></h4>
+</td>
+<td>
+<p>Use the common logger to log a message in the verbose channel, prefixed with ✏️</p>
+<code><span class="keyword">fun </span><span class="identifier">v</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.logs.Logger.Companion$v(kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="w.html">w</a></h4>
+</td>
+<td>
+<p>Use the common logger to log a message in the warning channel, prefixed with ⚠</p>
+<code><span class="keyword">fun </span><span class="identifier">w</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.logs.Logger.Companion$w(kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="wtf.html">wtf</a></h4>
+</td>
+<td>
+<p>Use the common logger to log a message in the WTF channel, prefixed with ☠️</p>
+<code><span class="keyword">fun </span><span class="identifier">wtf</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.logs.Logger.Companion$wtf(kotlin.String)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

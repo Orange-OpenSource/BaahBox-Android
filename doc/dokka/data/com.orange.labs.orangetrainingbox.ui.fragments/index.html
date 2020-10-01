@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.orange.labs.orangetrainingbox.ui.fragments - data</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">data</a>&nbsp;/&nbsp;<a href="./index.html">com.orange.labs.orangetrainingbox.ui.fragments</a><br/>
+<br/>
+<h2>Package com.orange.labs.orangetrainingbox.ui.fragments</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-abstract-game-fragment/index.html">AbstractGameFragment</a></h4>
+</td>
+<td>
+<p>Class which models a fragment to use in the navigation graph which embed a game.
+Factorizes a lot of behaviours about the navigation or the Bluetooth data.
+Each new game fragment must inherit from this class.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractGameFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abstract-themed-fragment/index.html"><span class="identifier">AbstractThemedFragment</span></a><span class="symbol">, </span><a href="-game-with3-screens/index.html"><span class="identifier">GameWith3Screens</span></a><span class="symbol">, </span><a href="-navigable-game/index.html"><span class="identifier">NavigableGame</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-abstract-themed-fragment/index.html">AbstractThemedFragment</a></h4>
+</td>
+<td>
+<p>Class which models a fragment with a customizable theme.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractThemedFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Fragment</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-game-balloon-fragment/index.html">GameBalloonFragment</a></h4>
+</td>
+<td>
+<p>A subclass of <a href="-abstract-game-fragment/index.html">AbstractGameFragment</a> for the balloon game.
+Player must contract one muscle so as to blow up a balloon and make it explode.</p>
+<code><span class="keyword">class </span><span class="identifier">GameBalloonFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abstract-game-fragment/index.html"><span class="identifier">AbstractGameFragment</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-game-sheep-fragment/index.html">GameSheepFragment</a></h4>
+</td>
+<td>
+<p>A fragment which embeds the logic of the sheep game and the GUI part.
+Possesses animators to make the sheep walk, jump and fall, and move the fences.
+Receives data from the Baah Box through the model, parse them and make the sheep move.
+Use configuration defined by the user in the preferences and also in the app config.</p>
+<code><span class="keyword">class </span><span class="identifier">GameSheepFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abstract-game-fragment/index.html"><span class="identifier">AbstractGameFragment</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-game-space-fragment/index.html">GameSpaceFragment</a></h4>
+</td>
+<td>
+<p>A simple <a href="#">Fragment</a> subclass.
+Use the <a href="-game-space-fragment/new-instance.html">GameSpaceFragment.newInstance</a> factory method to create an instance of this fragment.</p>
+<code><span class="keyword">class </span><span class="identifier">GameSpaceFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Fragment</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-game-star-fragment/index.html">GameStarFragment</a></h4>
+</td>
+<td>
+<p>A subclass of <a href="-abstract-game-fragment/index.html">AbstractGameFragment</a> implementing the star game.
+Player should contract one muscle stronger and stronger so as to make a star shine.</p>
+<code><span class="keyword">class </span><span class="identifier">GameStarFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abstract-game-fragment/index.html"><span class="identifier">AbstractGameFragment</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-game-toad-fragment/index.html">GameToadFragment</a></h4>
+</td>
+<td>
+<p>A simple <a href="#">Fragment</a> subclass.
+Use the <a href="-game-toad-fragment/new-instance.html">GameToadFragment.newInstance</a> factory method to create an instance of this fragment.</p>
+<code><span class="keyword">class </span><span class="identifier">GameToadFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Fragment</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-game-with3-screens/index.html">GameWith3Screens</a></h4>
+</td>
+<td>
+<p>Interface to use to get attributes of a game fragment which contains several layouts</p>
+<code><span class="keyword">interface </span><span class="identifier">GameWith3Screens</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-main-activity-fragment/index.html">MainActivityFragment</a></h4>
+</td>
+<td>
+<p>A placeholder fragment containing a simple view.</p>
+<code><span class="keyword">class </span><span class="identifier">MainActivityFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abstract-themed-fragment/index.html"><span class="identifier">AbstractThemedFragment</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-navigable-game/index.html">NavigableGame</a></h4>
+</td>
+<td>
+<p>Interface to use to get attributes to use for navigation between fragments using the Navigation graph pattern.</p>
+<code><span class="keyword">interface </span><span class="identifier">NavigableGame</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-a-r-g_-p-a-r-a-m1.html">ARG_PARAM1</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">ARG_PARAM1</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-a-r-g_-p-a-r-a-m2.html">ARG_PARAM2</a></h4>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">ARG_PARAM2</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,225 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbstractGameFragment - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.ui.fragments</a>&nbsp;/&nbsp;<a href="./index.html">AbstractGameFragment</a><br/>
+<br/>
+<h1>AbstractGameFragment</h1>
+(JVM) <code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractGameFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-themed-fragment/index.html"><span class="identifier">AbstractThemedFragment</span></a><span class="symbol">, </span><a href="../-game-with3-screens/index.html"><span class="identifier">GameWith3Screens</span></a><span class="symbol">, </span><a href="../-navigable-game/index.html"><span class="identifier">NavigableGame</span></a></code>
+<p>Class which models a fragment to use in the navigation graph which embed a game.
+Factorizes a lot of behaviours about the navigation or the Bluetooth data.
+Each new game fragment must inherit from this class.</p>
+<p><strong>Since</strong><br/>
+23/05/2019</p>
+<p><strong>Version</strong><br/>
+2.4.0</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../-abstract-themed-fragment/index.html">AbstractThemedFragment</a></p>
+</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Class which models a fragment to use in the navigation graph which embed a game.
+Factorizes a lot of behaviours about the navigation or the Bluetooth data.
+Each new game fragment must inherit from this class.</p>
+<code><span class="identifier">AbstractGameFragment</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="inputs-parser.html">inputsParser</a></h4>
+</td>
+<td>
+<p>The object which will process the data received from the box</p>
+<code><span class="keyword">val </span><span class="identifier">inputsParser</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.game/-inputs-parser/index.html"><span class="identifier">InputsParser</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="introducing.html">introducing</a></h4>
+</td>
+<td>
+<p>Flag indicating if the game has not been started or has been ended. Permits to display the suitable layout.</p>
+<code><span class="keyword">var </span><span class="identifier">introducing</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="model.html">model</a></h4>
+</td>
+<td>
+<p>A reference to the model of the app (using the BLE devices)</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">model</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.btle/-training-box-view-model/index.html"><span class="identifier">TrainingBoxViewModel</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="playing.html">playing</a></h4>
+</td>
+<td>
+<p>Flag indicating the game is running. Permits to display the suitable layout.</p>
+<code><span class="keyword">var </span><span class="identifier">playing</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="get-difficulty-numeric-value.html">getDifficultyNumericValue</a></h4>
+</td>
+<td>
+<p>Loads from properties file the numeric values to apply according to difficulty factor, and return
+the value matching the factor.</p>
+<code><span class="keyword">fun </span><span class="identifier">getDifficultyNumericValue</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="is-demo-mode-activated.html">isDemoModeActivated</a></h4>
+</td>
+<td>
+<p>If demo feature enabled (project settings) and demo mode activated (app preferences), returns true.
+Otherwise returns false.</p>
+<code><span class="keyword">fun </span><span class="identifier">isDemoModeActivated</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="load-from-args-flag-introducing.html">loadFromArgsFlagIntroducing</a></h4>
+</td>
+<td>
+<p>Loads from SafeArgs the value for the "introducing" flag.
+This method must be implemented using the subclass suitable Args class.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">loadFromArgsFlagIntroducing</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="load-from-args-flag-playing.html">loadFromArgsFlagPlaying</a></h4>
+</td>
+<td>
+<p>Loads from SafeArgs the value for the "playing" flag.
+This method must be implemented using the subclass suitable Args class.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">loadFromArgsFlagPlaying</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-create-view.html">onCreateView</a></h4>
+</td>
+<td>
+<p>Fragment lifecycle.
+Inflates the suitable layout according to the flags in use (playing and introducing).</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onCreateView</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.AbstractGameFragment$onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)/inflater">inflater</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/LayoutInflater.html"><span class="identifier">LayoutInflater</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.AbstractGameFragment$onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)/container">container</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/ViewGroup.html"><span class="identifier">ViewGroup</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.AbstractGameFragment$onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)/savedInstanceState">savedInstanceState</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html"><span class="identifier">Bundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-resume.html">onResume</a></h4>
+</td>
+<td>
+<p>Fragment lifecycle.
+Using "playing" and "introducing" flags, will define navigation details, look for data for the game
+or play animations.</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onResume</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="prepare-game-layout.html">prepareGameLayout</a></h4>
+</td>
+<td>
+<p>Prepares the inheriting classes for the game logic, the animations and other logic for the game.
+The game animations start here.
+This method is called when the activity is resuming.
+Called after <em>prepareSensorObserver</em>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">prepareGameLayout</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="prepare-sensor-observer.html">prepareSensorObserver</a></h4>
+</td>
+<td>
+<p>Prepares the observer for the sensor which will receive the data broadcast by the Baah Box sensors.
+The game logic starts there.
+This method is called when the activity is resuming.
+Called before <em>prepareGameLayout</em>.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">prepareSensorObserver</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="start-introduction-animation.html">startIntroductionAnimation</a></h4>
+</td>
+<td>
+<p>Starts the animation of game icons or layouts for the introduction screen</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">startIntroductionAnimation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="stop-introduction-animation.html">stopIntroductionAnimation</a></h4>
+</td>
+<td>
+<p>Stops the animation of game icons or layouts for the introduction screen</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">stopIntroductionAnimation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../-game-balloon-fragment/index.html">GameBalloonFragment</a></h4>
+</td>
+<td>
+<p>A subclass of <a href="./index.html">AbstractGameFragment</a> for the balloon game.
+Player must contract one muscle so as to blow up a balloon and make it explode.</p>
+<code><span class="keyword">class </span><span class="identifier">GameBalloonFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbstractGameFragment</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../-game-sheep-fragment/index.html">GameSheepFragment</a></h4>
+</td>
+<td>
+<p>A fragment which embeds the logic of the sheep game and the GUI part.
+Possesses animators to make the sheep walk, jump and fall, and move the fences.
+Receives data from the Baah Box through the model, parse them and make the sheep move.
+Use configuration defined by the user in the preferences and also in the app config.</p>
+<code><span class="keyword">class </span><span class="identifier">GameSheepFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbstractGameFragment</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../-game-star-fragment/index.html">GameStarFragment</a></h4>
+</td>
+<td>
+<p>A subclass of <a href="./index.html">AbstractGameFragment</a> implementing the star game.
+Player should contract one muscle stronger and stronger so as to make a star shine.</p>
+<code><span class="keyword">class </span><span class="identifier">GameStarFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbstractGameFragment</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

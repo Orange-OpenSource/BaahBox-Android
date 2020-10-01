@@ -27,16 +27,13 @@ import androidx.preference.*
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 import com.orange.labs.orangetrainingbox.utils.properties.readSheepDefaultConfiguration
 
-
 /**
  * Activity dedicated to preferences
  *
- * @author Pierre-Yves Lapersonne
  * @since 24/05/2019
  * @version 1.5.0
  */
 open class SettingsActivity : AppCompatActivity() {
-
 
     /**
      * A simple companion object
@@ -49,7 +46,6 @@ open class SettingsActivity : AppCompatActivity() {
         private var versionRelease: String? = null
 
     }
-
 
     /**
      * Activity lifecycle.
@@ -142,8 +138,8 @@ open class SettingsActivity : AppCompatActivity() {
             val licensesPreference: Preference = findPreference("pref_key_about_licenses")!!
             licensesPreference.setOnPreferenceClickListener {
                 val displayer = LicensesDisplayer()
-                val notices = displayer.prepareNotices(activity!!)
-                displayer.displayNotices(activity!!, notices)
+                val notices = displayer.prepareNotices(requireActivity())
+                displayer.displayNotices(requireActivity(), notices)
                 true
             }
         }
@@ -152,8 +148,7 @@ open class SettingsActivity : AppCompatActivity() {
          *
          */
         private fun prepareDifficultyFactorPreference(){
-            val difficultyPreference: SeekBarPreference =
-                                            findPreference("pref_key_settings_sensors_difficulty")!!
+            val difficultyPreference: Preference = findPreference("pref_key_settings_sensors_difficulty")!!
             // TODO If never defined use default value from properties
             difficultyPreference.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -168,9 +163,8 @@ open class SettingsActivity : AppCompatActivity() {
          * Defines minimum, maximum and defaults values for the slider
          */
         private fun prepareSheepGameFencesPreference() {
-            val sheepGameDefaultConfiguration = activity!!.readSheepDefaultConfiguration()
-            val numberOfFencesPreferences: SeekBarPreference =
-                                    findPreference("pref_key_settings_game_sheep_fences_number")!!
+            val sheepGameDefaultConfiguration = requireActivity().readSheepDefaultConfiguration()
+            val numberOfFencesPreferences: SeekBarPreference = findPreference("pref_key_settings_game_sheep_fences_number")!!
             // TODO If never defined use default value from properties
             numberOfFencesPreferences.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)

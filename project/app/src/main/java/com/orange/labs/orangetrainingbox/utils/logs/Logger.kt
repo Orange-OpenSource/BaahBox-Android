@@ -22,7 +22,6 @@ import android.util.Log
 /**
  * Class dedicated for logs. It provides simple methods with more visible and cooler traces, as a kind of proxy.
  *
- * @author Pierre-Yves Lapersonne
  * @since 21/05/2019
  * @version 1.0.0
  */

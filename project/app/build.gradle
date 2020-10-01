@@ -17,9 +17,9 @@
 */
 
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'changelog'
@@ -42,8 +42,8 @@ android {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        versionCode 30
-        versionName "0.7.1"
+        versionCode 31
+        versionName "0.8.0"
         vectorDrawables.useSupportLibrary true
     }
 
@@ -79,13 +79,14 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
 }
 
 // *******************
@@ -119,11 +120,8 @@ dependencies {
     implementation "androidx.preference:preference:$rootProject.preferencesVersion"
 
     // Material Design
-    implementation "androidx.legacy:legacy-support-core-utils:$rootProject.legacySupportVersion"
+    implementation "androidx.legacy:legacy-support-core-utils:$rootProject.coreUtilsVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
-
-    // Anko: to make things easier with Android and Kotlin
-    implementation "org.jetbrains.anko:anko:$ankoVersion"
 
     // LicensesDialog: to display third party contents
     implementation "de.psdev.licensesdialog:licensesdialog:$rootProject.licensesDialogVersion"
@@ -134,28 +132,62 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
 
     // Instrumented tests
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$rootProject.navigationVersion"
     androidTestImplementation "org.mockito:mockito-android:$rootProject.mockitoVersion"
-    androidTestImplementation ("com.android.support.test:rules:$rootProject.testVersion"){
+    androidTestImplementation ("com.android.support.test:rules:$rootProject.testRules"){
         exclude module: 'support-annotations'
     }
-    androidTestImplementation ("com.android.support.test.espresso:espresso-core:$rootProject.espressoCoreVersion"){
+    androidTestImplementation ("com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"){
         exclude module: 'support-annotations'
     }
-    androidTestImplementation ("com.android.support.test:runner:$rootProject.testVersion"){
+    androidTestImplementation ("com.android.support.test:runner:$rootProject.runnerVersion"){
         exclude module: 'support-annotations'
     }
-    
+
 }
 
 // *****
 // Tasks
 // *****
 
-// To keep a changelog up-to-date
+// To write HTML documentation
+// See https://www.kotlinresources.com/library/dokka/
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "../doc/dokka"
+
+    configuration {
+        moduleName = "data"
+
+        includeNonPublic = true
+        skipDeprecated = false
+        reportUndocumented = true
+        skipEmptyPackages = false
+
+        targets = ["JVM"]
+        platform = "JVM"
+
+        classpath = [new File("$buildDir/other.jar")]
+
+        sourceRoot {
+            path = "src"
+        }
+
+        jdkVersion = 8
+
+        noStdlibLink = false
+        noJdkLink = false
+
+    }
+}
+
+
+// To keep an up-to-date changelog
 changelog {
     file "../CHANGELOG-temp.md"
     appName "Orange Baah Box"
@@ -168,7 +200,7 @@ changelog {
     match "^fix|^doc|^test|^feat|^fix|^perf|^refactor|BREAKING" // style and chore are not parsed
 }
 
-// To check if properties file are will formatted
+// To check if properties file are well formatted
 propertieschecker {
     rulesFile "app/src/main/assets/app_configuration.rules.properties"
     targetFile "app/src/main/assets/app_configuration.properties"
@@ -196,36 +228,5 @@ easylauncher {
         primezone {
             filters = orangeRibbonFilter()
         }
-    }
-}
-
-// To generated HTML documentation
-// See https://www.kotlinresources.com/library/dokka/
-dokka {
-    outputFormat = 'html'
-    outputDirectory = "../doc/dokka"
-
-    configuration {
-        moduleName = "data"
-
-        includeNonPublic = true
-        skipDeprecated = false
-        reportUndocumented = true
-        skipEmptyPackages = false
-
-        targets = ["JVM"]
-        platform = "JVM"
-
-        classpath = [new File("$buildDir/other.jar")]
-
-        sourceRoot {
-            path = "src"
-        }
-
-        jdkVersion = 8
-
-        noStdlibLink = false
-        noJdkLink = false
-
     }
 }

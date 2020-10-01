@@ -25,10 +25,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.orange.labs.orangetrainingbox.R
 
-
-// ***************************************
-// The fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-// ***************************************
+// **************************************
+// The fragment initialization parameters
+// **************************************
 
 // TODO: Rename parameter arguments, choose names that match
 private const val ARG_PARAM1 = "param1"
@@ -42,7 +41,6 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  * Use the [GameSpaceFragment.newInstance] factory method to create an instance of this fragment.
  *
- * @author Marc Poppleton
  * @since 23/10/2018
  * @version 1.0.0
  */

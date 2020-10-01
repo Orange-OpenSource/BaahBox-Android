@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>InputsParser.prepareValue - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.game</a>&nbsp;/&nbsp;<a href="index.html">InputsParser</a>&nbsp;/&nbsp;<a href="./prepare-value.html">prepareValue</a><br/>
+<br/>
+<h1>prepareValue</h1>
+(JVM) <a name="com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Int, kotlin.Double)"></a>
+<code><span class="keyword">fun </span><span class="identifier">prepareValue</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Int, kotlin.Double)/sensorValue">sensorValue</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Int, kotlin.Double)/factor">factor</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code>
+<p>Parses a raw value returned by sensors to a game-logic suitable value.</p>
+<h3>Parameters</h3>
+<p><a name="sensorValue"></a>
+<code>sensorValue</code> - The integer to parse, should be between <a href="#">0;1024</a></p>
+<p><a name="factor"></a>
+<code>factor</code> - The factor to apply for the difficulty, must be &gt;= 0</p>
+<p><strong>Return</strong><br/>
+Int The game-logic value</p>
+(JVM) <a name="com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)"></a>
+<code><span class="keyword">private</span> <span class="keyword">fun </span><span class="identifier">prepareValue</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)/sensorValue">sensorValue</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)/factor">factor</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code>
+<p>Parses a raw value returned by sensors to a game-logic suitable value.</p>
+<p>Needs to have <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a> values on both sides so as to keep information.
+Will be divided by <a href="../-g-a-m-e_-l-o-g-i-c_-d-i-v-i-d-e-r.html">GAME_LOGIC_DIVIDER</a> and multiplied by a <a href="prepare-value.html#com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)/factor">factor</a>.</p>
+<p>Thus three cases occur:</p>
+<ul><li>First, the <a href="prepare-value.html#com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)/factor">factor</a> is equal to <a href="../-g-a-m-e_-l-o-g-i-c_-d-i-v-i-d-e-r.html">GAME_LOGIC_DIVIDER</a>, then the game-logic value will be equal to the sensor value</li>
+<li>Second, the <a href="prepare-value.html#com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)/factor">factor</a> is greater than <a href="../-g-a-m-e_-l-o-g-i-c_-d-i-v-i-d-e-r.html">GAME_LOGIC_DIVIDER</a>, then the game-logic value will be greater than the sensor value</li>
+<li>Third, the <a href="prepare-value.html#com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)/factor">factor</a> is lower than <a href="../-g-a-m-e_-l-o-g-i-c_-d-i-v-i-d-e-r.html">GAME_LOGIC_DIVIDER</a>, then the game-logic value will be lower than the sensor value.</li>
+</ul>
+<p>The lower is the factor the harder may be the game.</p>
+<p>In fact, if <a href="prepare-value.html#com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)/sensorValue">sensorValue</a> were an <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>, in the case where <a href="prepare-value.html#com.orange.labs.orangetrainingbox.game.InputsParser$prepareValue(kotlin.Double, kotlin.Double)/factor">factor</a> might be equal to <a href="../-g-a-m-e_-l-o-g-i-c_-d-i-v-i-d-e-r.html">GAME_LOGIC_DIVIDER</a>,
+the game-logic value will be lower than the sensor value ; it may be a non-sense because
+(x / y * z) == x if y == z</p>
+<h3>Parameters</h3>
+<p><a name="sensorValue"></a>
+<code>sensorValue</code> - The integer to parse, should be between <a href="#">0;1024</a></p>
+<p><a name="factor"></a>
+<code>factor</code> - The factor to apply for the difficulty, must be &gt;= 0</p>
+<p><strong>Return</strong><br/>
+Int The game-logic value</p>
+</BODY>
+</HTML>

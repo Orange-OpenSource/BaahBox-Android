@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.orange.labs.orangetrainingbox.utils.structures - data</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">data</a>&nbsp;/&nbsp;<a href="./index.html">com.orange.labs.orangetrainingbox.utils.structures</a><br/>
+<br/>
+<h2>Package com.orange.labs.orangetrainingbox.utils.structures</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-queue/index.html">Queue</a></h4>
+</td>
+<td>
+<p>Data structure acting as a FIFO structure.
+The first element saved in this list will be the first out.
+Contains a maximum size. If a new element should be added and the queue is full, the first item will be removed.</p>
+<code><span class="keyword">class </span><span class="identifier">Queue</span><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-sensor-data-series/index.html">SensorDataSeries</a></h4>
+</td>
+<td>
+<p>Class containing a series of sensor data stored in a <a href="-queue/index.html">Queue</a>, and providing methods for averages and trends.
+It contains also a swap for data stored before being added in the queue.
+This structure allows to check if data are parasites, powerful move or simple move.</p>
+<code><span class="keyword">class </span><span class="identifier">SensorDataSeries</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-sensor-trends/index.html">SensorTrends</a></h4>
+</td>
+<td>
+<p>Enumeration modeling trends about the computed metrics using sensor data records</p>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">SensorTrends</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-p-a-r-a-s-i-t-e_-m-a-x_-f-a-c-t-o-r.html">PARASITE_MAX_FACTOR</a></h4>
+</td>
+<td>
+<p>A factor for parasite computations.
+Once the data is enqueued, the 2 first highest values will be defined.
+If the highest of the 2 is FACTOR time greater than the another, thus this value is considered as a parasite.
+Indeed, the BaahBox sends data like 2022, 1024 or other too-high value. Need to find them because they
+have an effect on trends and averages (muscles contractions, decontractions, ...)</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">PARASITE_MAX_FACTOR</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-p-o-w-e-r-f-u-l_-m-o-v-e_-d-i-f-f.html">POWERFUL_MOVE_DIFF</a></h4>
+</td>
+<td>
+<p>Sometimes too-high records are not parasites, but a start of a powerful move.
+Indeed when the user makes a big muscle contraction, or a big release, very high value can occur but are not parasites.
+So as to check if we are in this case, a difference is made between values in the swap.
+If the absolute value fo the result is lower than this constant, we are in a powerful move</p>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">POWERFUL_MOVE_DIFF</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="average.html">average</a></h4>
+</td>
+<td>
+<p>Computes an average for a queue of integers.</p>
+<code><span class="keyword">fun </span><a href="-queue/index.html"><span class="identifier">Queue</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">average</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

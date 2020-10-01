@@ -22,14 +22,12 @@ import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGattCharacteristic
 import android.content.Context
 import android.content.res.Resources
-import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
-import de.psdev.licensesdialog.LicensesDialog
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
@@ -61,7 +59,7 @@ class MockUtils {
          * Creates a mock view
          *
          * @param x - 2D position in X axis
-         * @param y - 2D poxition in Y axis
+         * @param y - 2D position in Y axis
          * @param width - Width of the view
          * @param height - Height of the view
          * @return View
@@ -109,7 +107,7 @@ class MockUtils {
         }
 
         /**
-         * Creates a mock [Activity] used for [LicensesDisplayer] tests.
+         * Creates a mock [Activity] used for licenses displayer tests.
          * Will embeds mock data for 4 entries with managed licenses (if flag set to true, or not if false)
          *
          * @param containsUnmanagedLicense -
@@ -238,11 +236,11 @@ class MockUtils {
          *
          * Thus the frame contains 6 bytes like:
         <pre>
-        It models data like <muscle1, muscle2, Joystic=JBin, EndOfFrame>
+        It models data like <muscle1, muscle2, Joystick = JBin, EndOfFrame>
         Where:
         - muscle1 = C1 x 32 + a1
         - muscle2 = C2 x 32 + a2
-        - joystic = JBin
+        - joystick = JBin
         - EndOfFrame = 90 -> '\n'
         </pre>
          *

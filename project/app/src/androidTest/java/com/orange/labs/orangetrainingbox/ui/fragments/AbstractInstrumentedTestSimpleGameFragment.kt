@@ -19,13 +19,13 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.content.Context
 import android.widget.TextView
-import androidx.test.InstrumentationRegistry
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
-import androidx.test.runner.AndroidJUnit4
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.ui.MainActivity
 import org.hamcrest.CoreMatchers
@@ -36,17 +36,18 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * To test simple fragment games like [GameStarFragment], [GameBalloonFragment]
+ * To test simple game fragments like [GameStarFragment], [GameBalloonFragment]
  * or [GameSheepFragment] classes.
  * Allows to factorize instrumented tests for very similar games.
  *
- * @author Pierre-Yves Lapersonne
  * @since 30/08/2019
- * @version 1.0.0
+ * @version 2.0.0
+ * @see [InstrumentedTestSimpleGameFragment]
  */
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimpleGameFragment {
 
+    // Properties
 
     /**
      * Activity to play with
@@ -59,15 +60,18 @@ abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimp
      */
     private var appContext: Context? = null
 
+    // Configuration
 
     /**
      *
      */
     @Before
     fun setup(){
-        appContext = InstrumentationRegistry.getTargetContext()
+        appContext = InstrumentationRegistry.getInstrumentation().targetContext
         goToGame()
     }
+
+    // Tests
 
     /**
      * Test the layout elements.
@@ -85,15 +89,15 @@ abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimp
                 ViewMatchers.withParent(ViewMatchers.withId(R.id.toolbar))
             )
         )
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext!!.getString(rStringGameTitle))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext!!.getString(resourceStringGameTitle))))
 
         // Test the text contents
 
         Espresso.onView(ViewMatchers.withId(R.id.tvLine1))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext!!.getString(rStringGameInstructionLine1))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext!!.getString(resourceStringGameInstructionLine1))))
 
         Espresso.onView(ViewMatchers.withId(R.id.tvLine2))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext!!.getString(rStringGameInstructionLine2))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext!!.getString(resourceStringGameInstructionLine2))))
 
         // Test the button
 
@@ -112,16 +116,13 @@ abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimp
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
-
-    // ****************
-    // Helper functions
-    // ****************
+    // Inner part
 
     /**
      * Goes to star game screen
      */
     private fun goToGame(){
-        Espresso.onView(ViewMatchers.withText(appContext!!.getString(rStringGameTitle)))
+        Espresso.onView(ViewMatchers.withText(appContext!!.getString(resourceStringGameTitle)))
             .perform(ViewActions.click())
     }
 
@@ -135,17 +136,17 @@ interface InstrumentedTestSimpleGameFragment {
     /**
      * The title of the game, in R.string
      */
-    val rStringGameTitle: Int
+    val resourceStringGameTitle: Int
 
     /**
      * The first line for instructions
      */
-    val rStringGameInstructionLine1: Int
+    val resourceStringGameInstructionLine1: Int
 
     /**
      * The second line for instructions
      */
-    val rStringGameInstructionLine2: Int
+    val resourceStringGameInstructionLine2: Int
 
     /**
      * The id of the playing mode layout

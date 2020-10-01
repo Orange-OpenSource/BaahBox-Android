@@ -18,32 +18,27 @@
 package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.os.Bundle
-import androidx.navigation.findNavController
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import com.orange.labs.orangetrainingbox.utils.properties.readDifficultyDetailsConfiguration
 import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import kotlinx.android.synthetic.main.fragment_game_star_outro.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import android.view.*
+import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.game.InputsParser
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
-
 
 /**
  * Class which models a fragment to use in the navigation graph which embed a game.
  * Factorizes a lot of behaviours about the navigation or the Bluetooth data.
  * Each new game fragment must inherit from this class.
  *
- * @author Pierre-Yves Lapersonne
- * @author Marc Poppleton
  * @since 23/05/2019
- * @version 2.2.0
+ * @version 2.4.0
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
-
 
     // **********
     // Properties
@@ -57,7 +52,7 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
     /**
      * Flag indicating if the game has not been started or has been ended. Permits to display the suitable layout.
      */
-    protected var introducing: Boolean = false
+    private var introducing: Boolean = false
 
     /**
      * A reference to the model of the app (using the BLE devices)
@@ -106,17 +101,14 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
 
             // First start of the game
             if (introducing) {
-
                 startIntroductionAnimation()
-
-                btnPlay.onClick {
+                btnPlay.setOnClickListener {
                     it!!.findNavController().navigate(actionFromIntroductionToPlaying)
                     stopIntroductionAnimation()
                 }
-
             // Restart the game
             } else {
-                btnRestart.onClick {
+                btnRestart.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putBoolean("introducing", false)
                     bundle.putBoolean("playing", true)
@@ -139,7 +131,7 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
      * @return Double The value to apply to calculations
      */
     protected fun getDifficultyNumericValue(): Double {
-        val difficultyConfigurationValues = context!!.readDifficultyDetailsConfiguration()
+        val difficultyConfigurationValues = requireContext().readDifficultyDetailsConfiguration()
         return when (model.difficultyFactor) {
             DifficultyFactor.LOW -> difficultyConfigurationValues.difficultyFactorLow
             DifficultyFactor.MEDIUM -> difficultyConfigurationValues.difficultyFactorMedium
@@ -206,7 +198,6 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
 /**
  * Interface to use to get attributes of a game fragment which contains several layouts
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/05/2019
  * @version 1.0.0
  */
@@ -232,7 +223,6 @@ interface GameWith3Screens {
 /**
  * Interface to use to get attributes to use for navigation between fragments using the Navigation graph pattern.
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/05/2019
  * @version 1.0.0
  */

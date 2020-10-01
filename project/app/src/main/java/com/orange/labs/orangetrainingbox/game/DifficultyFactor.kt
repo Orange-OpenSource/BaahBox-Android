@@ -21,8 +21,6 @@ package com.orange.labs.orangetrainingbox.game
  * Enumeration defining the factor to apply to sensor inputs.
  * The highest the value is, the lowest is the difficulty coefficient.
  *
- * @author Pierre-Yves Lapersonne
- * @author Marc Poppleton
  * @since 16/05/2019
  * @version 3.0.0
  */

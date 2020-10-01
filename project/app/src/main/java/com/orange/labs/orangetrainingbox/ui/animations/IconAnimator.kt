@@ -19,7 +19,6 @@ package com.orange.labs.orangetrainingbox.ui.animations
 
 import android.app.Activity
 import android.widget.ImageView
-import org.jetbrains.anko.imageResource
 import java.lang.IllegalArgumentException
 import java.util.*
 import kotlin.concurrent.schedule
@@ -27,12 +26,10 @@ import kotlin.concurrent.schedule
 /**
  * Simple utility object dealing with animations of icons
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/05/20190
  * @version 1.2.1
  */
 class IconAnimator {
-
 
     // **********
     // Properties
@@ -47,7 +44,6 @@ class IconAnimator {
      * The timer scheduling the tasks for animations
      */
     private var timer: Timer? = null
-
 
     // *******
     // Methods
@@ -92,7 +88,7 @@ class IconAnimator {
     private fun displaySuitableImage(imageView: ImageView, images: Array<Int>)  {
         val maxIndex = images.size - 1
         if (ticker > maxIndex) ticker = 0
-        imageView.imageResource = images[ticker]
+        imageView.setImageResource(images[ticker])
         ticker++
     }
 

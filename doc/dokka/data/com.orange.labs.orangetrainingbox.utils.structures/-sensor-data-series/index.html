@@ -1,0 +1,163 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SensorDataSeries - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.utils.structures</a>&nbsp;/&nbsp;<a href="./index.html">SensorDataSeries</a><br/>
+<br/>
+<h1>SensorDataSeries</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">SensorDataSeries</span></code>
+<p>Class containing a series of sensor data stored in a <a href="../-queue/index.html">Queue</a>, and providing methods for averages and trends.
+It contains also a swap for data stored before being added in the queue.
+This structure allows to check if data are parasites, powerful move or simple move.</p>
+<h3>Parameters</h3>
+<p><a name="historySize"></a>
+<code>historySize</code> - Higher is this value, bigger is the number of sensor data records</p>
+<p><a name="intervalForUpdate"></a>
+<code>intervalForUpdate</code> - All INTERVAL_FOR_UPDATE-th items, compute a new average and store it.</p>
+<p><a name="trendThreshold"></a>
+<code>trendThreshold</code> - The trend threshold defining if trend is increasing, freezing or decreasing</p>
+<p><strong>Since</strong><br/>
+22/08/2019</p>
+<p><strong>Version</strong><br/>
+1.0.0</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Class containing a series of sensor data stored in a <a href="../-queue/index.html">Queue</a>, and providing methods for averages and trends.
+It contains also a swap for data stored before being added in the queue.
+This structure allows to check if data are parasites, powerful move or simple move.</p>
+<code><span class="identifier">SensorDataSeries</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$<init>(kotlin.Int, kotlin.Int, kotlin.Int)/historySize">historySize</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$<init>(kotlin.Int, kotlin.Int, kotlin.Int)/intervalForUpdate">intervalForUpdate</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$<init>(kotlin.Int, kotlin.Int, kotlin.Int)/trendThreshold">trendThreshold</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="count-down-for-average.html">countDownForAverage</a></h4>
+</td>
+<td>
+<p>Countdown when, if equal to 0, the last computed average will be updated</p>
+<code><span class="keyword">var </span><span class="identifier">countDownForAverage</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="history-size.html">historySize</a></h4>
+</td>
+<td>
+<p>Higher is this value, bigger is the number of sensor data records</p>
+<code><span class="keyword">val </span><span class="identifier">historySize</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="interval-for-update.html">intervalForUpdate</a></h4>
+</td>
+<td>
+<p>All INTERVAL_FOR_UPDATE-th items, compute a new average and store it.</p>
+<code><span class="keyword">val </span><span class="identifier">intervalForUpdate</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="last-computed-average.html">lastComputedAverage</a></h4>
+</td>
+<td>
+<p>The last computed average which will be compared to a newer value so as to define
+trends</p>
+<code><span class="keyword">var </span><span class="identifier">lastComputedAverage</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="sensor-data-queue.html">sensorDataQueue</a></h4>
+</td>
+<td>
+<p>Sensor data are stored in a FIFO structure so as to deal with order of values</p>
+<code><span class="keyword">val </span><span class="identifier">sensorDataQueue</span><span class="symbol">: </span><a href="../-queue/index.html"><span class="identifier">Queue</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="swap.html">swap</a></h4>
+</td>
+<td>
+<p>The swap is a kind of waiting queue for values before adding them in the queue.
+It allows to catch parasite values and check if such high values are not for powerful move.
+Indeed, a parasite in a site is like <a href="#">10,12,12,15,800,12,15</a>.
+A powerful move (big contraction or big release of muscle) is more like <a href="#">10,12,12,15,800,810,850</a></p>
+<code><span class="keyword">val </span><span class="identifier">swap</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="trend-threshold.html">trendThreshold</a></h4>
+</td>
+<td>
+<p>The trend threshold defining if trend is increasing, freezing or decreasing</p>
+<code><span class="keyword">val </span><span class="identifier">trendThreshold</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="was-parasite.html">wasParasite</a></h4>
+</td>
+<td>
+<p>Check in the swap if a parasite value has been stored.
+If the swap is not empty (no -1 stored), check if the 1st value is far higher (using PARASITE_MAX_FACTOR)
+than the 2nd. In this case returns true, otherwise false.</p>
+<code><span class="keyword">val </span><span class="identifier">wasParasite</span><span class="symbol">: </span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="add-record.html">addRecord</a></h4>
+</td>
+<td>
+<p>Adds a new record of sensor data in the queue.
+The <a href="../-queue/index.html">Queue</a> object will do the job of checking the size and cleaning.</p>
+<code><span class="keyword">fun </span><span class="identifier">addRecord</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$addRecord(kotlin.Int)/record">record</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="compute-average.html">computeAverage</a></h4>
+</td>
+<td>
+<p>Returns the average of all recorded sensor values</p>
+<code><span class="keyword">fun </span><span class="identifier">computeAverage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="trend-of-recorded-data.html">trendOfRecordedData</a></h4>
+</td>
+<td>
+<p>The current trend for the current recorded sensor data.
+Computes the difference between the current average and the last computed.
+If the result is negligible, will consider a non-moving trend.
+If the result is significant, will consider an increasing or a decreasing trend.
+If the average of recorded values is very slow, will consider trend at its LOWEST state.</p>
+<code><span class="keyword">fun </span><span class="identifier">trendOfRecordedData</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-sensor-trends/index.html"><span class="identifier">SensorTrends</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

@@ -18,29 +18,28 @@
 package com.orange.labs.orangetrainingbox.ui
 
 import android.content.Context
-import androidx.test.InstrumentationRegistry
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.runner.AndroidJUnit4
-import org.junit.runner.RunWith
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.orange.labs.orangetrainingbox.R
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-
+import org.junit.runner.RunWith
 
 /**
  * To test [MainActivity] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 30/08/2019
- * @version 1.0.0
+ * @version 2.0.0
  */
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class InstrumentedTestMainActivity {
 
+    // Properties
 
     /**
      * Activity to play with
@@ -52,13 +51,17 @@ class InstrumentedTestMainActivity {
      */
     private var appContext: Context? = null
 
+    // Configuration
+
     /**
      *
      */
     @Before
     fun setup(){
-        appContext = InstrumentationRegistry.getTargetContext()
+        appContext = InstrumentationRegistry.getInstrumentation().targetContext
     }
+
+    // Tests
 
     /**
      * Test the app bar of the main activity
@@ -69,14 +72,10 @@ class InstrumentedTestMainActivity {
     }
 
     /**
-     * Test the navgraph with fragments entries
+     * Test the navgraph with fragments entries (only displayed texts)
      */
     @Test
     fun gameEntries(){
-
-        // Check the navigation fragment
-
-        onView(withId(R.id.nav_fragment)).check(matches(isDisplayed()))
 
         // Check entries of navgraph
 

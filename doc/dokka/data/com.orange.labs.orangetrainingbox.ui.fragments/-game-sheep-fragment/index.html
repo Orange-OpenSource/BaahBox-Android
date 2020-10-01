@@ -1,0 +1,393 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GameSheepFragment - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.ui.fragments</a>&nbsp;/&nbsp;<a href="./index.html">GameSheepFragment</a><br/>
+<br/>
+<h1>GameSheepFragment</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">GameSheepFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-game-fragment/index.html"><span class="identifier">AbstractGameFragment</span></a></code>
+<p>A fragment which embeds the logic of the sheep game and the GUI part.
+Possesses animators to make the sheep walk, jump and fall, and move the fences.
+Receives data from the Baah Box through the model, parse them and make the sheep move.
+Use configuration defined by the user in the preferences and also in the app config.</p>
+<p>The animations are not efficient and the move of the sheep must be improved</p>
+<p>The game cannot be used with ome devices, we have to refactor the positionning</p>
+<p><strong>Since</strong><br/>
+23/10/2018</p>
+<p><strong>Version</strong><br/>
+2.6.0</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../-abstract-game-fragment/index.html">AbstractGameFragment</a></p>
+</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>A fragment which embeds the logic of the sheep game and the GUI part.
+Possesses animators to make the sheep walk, jump and fall, and move the fences.
+Receives data from the Baah Box through the model, parse them and make the sheep move.
+Use configuration defined by the user in the preferences and also in the app config.</p>
+<code><span class="identifier">GameSheepFragment</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="action-from-introduction-to-playing.html">actionFromIntroductionToPlaying</a></h4>
+</td>
+<td>
+<p>An action defined in the navigation graph to use to go from the introduction screen to the
+playing screen.</p>
+<code><span class="keyword">val </span><span class="identifier">actionFromIntroductionToPlaying</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="action-go-to-playing.html">actionGoToPlaying</a></h4>
+</td>
+<td>
+<p>An action to trigger to go back to the playing screen, e.g. for restart of the game after a win
+or a loose.</p>
+<code><span class="keyword">val </span><span class="identifier">actionGoToPlaying</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="collision-detector.html">collisionDetector</a></h4>
+</td>
+<td>
+<p>The object which looks periodically for collisions between the sheep and the fences.</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">collisionDetector</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.game/-collision-detector/index.html"><span class="identifier">CollisionDetector</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="default-game-configuration.html">defaultGameConfiguration</a></h4>
+</td>
+<td>
+<p>The default configuration for this game.</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">defaultGameConfiguration</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.utils.properties/-sheep-game-default-configuration/index.html"><span class="identifier">SheepGameDefaultConfiguration</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="difficulty-factor.html">difficultyFactor</a></h4>
+</td>
+<td>
+<p>The difficulty factor to apply.</p>
+<code><span class="keyword">var </span><span class="identifier">difficultyFactor</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="fences-animator.html">fencesAnimator</a></h4>
+</td>
+<td>
+<p>Permits to play animations for fences, i.e. make them move on the floor.</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">fencesAnimator</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/animation/ObjectAnimator.html"><span class="identifier">ObjectAnimator</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="game-configuration.html">gameConfiguration</a></h4>
+</td>
+<td>
+<p>The global configuration for this game.</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">gameConfiguration</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.utils.properties/-sheep-game-configuration/index.html"><span class="identifier">SheepGameConfiguration</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="game-icon-animator.html">gameIconAnimator</a></h4>
+</td>
+<td>
+<p>Permits to play some kind of animations for the game icon, i.e. here move the legs of the sheep.</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">gameIconAnimator</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.ui.animations/-icon-animator/index.html"><span class="identifier">IconAnimator</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="introduction-layout.html">introductionLayout</a></h4>
+</td>
+<td>
+<p>Identifier of the layout introducing the game.</p>
+<code><span class="keyword">val </span><span class="identifier">introductionLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="last-points.html">lastPoints</a></h4>
+</td>
+<td>
+<p>The registry for sensor data records.</p>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">lastPoints</span><span class="symbol">: </span><a href="../../com.orange.labs.orangetrainingbox.utils.structures/-sensor-data-series/index.html"><span class="identifier">SensorDataSeries</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="playing-layout.html">playingLayout</a></h4>
+</td>
+<td>
+<p>Identifier of the layout with the game itself, where the user can play.</p>
+<code><span class="keyword">val </span><span class="identifier">playingLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="remaining-number-of-fences.html">remainingNumberOfFences</a></h4>
+</td>
+<td>
+<p>The remaining number of fences to jump over.
+If changed makes the GUI updated with the new value.</p>
+<code><span class="keyword">var </span><span class="identifier">remainingNumberOfFences</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="restart-layout.html">restartLayout</a></h4>
+</td>
+<td>
+<p>Identifier fo the restart / outro layout with e.g. the final score, a button to restart...</p>
+<code><span class="keyword">val </span><span class="identifier">restartLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="screen-title.html">screenTitle</a></h4>
+</td>
+<td>
+<p>Identifier of the game's title.</p>
+<code><span class="keyword">val </span><span class="identifier">screenTitle</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="sheep-initial-y-position.html">sheepInitialYPosition</a></h4>
+</td>
+<td>
+<p>Initial position on Y-axis of the sheep game icon.</p>
+<code><span class="keyword">var </span><span class="identifier">sheepInitialYPosition</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="theming-color.html">themingColor</a></h4>
+</td>
+<td>
+<p>Identifier of the game's theming color.</p>
+<code><span class="keyword">val </span><span class="identifier">themingColor</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="total-number-of-fences.html">totalNumberOfFences</a></h4>
+</td>
+<td>
+<p>The total number of fences to jump over.</p>
+<code><span class="keyword">val </span><span class="identifier">totalNumberOfFences</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="was-already-in-lowest-position.html">wasAlreadyInLowestPosition</a></h4>
+</td>
+<td>
+<p>Flag indicating if the sheep was still in its lowest position.
+Used when sensor data are received, and a LOWEST trend is computed again.</p>
+<code><span class="keyword">var </span><span class="identifier">wasAlreadyInLowestPosition</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="add-new-fence-view.html">addNewFenceView</a></h4>
+</td>
+<td>
+<p>Creates a new image view for the fence.
+Uses <a href="#">ConstraintLayout</a> params for configuration.
+Adds the view to the parent layout.</p>
+<code><span class="keyword">fun </span><span class="identifier">addNewFenceView</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment$addNewFenceView(androidx.constraintlayout.widget.ConstraintLayout)/parent">parent</span><span class="symbol">:</span>&nbsp;<span class="identifier">ConstraintLayout</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/widget/ImageView.html"><span class="identifier">ImageView</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="compute-fences-speed.html">computeFencesSpeed</a></h4>
+</td>
+<td>
+<p>Reads from preferences the speed of fences.
+Then get from app config the values to apply to compute this speed, i.e. the default speed
+and the speed factor</p>
+<code><span class="keyword">fun </span><span class="identifier">computeFencesSpeed</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html"><span class="identifier">Long</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="create-fence-animator.html">createFenceAnimator</a></h4>
+</td>
+<td>
+<p>Creates and returns an animator which will make X-axis translations to animate an image view (the fence)
+using its parent layout. The parent layout is used to remove the view once animation ended.
+Uses configuration details picked from preferences or in-app config.
+Calls logic parts within animator so as to deal with collisions, repetition, UI update etc.</p>
+<code><span class="keyword">fun </span><span class="identifier">createFenceAnimator</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment$createFenceAnimator(android.widget.ImageView, androidx.constraintlayout.widget.ConstraintLayout)/fence">fence</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/widget/ImageView.html"><span class="identifier">ImageView</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment$createFenceAnimator(android.widget.ImageView, androidx.constraintlayout.widget.ConstraintLayout)/parent">parent</span><span class="symbol">:</span>&nbsp;<span class="identifier">ConstraintLayout</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/animation/ObjectAnimator.html"><span class="identifier">ObjectAnimator</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="load-from-args-flag-introducing.html">loadFromArgsFlagIntroducing</a></h4>
+</td>
+<td>
+<p>Loads from the SafeArgs the argument "introducing".</p>
+<code><span class="keyword">fun </span><span class="identifier">loadFromArgsFlagIntroducing</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="load-from-args-flag-playing.html">loadFromArgsFlagPlaying</a></h4>
+</td>
+<td>
+<p>Loads from the SafeArgs the argument "playing".</p>
+<code><span class="keyword">fun </span><span class="identifier">loadFromArgsFlagPlaying</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="move-fences.html">moveFences</a></h4>
+</td>
+<td>
+<p>Makes the fences images move on the floor from the right to the left.</p>
+<code><span class="keyword">fun </span><span class="identifier">moveFences</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="move-sheep.html">moveSheep</a></h4>
+</td>
+<td>
+<p>Moves the sheep with an Y-axis translation using an offset based on user input / sensor value.
+Modifies thus the top margin of the game icon.</p>
+<code><span class="keyword">fun </span><span class="identifier">moveSheep</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment$moveSheep(com.orange.labs.orangetrainingbox.utils.structures.SensorTrends)/trend">trend</span><span class="symbol">:</span>&nbsp;<a href="../../com.orange.labs.orangetrainingbox.utils.structures/-sensor-trends/index.html"><span class="identifier">SensorTrends</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-pause.html">onPause</a></h4>
+</td>
+<td>
+<p>Fragment lifecycle.
+Stops animations (walking sheep and sliding fences).</p>
+<code><span class="keyword">fun </span><span class="identifier">onPause</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-resume.html">onResume</a></h4>
+</td>
+<td>
+<p>Firstly calls the super.onResume() method so as to inflate layouts, prepare observers...
+Then checks if the game is ended, and in this case update the widgets with details.</p>
+<code><span class="keyword">fun </span><span class="identifier">onResume</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="prepare-game-layout.html">prepareGameLayout</a></h4>
+</td>
+<td>
+<p>Defines, if defined in app config, a gesture listener with <a href="../../com.orange.labs.orangetrainingbox.ui.demo/-gestures-demo/index.html">GesturesDemo</a> to fake
+sensors and sends data from manual gestures.
+Prepares the inheriting classes for the game logic, the animations and other logic for the game.
+The game animations start here (sheep icon, fences).
+This method is triggered from the super-class when the activity is resuming.</p>
+<code><span class="keyword">fun </span><span class="identifier">prepareGameLayout</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="prepare-sensor-observer.html">prepareSensorObserver</a></h4>
+</td>
+<td>
+<p>Prepare the Bluetooth LE sensor observer.
+Defines the behaviour of the observer using the sensor value, and thus the logic of the game.
+Get from properties the configuration details of the sheep game like difficulty factor or numeric values for examples.
+Use the value returned by the sensor and process the game logic.</p>
+<code><span class="keyword">fun </span><span class="identifier">prepareSensorObserver</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="process-baah-box-data.html">processBaahBoxData</a></h4>
+</td>
+<td>
+<p>The logic of this game.
+Records the new input sent by the Baah Box (or the gesture listeners in demo mode).
+Defines then a trend for the sheep (rising, falling, staying at its coordinates).
+Moves the sheep following this trend.</p>
+<code><span class="keyword">fun </span><span class="identifier">processBaahBoxData</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.GameSheepFragment$processBaahBoxData(kotlin.Int)/userInput">userInput</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="process-collision.html">processCollision</a></h4>
+</td>
+<td>
+<p>Triggered when a collision has been detected by the <a href="../../com.orange.labs.orangetrainingbox.game/-collision-detector/index.html">CollisionDetector</a> between the sheep view and
+a fence view.</p>
+<code><span class="keyword">fun </span><span class="identifier">processCollision</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="process-victory.html">processVictory</a></h4>
+</td>
+<td>
+<p>Triggered when all fences have been jumped by the sheep.</p>
+<code><span class="keyword">fun </span><span class="identifier">processVictory</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="start-introduction-animation.html">startIntroductionAnimation</a></h4>
+</td>
+<td>
+<p>Uses an <a href="../../com.orange.labs.orangetrainingbox.ui.animations/-icon-animator/index.html">IconAnimator</a> to display several images in the game icon widget.</p>
+<code><span class="keyword">fun </span><span class="identifier">startIntroductionAnimation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="stop-introduction-animation.html">stopIntroductionAnimation</a></h4>
+</td>
+<td>
+<p>Stops the <a href="../../com.orange.labs.orangetrainingbox.ui.animations/-icon-animator/index.html">IconAnimator</a> which makes the sheep "walk".</p>
+<code><span class="keyword">fun </span><span class="identifier">stopIntroductionAnimation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="update-remaining-fences-message.html">updateRemainingFencesMessage</a></h4>
+</td>
+<td>
+<p>Changes the message indicating the number of remaining fences to jump over.</p>
+<code><span class="keyword">fun </span><span class="identifier">updateRemainingFencesMessage</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

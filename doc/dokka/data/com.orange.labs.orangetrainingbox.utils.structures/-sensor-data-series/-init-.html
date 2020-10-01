@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>SensorDataSeries.<init> - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.utils.structures</a>&nbsp;/&nbsp;<a href="index.html">SensorDataSeries</a>&nbsp;/&nbsp;<a href="./-init-.html">&lt;init&gt;</a><br/>
+<br/>
+<h1>&lt;init&gt;</h1>
+(JVM) <a name="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$&lt;init&gt;(kotlin.Int, kotlin.Int, kotlin.Int)"></a>
+<code><span class="identifier">SensorDataSeries</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$<init>(kotlin.Int, kotlin.Int, kotlin.Int)/historySize">historySize</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$<init>(kotlin.Int, kotlin.Int, kotlin.Int)/intervalForUpdate">intervalForUpdate</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries$<init>(kotlin.Int, kotlin.Int, kotlin.Int)/trendThreshold">trendThreshold</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code>
+<p>Class containing a series of sensor data stored in a <a href="../-queue/index.html">Queue</a>, and providing methods for averages and trends.
+It contains also a swap for data stored before being added in the queue.
+This structure allows to check if data are parasites, powerful move or simple move.</p>
+<h3>Parameters</h3>
+<p><a name="historySize"></a>
+<code>historySize</code> - Higher is this value, bigger is the number of sensor data records</p>
+<p><a name="intervalForUpdate"></a>
+<code>intervalForUpdate</code> - All INTERVAL_FOR_UPDATE-th items, compute a new average and store it.</p>
+<p><a name="trendThreshold"></a>
+<code>trendThreshold</code> - The trend threshold defining if trend is increasing, freezing or decreasing</p>
+<p><strong>Since</strong><br/>
+22/08/2019</p>
+<p><strong>Version</strong><br/>
+1.0.0</p>
+</BODY>
+</HTML>

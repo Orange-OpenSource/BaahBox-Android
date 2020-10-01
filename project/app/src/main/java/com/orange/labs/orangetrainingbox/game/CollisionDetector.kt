@@ -31,7 +31,6 @@ import androidx.lifecycle.MutableLiveData
  * including them or not.
  * Computes hitboxes using locations and dimensions, and compare.
  *
- * @author Pierre-Yves Lapersonne
  * @since 05/09/2019
  * @version 1.0.1
  *
@@ -41,7 +40,6 @@ import androidx.lifecycle.MutableLiveData
  */
 class CollisionDetector(private val first: View, private val second: View,
                         private val detectionInterval: Long = 500L) {
-
 
     // **********
     // Properties
@@ -69,7 +67,6 @@ class CollisionDetector(private val first: View, private val second: View,
      * Flag updated regularly by _task_ indicating if a collision occurred
      */
     val isCollisionDetected: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
-
 
     // *******
     // Methods
@@ -136,7 +133,6 @@ class CollisionDetector(private val first: View, private val second: View,
  * @param maxY The end of the hitbox in Y axis
  */
 data class Hitbox(val minX: Int, val maxX: Int, val minY: Int, val maxY: Int)
-
 
 // **********
 // Extensions

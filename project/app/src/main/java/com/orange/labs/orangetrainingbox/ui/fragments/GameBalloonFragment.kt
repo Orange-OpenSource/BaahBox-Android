@@ -19,7 +19,6 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -33,22 +32,16 @@ import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import kotlinx.android.synthetic.main.fragment_game_balloon_playing.*
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
 import kotlinx.android.synthetic.main.fragment_game_star_playing.tv_congratulations
-import org.jetbrains.anko.imageResource
-import org.jetbrains.anko.support.v4.find
-
 
 /**
  * A subclass of [AbstractGameFragment] for the balloon game.
  * Player must contract one muscle so as to blow up a balloon and make it explode.
  *
- * @author Marc Poppleton
- * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.56.0
+ * @version 2.8.0
  * @see [AbstractGameFragment]
  */
 class GameBalloonFragment : AbstractGameFragment() {
-
 
     // **********
     // Properties
@@ -58,7 +51,6 @@ class GameBalloonFragment : AbstractGameFragment() {
      * Permits to play some kind of animations for the game icon
      */
     private var gameIconAnimator: IconAnimator? = null
-
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -126,7 +118,7 @@ class GameBalloonFragment : AbstractGameFragment() {
      */
     override fun startIntroductionAnimation() {
         gameIconAnimator = IconAnimator()
-        val period = context!!.readBalloonAdditionalConfiguration()
+        val period = requireContext().readBalloonAdditionalConfiguration()
         gameIconAnimator!!.animateGameIcon((activity as AppCompatActivity), gameIcon, period,
             arrayOf(R.mipmap.ic_balloon_0, R.mipmap.ic_balloon_1, R.mipmap.ic_balloon_2, R.mipmap.ic_balloon_3, R.mipmap.ic_balloon_4))
     }
@@ -137,7 +129,6 @@ class GameBalloonFragment : AbstractGameFragment() {
     override fun stopIntroductionAnimation() {
         gameIconAnimator!!.stopAnimateGameIcon()
     }
-
 
     // *******
     // Methods
@@ -165,7 +156,7 @@ class GameBalloonFragment : AbstractGameFragment() {
             ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val gameConfiguration = context!!.readBalloonGameConfiguration()
+        val gameConfiguration = requireContext().readBalloonGameConfiguration()
         val difficultyFactor = getDifficultyNumericValue()
 
         // Define the observer
@@ -189,12 +180,11 @@ class GameBalloonFragment : AbstractGameFragment() {
             model.sensorB.postValue(0)
             // Define listeners
             GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
-                find<ConstraintLayout>(R.id.clBalloonGamePlaying),
-                context!!
+                requireActivity().findViewById(R.id.clBalloonGamePlaying),
+                requireContext()
             )
         }
     }
-
 
     // **********
     // Game logic
@@ -216,21 +206,21 @@ class GameBalloonFragment : AbstractGameFragment() {
         val (a, b, c, d, e, f, g, h) = configuration
 
         when (inputsParser.prepareValue(userInput, difficultyFactor)) {
-            in a..b -> {
+            in a.toDouble()..b.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_1)
-                balloonPlaying.imageResource = R.mipmap.ic_balloon_0
+                balloonPlaying.setImageResource(R.mipmap.ic_balloon_0)
             }
-            in c..d -> {
+            in c.toDouble()..d.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_2)
-                balloonPlaying.imageResource = R.mipmap.ic_balloon_1
+                balloonPlaying.setImageResource(R.mipmap.ic_balloon_1)
             }
-            in e..f -> {
+            in e.toDouble()..f.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_3)
-                balloonPlaying.imageResource = R.mipmap.ic_balloon_2
+                balloonPlaying.setImageResource(R.mipmap.ic_balloon_2)
             }
-            in g until h -> {
+            in g.toDouble()..h.toDouble() -> {
                 tv_congratulations.text = getString(R.string.game_balloon_congratulations_level_4)
-                balloonPlaying.imageResource = R.mipmap.ic_balloon_3
+                balloonPlaying.setImageResource(R.mipmap.ic_balloon_3)
             }
             else -> {
                 val bundle = Bundle()

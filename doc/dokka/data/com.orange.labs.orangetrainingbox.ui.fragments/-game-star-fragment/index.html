@@ -1,0 +1,179 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>GameStarFragment - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.ui.fragments</a>&nbsp;/&nbsp;<a href="./index.html">GameStarFragment</a><br/>
+<br/>
+<h1>GameStarFragment</h1>
+(JVM) <code><span class="keyword">class </span><span class="identifier">GameStarFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-game-fragment/index.html"><span class="identifier">AbstractGameFragment</span></a></code>
+<p>A subclass of <a href="../-abstract-game-fragment/index.html">AbstractGameFragment</a> implementing the star game.
+Player should contract one muscle stronger and stronger so as to make a star shine.</p>
+<p><strong>Since</strong><br/>
+23/10/2018</p>
+<p><strong>Version</strong><br/>
+2.8s.0</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../-abstract-game-fragment/index.html">AbstractGameFragment</a></p>
+</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>A subclass of <a href="../-abstract-game-fragment/index.html">AbstractGameFragment</a> implementing the star game.
+Player should contract one muscle stronger and stronger so as to make a star shine.</p>
+<code><span class="identifier">GameStarFragment</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="action-from-introduction-to-playing.html">actionFromIntroductionToPlaying</a></h4>
+</td>
+<td>
+<p>An action define in the navigation graph to use to go from the introduction screen to the
+playing screen.</p>
+<code><span class="keyword">val </span><span class="identifier">actionFromIntroductionToPlaying</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="action-go-to-playing.html">actionGoToPlaying</a></h4>
+</td>
+<td>
+<p>An action to trigger to go back to the playing scree, e.g. for restart of the game</p>
+<code><span class="keyword">val </span><span class="identifier">actionGoToPlaying</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="introduction-layout.html">introductionLayout</a></h4>
+</td>
+<td>
+<p>Identifier of the layout introducing the game</p>
+<code><span class="keyword">val </span><span class="identifier">introductionLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="playing-layout.html">playingLayout</a></h4>
+</td>
+<td>
+<p>Identifier of the layout with the game itself, where the user can play</p>
+<code><span class="keyword">val </span><span class="identifier">playingLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="restart-layout.html">restartLayout</a></h4>
+</td>
+<td>
+<p>Identifier fo the restart / outro layout with e.g. the final score, a button to restart...</p>
+<code><span class="keyword">val </span><span class="identifier">restartLayout</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="screen-title.html">screenTitle</a></h4>
+</td>
+<td>
+<p>Identifier of the game's title</p>
+<code><span class="keyword">val </span><span class="identifier">screenTitle</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="theming-color.html">themingColor</a></h4>
+</td>
+<td>
+<p>Identifier of the game's theming color</p>
+<code><span class="keyword">val </span><span class="identifier">themingColor</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="load-from-args-flag-introducing.html">loadFromArgsFlagIntroducing</a></h4>
+</td>
+<td>
+<p>Loads from the SafeArgs the argument "introducing"</p>
+<code><span class="keyword">fun </span><span class="identifier">loadFromArgsFlagIntroducing</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="load-from-args-flag-playing.html">loadFromArgsFlagPlaying</a></h4>
+</td>
+<td>
+<p>Loads from the SafeArgs the argument "playing"</p>
+<code><span class="keyword">fun </span><span class="identifier">loadFromArgsFlagPlaying</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="prepare-game-layout.html">prepareGameLayout</a></h4>
+</td>
+<td>
+<p>Defines, if demo feature enabled (project settings) and demo mode activated (app preferences)
+a gesture listener with <a href="../../com.orange.labs.orangetrainingbox.ui.demo/-gestures-demo/index.html">GesturesDemo</a> to fake sensors and sends data from manual tests.</p>
+<code><span class="keyword">fun </span><span class="identifier">prepareGameLayout</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="prepare-sensor-observer.html">prepareSensorObserver</a></h4>
+</td>
+<td>
+<p>Prepare the Bluetooth LE sensor observer.
+Defines the behaviour of the observer using the sensor value, and thus the logic of the game.</p>
+<code><span class="keyword">fun </span><span class="identifier">prepareSensorObserver</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="process-baah-box-data.html">processBaahBoxData</a></h4>
+</td>
+<td>
+<p>The logic of this game.
+Get from properties the thresholds to apply for the game.
+According to the gotten sensor value, will display the suitable congratulation message and change the star transparency
+to make it shine.</p>
+<code><span class="keyword">fun </span><span class="identifier">processBaahBoxData</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.GameStarFragment$processBaahBoxData(com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration, kotlin.Int, kotlin.Double)/configuration">configuration</span><span class="symbol">:</span>&nbsp;<a href="../../com.orange.labs.orangetrainingbox.utils.properties/-star-game-configuration/index.html"><span class="identifier">StarGameConfiguration</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.GameStarFragment$processBaahBoxData(com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration, kotlin.Int, kotlin.Double)/userInput">userInput</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.GameStarFragment$processBaahBoxData(com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration, kotlin.Int, kotlin.Double)/difficultyFactor">difficultyFactor</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html"><span class="identifier">Double</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="start-introduction-animation.html">startIntroductionAnimation</a></h4>
+</td>
+<td>
+<p>Get the drawable content of the game icon widget and makes it start its animation</p>
+<code><span class="keyword">fun </span><span class="identifier">startIntroductionAnimation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="stop-introduction-animation.html">stopIntroductionAnimation</a></h4>
+</td>
+<td>
+<p>Nothing is done here</p>
+<code><span class="keyword">fun </span><span class="identifier">stopIntroductionAnimation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

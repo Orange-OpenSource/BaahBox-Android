@@ -22,7 +22,6 @@
     <!-- The authors -->
     <string-array name="credits_names">
         <item>Orange Baah Box</item>
-        <item>Anko</item>
         <item>Dokka</item>
         <item>Easylauncher-gradle-plugin</item>
         <item>Gradle changelog plugin</item>
@@ -37,7 +36,6 @@
     <!-- The copyrights -->
     <string-array name="credits_copyrights">
         <item>Copyright &#169; 2017 &#8211; 2019 Orange SA</item>
-        <item>Copyright &#169; 2016 JetBrains s.r.o.</item>
         <item>Copyright &#169; 2018 JetBrains s.r.o.</item>
         <item>Copyright &#169; 2018 Mikel</item>
         <item>Copyright &#169; 2017 Marc Poppleton</item>
@@ -52,7 +50,6 @@
     <!-- The URL -->
     <string-array name="credits_url">
         <item>https://orange-opensource.github.io/</item>
-        <item>https://github.com/Kotlin/anko</item>
         <item>https://github.com/Kotlin/dokka</item>
         <item>https://github.com/marcpoppleton/gradle-changelog-plugin</item>
         <item>https://github.com/akaita/easylauncher-gradle-plugin</item>
@@ -67,7 +64,6 @@
     <!-- The licenses -->
     <string-array name="credits_licenses">
         <item>GPL 3.0</item>
-        <item>Apache 2.0</item>
         <item>Apache 2.0</item>
         <item>Apache 2.0</item>
         <item>Apache 2.0</item>

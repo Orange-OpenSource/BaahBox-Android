@@ -36,6 +36,7 @@ private const val PARASITE_MAX_FACTOR = 8
  * So as to check if we are in this case, a difference is made between values in the swap.
  * If the absolute value fo the result is lower than this constant, we are in a powerful move
  */
+@Suppress("unused")
 private const val POWERFUL_MOVE_DIFF = 200
 
 
@@ -52,14 +53,12 @@ private const val POWERFUL_MOVE_DIFF = 200
  * @param intervalForUpdate All INTERVAL_FOR_UPDATE-th items, compute a new average and store it.
  * @param trendThreshold The trend threshold defining if trend is increasing, freezing or decreasing
  *
- * @author Pierre-Yves Lapersonne
  * @since 22/08/2019
  * @version 1.0.0
  */
 class SensorDataSeries(private val historySize: Int,
                        private val intervalForUpdate: Int,
                        private val trendThreshold: Int) {
-
 
     // **********
     // Properties
@@ -114,7 +113,6 @@ class SensorDataSeries(private val historySize: Int,
      * Countdown when, if equal to 0, the last computed average will be updated
      */
     private var countDownForAverage = intervalForUpdate
-
 
     // *******
     // Methods
@@ -194,7 +192,6 @@ class SensorDataSeries(private val historySize: Int,
     }
 
 }
-
 
 // *****
 // Enums

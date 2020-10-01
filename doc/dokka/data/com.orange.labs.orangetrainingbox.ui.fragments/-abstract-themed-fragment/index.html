@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbstractThemedFragment - data</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.ui.fragments</a>&nbsp;/&nbsp;<a href="./index.html">AbstractThemedFragment</a><br/>
+<br/>
+<h1>AbstractThemedFragment</h1>
+(JVM) <code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractThemedFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Fragment</span></code>
+<p>Class which models a fragment with a customizable theme.</p>
+<p><strong>Since</strong><br/>
+27/05/2019</p>
+<p><strong>Version</strong><br/>
+1.1.0</p>
+<p><strong>See Also</strong><br/>
+<p><a href="#">Fragment</a></p>
+</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Class which models a fragment with a customizable theme.</p>
+<code><span class="identifier">AbstractThemedFragment</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="screen-title.html">screenTitle</a></h4>
+</td>
+<td>
+<p>The identifier of the string resource pointing to the title to display</p>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">screenTitle</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="theming-color.html">themingColor</a></h4>
+</td>
+<td>
+<p>The identifier of the color to use to theme the toolbar and the icons</p>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">themingColor</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-create-options-menu.html">onCreateOptionsMenu</a></h4>
+</td>
+<td>
+<p>Deals with the option menu, and applies to menu items the colors.</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onCreateOptionsMenu</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.AbstractThemedFragment$onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)/menu">menu</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/Menu.html"><span class="identifier">Menu</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.AbstractThemedFragment$onCreateOptionsMenu(android.view.Menu, android.view.MenuInflater)/inflater">inflater</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/MenuInflater.html"><span class="identifier">MenuInflater</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="on-view-created.html">onViewCreated</a></h4>
+</td>
+<td>
+<p>Fragment lifecycle.
+Defines the action bar, the title and the color to use.</p>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onViewCreated</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.AbstractThemedFragment$onViewCreated(android.view.View, android.os.Bundle)/view">view</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.ui.fragments.AbstractThemedFragment$onViewCreated(android.view.View, android.os.Bundle)/savedInstanceState">savedInstanceState</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/os/Bundle.html"><span class="identifier">Bundle</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../-abstract-game-fragment/index.html">AbstractGameFragment</a></h4>
+</td>
+<td>
+<p>Class which models a fragment to use in the navigation graph which embed a game.
+Factorizes a lot of behaviours about the navigation or the Bluetooth data.
+Each new game fragment must inherit from this class.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbstractGameFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbstractThemedFragment</span></a><span class="symbol">, </span><a href="../-game-with3-screens/index.html"><span class="identifier">GameWith3Screens</span></a><span class="symbol">, </span><a href="../-navigable-game/index.html"><span class="identifier">NavigableGame</span></a></code></td>
+</tr>
+<tr>
+<td>
+(JVM) 
+<h4><a href="../-main-activity-fragment/index.html">MainActivityFragment</a></h4>
+</td>
+<td>
+<p>A placeholder fragment containing a simple view.</p>
+<code><span class="keyword">class </span><span class="identifier">MainActivityFragment</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbstractThemedFragment</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

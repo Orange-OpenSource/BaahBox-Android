@@ -30,21 +30,17 @@ import com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readStarGameConfiguration
 import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
 import kotlinx.android.synthetic.main.fragment_game_star_playing.*
-import org.jetbrains.anko.support.v4.find
 
 
 /**
  * A subclass of [AbstractGameFragment] implementing the star game.
  * Player should contract one muscle stronger and stronger so as to make a star shine.
  *
- * @author Marc Poppleton
- * @author Pierre-Yves Lapersonne
  * @since 23/10/2018
- * @version 2.6.0
+ * @version 2.8s.0
  * @see [AbstractGameFragment]
  */
 class GameStarFragment : AbstractGameFragment() {
-
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -132,7 +128,7 @@ class GameStarFragment : AbstractGameFragment() {
             ViewModelProvider(this).get(TrainingBoxViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val gameConfiguration = context!!.readStarGameConfiguration()
+        val gameConfiguration = requireContext().readStarGameConfiguration()
         val difficultyFactor = getDifficultyNumericValue()
 
         // Define the observer
@@ -158,12 +154,11 @@ class GameStarFragment : AbstractGameFragment() {
             model.sensorB.postValue(0)
             // Define listeners
             GesturesDemo(model.sensorA, model.sensorB).addGestureListeners(
-                find<ConstraintLayout>(R.id.clStarGamePlaying),
-                context!!
+                requireView().findViewById<ConstraintLayout>(R.id.clStarGamePlaying),
+                requireContext()
             )
         }
     }
-
 
     // **********
     // Game logic
@@ -187,13 +182,13 @@ class GameStarFragment : AbstractGameFragment() {
         starPlaying.alpha = parsedSensorValue.toFloat() / f.toFloat()
 
         when (parsedSensorValue) {
-            in a..b -> {
+            in a.toFloat()..b.toFloat() -> {
                 tv_congratulations.text = getString(R.string.game_star_congratulations_level_1)
             }
-            in c..d -> {
+            in c.toFloat()..d.toFloat() -> {
                 tv_congratulations.text = getString(R.string.game_star_congratulations_level_2)
             }
-            in e until f -> {
+            in e.toFloat()..f.toFloat() -> {
                 tv_congratulations.text = getString(R.string.game_star_congratulations_level_3)
             }
             else -> { // Should be only >= 60

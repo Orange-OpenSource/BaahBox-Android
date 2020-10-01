@@ -30,8 +30,6 @@ import androidx.fragment.app.Fragment
 /**
  * Class which models a fragment with a customizable theme.
  *
- * @author Marc Poppleton
- * @author Pierre-Yves Lapersonne
  * @since 27/05/2019
  * @version 1.1.0
  * @see [Fragment]
