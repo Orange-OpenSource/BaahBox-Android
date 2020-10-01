@@ -18,31 +18,31 @@
 package com.orange.labs.orangetrainingbox.btle
 
 import android.content.Context
-import androidx.test.InstrumentationRegistry
-import org.junit.Assert.assertTrue
-import org.junit.Before
-import org.junit.Test
-import org.mockito.Mockito.`when`
-import androidx.test.runner.AndroidJUnit4
-import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
 import androidx.lifecycle.*
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.LifecycleOwner
+import androidx.test.annotation.UiThreadTest
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.assertTrue
 import org.junit.After
-
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 
 /**
  * To test [TrainingBoxViewModel] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 28/08/2019
- * @version 1.0.0
+ * @version 2.0.0
  */
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class InstrumentedTestTrainingBoxViewModel {
 
+    // Properties
 
     /**
      * The object to test
@@ -54,6 +54,7 @@ class InstrumentedTestTrainingBoxViewModel {
      */
     private var appContext: Context? = null
 
+    // Configuration
 
     /**
      * Init the object to test
@@ -61,11 +62,11 @@ class InstrumentedTestTrainingBoxViewModel {
     @Before
     fun setup(){
         trainingBoxViewModel = TrainingBoxViewModel()
-        appContext = InstrumentationRegistry.getTargetContext()
+        appContext = InstrumentationRegistry.getInstrumentation().targetContext
     }
 
     /**
-     * Init the object to test
+     * Deinit the object to test
      */
     @After
     fun tearDown(){
@@ -73,8 +74,11 @@ class InstrumentedTestTrainingBoxViewModel {
         appContext = null
     }
 
+    // Tests
+
     /**
-     * Test the sensors A and B properties of the [TrainingBoxViewModel] with limit values
+     * Test the sensors A and B properties of the [TrainingBoxViewModel] with limit values.
+     * Kind of stress tests: nothing wrong should occur.
      */
     @Test
     fun sensorsAtLimit() {
@@ -93,19 +97,18 @@ class InstrumentedTestTrainingBoxViewModel {
     }
 
     /**
-     * Test observable/observer pattern for sensors properties of the [TrainingBoxViewModel]
+     * Test observable/observer pattern for sensors properties of the [TrainingBoxViewModel].
+     * Checks if a posted value has been retrieved for both sensors.
      */
-    @Test
+    @Test @UiThreadTest
     fun sensorsObserving() {
 
         val testObserving: (MutableLiveData<Int>) -> Unit = { sensor ->
-            val expected = 2048
+            val expected = 2048 // A magic number for the test
             val observer = Observer<Int> { sensorValue ->
                 assertTrue(sensorValue == expected)
             }
-            appContext!!.runOnUiThread {
-                sensor.observe(mockLifecycleOwner(), observer)
-            }
+            sensor.observe(mockLifecycleOwner(), observer)
             sensor.postValue(expected)
         }
 
@@ -115,12 +118,15 @@ class InstrumentedTestTrainingBoxViewModel {
     }
 
     /**
-     * Test the getBoxes() method of [TrainingBoxViewModel]
+     * Test the getBoxes() method of [TrainingBoxViewModel].
+     * Kind of smoke test: nothing wrong must occur here.
      */
     @Test
     fun getBoxes() {
         trainingBoxViewModel?.getBoxes()
     }
+
+    // Inner part
 
     /**
      * Helper function creating a mock object of [LifecycleOwner] for live data observers

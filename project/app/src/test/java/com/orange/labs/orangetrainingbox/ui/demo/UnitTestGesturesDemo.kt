@@ -17,12 +17,12 @@
  */
 package com.orange.labs.orangetrainingbox.ui.demo
 
+import androidx.annotation.UiThread
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.*
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockContext
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockLifecycleOwner
 import com.orange.labs.orangetrainingbox.MockUtils.Companion.mockView
-import org.jetbrains.anko.runOnUiThread
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -51,7 +51,7 @@ class UnitTestGesturesDemo {
     /**
      * Test the constructors for the object
      */
-    @Test
+    @Test @UiThread
     fun gesturesDemoConstructor() {
 
         // Test with virgin sensors
@@ -64,10 +64,8 @@ class UnitTestGesturesDemo {
         sensorB = MutableLiveData()
         val appContext = mockContext()
         val observer = Observer<Int> {}
-        appContext.runOnUiThread {
-            sensorA.observe(mockLifecycleOwner(), observer)
-            sensorB.observe(mockLifecycleOwner(), observer)
-        }
+        sensorA.observe(mockLifecycleOwner(), observer)
+        sensorB.observe(mockLifecycleOwner(), observer)
 
         assertNotNull(GesturesDemo(sensorA, sensorB))
 
@@ -76,15 +74,13 @@ class UnitTestGesturesDemo {
     /**
      * Test the addGestureListeners() method by just calling it.
      */
-    @Test
+    @Test @UiThread
     fun addGestureListeners() {
 
         val mockedView = mockView()
         val gesturesDemo = GesturesDemo(MutableLiveData(),MutableLiveData())
         val appContext = mockContext()
-        appContext.runOnUiThread {
-            gesturesDemo.addGestureListeners(mockedView, appContext)
-        }
+        gesturesDemo.addGestureListeners(mockedView, appContext)
 
     }
 
@@ -220,12 +216,9 @@ class UnitTestGesturesDemo {
     private fun createObservedDetector(): GesturesDemoListener {
         val sensorA = MutableLiveData<Int>()
         val sensorB = MutableLiveData<Int>()
-        val appContext = mockContext()
         val observer = Observer<Int> {}
-        appContext.runOnUiThread {
-            sensorA.observe(mockLifecycleOwner(), observer)
-            sensorB.observe(mockLifecycleOwner(), observer)
-        }
+        sensorA.observe(mockLifecycleOwner(), observer)
+        sensorB.observe(mockLifecycleOwner(), observer)
         return GesturesDemoListener(sensorA, sensorB)
     }
 

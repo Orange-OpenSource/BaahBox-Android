@@ -19,27 +19,31 @@ package com.orange.labs.orangetrainingbox.utils.properties
 
 import android.content.Context
 import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 /**
  * To test [Context] extensions to use for properties loading.
  * See [testing documentation](http://d.android.com/tools/testing).
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.4.0
+ * @version 2.0.0
  */
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class InstrumentedTestPropertiesReader {
 
-    // Needed to play with properties files
+    // Properties
+
+    /**
+     * Needed to play with properties files
+     */
     private var appContext: Context? = null
+
+    // Configuration
 
     /**
      * Get context from device
@@ -56,6 +60,8 @@ class InstrumentedTestPropertiesReader {
     fun tearDown(){
         appContext = null
     }
+
+    // Tests
 
     /**
      * Test the loadProperties() Context extension.

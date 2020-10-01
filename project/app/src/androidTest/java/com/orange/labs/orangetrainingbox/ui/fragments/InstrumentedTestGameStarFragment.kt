@@ -17,38 +17,38 @@
  */
 package com.orange.labs.orangetrainingbox.ui.fragments
 
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.orange.labs.orangetrainingbox.R
 import org.junit.runner.RunWith
 
-
 /**
  * To test [GameStarFragment] class.
- * See [AbstractInstrumentedTestSimpleGameFragment].
+ * This class defines only the expected resources, e.g. strings and layout (using identifiers).
+ * Test cases are mainly factorized in the super class because some games are quite similar.
  *
- * @author Pierre-Yves Lapersonne
  * @since 30/08/2019
- * @version 1.0.0
+ * @version 2.0.0
+ * @see [AbstractInstrumentedTestSimpleGameFragment]
  */
-@RunWith(AndroidJUnit4::class)
+@RunWith(AndroidJUnit4ClassRunner::class)
 class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragment() {
 
     /**
      * The text to find in the tool bar
      */
-    override val rStringGameTitle: Int
+    override val resourceStringGameTitle: Int
         get() = R.string.title_game_star
 
     /**
      * First line of instruction
      */
-    override val rStringGameInstructionLine1: Int
+    override val resourceStringGameInstructionLine1: Int
         get() = R.string.game_star_instructions_line_1
 
     /**
      * Second line of instruction
      */
-    override val rStringGameInstructionLine2: Int
+    override val resourceStringGameInstructionLine2: Int
         get() = R.string.game_star_instructions_line_2
 
     /**

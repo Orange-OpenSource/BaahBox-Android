@@ -132,6 +132,7 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
 
     // Instrumented tests
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.runnerVersion"
