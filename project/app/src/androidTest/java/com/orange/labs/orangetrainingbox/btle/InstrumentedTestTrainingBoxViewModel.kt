@@ -30,7 +30,6 @@ import androidx.lifecycle.*
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.LifecycleOwner
-import org.jetbrains.anko.runOnUiThread
 import org.junit.After
 
 

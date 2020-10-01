@@ -281,7 +281,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_bledevices -> {
-                scanLeDevice(true)
+  //              scanLeDevice(true)
                 checkBtleConfig()
             }
             R.id.action_settings -> {
@@ -424,7 +424,6 @@ class MainActivity : AppCompatActivity() {
             showingPopup = false
         }
 
-        // Note Anko library's selector does not provide an implementation of "selector" with a dismiss listener to define
         builder.setOnDismissListener {
             showingPopup = false
         }

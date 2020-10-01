@@ -22,7 +22,7 @@ import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import java.lang.IllegalArgumentException
 
 /**
- * A divider to make the sensor value more suitable for game logics
+ * A divider to make the sensor value more suitable for game logic
  */
 const val GAME_LOGIC_DIVIDER: Int = 10
 
