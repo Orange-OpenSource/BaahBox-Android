@@ -40,7 +40,6 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  * Use the [GameToadFragment.newInstance] factory method to create an instance of this fragment.
  *
- * @author Marc Poppleton
  * @since 23/10/2018
  * @version 1.0.0
  */

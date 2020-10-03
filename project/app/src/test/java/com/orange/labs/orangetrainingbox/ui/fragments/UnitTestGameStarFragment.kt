@@ -26,7 +26,6 @@ import org.junit.Test
 /**
  * To test [GameStarFragment] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 29/08/2019
  * @version 1.0.0
  */

@@ -36,7 +36,6 @@ import org.mockito.Mockito.mock
 /**
  * Utility object to use for mocks
  *
- * @author Pierre-Yves Lapersonne
  * @since 20/03/2020
  * @version 1.0.0
  */

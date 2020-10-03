@@ -22,7 +22,6 @@ import org.junit.Test
 /**
  * To test [Logger] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
  * @version 1.0.0
  */

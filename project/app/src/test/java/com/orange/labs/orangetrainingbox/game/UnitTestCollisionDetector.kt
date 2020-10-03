@@ -25,7 +25,6 @@ import org.junit.Test
 /**
  * To test [CollisionDetector] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 05/09/2019
  * @version 1.0.0
  */

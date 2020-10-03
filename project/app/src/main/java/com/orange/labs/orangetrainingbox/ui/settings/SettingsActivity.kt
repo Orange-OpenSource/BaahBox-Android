@@ -86,7 +86,6 @@ open class SettingsActivity : AppCompatActivity() {
     /**
      * Fragment dedicated to the preferences
      *
-     * @author Pierre-Yves Lapersonne
      * @since 24/05/2019
      * @version 1.1.0
      */
