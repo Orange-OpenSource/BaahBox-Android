@@ -25,13 +25,14 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.lang.IllegalArgumentException
 
 /**
  * To test [Context] extensions to use for properties loading.
  * See [testing documentation](http://d.android.com/tools/testing).
  *
  * @since 23/08/2019
- * @version 2.0.0
+ * @version 2.2.0
  */
 @RunWith(AndroidJUnit4ClassRunner::class)
 class InstrumentedTestPropertiesReader {
@@ -275,6 +276,26 @@ class InstrumentedTestPropertiesReader {
         val expectedInterval = appContext!!.loadProperties().getProperty(PropertiesKeys.COLLISION_DETECTION_INTERVAL.key).toLong()
         val config = appContext!!.readCollisionDetectionInterval()
         assertTrue(expectedInterval == config)
+    }
+
+    /**
+     * Test the readBleFrameStrategy() Context extension
+     */
+    @Test
+    fun readBleFrameStrategy() {
+
+        val properties = appContext!!.loadProperties()
+        val rawBleFramesStrategy = properties.getProperty(PropertiesKeys.BLE_FRAMES_STRATEGY.key).toUpperCase()
+        val expectedBleFramesStrategy = try {
+            enumValueOf(rawBleFramesStrategy)
+        } catch (exception: IllegalArgumentException) {
+            BleFrameStrategy.UNDEFINED
+        }
+
+        val actualBleFramesStrategy = appContext!!.readBleFrameStrategy()
+
+        assertTrue(expectedBleFramesStrategy == actualBleFramesStrategy)
+
     }
 
 }

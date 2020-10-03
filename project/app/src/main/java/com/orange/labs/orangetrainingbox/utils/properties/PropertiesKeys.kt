@@ -21,11 +21,10 @@ package com.orange.labs.orangetrainingbox.utils.properties
 /**
  * Enumeration defining objects for properties to configure the app.
  *
- * @property key - The key used in the properties file which matches this property
+ * @param key - The key used in the properties file which matches this property
  *
- * @author Marc Poppleton
  * @since 20/05/2019
- * @version 1.9.0
+ * @version 1.10.0
  */
 enum class PropertiesKeys(val key: String) {
 
@@ -40,6 +39,11 @@ enum class PropertiesKeys(val key: String) {
      * The interval in ms where collision detection is done
      */
     COLLISION_DETECTION_INTERVAL("collision_detection_interval"),
+
+    /**
+     * The strategy to apply to forge the BLE frames
+     */
+    BLE_FRAMES_STRATEGY("ble_frames_strategy"),
 
     /* Games */
 
