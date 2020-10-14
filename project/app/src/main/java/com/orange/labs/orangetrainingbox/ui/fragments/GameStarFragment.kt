@@ -19,6 +19,7 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.graphics.drawable.Animatable
 import android.os.Bundle
+import android.os.Handler
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,9 +27,10 @@ import androidx.navigation.fragment.findNavController
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import com.orange.labs.orangetrainingbox.utils.properties.StarGameConfiguration
 import com.orange.labs.orangetrainingbox.utils.properties.readStarGameConfiguration
-import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
+import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import kotlinx.android.synthetic.main.fragment_game_star_playing.*
 
 
@@ -37,7 +39,7 @@ import kotlinx.android.synthetic.main.fragment_game_star_playing.*
  * Player should contract one muscle stronger and stronger so as to make a star shine.
  *
  * @since 23/10/2018
- * @version 2.8s.0
+ * @version 2.8.0
  * @see [AbstractGameFragment]
  */
 class GameStarFragment : AbstractGameFragment() {
@@ -174,8 +176,10 @@ class GameStarFragment : AbstractGameFragment() {
      * @param userInput The data given by the Baah box
      * @param difficultyFactor The numeric value to apply for inputs to create a kind of difficulty
      */
-    private fun processBaahBoxData(configuration: StarGameConfiguration, userInput: Int,
-                                   difficultyFactor: Double) {
+    private fun processBaahBoxData(
+        configuration: StarGameConfiguration, userInput: Int,
+        difficultyFactor: Double,
+    ) {
 
         val parsedSensorValue = inputsParser.prepareValue(userInput, difficultyFactor)
         val (a, b, c, d, e, f) = configuration

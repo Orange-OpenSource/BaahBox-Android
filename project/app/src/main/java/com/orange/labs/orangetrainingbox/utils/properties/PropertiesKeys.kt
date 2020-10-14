@@ -40,11 +40,6 @@ enum class PropertiesKeys(val key: String) {
      */
     COLLISION_DETECTION_INTERVAL("collision_detection_interval"),
 
-    /**
-     * The strategy to apply to forge the BLE frames
-     */
-    BLE_FRAMES_STRATEGY("ble_frames_strategy"),
-
     /* Games */
 
     /**

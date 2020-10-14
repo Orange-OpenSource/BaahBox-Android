@@ -77,15 +77,6 @@ fun Context.readCollisionDetectionInterval(): Long {
 }
 
 /**
- * Reads from the properties file in assets the strategy to use to make or not BLE frames
- */
-fun Context.readBleFrameStrategy(): BleFrameStrategy {
-    val properties = loadProperties()
-    val bleStrategy: String = properties.getProperty(PropertiesKeys.BLE_FRAMES_STRATEGY.key)!!
-    return BleFrameStrategy.convertStringToValue(bleStrategy)
-}
-
-/**
  * Reads from properties file in assets configuration elements for BLE things
  *
  * @return BleConfiguration

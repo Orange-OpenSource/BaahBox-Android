@@ -278,24 +278,4 @@ class InstrumentedTestPropertiesReader {
         assertTrue(expectedInterval == config)
     }
 
-    /**
-     * Test the readBleFrameStrategy() Context extension
-     */
-    @Test
-    fun readBleFrameStrategy() {
-
-        val properties = appContext!!.loadProperties()
-        val rawBleFramesStrategy = properties.getProperty(PropertiesKeys.BLE_FRAMES_STRATEGY.key).toUpperCase()
-        val expectedBleFramesStrategy = try {
-            enumValueOf(rawBleFramesStrategy)
-        } catch (exception: IllegalArgumentException) {
-            BleFrameStrategy.UNDEFINED
-        }
-
-        val actualBleFramesStrategy = appContext!!.readBleFrameStrategy()
-
-        assertTrue(expectedBleFramesStrategy == actualBleFramesStrategy)
-
-    }
-
 }

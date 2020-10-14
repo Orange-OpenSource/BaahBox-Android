@@ -100,9 +100,4 @@ class UnitTestPropertiesKeys {
         assertEquals(PropertiesKeys.ENABLE_GAME_TOAD.key, "enable_game_toad")
     }
 
-    @Test
-    fun `keys for BLE frames strategy`() {
-        assertEquals(PropertiesKeys.BLE_FRAMES_STRATEGY.key, "ble_frames_strategy")
-    }
-
 }

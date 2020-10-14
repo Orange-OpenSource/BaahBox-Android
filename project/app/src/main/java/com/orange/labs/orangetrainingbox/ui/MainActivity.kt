@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * A reference to the model of the app, here with references to the BLE devices.
      */
-    private lateinit var model: TrainingBoxViewModel
+    lateinit var model: TrainingBoxViewModel
 
     // Bluetooth
 
