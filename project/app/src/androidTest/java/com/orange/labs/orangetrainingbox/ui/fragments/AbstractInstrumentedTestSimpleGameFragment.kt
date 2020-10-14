@@ -27,6 +27,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import com.orange.labs.orangetrainingbox.R
+import com.orange.labs.orangetrainingbox.`_`.readMockEventsFromFile
 import com.orange.labs.orangetrainingbox.ui.MainActivity
 import org.hamcrest.CoreMatchers
 import org.hamcrest.core.IsInstanceOf
@@ -132,6 +133,32 @@ abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimp
     private fun goToGame(){
         Espresso.onView(ViewMatchers.withText(appContext!!.getString(resourceStringGameTitle)))
             .perform(ViewActions.click())
+    }
+
+    /**
+     * Go to the playing screen by clicking on the play button
+     */
+    protected fun goToPlayingScreen(){
+        Espresso.onView(ViewMatchers.withId(R.id.btnPlay)).perform(ViewActions.click())
+        Espresso.onView(ViewMatchers.withId(playingModeLayoutId))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    /**
+     * Using the file with the given name, stored in assets folder, load the mock frames and interruptions and
+     * run each of them.
+     * Uses also the _timeToWaitUntilNextMockFrame_ interval between each bunch of frames process.
+     *
+     * @param name The name of the mock file to use
+     */
+    protected fun runMockBLEFramesFromFile(name: String) {
+        val mockEvents = readMockEventsFromFile(name, appContext!!)
+        mockEvents.forEach { frame ->
+            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
+            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
+            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
+            Thread.sleep(timeToWaitUntilNextMockFrame)
+        }
     }
 
 }

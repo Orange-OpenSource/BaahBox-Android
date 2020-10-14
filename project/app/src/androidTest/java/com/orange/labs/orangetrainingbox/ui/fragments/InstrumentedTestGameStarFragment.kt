@@ -95,13 +95,7 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
         goToPlayingScreen()
 
         // When
-        val mockEvents = readMockEventsFromFile("game-star-level1-signals.mock", appContext)
-        mockEvents.forEach { frame ->
-            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
-            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
-            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
-            Thread.sleep(timeToWaitUntilNextMockFrame)
-        }
+        runMockBLEFramesFromFile("game-star-level1-signals.mock")
 
         // Then
         Espresso
@@ -120,13 +114,7 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
         goToPlayingScreen()
 
         // When
-        val mockEvents = readMockEventsFromFile("game-star-level2-signals.mock", appContext)
-        mockEvents.forEach { frame ->
-            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
-            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
-            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
-            Thread.sleep(timeToWaitUntilNextMockFrame)
-        }
+        runMockBLEFramesFromFile("game-star-level2-signals.mock")
 
         // Then
         Espresso
@@ -145,13 +133,7 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
         goToPlayingScreen()
 
         // When
-        val mockEvents = readMockEventsFromFile("game-star-level3-signals.mock", appContext)
-        mockEvents.forEach { frame ->
-            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
-            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
-            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
-            Thread.sleep(timeToWaitUntilNextMockFrame)
-        }
+        runMockBLEFramesFromFile("game-star-level3-signals.mock")
 
         // Then
         Espresso
@@ -171,13 +153,7 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
         goToPlayingScreen()
 
         // When
-        val mockEvents = readMockEventsFromFile("game-star-levelmax-signals.mock", appContext)
-        mockEvents.forEach { frame ->
-            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
-            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
-            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
-            Thread.sleep(timeToWaitUntilNextMockFrame)
-        }
+        runMockBLEFramesFromFile("game-star-levelmax-signals.mock")
 
         // Then
         Espresso
@@ -188,17 +164,6 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
             .onView(ViewMatchers.withId(R.id.tv_congratulations_restart))
             .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_max))))
 
-    }
-
-    // Utils
-
-    /**
-     * Go to the playing screen by clicking on the play button
-     */
-    private fun goToPlayingScreen(){
-        Espresso.onView(ViewMatchers.withId(R.id.btnPlay)).perform(ViewActions.click())
-        Espresso.onView(ViewMatchers.withId(playingModeLayoutId))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
 }
