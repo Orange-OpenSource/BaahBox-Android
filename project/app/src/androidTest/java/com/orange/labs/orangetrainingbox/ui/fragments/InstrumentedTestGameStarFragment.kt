@@ -33,6 +33,9 @@ import org.junit.runner.RunWith
  * To test [GameStarFragment] class.
  * This class defines the expected resources, e.g. strings and layout (using identifiers).
  * Test cases are mainly factorized in the super class because some games are quite similar.
+ * Uses mocks to make more tests on the game logic.
+ *
+ * We assume we have a sensor reactivity defined to "medium" in prerequisite, no control on this value has been made yet.
  *
  * @since 30/08/2019
  * @version 2.1.0
@@ -86,7 +89,7 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
 
     /**
      * Uses a bunch of fake signals (mocks) to test the game.
-     * The start must be clear at the end.
+     * The star must be clear at the end.
      */
     @Test
     fun starMustBeClearOnceAllEventsParsed(){
