@@ -17,22 +17,21 @@
  */
 package com.orange.labs.orangetrainingbox.ui.fragments
 
+import android.content.Context
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.orange.labs.orangetrainingbox.R
-import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
-import com.orange.labs.orangetrainingbox.utils.logs.Logger
+import com.orange.labs.orangetrainingbox.`_`.readMockEventsFromFile
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import java.io.File
 
 /**
  * To test [GameStarFragment] class.
- * This class defines only the expected resources, e.g. strings and layout (using identifiers).
+ * This class defines the expected resources, e.g. strings and layout (using identifiers).
  * Test cases are mainly factorized in the super class because some games are quite similar.
  *
  * @since 30/08/2019
@@ -42,7 +41,7 @@ import java.io.File
 @RunWith(AndroidJUnit4ClassRunner::class)
 class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragment() {
 
-    // Properties
+    // Properties from AbstractInstrumentedTestSimpleGameFragment
 
     /**
      * The text to find in the tool bar
@@ -68,7 +67,98 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
     override val playingModeLayoutId: Int
         get() = R.id.clStarGamePlaying
 
+    // Other properties
+
+    /**
+     * To load mock data
+     */
+    private lateinit var appContext: Context
+
     // More tests
+
+    /**
+     *
+     */
+    @Before
+    fun setUp() {
+        appContext = activityActivityTestRule.activity.applicationContext
+    }
+
+    /**
+     * Uses a bunch of fake signals (mocks) to test the game.
+     * The start must be clear at the end.
+     */
+    @Test
+    fun starMustBeClearOnceAllEventsParsed(){
+
+        // Given
+        goToPlayingScreen()
+
+        // When
+        val mockEvents = readMockEventsFromFile("game-star-level1-signals.mock", appContext)
+        mockEvents.forEach { frame ->
+            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
+            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
+            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
+            Thread.sleep(timeToWaitUntilNextMockFrame)
+        }
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_1))))
+
+    }
+
+    /**
+     * Using a file of mock frames should display a congratulation message (level 2)
+     */
+    @Test
+    fun shouldDisplayLevel2Congratulations() {
+
+        // Given
+        goToPlayingScreen()
+
+        // When
+        val mockEvents = readMockEventsFromFile("game-star-level2-signals.mock", appContext)
+        mockEvents.forEach { frame ->
+            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
+            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
+            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
+            Thread.sleep(timeToWaitUntilNextMockFrame)
+        }
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_2))))
+
+    }
+
+    /**
+     * Using a file of mock frames should display a congratulation message (level 3)
+     */
+    @Test
+    fun shouldDisplayLevel3Congratulations() {
+
+        // Given
+        goToPlayingScreen()
+
+        // When
+        val mockEvents = readMockEventsFromFile("game-star-level3-signals.mock", appContext)
+        mockEvents.forEach { frame ->
+            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
+            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
+            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
+            Thread.sleep(timeToWaitUntilNextMockFrame)
+        }
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_3))))
+
+    }
 
     /**
      * Uses a bunch of fake signals (mocks) to test the game.
@@ -77,15 +167,26 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
     @Test
     fun starMustShineOnceAllEventsParsed(){
 
+        // Given
         goToPlayingScreen()
 
-        // Read mock events
-        readMockEventFromFile()
+        // When
+        val mockEvents = readMockEventsFromFile("game-star-levelmax-signals.mock", appContext)
+        mockEvents.forEach { frame ->
+            val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
+            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
+            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
+            Thread.sleep(timeToWaitUntilNextMockFrame)
+        }
 
-        // Process events
-        activityActivityTestRule.activity.model.sensorB.postValue(500)
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.btnRestart))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.btn_restart))))
 
-        // Final assertion
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations_restart))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_max))))
 
     }
 
@@ -100,31 +201,4 @@ class InstrumentedTestGameStarFragment : AbstractInstrumentedTestSimpleGameFragm
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
     }
 
-    /**
-     * Reads from a text file the mock events to process
-     * @param name The file name, default set to "game-star-win-signals.mock"
-     * @return The list of fake interruptions to process
-     */
-    private fun readMockEventFromFile(name: String = "game-star-win-signals.mock") { //: List<MockInterruption> {
-        activityActivityTestRule.activity.applicationContext.assets.open(name).bufferedReader().use {
-            Logger.d("----- ${it.readLine()}")
-        }
-
-    }
-
-    /**
-     * Models the sensors of the Baah Box which can be mapped for example to the [TrainingBoxViewModel].
-     */
-    enum class Sensor {
-        SENSOR_A,
-        SENSOR_B
-    }
-
-    /**
-     * Models a fake interruption with mock values
-     *
-     * @param sensor The sensor of the Baah Box (A or B)
-     * @param interruption The value to broadcast
-     */
-    data class MockInterruption(val sensor: Sensor, val interruption: Int)
 }

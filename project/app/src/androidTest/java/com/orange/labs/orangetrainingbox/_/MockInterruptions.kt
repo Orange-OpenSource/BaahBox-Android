@@ -76,9 +76,9 @@ enum class Sensor {
  * Models a fake interruption with mock values
  *
  * @param sensor The sensor of the Baah Box (A or B or Joystick)
- * @param interruption The value to broadcast
+ * @param payload The value to broadcast
  */
-data class MockInterruption(val sensor: Sensor, val interruption: Int)
+data class MockInterruption(val sensor: Sensor, val payload: Int)
 
 /**
  * Defines a bundle of interruptions which must be processed at the same time like if we have several

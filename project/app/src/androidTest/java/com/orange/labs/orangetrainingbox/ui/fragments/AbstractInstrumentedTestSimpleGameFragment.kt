@@ -42,12 +42,12 @@ import org.junit.runner.RunWith
  *
  * @since 30/08/2019
  * @version 2.0.0
- * @see [InstrumentedTestSimpleGameFragment]
+ * @see [InstrumentedTestSimpleGameFragment], [InstrumentedTestMockFramesCapable]
  */
 @RunWith(AndroidJUnit4ClassRunner::class)
-abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimpleGameFragment {
+abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimpleGameFragment, InstrumentedTestMockFramesCapable {
 
-    // Properties
+    // Internal properties
 
     /**
      * Activity to play with
@@ -59,6 +59,14 @@ abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimp
      * To get UI thread
      */
     private var appContext: Context? = null
+
+    // Properties from InstrumentedTestMockFramesCapable
+
+    /**
+     * The time in milliseconds during each mock frame processing
+     */
+    override val timeToWaitUntilNextMockFrame: Long
+        get() = 500
 
     // Configuration
 
@@ -152,5 +160,17 @@ interface InstrumentedTestSimpleGameFragment {
      * The id of the playing mode layout
      */
     val playingModeLayoutId: Int
+
+}
+
+/**
+ * Contains a property subclasses should define so as to wait between each mock frame processing
+ */
+interface InstrumentedTestMockFramesCapable {
+
+    /**
+     * The time in milliseconds during each mock frame processing
+     */
+    val timeToWaitUntilNextMockFrame: Long
 
 }
