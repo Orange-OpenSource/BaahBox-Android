@@ -168,6 +168,8 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
      * Using the file with the given name, stored in assets folder, load the mock frames and interruptions and
      * run each of them.
      * Uses also the _timeToWaitUntilNextMockFrame_ interval between each bunch of frames process.
+     * To speed up or make slower the frames execution, change value of  _timeToWaitUntilNextMockFrame_
+     * before calling this method.
      *
      * @param name The name of the mock file to use
      */
@@ -182,8 +184,8 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
     }
 
     /**
-     * Defines the prerequisites to ensure the tests are triggered with the same conditions.
-     * Settings are "manually" updated using the settings view, and also changed by code using [PreferenceManager].
+     * Defines the prerequisites to ensure the tests are triggered with the expected conditions.
+     * Settings are changed by code using [PreferenceManager].
      *
      * @param enableDemoMode - True to enable it, false to disable, default set to _self.demoModeMustBeEnabled_
      * @param difficultyFactor -The difficulty factor, default set to _self.difficultyFactor_

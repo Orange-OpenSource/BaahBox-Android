@@ -162,4 +162,64 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
 
     }
 
+    /**
+     * With a low difficulty and small moves, congratulation message should be
+     */
+    @Test
+    fun shouldDisplayMessageWithLowDifficultyAndSmallMoves() {
+
+        // Given
+        setUpPrerequisites(difficultyFactor = DifficultyFactor.LOW)
+        goToPlayingScreen()
+
+        // When
+        timeToWaitUntilNextMockFrame = 200
+        runMockBLEFramesFromFile("game-star-smallmoves-signals.mock")
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_3))))
+
+    }
+
+    /**
+     * With a medium difficulty and small moves, congratulation message should be
+     */
+    @Test
+    fun shouldDisplayMessageWithMediumDifficultyAndSmallMoves() {
+
+        // Given
+        setUpPrerequisites(difficultyFactor = DifficultyFactor.MEDIUM)
+        goToPlayingScreen()
+
+        // When
+        runMockBLEFramesFromFile("game-star-smallmoves-signals.mock")
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_2))))
+
+    }
+
+    /**
+     * With a high difficulty and small moves, congratulation message should be
+     */
+    @Test
+    fun shouldDisplayMessageWithHighDifficultyAndSmallMoves() {
+
+        // Given
+        setUpPrerequisites(difficultyFactor = DifficultyFactor.HIGH)
+        goToPlayingScreen()
+
+        // When
+        runMockBLEFramesFromFile("game-star-smallmoves-signals.mock")
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_2))))
+
+    }
 }
