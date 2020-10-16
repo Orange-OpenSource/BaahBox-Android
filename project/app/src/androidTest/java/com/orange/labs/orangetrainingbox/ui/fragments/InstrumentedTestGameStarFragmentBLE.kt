@@ -107,6 +107,7 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
     fun shouldDisplayLevel2Congratulations() {
 
         // Given
+        setUpPrerequisites(difficultyFactor = DifficultyFactor.MEDIUM)
         goToPlayingScreen()
 
         // When
@@ -126,6 +127,7 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
     fun shouldDisplayLevel3Congratulations() {
 
         // Given
+        setUpPrerequisites(difficultyFactor = DifficultyFactor.MEDIUM)
         goToPlayingScreen()
 
         // When
