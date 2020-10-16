@@ -25,8 +25,10 @@ import org.junit.runner.RunWith
 
 /**
  * To test [GameSheepFragment] class.
- * This class defines only the expected resources, e.g. strings and layout (using identifiers).
+ * This class defines the expected resources, e.g. strings and layout (using identifiers).
  * Test cases are mainly factorized in the super class because some games are quite similar.
+ *
+ * Specific tests cases are also defined in this class.
  *
  * @since 30/08/2019
  * @version 2.0.0
@@ -62,7 +64,6 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
         get() = R.id.clSheepGamePlaying
 
     // More tests
-
 
     /**
      * For all test cases, except if overridden in such test cases, disabled demo mode
