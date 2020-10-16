@@ -46,9 +46,9 @@ import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.btle.TrainingBoxViewModel
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import com.orange.labs.orangetrainingbox.game.InputsParser
+import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
 import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import com.orange.labs.orangetrainingbox.utils.properties.BleConfiguration
-import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import com.orange.labs.orangetrainingbox.utils.properties.readBleSensorsConfiguration
 import com.orange.labs.orangetrainingbox.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -317,11 +317,10 @@ class MainActivity : AppCompatActivity() {
                 when (resultCode) {
                     Activity.RESULT_OK -> {
                         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-                        when (preferences.getInt(PropertiesKeys.DIFFICULTY_FACTOR.key,1)) {
-                                0 -> model.difficultyFactor = DifficultyFactor.LOW
-                                2 -> model.difficultyFactor = DifficultyFactor.HIGH
-                                else /* and 1 */ -> model.difficultyFactor = DifficultyFactor.MEDIUM
-                        }
+                        val difficultyFactorPreference = preferences.getInt(PreferencesKeys.DIFFICULTY_FACTOR.key, DifficultyFactor.MEDIUM.preferencesValue)
+                        // With !! the value for one reason: if a null value is retrieved, it means there is a big mes sin the preferences or the settings.
+                        // We should stop now.
+                        model.difficultyFactor = DifficultyFactor.fromIntToValue(difficultyFactorPreference)!!
                         Toast.makeText(this@MainActivity, this.getString(R.string.toast_difficulty_factor_changed, model.difficultyFactor), Toast.LENGTH_LONG).show()
                         Logger.d("Difficulty factor has been changed: ${model.difficultyFactor}")
                     }

@@ -39,6 +39,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.game.CollisionDetector
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
+import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
 import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.properties.*
 import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
@@ -117,7 +118,7 @@ class GameSheepFragment : AbstractGameFragment() {
      * The total number of fences to jump over.
      */
     private val totalNumberOfFences: Int by lazy  {
-        PreferenceManager.getDefaultSharedPreferences(activity).getInt("pref_key_settings_game_sheep_fences_number", 0)
+        PreferenceManager.getDefaultSharedPreferences(activity).getInt(PreferencesKeys.SHEEP_GAME_FENCES_NUMBER.key, 0)
     }
 
     /**
@@ -562,7 +563,7 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     private fun computeFencesSpeed(): Long {
         val speedFactor = when(PreferenceManager.getDefaultSharedPreferences(activity)
-            .getInt("pref_key_settings_game_sheep_fences_speed", 0)) {
+            .getInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, 0)) {
             1 -> defaultGameConfiguration.speedFactors.second
             2 -> defaultGameConfiguration.speedFactors.third
             else /* including 0 */  -> defaultGameConfiguration.speedFactors.first

@@ -17,62 +17,55 @@
  */
 package com.orange.labs.orangetrainingbox.ui.fragments
 
-import android.content.Context
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.orange.labs.orangetrainingbox.R
+import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
+
 /**
- * To test [GameBalloonFragment] class.
- * This class defines only the expected resources, e.g. strings and layout (using identifiers).
+ * To test [GameStarFragment] class.
+ * This class defines the expected resources, e.g. strings and layout (using identifiers).
  * Test cases are mainly factorized in the super class because some games are quite similar.
- *
- * We assume we have a sensor reactivity defined to "medium" in prerequisite, no control on this value has been made yet.
+ * Uses mocks to make more tests on the game logic.
  *
  * @since 30/08/2019
- * @version 2.0.0
- * @see [AbstractInstrumentedTestSimpleGameFragment]
+ * @version 2.1.0
+ * @see [AbstractInstrumentedTestSimpleGameFragmentBLE]
  */
 @RunWith(AndroidJUnit4ClassRunner::class)
-class InstrumentedTestGameBalloonFragment : AbstractInstrumentedTestSimpleGameFragment() {
+class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFragmentBLE() {
 
-    // Properties from AbstractInstrumentedTestSimpleGameFragment
+    // Properties from AbstractInstrumentedTestSimpleGameFragmentBLE
 
     /**
      * The text to find in the tool bar
      */
     override val resourceStringGameTitle: Int
-        get() = R.string.title_game_balloon
+        get() = R.string.title_game_star
 
     /**
      * First line of instruction
      */
     override val resourceStringGameInstructionLine1: Int
-        get() = R.string.game_balloon_instructions_line_1
+        get() = R.string.game_star_instructions_line_1
 
     /**
      * Second line of instruction
      */
     override val resourceStringGameInstructionLine2: Int
-        get() = R.string.game_balloon_instructions_line_2
+        get() = R.string.game_star_instructions_line_2
 
     /**
      * Id of the layout for playing mode
      */
     override val playingModeLayoutId: Int
-        get() = R.id.clBalloonGamePlaying
-
-    // Other properties
-
-    /**
-     * To load mock data
-     */
-    private lateinit var appContext: Context
+        get() = R.id.clStarGamePlaying
 
     // More tests
 
@@ -80,32 +73,34 @@ class InstrumentedTestGameBalloonFragment : AbstractInstrumentedTestSimpleGameFr
      *
      */
     @Before
-    fun setUp() {
-        appContext = activityActivityTestRule.activity.applicationContext
+    fun setUp(){
+        demoModeMustBeEnabled = false
+        difficultyFactor = DifficultyFactor.LOW
+        super.setup()
     }
 
     /**
      * Uses a bunch of fake signals (mocks) to test the game.
-     * The balloon must be small at the end with the good texts.
+     * The star must be clear at the end.
      */
     @Test
-    fun balloonMustBeSmallOnceAllEventsParsed(){
+    fun starMustBeClearOnceAllEventsParsed(){
 
         // Given
         goToPlayingScreen()
 
         // When
-        runMockBLEFramesFromFile("game-balloon-level1-signals.mock")
+        runMockBLEFramesFromFile("game-star-level1-signals.mock")
 
         // Then
         Espresso
             .onView(ViewMatchers.withId(R.id.tv_congratulations))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_1))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_1))))
 
     }
 
     /**
-     * Using a file of mock frames should display the good congratulation message (level 2).
+     * Using a file of mock frames should display a congratulation message (level 2)
      */
     @Test
     fun shouldDisplayLevel2Congratulations() {
@@ -114,17 +109,17 @@ class InstrumentedTestGameBalloonFragment : AbstractInstrumentedTestSimpleGameFr
         goToPlayingScreen()
 
         // When
-        runMockBLEFramesFromFile("game-balloon-level2-signals.mock")
+        runMockBLEFramesFromFile("game-star-level2-signals.mock")
 
         // Then
         Espresso
             .onView(ViewMatchers.withId(R.id.tv_congratulations))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_2))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_2))))
 
     }
 
     /**
-     * Using a file of mock frames should display the good congratulation message (level 3).
+     * Using a file of mock frames should display a congratulation message (level 3)
      */
     @Test
     fun shouldDisplayLevel3Congratulations() {
@@ -133,26 +128,27 @@ class InstrumentedTestGameBalloonFragment : AbstractInstrumentedTestSimpleGameFr
         goToPlayingScreen()
 
         // When
-        runMockBLEFramesFromFile("game-balloon-level3-signals.mock")
+        runMockBLEFramesFromFile("game-star-level3-signals.mock")
 
         // Then
         Espresso
             .onView(ViewMatchers.withId(R.id.tv_congratulations))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_3))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_3))))
 
     }
 
     /**
-     * Using a file of mock frames should display the good congratulation message (level max).
+     * Uses a bunch of fake signals (mocks) to test the game.
+     * The start must be shining at the end.
      */
     @Test
-    fun shouldDisplayLevelMaxCongratulations() {
+    fun starMustShineOnceAllEventsParsed() {
 
         // Given
         goToPlayingScreen()
 
         // When
-        runMockBLEFramesFromFile("game-balloon-levelmax-signals.mock")
+        runMockBLEFramesFromFile("game-star-levelmax-signals.mock")
 
         // Then
         Espresso
@@ -161,7 +157,7 @@ class InstrumentedTestGameBalloonFragment : AbstractInstrumentedTestSimpleGameFr
 
         Espresso
             .onView(ViewMatchers.withId(R.id.tv_congratulations_restart))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_max))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_max))))
 
     }
 

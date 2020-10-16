@@ -28,10 +28,10 @@ import org.junit.runner.RunWith
  *
  * @since 30/08/2019
  * @version 2.0.0
- * @see [AbstractInstrumentedTestSimpleGameFragment]
+ * @see [AbstractInstrumentedTestSimpleGameFragmentBLE]
  */
 @RunWith(AndroidJUnit4ClassRunner::class)
-class InstrumentedTestGameSheepFragment : AbstractInstrumentedTestSimpleGameFragment() {
+class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameFragmentBLE() {
 
     /**
      * The text to find in the tool bar

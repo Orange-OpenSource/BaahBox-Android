@@ -87,7 +87,6 @@ class UnitTestPropertiesKeys {
 
     @Test
     fun `keys of difficulty`() {
-        assertEquals(PropertiesKeys.DIFFICULTY_FACTOR.key, "difficulty_factor")
         assertEquals(PropertiesKeys.DIFFICULTY_NUMERIC_VALUES.key, "difficulty_factor_values")
     }
 

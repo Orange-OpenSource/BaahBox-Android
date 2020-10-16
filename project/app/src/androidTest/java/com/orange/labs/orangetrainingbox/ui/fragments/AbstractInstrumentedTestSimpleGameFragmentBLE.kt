@@ -19,6 +19,7 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 
 import android.content.Context
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
@@ -28,9 +29,12 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.rule.ActivityTestRule
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.`_`.readMockEventsFromFile
+import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import com.orange.labs.orangetrainingbox.ui.MainActivity
+import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
 import org.hamcrest.CoreMatchers
 import org.hamcrest.core.IsInstanceOf
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -43,10 +47,12 @@ import org.junit.runner.RunWith
  *
  * @since 30/08/2019
  * @version 2.0.0
- * @see [InstrumentedTestSimpleGameFragment], [InstrumentedTestMockFramesCapable]
+ * @see [InstrumentedTestSimpleGameFragment], [InstrumentedTestMockBLEFramesCapable], [InstrumentedTestPrerequisitesCapable]
  */
 @RunWith(AndroidJUnit4ClassRunner::class)
-abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimpleGameFragment, InstrumentedTestMockFramesCapable {
+abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestSimpleGameFragment,
+                                                                InstrumentedTestMockBLEFramesCapable,
+                                                                InstrumentedTestPrerequisitesCapable {
 
     // Internal properties
 
@@ -54,30 +60,44 @@ abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimp
      * Activity to play with
      */
     @Rule
-    @JvmField var activityActivityTestRule = ActivityTestRule(MainActivity::class.java)
+    @JvmField var activityTestRule = ActivityTestRule(MainActivity::class.java)
 
     /**
-     * To get UI thread
+     * To get UI thread, [Context]...
      */
-    private var appContext: Context? = null
+    protected lateinit var appContext: Context
 
-    // Properties from InstrumentedTestMockFramesCapable
+    // Properties from InstrumentedTestMockBLEFramesCapable
 
     /**
-     * The time in milliseconds during each mock frame processing
+     * By default 500ms between each fake BLE frame
      */
-    override val timeToWaitUntilNextMockFrame: Long
-        get() = 500
+    override var timeToWaitUntilNextMockFrame: Long = 500
+
+    // Properties from InstrumentedTestPrerequisitesCapable
+
+    /**
+     * By default demo mode must be disabled
+     */
+    override var demoModeMustBeEnabled: Boolean = false
+
+    /**
+     * By default difficulty is set to medium
+     */
+    override var difficultyFactor: DifficultyFactor = DifficultyFactor.MEDIUM
 
     // Configuration
 
     /**
-     *
+     * Retrieves the [Context].
+     * Go to the game screen with layouts defined in subclasses).
+     * Set tup prerequisites.
      */
     @Before
     fun setup(){
         appContext = InstrumentationRegistry.getInstrumentation().targetContext
         goToGame()
+        setUpPrerequisites(true, DifficultyFactor.MEDIUM)
     }
 
     // Tests
@@ -155,10 +175,43 @@ abstract class AbstractInstrumentedTestSimpleGameFragment : InstrumentedTestSimp
         val mockEvents = readMockEventsFromFile(name, appContext!!)
         mockEvents.forEach { frame ->
             val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
-            if (sensorA != null) activityActivityTestRule.activity.model.sensorA.postValue(sensorA.payload)
-            if (sensorB != null) activityActivityTestRule.activity.model.sensorB.postValue(sensorB.payload)
+            if (sensorA != null) activityTestRule.activity.model.sensorA.postValue(sensorA.payload)
+            if (sensorB != null) activityTestRule.activity.model.sensorB.postValue(sensorB.payload)
             Thread.sleep(timeToWaitUntilNextMockFrame)
         }
+    }
+
+    /**
+     * Defines the prerequisites to ensure the tests are triggered with the same conditions.
+     * Settings are "manually" updated using the settings view, and also changed by code using [PreferenceManager].
+     *
+     * @param enableDemoMode - True to enable it, false to disable
+     * @param difficultyFactor -The difficulty factor
+     */
+    protected open fun setUpPrerequisites(enableDemoMode: Boolean, difficultyFactor: DifficultyFactor) {
+
+        Espresso.onView(ViewMatchers.withId(R.id.action_settings)).perform(ViewActions.click())
+        val preferences = PreferenceManager.getDefaultSharedPreferences(appContext)
+        val preferencesEditor = preferences.edit()
+
+        // Deal with the demo mode
+        preferencesEditor.putBoolean(PreferencesKeys.ENABLE_DEMO_MODE.key, enableDemoMode).apply()
+        val demoModeState = preferences.getBoolean(PreferencesKeys.ENABLE_DEMO_MODE.key, !enableDemoMode) // Trick to ensure to have a failing value if preference not saved
+        Assert.assertEquals("Demo mode has not been changed, expected $enableDemoMode but was $demoModeState",
+            enableDemoMode,
+            demoModeState)
+
+        // Define difficulty
+        preferencesEditor.putInt(PreferencesKeys.DIFFICULTY_FACTOR.key, difficultyFactor.preferencesValue).apply()
+        val difficultyFactorState = preferences.getInt(PreferencesKeys.DIFFICULTY_FACTOR.key, difficultyFactor.preferencesValue * -1) // Trick to ensure we make the test fail if preferences unsaved
+        Assert.assertEquals("Difficulty factor mode has not been changed, expected $difficultyFactor.preferencesValue but was $difficultyFactorState",
+            difficultyFactor.preferencesValue,
+            difficultyFactorState)
+
+        // Back to playing screen
+
+        Espresso.pressBack()
+
     }
 
 }
@@ -191,13 +244,31 @@ interface InstrumentedTestSimpleGameFragment {
 }
 
 /**
- * Contains a property subclasses should define so as to wait between each mock frame processing
+ * Contains a property subclasses should define so as to wait between each mock BLE frame processing
  */
-interface InstrumentedTestMockFramesCapable {
+interface InstrumentedTestMockBLEFramesCapable {
 
     /**
      * The time in milliseconds during each mock frame processing
      */
-    val timeToWaitUntilNextMockFrame: Long
+    var timeToWaitUntilNextMockFrame: Long
+
+}
+
+/**
+ * Contains basic properties to override in subclasses for the minimum of prerequisites to define
+ * for each game before each test case.
+ */
+interface InstrumentedTestPrerequisitesCapable {
+
+    /**
+     * If the demo mode has to be enabled or not
+     */
+    var demoModeMustBeEnabled: Boolean
+
+    /**
+     * The difficulty factor
+     */
+    var difficultyFactor: DifficultyFactor
 
 }

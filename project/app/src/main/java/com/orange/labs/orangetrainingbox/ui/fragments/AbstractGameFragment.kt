@@ -27,6 +27,8 @@ import android.view.*
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.game.InputsParser
+import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
+import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
 
 /**
@@ -35,7 +37,7 @@ import com.orange.labs.orangetrainingbox.utils.properties.isDemoFeatureEnabled
  * Each new game fragment must inherit from this class.
  *
  * @since 23/05/2019
- * @version 2.4.0
+ * @version 2.5.0
  * @see [AbstractThemedFragment], [GameWith3Screens], [NavigableGame]
  */
 abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens, NavigableGame {
@@ -148,7 +150,7 @@ abstract class AbstractGameFragment : AbstractThemedFragment(), GameWith3Screens
     protected fun isDemoModeActivated(): Boolean {
         if (activity?.isDemoFeatureEnabled() == false) return false
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        return preferences.getBoolean("preferences_demo_mode_enabled", false)
+        return preferences.getBoolean(PreferencesKeys.ENABLE_DEMO_MODE.key, false)
     }
 
     /**

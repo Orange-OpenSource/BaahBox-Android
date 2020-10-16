@@ -262,7 +262,7 @@ class InstrumentedTestPropertiesReader {
      * Test the isDemoFeatureEnabled() Context extension
      */
     @Test
-    fun isDemoModeActivated() {
+    fun isDemoFeatureActivated() {
         val expectedFlag = appContext!!.loadProperties().getProperty(PropertiesKeys.ENABLE_DEMO_FEATURE.key).toBoolean()
         val config = appContext!!.isDemoFeatureEnabled()
         assertEquals(expectedFlag, config)
