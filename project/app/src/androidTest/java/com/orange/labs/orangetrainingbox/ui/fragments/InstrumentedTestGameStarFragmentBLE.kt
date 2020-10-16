@@ -70,7 +70,8 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
     // More tests
 
     /**
-     *
+     * For all test cases, except if overridden in such test cases, disabled demo mode
+     * and defines difficulty to LOW.
      */
     @Before
     fun setUp(){

@@ -97,7 +97,7 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
     fun setup(){
         appContext = InstrumentationRegistry.getInstrumentation().targetContext
         goToGame()
-        setUpPrerequisites(true, DifficultyFactor.MEDIUM)
+        setUpPrerequisites()
     }
 
     // Tests
@@ -185,10 +185,11 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
      * Defines the prerequisites to ensure the tests are triggered with the same conditions.
      * Settings are "manually" updated using the settings view, and also changed by code using [PreferenceManager].
      *
-     * @param enableDemoMode - True to enable it, false to disable
-     * @param difficultyFactor -The difficulty factor
+     * @param enableDemoMode - True to enable it, false to disable, default set to _self.demoModeMustBeEnabled_
+     * @param difficultyFactor -The difficulty factor, default set to _self.difficultyFactor_
      */
-    protected open fun setUpPrerequisites(enableDemoMode: Boolean, difficultyFactor: DifficultyFactor) {
+    protected open fun setUpPrerequisites(enableDemoMode: Boolean = this.demoModeMustBeEnabled,
+                                          difficultyFactor: DifficultyFactor = this.difficultyFactor) {
 
         Espresso.onView(ViewMatchers.withId(R.id.action_settings)).perform(ViewActions.click())
         val preferences = PreferenceManager.getDefaultSharedPreferences(appContext)
@@ -209,7 +210,6 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
             difficultyFactorState)
 
         // Back to playing screen
-
         Espresso.pressBack()
 
     }
