@@ -165,7 +165,7 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
     }
 
     /**
-     * With a low difficulty and small moves, congratulation message should be _game_star_congratulations_level_3_
+     * With a low difficulty and small moves, congratulation message should be _game_star_congratulations_level_2_
      */
     @Test
     fun shouldDisplayMessageWithLowDifficultyAndSmallMoves() {
@@ -181,7 +181,7 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
         // Then
         Espresso
             .onView(ViewMatchers.withId(R.id.tv_congratulations))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_3))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_star_congratulations_level_2))))
 
     }
 

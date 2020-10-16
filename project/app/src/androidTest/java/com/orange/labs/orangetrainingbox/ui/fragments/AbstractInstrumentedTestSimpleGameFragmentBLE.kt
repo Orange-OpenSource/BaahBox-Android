@@ -188,12 +188,11 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
      * Settings are changed by code using [PreferenceManager].
      *
      * @param enableDemoMode - True to enable it, false to disable, default set to _self.demoModeMustBeEnabled_
-     * @param difficultyFactor -The difficulty factor, default set to _self.difficultyFactor_
+     * @param difficultyFactor - The difficulty factor, default set to _self.difficultyFactor_
      */
     protected open fun setUpPrerequisites(enableDemoMode: Boolean = this.demoModeMustBeEnabled,
                                           difficultyFactor: DifficultyFactor = this.difficultyFactor) {
 
-        Espresso.onView(ViewMatchers.withId(R.id.action_settings)).perform(ViewActions.click())
         val preferences = PreferenceManager.getDefaultSharedPreferences(appContext)
         val preferencesEditor = preferences.edit()
 
@@ -210,9 +209,6 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
         Assert.assertEquals("Difficulty factor mode has not been changed, expected $difficultyFactor.preferencesValue but was $difficultyFactorState",
             difficultyFactor.preferencesValue,
             difficultyFactorState)
-
-        // Back to playing screen
-        Espresso.pressBack()
 
     }
 
