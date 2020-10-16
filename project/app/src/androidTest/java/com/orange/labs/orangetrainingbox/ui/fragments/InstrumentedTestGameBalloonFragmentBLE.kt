@@ -23,16 +23,15 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.orange.labs.orangetrainingbox.R
+import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
  * To test [GameBalloonFragment] class.
- * This class defines only the expected resources, e.g. strings and layout (using identifiers).
+ * This class defines the expected resources, e.g. strings and layout (using identifiers).
  * Test cases are mainly factorized in the super class because some games are quite similar.
- *
- * We assume we have a sensor reactivity defined to "medium" in prerequisite, no control on this value has been made yet.
  *
  * @since 30/08/2019
  * @version 2.0.0
@@ -68,6 +67,17 @@ class InstrumentedTestGameBalloonFragmentBLE : AbstractInstrumentedTestSimpleGam
         get() = R.id.clBalloonGamePlaying
 
     // More tests
+
+    /**
+     * For all test cases, except if overridden in such test cases, disabled demo mode
+     * and defines difficulty to LOW.
+     */
+    @Before
+    fun setUp(){
+        demoModeMustBeEnabled = false
+        difficultyFactor = DifficultyFactor.MEDIUM
+        super.setup()
+    }
 
     /**
      * Uses a bunch of fake signals (mocks) to test the game.
@@ -147,6 +157,69 @@ class InstrumentedTestGameBalloonFragmentBLE : AbstractInstrumentedTestSimpleGam
         Espresso
             .onView(ViewMatchers.withId(R.id.tv_congratulations_restart))
             .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_max))))
+
+    }
+
+    /**
+     * With a low difficulty and small moves, congratulation message should be _game_balloon_congratulations_level_4_
+     */
+    @Test
+    fun shouldDisplayMessageWithLowDifficultyAndSmallMoves() {
+
+        // Given
+        setUpPrerequisites(difficultyFactor = DifficultyFactor.LOW)
+        goToPlayingScreen()
+
+        // When
+        timeToWaitUntilNextMockFrame = 100
+        runMockBLEFramesFromFile("game-balloon-smallmoves-signals.mock")
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_4))))
+
+    }
+
+    /**
+     * With a low difficulty and small moves, congratulation message should be _game_balloon_congratulations_level_4_
+     */
+    @Test
+    fun shouldDisplayMessageWithMediumDifficultyAndSmallMoves() {
+
+        // Given
+        setUpPrerequisites(difficultyFactor = DifficultyFactor.MEDIUM)
+        goToPlayingScreen()
+
+        // When
+        timeToWaitUntilNextMockFrame = 100
+        runMockBLEFramesFromFile("game-balloon-smallmoves-signals.mock")
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_3))))
+
+    }
+
+    /**
+     * With a low difficulty and small moves, congratulation message should be _game_balloon_congratulations_level_2_
+     */
+    @Test
+    fun shouldDisplayMessageWithHighDifficultyAndSmallMoves() {
+
+        // Given
+        setUpPrerequisites(difficultyFactor = DifficultyFactor.HIGH)
+        goToPlayingScreen()
+
+        // When
+        timeToWaitUntilNextMockFrame = 100
+        runMockBLEFramesFromFile("game-balloon-smallmoves-signals.mock")
+
+        // Then
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tv_congratulations))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_2))))
 
     }
 

@@ -165,7 +165,7 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
     }
 
     /**
-     * With a low difficulty and small moves, congratulation message should be
+     * With a low difficulty and small moves, congratulation message should be _game_star_congratulations_level_3_
      */
     @Test
     fun shouldDisplayMessageWithLowDifficultyAndSmallMoves() {
@@ -186,7 +186,7 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
     }
 
     /**
-     * With a medium difficulty and small moves, congratulation message should be
+     * With a medium difficulty and small moves, congratulation message should be _game_star_congratulations_level_2_
      */
     @Test
     fun shouldDisplayMessageWithMediumDifficultyAndSmallMoves() {
@@ -206,7 +206,7 @@ class InstrumentedTestGameStarFragmentBLE : AbstractInstrumentedTestSimpleGameFr
     }
 
     /**
-     * With a high difficulty and small moves, congratulation message should be
+     * With a high difficulty and small moves, congratulation message should be _game_star_congratulations_level_2_
      */
     @Test
     fun shouldDisplayMessageWithHighDifficultyAndSmallMoves() {
