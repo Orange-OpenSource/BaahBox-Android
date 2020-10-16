@@ -182,7 +182,7 @@ class InstrumentedTestGameBalloonFragmentBLE : AbstractInstrumentedTestSimpleGam
     }
 
     /**
-     * With a low difficulty and small moves, congratulation message should be _game_balloon_congratulations_level_4_
+     * With a low difficulty and small moves, congratulation message should be _game_balloon_congratulations_level_3_
      */
     @Test
     fun shouldDisplayMessageWithMediumDifficultyAndSmallMoves() {
@@ -203,7 +203,7 @@ class InstrumentedTestGameBalloonFragmentBLE : AbstractInstrumentedTestSimpleGam
     }
 
     /**
-     * With a low difficulty and small moves, congratulation message should be _game_balloon_congratulations_level_2_
+     * With a low difficulty and small moves, congratulation message should be _game_balloon_congratulations_level_3_
      */
     @Test
     fun shouldDisplayMessageWithHighDifficultyAndSmallMoves() {
@@ -219,7 +219,7 @@ class InstrumentedTestGameBalloonFragmentBLE : AbstractInstrumentedTestSimpleGam
         // Then
         Espresso
             .onView(ViewMatchers.withId(R.id.tv_congratulations))
-            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_2))))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.game_balloon_congratulations_level_3))))
 
     }
 

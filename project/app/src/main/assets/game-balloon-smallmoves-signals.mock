@@ -1,6 +1,5 @@
 # Format should be A=value;B=value;J=value
 # where value is a positive integer and sensor is A or B or J (for Joystick.)
-A=0;B=50;J=0
-A=0;B=100;J=0
 A=0;B=200;J=0
 A=0;B=300;J=0
+A=0;B=400;J=0

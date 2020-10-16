@@ -19,6 +19,8 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.orange.labs.orangetrainingbox.R
+import com.orange.labs.orangetrainingbox.game.DifficultyFactor
+import org.junit.Before
 import org.junit.runner.RunWith
 
 /**
@@ -32,6 +34,8 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4ClassRunner::class)
 class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameFragmentBLE() {
+
+    // Properties from AbstractInstrumentedTestSimpleGameFragmentBLE
 
     /**
      * The text to find in the tool bar
@@ -56,5 +60,19 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
      */
     override val playingModeLayoutId: Int
         get() = R.id.clSheepGamePlaying
+
+    // More tests
+
+
+    /**
+     * For all test cases, except if overridden in such test cases, disabled demo mode
+     * and defines difficulty to LOW.
+     */
+    @Before
+    fun setUp(){
+        demoModeMustBeEnabled = false
+        difficultyFactor = DifficultyFactor.MEDIUM
+        super.setup()
+    }
 
 }

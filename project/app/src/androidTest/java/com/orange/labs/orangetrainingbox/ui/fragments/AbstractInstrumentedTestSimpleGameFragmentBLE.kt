@@ -97,7 +97,7 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
     fun setup(){
         appContext = InstrumentationRegistry.getInstrumentation().targetContext
         goToGame()
-        setUpPrerequisites()
+        //setUpPrerequisites()
     }
 
     // Tests
@@ -193,6 +193,11 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
     protected open fun setUpPrerequisites(enableDemoMode: Boolean = this.demoModeMustBeEnabled,
                                           difficultyFactor: DifficultyFactor = this.difficultyFactor) {
 
+
+        // Go to settings activity
+        // Useful only when finished
+        Espresso.onView(ViewMatchers.withId(R.id.action_settings)).perform(ViewActions.click())
+
         val preferences = PreferenceManager.getDefaultSharedPreferences(appContext)
         val preferencesEditor = preferences.edit()
 
@@ -209,6 +214,11 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
         Assert.assertEquals("Difficulty factor mode has not been changed, expected $difficultyFactor.preferencesValue but was $difficultyFactorState",
             difficultyFactor.preferencesValue,
             difficultyFactorState)
+
+        // Go to back.
+        // The finishing of the settings activity triggers the onActivityResult() of the main activity
+        // and updates objects like model.
+        Espresso.pressBack()
 
     }
 
