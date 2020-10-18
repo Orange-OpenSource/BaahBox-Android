@@ -31,7 +31,7 @@ import android.view.View
  * @since 05/09/2019
  * @version 2.0.0
  */
-class CollisionDetector() {
+class CollisionDetector {
 
     // *******
     // Methods

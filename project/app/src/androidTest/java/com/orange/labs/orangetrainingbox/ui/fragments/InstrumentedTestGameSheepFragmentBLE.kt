@@ -24,6 +24,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
+import com.orange.labs.orangetrainingbox.game.SheepGameFencesSpeed
 import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
 import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
 import com.orange.labs.orangetrainingbox.utils.properties.loadProperties
@@ -94,13 +95,13 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
 
         // Given
         difficultyFactor = DifficultyFactor.LOW
-        timeToWaitUntilNextMockFrame = 100
-        this.setUpPrerequisites(fencesNumber = 1, fencesSpeed = 1)
+        timeToWaitUntilNextMockFrame = 50
+        this.setUpPrerequisites(fencesNumber = 1, fencesSpeed = SheepGameFencesSpeed.LOW)
         goToPlayingScreen()
 
         // When
         runMockBLEFramesFromFile("game-sheep-1-jump.mock")
-        Thread.sleep(10000)
+        Thread.sleep(20000)
 
         // Then
 
@@ -118,16 +119,15 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
      * @param enableDemoMode - True to enable it, false to disable, default set to _self.demoModeMustBeEnabled_
      * @param difficultyFactor - The difficulty factor, default set to _self.difficultyFactor_
      * @param fencesNumber - The number of fences to jump over
-     * @param fencesSpeed - The speed of fences' "run"? By definition in the _preferences.xml_ must be between 0 and 2.
+     * @param fencesSpeed - The speed of fences'moves
      */
     private fun setUpPrerequisites(enableDemoMode: Boolean = this.demoModeMustBeEnabled,
-                           difficultyFactor: DifficultyFactor = this.difficultyFactor,
-                                    fencesNumber: Int, fencesSpeed: Int) {
+                                         difficultyFactor: DifficultyFactor = this.difficultyFactor,
+                                              fencesNumber: Int, fencesSpeed: SheepGameFencesSpeed) {
 
         // Check parameters
         val maxNumberOfFences = appContext.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key).toInt()
         if (fencesNumber < 0 || fencesNumber > maxNumberOfFences) fail("Fences number is $fencesNumber but must be between 0 and $maxNumberOfFences")
-        if (fencesSpeed < 0 || fencesSpeed > 2) fail("Fences speed is $fencesSpeed and must be between 0 and 2")
 
         // Defines basic prerequisites
         super.setUpPrerequisites(enableDemoMode, difficultyFactor)
@@ -140,14 +140,14 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
         val preferences = PreferenceManager.getDefaultSharedPreferences(appContext)
         val preferencesEditor = preferences.edit()
 
-        preferencesEditor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesSpeed).apply()
-        val savedSpeedOfFences = preferences.getInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesSpeed * -1) // Trick to ensure to have a failing value if preference not saved
+        preferencesEditor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesSpeed.preferencesValue).apply()
+        val savedSpeedOfFences = preferences.getInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesSpeed.preferencesValue * -1) // Trick to ensure to have a failing value if preference not saved
         Assert.assertEquals("Speed fence has not been changed, expected $fencesSpeed but was $savedSpeedOfFences",
             fencesSpeed,
             savedSpeedOfFences)
 
         preferencesEditor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_NUMBER.key, fencesNumber).apply()
-        val savedNumberOfFences = preferences.getInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesNumber * -1) // Trick to ensure to have a failing value if preference not saved
+        val savedNumberOfFences = preferences.getInt(PreferencesKeys.SHEEP_GAME_FENCES_NUMBER.key, fencesNumber * -1) // Trick to ensure to have a failing value if preference not saved
         Assert.assertEquals("Number of fences has not been changed, expected $fencesNumber but was $savedNumberOfFences",
             fencesNumber,
             savedNumberOfFences)
