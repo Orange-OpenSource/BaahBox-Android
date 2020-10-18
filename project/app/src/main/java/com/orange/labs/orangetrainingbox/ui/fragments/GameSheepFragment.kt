@@ -45,6 +45,7 @@ import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
 import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.properties.*
 import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
+import kotlinx.android.synthetic.main.fragment_game_sheep_outro.*
 
 // *******
 // Classes
@@ -167,12 +168,16 @@ class GameSheepFragment : AbstractGameFragment() {
      */
     private val collisionDetectionRoutine: Runnable by lazy {
         Runnable {
-            try {
-                val sheep = requireActivity().findViewById<ImageView>(R.id.gameIcon)
-                val isCollision = collisionDetector.isCollision(sheep, fenceImageView)
-                isCollisionDetected.postValue(isCollision)
-            } finally {
-                collisionDetectionRoutineHandler.postDelayed(collisionDetectionRoutine, detectionInterval)
+            val attachedActivity = activity
+            if (attachedActivity != null) {
+                try {
+                    val sheep = attachedActivity.findViewById<ImageView>(R.id.gameIcon)
+                    val isCollision = collisionDetector.isCollision(sheep, fenceImageView)
+                    isCollisionDetected.postValue(isCollision)
+                } finally {
+                    collisionDetectionRoutineHandler.postDelayed(collisionDetectionRoutine,
+                        detectionInterval)
+                }
             }
         }
     }
@@ -335,8 +340,7 @@ class GameSheepFragment : AbstractGameFragment() {
         super.onResume()
 
         // If game ended
-        if (!loadFromArgsFlagIntroducing()
-            && !loadFromArgsFlagPlaying()) {
+        if (!loadFromArgsFlagIntroducing() && !loadFromArgsFlagPlaying()) {
 
             val activity = requireActivity()
             val ivSheepFloor: ImageView =  activity.findViewById(R.id.ivGameSheepFloor)
@@ -356,7 +360,7 @@ class GameSheepFragment : AbstractGameFragment() {
                 tvLine2.text = getString(R.string.game_sheep_score_success)
 
                 gameIconAnimator = IconAnimator()
-                gameIconAnimator.animateGameIcon((activity as AppCompatActivity), gameIcon, 1000,
+                gameIconAnimator.animateGameIcon((activity as AppCompatActivity), ivGameSheepVictory, 1000,
                     arrayOf(R.mipmap.ic_sheep_welcome_1, R.mipmap.ic_sheep_welcome_2))
 
             // Else the player has lost, display score and bang image
@@ -561,12 +565,11 @@ class GameSheepFragment : AbstractGameFragment() {
                         processCollision() }
 
                 )
-                collisionDetectionRoutine.run()//collisionDetector.startDetection()
+                collisionDetectionRoutine.run()
             }
 
             // Remove views and load final view once animations completed
             override fun onAnimationEnd(animation: Animator) {
-               // collisionDetector.stopDetection()
                 collisionDetectionRoutineHandler.removeCallbacks(collisionDetectionRoutine)
                 parent.removeView(view)
                 processVictory()
