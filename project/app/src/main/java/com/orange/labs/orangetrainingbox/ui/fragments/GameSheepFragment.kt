@@ -367,7 +367,7 @@ class GameSheepFragment : AbstractGameFragment() {
             // Else the player has lost, display score and bang image
             } else {
 
-                ivSheepFloor.visibility = View.VISIBLE
+                ivSheepFloor.visibility = View.INVISIBLE
 
                 ivSheepGameResult = activity.findViewById(R.id.ivGameSheepBang)
                 ivSheepGameResult.visibility = View.VISIBLE

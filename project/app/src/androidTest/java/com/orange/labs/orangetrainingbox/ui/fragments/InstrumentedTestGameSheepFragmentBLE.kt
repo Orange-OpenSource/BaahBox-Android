@@ -20,6 +20,7 @@ package com.orange.labs.orangetrainingbox.ui.fragments
 import androidx.preference.PreferenceManager
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.orange.labs.orangetrainingbox.R
@@ -40,6 +41,8 @@ import org.junit.runner.RunWith
  * Test cases are mainly factorized in the super class because some games are quite similar.
  *
  * Specific tests cases are also defined in this class.
+ *
+ * Note simulators used for tests where Pixel 3a XL (API 38) and Nexus 4 (API 28)
  *
  * @since 30/08/2019
  * @version 2.0.0
@@ -101,12 +104,73 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
 
         // When
         runMockBLEFramesFromFile("game-sheep-1-jump.mock")
-        Thread.sleep(20000)
+        waitAMoment()
+
+        // Then
+        // TODO Check victory message
+        Espresso
+            .onView(ViewMatchers.withId(R.id.btnRestart))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.btn_restart))))
+
+    }
+
+    /**
+     * Should loose when the seep hit the fence
+     */
+    @Test
+    fun shouldFailOnceOneFenceOfOneJumped() {
+
+        // Given
+        difficultyFactor = DifficultyFactor.LOW
+        timeToWaitUntilNextMockFrame = 50
+        this.setUpPrerequisites(fencesNumber = 1, fencesSpeed = SheepGameFencesSpeed.LOW)
+        goToPlayingScreen()
+
+        // When
+        runMockBLEFramesFromFile("game-sheep-1-fail.mock")
+        waitAMoment()
+
+        // Then
+        // TODO Check victory message
+        Espresso
+            .onView(ViewMatchers.withId(R.id.btnRestart))
+            .check(ViewAssertions.matches(ViewMatchers.withText(appContext.getString(R.string.btn_restart))))
+
+    }
+
+    /**
+     * Should display remaining fences and update counter
+     */
+    @Test
+    fun shouldUpdateCountersForEachJumpOfFence() {
+
+        // Given
+        difficultyFactor = DifficultyFactor.LOW
+        timeToWaitUntilNextMockFrame = 50
+        this.setUpPrerequisites(fencesNumber = 3, fencesSpeed = SheepGameFencesSpeed.HIGH)
+        goToPlayingScreen()
+
+        // When
+        runMockBLEFramesFromFile("game-sheep-1-jump.mock")
+        waitAMoment(5000)
 
         // Then
 
+        // We suppose message for the 1st fence has been updated after 5 seconds
+       var expectedString = appContext.resources.getQuantityString(R.plurals.game_sheep_instructions_line_0_started, 1,1, 2)
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tvLine0))
+            .check(ViewAssertions.matches(ViewMatchers.withText(expectedString)))
+
+        // We suppose message for the 2nd fence has been updated after 8 seconds
+        waitAMoment(8000)
+        expectedString = appContext.resources.getQuantityString(R.plurals.game_sheep_instructions_line_0_started, 2,2, 1)
+        Espresso
+            .onView(ViewMatchers.withId(R.id.tvLine0))
+            .check(ViewAssertions.matches(ViewMatchers.withText(expectedString)))
 
     }
+
 
     // Inner methods
 
@@ -142,8 +206,8 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
 
         preferencesEditor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesSpeed.preferencesValue).apply()
         val savedSpeedOfFences = preferences.getInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesSpeed.preferencesValue * -1) // Trick to ensure to have a failing value if preference not saved
-        Assert.assertEquals("Speed fence has not been changed, expected $fencesSpeed but was $savedSpeedOfFences",
-            fencesSpeed,
+        Assert.assertEquals("Speed fence has not been changed, expected ${fencesSpeed.preferencesValue} but was $savedSpeedOfFences",
+            fencesSpeed.preferencesValue,
             savedSpeedOfFences)
 
         preferencesEditor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_NUMBER.key, fencesNumber).apply()
@@ -157,6 +221,16 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
         // and updates objects like model.
         Espresso.pressBack()
 
+    }
+
+    /**
+     * Waits during the given _period_.
+     * Allows to wait during mock frames processing before doing assertions.
+     *
+     * @param duration - The delay to use, default set to 15000 ms
+     */
+    private fun waitAMoment(duration: Long = 20000){
+        Thread.sleep(duration)
     }
 
 }
