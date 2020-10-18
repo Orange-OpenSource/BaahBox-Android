@@ -25,9 +25,8 @@ import org.junit.Test
 /**
  * To test [CollisionDetector] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 05/09/2019
- * @version 1.0.0
+ * @version 2.0.0
  */
 class UnitTestCollisionDetector {
 
@@ -112,7 +111,7 @@ class UnitTestCollisionDetector {
         val first = mockView(80, 60, 50, 50)
         val second = mockView(500, 600, 10, 10)
         // When
-        val collides = CollisionDetector(first, second).isCollision()
+        val collides = CollisionDetector().isCollision(first, second)
         // Then
         assertFalse("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
     }
@@ -126,7 +125,7 @@ class UnitTestCollisionDetector {
         val first = mockView(80, 60, 50, 50)
         val second = mockView(110, 50, 20, 20)
         // When
-        val collides = CollisionDetector(first, second).isCollision()
+        val collides = CollisionDetector().isCollision(first, second)
         // Then
         assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
     }
@@ -140,7 +139,7 @@ class UnitTestCollisionDetector {
         val first = mockView(80, 60, 50, 50)
         val second = mockView(110, 90, 30, 30)
         // When
-        val collides = CollisionDetector(first, second).isCollision()
+        val collides = CollisionDetector().isCollision(first, second)
         // Then
         assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
     }
@@ -154,7 +153,7 @@ class UnitTestCollisionDetector {
         val first = mockView(80, 60, 50, 50)
         val second = mockView(60, 10, 30, 70)
         // When
-        val collides = CollisionDetector(first, second).isCollision()
+        val collides = CollisionDetector().isCollision(first, second)
         // Then
         assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
     }
@@ -168,7 +167,7 @@ class UnitTestCollisionDetector {
         val first = mockView(80, 60, 50, 50)
         val second = mockView(130, 110, 10, 10)
         // When
-        val collides = CollisionDetector(first, second).isCollision()
+        val collides = CollisionDetector().isCollision(first, second)
         // Then
         assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
     }
@@ -182,7 +181,7 @@ class UnitTestCollisionDetector {
         val first = mockView(80, 60, 50, 50)
         val second = mockView(90, 80, 10, 10)
         // When
-        val collides = CollisionDetector(first, second).isCollision()
+        val collides = CollisionDetector().isCollision(first, second)
         // Then
         assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
     }
@@ -196,58 +195,9 @@ class UnitTestCollisionDetector {
         val first = mockView(80, 60, 50, 50)
         val second = mockView(130, 70, 90, 10)
         // When
-        val collides = CollisionDetector(first, second).isCollision()
+        val collides = CollisionDetector().isCollision(first, second)
         // Then
         assertTrue("${first.computeHitbox()} vs ${second.computeHitbox()}", collides)
-    }
-
-    /**
-     * Test the startDetection() method
-     */
-    @Test
-    fun startDetection() {
-
-        val first = mockView(80, 60, 50, 50)
-        val second = mockView(500, 600, 10, 10)
-
-        // Simple call
-        var detector = CollisionDetector(first, second)
-        detector.startDetection()
-
-        // Spamming
-        detector = CollisionDetector(first, second)
-        for (i in 0..1000) {
-            detector.startDetection()
-        }
-
-    }
-
-    /**
-     * Test the stopDetection() method
-     */
-    @Test
-    fun stopDetection() {
-
-        val first = mockView(80, 60, 50, 50)
-        val second = mockView(500, 600, 10, 10)
-
-        // Simple call
-        var detector = CollisionDetector(first, second)
-        detector.stopDetection()
-
-        // Spamming
-        detector = CollisionDetector(first, second)
-        for (i in 0..1000) {
-            detector.stopDetection()
-        }
-
-        // Spamming again :)
-        detector = CollisionDetector(first, second)
-        for (i in 0..1000) {
-            detector.startDetection()
-            detector.stopDetection()
-        }
-
     }
 
 }

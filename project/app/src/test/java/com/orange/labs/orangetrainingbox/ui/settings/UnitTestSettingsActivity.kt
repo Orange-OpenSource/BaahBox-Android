@@ -25,7 +25,6 @@ import org.junit.Test
 /**
  * To test [SettingsActivity] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/03/2019
  * @version 1.0.0
  */

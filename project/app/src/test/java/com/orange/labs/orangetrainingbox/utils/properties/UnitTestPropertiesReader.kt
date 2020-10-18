@@ -24,9 +24,8 @@ import org.junit.Test
 /**
  * To test configuration elements for games.
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/08/2019
- * @version 1.0.0
+ * @version 1.1.0
  */
 class UnitTestPropertiesReader {
 
@@ -350,5 +349,27 @@ class UnitTestPropertiesReader {
             1))
     }
 
+    // *******************
+    // BLE frames strategy
+    // *******************
+
+    /**
+     *
+     */
+    @Test
+    fun `valueOf string should return instances of BleFrameStrategy`() {
+        assertEquals(BleFrameStrategy.MOCK, BleFrameStrategy.convertStringToValue("mock"))
+        assertEquals(BleFrameStrategy.BOX, BleFrameStrategy.convertStringToValue("box"))
+    }
+
+    /**
+     *
+     */
+    @Test
+    fun `valueOf should return an UNDEFINED value if no string matches`() {
+        assertEquals(BleFrameStrategy.UNDEFINED, BleFrameStrategy.convertStringToValue(""))
+        assertEquals(BleFrameStrategy.UNDEFINED, BleFrameStrategy.convertStringToValue("."))
+        assertEquals(BleFrameStrategy.UNDEFINED, BleFrameStrategy.convertStringToValue("FOO-BAR-WIZZ"))
+    }
 
 }

@@ -21,11 +21,13 @@ package com.orange.labs.orangetrainingbox.utils.properties
 /**
  * Enumeration defining objects for properties to configure the app.
  *
- * @property key - The key used in the properties file which matches this property
+ * These keys are related to the entries in the assets/app_configuration.properties, and also to
+ * the Preferences.
  *
- * @author Marc Poppleton
+ * @param key - The key used in the properties file which matches this property
+ *
  * @since 20/05/2019
- * @version 1.9.0
+ * @version 1.10.0
  */
 enum class PropertiesKeys(val key: String) {
 
@@ -66,10 +68,6 @@ enum class PropertiesKeys(val key: String) {
 
     /* Game configuration */
 
-    /**
-     * A factor to apply on measures so as to define a difficulty. The higher the factor is, the bigger will be the difficulty.
-     */
-    DIFFICULTY_FACTOR("difficulty_factor"),
     /**
      * The numeric values of the difficulty factors (low, medium and high).
      */

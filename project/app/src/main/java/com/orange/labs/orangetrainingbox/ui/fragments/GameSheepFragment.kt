@@ -21,6 +21,7 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -34,14 +35,18 @@ import kotlinx.android.synthetic.main.fragment_game_star_intro.*
 import android.util.TypedValue
 import android.util.DisplayMetrics
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import com.orange.labs.orangetrainingbox.game.CollisionDetector
+import com.orange.labs.orangetrainingbox.game.SheepGameFencesSpeed
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
+import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
 import com.orange.labs.orangetrainingbox.utils.structures.SensorDataSeries
 import com.orange.labs.orangetrainingbox.utils.properties.*
 import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
+import kotlinx.android.synthetic.main.fragment_game_sheep_outro.*
 
 // *******
 // Classes
@@ -58,7 +63,7 @@ import com.orange.labs.orangetrainingbox.utils.structures.SensorTrends
  * <b>The game cannot be used with ome devices, we have to refactor the positionning</b>
  *
  * @since 23/10/2018
- * @version 2.6.0
+ * @version 3.0.0
  * @see [AbstractGameFragment]
  */
 class GameSheepFragment : AbstractGameFragment() {
@@ -66,6 +71,8 @@ class GameSheepFragment : AbstractGameFragment() {
     // **********
     // Properties
     // **********
+
+    // Animations
 
     /**
      * Permits to play some kind of animations for the game icon, i.e. here move the legs of the sheep.
@@ -87,6 +94,13 @@ class GameSheepFragment : AbstractGameFragment() {
      * Used when sensor data are received, and a LOWEST trend is computed again.
      */
     private var wasAlreadyInLowestPosition: Boolean = false
+
+    /**
+     * The image view used for the fence
+     */
+    private lateinit var fenceImageView : ImageView
+
+    // Game configuration
 
     /**
      * The difficulty factor to apply.
@@ -117,7 +131,7 @@ class GameSheepFragment : AbstractGameFragment() {
      * The total number of fences to jump over.
      */
     private val totalNumberOfFences: Int by lazy  {
-        PreferenceManager.getDefaultSharedPreferences(activity).getInt("pref_key_settings_game_sheep_fences_number", 0)
+        PreferenceManager.getDefaultSharedPreferences(activity).getInt(PreferencesKeys.SHEEP_GAME_FENCES_NUMBER.key, 0)
     }
 
     /**
@@ -129,6 +143,45 @@ class GameSheepFragment : AbstractGameFragment() {
             field = value
             updateRemainingFencesMessage()
         }
+
+    // Collisions
+
+    /**
+     * Flag updated regularly by _task_ indicating if a collision occurred.
+     * [MutableLiveData] used so as to make easy communication between threads ([Runnable] for detection and UI thread for navigation)
+     */
+    private val isCollisionDetected: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+
+    /**
+     * The interval when the [Runnable] will ask to the [CollisionDetector] if there is a collision.
+     * Interval in ms.
+     */
+    private val detectionInterval: Long = 100L // FIXME Property
+
+    /**
+     * An handler for the [Runnable] checking if there are collisions
+     */
+    private val collisionDetectionRoutineHandler: Handler by lazy { Handler() }
+
+    /**
+     * A routine which will check using the [CollisionDetector] each _detectionInterval_ if there is a collision
+     * between the sheep and the fence.
+     */
+    private val collisionDetectionRoutine: Runnable by lazy {
+        Runnable {
+            val attachedActivity = activity
+            if (attachedActivity != null) {
+                try {
+                    val sheep = attachedActivity.findViewById<ImageView>(R.id.gameIcon)
+                    val isCollision = collisionDetector.isCollision(sheep, fenceImageView)
+                    isCollisionDetected.postValue(isCollision)
+                } finally {
+                    collisionDetectionRoutineHandler.postDelayed(collisionDetectionRoutine,
+                        detectionInterval)
+                }
+            }
+        }
+    }
 
     // ***********************************
     // Inherited from AbstractGameFragment
@@ -147,7 +200,7 @@ class GameSheepFragment : AbstractGameFragment() {
         get() = R.layout.fragment_game_sheep_playing
 
     /**
-     * Identifier fo the restart / outro layout with e.g. the final score, a button to restart...
+     * Identifier for the restart / outro layout with e.g. the final score, a button to restart...
      */
     override val restartLayout: Int
         get() = R.layout.fragment_game_sheep_outro
@@ -288,8 +341,7 @@ class GameSheepFragment : AbstractGameFragment() {
         super.onResume()
 
         // If game ended
-        if (!loadFromArgsFlagIntroducing()
-            && !loadFromArgsFlagPlaying()) {
+        if (!loadFromArgsFlagIntroducing() && !loadFromArgsFlagPlaying()) {
 
             val activity = requireActivity()
             val ivSheepFloor: ImageView =  activity.findViewById(R.id.ivGameSheepFloor)
@@ -309,13 +361,13 @@ class GameSheepFragment : AbstractGameFragment() {
                 tvLine2.text = getString(R.string.game_sheep_score_success)
 
                 gameIconAnimator = IconAnimator()
-                gameIconAnimator.animateGameIcon((activity as AppCompatActivity), gameIcon, 1000,
+                gameIconAnimator.animateGameIcon((activity as AppCompatActivity), ivGameSheepVictory, 1000,
                     arrayOf(R.mipmap.ic_sheep_welcome_1, R.mipmap.ic_sheep_welcome_2))
 
             // Else the player has lost, display score and bang image
             } else {
 
-                ivSheepFloor.visibility = View.VISIBLE
+                ivSheepFloor.visibility = View.INVISIBLE
 
                 ivSheepGameResult = activity.findViewById(R.id.ivGameSheepBang)
                 ivSheepGameResult.visibility = View.VISIBLE
@@ -440,7 +492,7 @@ class GameSheepFragment : AbstractGameFragment() {
         } else {
             // Loads and adds the fence asset in a dedicated image view
             val parentLayout = requireActivity().findViewById<ConstraintLayout>(R.id.clSheepGamePlaying)
-            val fenceImageView = addNewFenceView(parentLayout)
+            fenceImageView = addNewFenceView(parentLayout)
             fencesAnimator = createFenceAnimator(fenceImageView, parentLayout)
             fencesAnimator.start()
         }
@@ -497,8 +549,7 @@ class GameSheepFragment : AbstractGameFragment() {
         val metrics = DisplayMetrics()
         activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
 
-        fencesAnimator = ObjectAnimator.ofFloat(fence, "translationX",
-            metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
+        fencesAnimator = ObjectAnimator.ofFloat(fence, "translationX", metrics.widthPixels.toFloat(), metrics.widthPixels * -1f)
         fencesAnimator.duration = computeFencesSpeed()
         fencesAnimator.repeatCount = totalNumberOfFences - 1 // For k fences, repeat k-1 times
         fencesAnimator.repeatMode = ValueAnimator.RESTART
@@ -509,16 +560,18 @@ class GameSheepFragment : AbstractGameFragment() {
             // If animation of fences is started, fences may be added, thus we can detect collisions
             override fun onAnimationStart(animation: Animator) {
                 remainingNumberOfFences = totalNumberOfFences
-                collisionDetector = CollisionDetector(requireActivity().findViewById<ImageView>(R.id.gameIcon), fence, requireContext().readCollisionDetectionInterval())
-                collisionDetector.isCollisionDetected.observe(this@GameSheepFragment,
-                    { t -> if (t == true) processCollision() }
+                collisionDetector = CollisionDetector()
+                isCollisionDetected.observe(this@GameSheepFragment,
+                    { t -> if (t == true)
+                        processCollision() }
+
                 )
-                collisionDetector.startDetection()
+                collisionDetectionRoutine.run()
             }
 
             // Remove views and load final view once animations completed
             override fun onAnimationEnd(animation: Animator) {
-                collisionDetector.stopDetection()
+                collisionDetectionRoutineHandler.removeCallbacks(collisionDetectionRoutine)
                 parent.removeView(view)
                 processVictory()
             }
@@ -561,10 +614,12 @@ class GameSheepFragment : AbstractGameFragment() {
      * @return Long The speed for the fences
      */
     private fun computeFencesSpeed(): Long {
-        val speedFactor = when(PreferenceManager.getDefaultSharedPreferences(activity)
-            .getInt("pref_key_settings_game_sheep_fences_speed", 0)) {
-            1 -> defaultGameConfiguration.speedFactors.second
-            2 -> defaultGameConfiguration.speedFactors.third
+        val speed = SheepGameFencesSpeed.fromIntToValue(
+                                PreferenceManager.getDefaultSharedPreferences(activity)
+                                    .getInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, 0))
+        val speedFactor = when(speed) {
+            SheepGameFencesSpeed.MEDIUM -> defaultGameConfiguration.speedFactors.second
+            SheepGameFencesSpeed.HIGH -> defaultGameConfiguration.speedFactors.third
             else /* including 0 */  -> defaultGameConfiguration.speedFactors.first
         }
         return (defaultGameConfiguration.defaultSpeed * speedFactor).toLong()

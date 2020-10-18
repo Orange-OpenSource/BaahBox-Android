@@ -25,13 +25,14 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.lang.IllegalArgumentException
 
 /**
  * To test [Context] extensions to use for properties loading.
  * See [testing documentation](http://d.android.com/tools/testing).
  *
  * @since 23/08/2019
- * @version 2.0.0
+ * @version 2.2.0
  */
 @RunWith(AndroidJUnit4ClassRunner::class)
 class InstrumentedTestPropertiesReader {
@@ -261,7 +262,7 @@ class InstrumentedTestPropertiesReader {
      * Test the isDemoFeatureEnabled() Context extension
      */
     @Test
-    fun isDemoModeActivated() {
+    fun isDemoFeatureActivated() {
         val expectedFlag = appContext!!.loadProperties().getProperty(PropertiesKeys.ENABLE_DEMO_FEATURE.key).toBoolean()
         val config = appContext!!.isDemoFeatureEnabled()
         assertEquals(expectedFlag, config)

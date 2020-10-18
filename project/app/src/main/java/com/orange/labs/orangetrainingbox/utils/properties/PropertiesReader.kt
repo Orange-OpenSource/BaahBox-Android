@@ -19,6 +19,7 @@
 package com.orange.labs.orangetrainingbox.utils.properties
 
 import android.content.Context
+import java.lang.IllegalArgumentException
 import java.util.*
 
 /**
@@ -26,7 +27,7 @@ import java.util.*
  * configurations.
  *
  * @since 20/05/2019
- * @version 2.6.0
+ * @version 2.7.0
  */
 
 // Compile-time constants
@@ -68,7 +69,7 @@ fun Context.isDemoFeatureEnabled(): Boolean {
 /**
  * Reads from properties file in assets the interval for collision detection
  *
- * @return Long -
+ * @return Longs
  */
 fun Context.readCollisionDetectionInterval(): Long {
     val properties = loadProperties()
@@ -228,6 +229,45 @@ class InvalidConfigurationException(override var message: String): Exception(mes
 // Data classes
 // ************
 
+/**
+ * Enumeration defining the strategy to use for BLE frames generation
+ */
+enum class BleFrameStrategy {
+
+    /**
+     * Mocks should be used to forge frames
+     */
+    MOCK,
+
+    /**
+     * The Baah Box will BLE connection should be used
+     */
+    BOX,
+
+    /**
+     * If not strategy has been defined
+     */
+    UNDEFINED;
+
+    companion object {
+
+        /**
+         * Converts using standard  API a simple string to a value og [BleFrameStrategy].
+         * If given string does not match any value, returns an [BleFrameStrategy.UNDEFINED] value.
+         *
+         * @param string -  The value ton convert
+         * @return BleFrameStrategy - The strategy or [BleFrameStrategy.UNDEFINED] if an [IllegalArgumentException] occurred.
+         */
+        fun convertStringToValue(string: String): BleFrameStrategy {
+            return try {
+                enumValueOf(string.toUpperCase())
+            } catch (exception: IllegalArgumentException) {
+                 UNDEFINED
+            }
+        }
+    }
+}
+
 /***
  * Models a bundle data storing configuration elements for BLE sensors / boxes / devices
  *
@@ -304,6 +344,7 @@ data class BalloonGameConfiguration(val minThreshold1: Int, val maxThreshold1: I
 
 /**
  * Models a bundle of sheep game configuration elements.
+ *
  * @param moveOffset The move the sheep should make for each rise or fall event, in px
  * @param walkAnimationPeriod Each "frame" of the game icon is animated with this period (in ms)
  * @param moveDuration The duration of each move used by the animator in charge of the sheep icon
@@ -312,7 +353,8 @@ data class SheepGameConfiguration(val moveOffset: Int, val walkAnimationPeriod: 
                                   val moveDuration: Long)
 
 /**
- * Models a bundle of sheep game default configuration values..
+ * Models a bundle of sheep game default configuration values.
+ *
  * @param defaultFencesCount The default number of fences to display
  * @param defaultMaxFencesCount The highest number of fences to display
  * @param defaultSpeed The default speed for the floor and fences (in ms)

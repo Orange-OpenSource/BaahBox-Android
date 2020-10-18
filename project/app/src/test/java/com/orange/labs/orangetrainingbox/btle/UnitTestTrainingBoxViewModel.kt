@@ -24,11 +24,9 @@ import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 
-
 /**
  * To test [TrainingBoxViewModel] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 20/03/2020
  * @version 1.0.0
  */

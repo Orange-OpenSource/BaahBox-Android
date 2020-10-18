@@ -27,7 +27,6 @@ import org.junit.Test
 /**
  * To test [IconAnimator] class.
  *
- * @author Pierre-Yves Lapersonne
  * @since 23/03/2020
  * @version 1.0.0
  */

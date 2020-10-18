@@ -17,10 +17,7 @@
  */
 package com.orange.labs.orangetrainingbox.game
 
-import android.os.Handler
 import android.view.View
-import androidx.lifecycle.MutableLiveData
-
 
 // *******
 // Classes
@@ -32,59 +29,13 @@ import androidx.lifecycle.MutableLiveData
  * Computes hitboxes using locations and dimensions, and compare.
  *
  * @since 05/09/2019
- * @version 1.0.1
- *
- * @param first One of the view to use for collision detections
- * @param second One of the view to use for collision detections
- * @param detectionInterval The interval in ms where collision detection is processed (default: 500ms)
+ * @version 2.0.0
  */
-class CollisionDetector(private val first: View, private val second: View,
-                        private val detectionInterval: Long = 500L) {
-
-    // **********
-    // Properties
-    // **********
-
-    /**
-     * The handler managing the task which regularly will check if _first_ and _second_ collides
-     */
-    private val handler: Handler by lazy { Handler() }
-
-    /**
-     * The task which make assertions to check if collisions occur
-     */
-    private val task: Runnable by lazy {
-        Runnable {
-            try {
-                isCollisionDetected.postValue(isCollision())
-            } finally {
-                handler.postDelayed(task, detectionInterval)
-            }
-        }
-    }
-
-    /**
-     * Flag updated regularly by _task_ indicating if a collision occurred
-     */
-    val isCollisionDetected: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+class CollisionDetector {
 
     // *******
     // Methods
     // *******
-
-    /**
-     * Starts the task which looks regularly for collisions between first_ and _second_
-     */
-    fun startDetection() {
-        task.run()
-    }
-
-    /**
-     * Stops the task which looks regularly for collisions between first_ and _second_
-     */
-    fun stopDetection() {
-        handler.removeCallbacks(task)
-    }
 
     /**
      * Returns true if _first_ and _second_ collides using their hitboxes, false otherwise.
@@ -92,9 +43,13 @@ class CollisionDetector(private val first: View, private val second: View,
      *
      * Four cases are managed, and compares first min and max X and Y values to second's.
      *
+     * Note this method words well for the sheep game, but not updated (if needed) for other games.
+     *
+     * @param first One of the views to test, e.g. a sheep
+     * @param second One of the views to test, e.g. a fence
      * @return Boolean
      */
-    fun isCollision(): Boolean {
+    fun isCollision(first: View, second:View): Boolean {
 
         val (firstMinX, firstMaxX, firstMinY, firstMaxY) = first.computeHitbox()
         val (secondMinX, secondMaxX, secondMinY, secondMaxY) = second.computeHitbox()
@@ -106,17 +61,6 @@ class CollisionDetector(private val first: View, private val second: View,
         if (secondMaxX in firstMinX..firstMaxX && secondMaxY in firstMinY..firstMaxY) return true
         if (secondMinX in firstMinX..firstMaxX && secondMinY in firstMinY..firstMaxY) return true
         if (secondMaxX in firstMinX..firstMaxX && secondMinY in firstMinY..firstMaxY) return true
-
-        // TODO More cases to deal with?
-        /*
-        // Case with object with unequal sizes
-        if (firstMinY in secondMinX..secondMaxY
-            && (secondMaxX in firstMinX..firstMaxX || secondMinX in firstMinX..firstMaxX)) return true
-
-        // Case where one object is inside another
-        if (secondMinX in firstMinX..firstMaxX && secondMaxX in firstMinX..firstMaxX
-            && secondMinY in firstMinY..firstMaxY && secondMaxX in firstMinY..firstMaxY) return true
-        */
 
         return false
 

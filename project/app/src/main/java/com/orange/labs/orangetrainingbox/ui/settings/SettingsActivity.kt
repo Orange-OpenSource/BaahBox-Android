@@ -86,7 +86,6 @@ open class SettingsActivity : AppCompatActivity() {
     /**
      * Fragment dedicated to the preferences
      *
-     * @author Pierre-Yves Lapersonne
      * @since 24/05/2019
      * @version 1.1.0
      */
@@ -116,7 +115,7 @@ open class SettingsActivity : AppCompatActivity() {
                 demoPreference.setOnPreferenceChangeListener { _, newValue ->
                     val preferences = PreferenceManager.getDefaultSharedPreferences(context)
                     val editor = preferences.edit()
-                    editor.putBoolean(PropertiesKeys.ENABLE_DEMO_FEATURE.key, newValue as Boolean)
+                    editor.putBoolean(PreferencesKeys.ENABLE_DEMO_MODE.key, newValue as Boolean)
                     editor.apply()
                     true
                 }
@@ -153,7 +152,7 @@ open class SettingsActivity : AppCompatActivity() {
             difficultyPreference.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
                 val editor = preferences.edit()
-                editor.putInt(PropertiesKeys.DIFFICULTY_FACTOR.key, newValue as Int)
+                editor.putInt(PreferencesKeys.DIFFICULTY_FACTOR.key, newValue as Int)
                 editor.apply()
                 true
             }
@@ -169,7 +168,7 @@ open class SettingsActivity : AppCompatActivity() {
             numberOfFencesPreferences.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
                 val editor = preferences.edit()
-                editor.putInt("pref_key_settings_game_sheep_fences_number", newValue as Int)
+                editor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_NUMBER.key, newValue as Int)
                 editor.apply()
                 true
             }
@@ -186,7 +185,7 @@ open class SettingsActivity : AppCompatActivity() {
             speedPreference.setOnPreferenceChangeListener { _, newValue ->
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
                 val editor = preferences.edit()
-                editor.putInt("pref_key_settings_game_sheep_fences_speed", newValue as Int)
+                editor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, newValue as Int)
                 editor.apply()
                 true
             }

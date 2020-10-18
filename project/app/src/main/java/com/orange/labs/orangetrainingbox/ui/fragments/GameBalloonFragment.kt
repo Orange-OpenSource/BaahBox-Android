@@ -30,8 +30,8 @@ import com.orange.labs.orangetrainingbox.utils.properties.readBalloonGameConfigu
 import com.orange.labs.orangetrainingbox.ui.animations.IconAnimator
 import com.orange.labs.orangetrainingbox.ui.demo.GesturesDemo
 import kotlinx.android.synthetic.main.fragment_game_balloon_playing.*
-import kotlinx.android.synthetic.main.fragment_game_star_intro.gameIcon
-import kotlinx.android.synthetic.main.fragment_game_star_playing.tv_congratulations
+import kotlinx.android.synthetic.main.fragment_game_balloon_intro.gameIcon
+import kotlinx.android.synthetic.main.fragment_game_balloon_playing.tv_congratulations
 
 /**
  * A subclass of [AbstractGameFragment] for the balloon game.

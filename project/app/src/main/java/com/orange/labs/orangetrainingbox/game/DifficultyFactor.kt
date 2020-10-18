@@ -19,26 +19,51 @@ package com.orange.labs.orangetrainingbox.game
 
 /**
  * Enumeration defining the factor to apply to sensor inputs.
- * The highest the value is, the lowest is the difficulty coefficient.
+ * The highest the difficulty is, the lowest should be the difficulty coefficient.
+ * For example, a [DifficultyFactor.LOW] implies an high factor.
  *
+ * @param preferencesValue - Because difficulty factor is bound to an [androidx.preference.SeekBarPreference],
+ * the seekbar values as integers re saved for the enum values
  * @since 16/05/2019
- * @version 3.0.0
+ * @version 4.0.0
  */
-enum class DifficultyFactor {
+enum class DifficultyFactor(val preferencesValue: Int) {
 
     /**
-     * A low factor to apply, making small the difficulty
+     * A low factor to apply, making small the difficulty.
+     * Is bound to the 1st value of the seekbar.
      */
-    LOW,
+    LOW(0),
 
     /**
-     * A medium factor to apply, making harder the games thant the LOW level
+     * A medium factor to apply, making harder the games thant the LOW level.
+     * Is bound to the 2nd value of the seekbar.
      */
-    MEDIUM,
+    MEDIUM(1),
 
     /**
      * The highest factor to apply, without help ;-)
+     * Is bound to the 3rd value of the seekbar.
      */
-    HIGH
+    HIGH(2);
+
+    companion object {
+
+        /**
+         * Using the given _value_, converts to a value of [DifficultyFactor] based on their
+         * _preferencesValue_.
+         *
+         * @param value
+         * @return The matching enum of null if nothing matches
+         */
+        fun fromIntToValue(value: Int) : DifficultyFactor? {
+            return when(value) {
+                LOW.preferencesValue -> LOW
+                MEDIUM.preferencesValue -> MEDIUM
+                HIGH.preferencesValue -> HIGH
+                else -> null
+            }
+        }
+    }
 
 }
