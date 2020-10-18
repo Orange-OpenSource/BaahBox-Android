@@ -19,3 +19,29 @@ Finally you should also update the "configuration as code" systme by updating th
 
 Main configuration of the app is based on _assets/app_configuration.propeties_ file. This file contains configuration details for games or other features.
 You should add the new entry with values seperated by ';' and update the _PropertiesKies.kt_ file. This enumeration is used by properties parser and hides the name of the entries kies. The you will have to update the _PropertiesReader.kt_ file which will parle the proeprties file using the enum and return a data class with the configuration data.
+
+
+## How to use fake BLE frames?
+
+So as to use fake BLE frames, you can first have a look on the file at _/MockInterruptions.kit_ (in the _androidTest_) folder.
+This file has primitives which permit to load from _assets_ folder a list of fake frames with the values of each sensors.
+Thus you can define and use a list of interruptions defined in files with the format:
+
+```text
+# This is a comment line
+
+# Empty line are ignored
+A=0;B=50;J=0
+A=0;B=70;J=0
+A=0;B=90;J=0
+A=0;B=110;J=0
+A=0;B=130;J=0
+```
+
+In this case sensors A and joystick (J) have no value and only the sensor B has values.
+The lines must follow the regular expression "A=[0-9]+;B=[0-9]+;J=[0-9]+".
+Each line modeels a frame: the values of sensors A, B and Joystick are sent to the model in the same time.
+Each frame is seperatedd by a time sleep.
+
+For more details, you can have a look at _ui/fragments/AbstractInstrumentedTestSimpleGameFragmentBLE_ (in the _androidTest_).
+Delay between each frame processing is defined in propeerty _timeToWaitUntilNextMockFrame_.
