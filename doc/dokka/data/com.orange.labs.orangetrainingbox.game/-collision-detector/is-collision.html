@@ -8,11 +8,17 @@
 <a href="../../index.html">data</a>&nbsp;/&nbsp;<a href="../index.html">com.orange.labs.orangetrainingbox.game</a>&nbsp;/&nbsp;<a href="index.html">CollisionDetector</a>&nbsp;/&nbsp;<a href="./is-collision.html">isCollision</a><br/>
 <br/>
 <h1>isCollision</h1>
-(JVM) <a name="com.orange.labs.orangetrainingbox.game.CollisionDetector$isCollision()"></a>
-<code><span class="keyword">fun </span><span class="identifier">isCollision</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+(JVM) <a name="com.orange.labs.orangetrainingbox.game.CollisionDetector$isCollision(android.view.View, android.view.View)"></a>
+<code><span class="keyword">fun </span><span class="identifier">isCollision</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.CollisionDetector$isCollision(android.view.View, android.view.View)/first">first</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">, </span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.CollisionDetector$isCollision(android.view.View, android.view.View)/second">second</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
 <p>Returns true if <em>first</em> and <em>second</em> collides using their hitboxes, false otherwise.
 Compares min and max values for X and Y axis on objects.</p>
 <p>Four cases are managed, and compares first min and max X and Y values to second's.</p>
+<p>Note this method words well for the sheep game, but not updated (if needed) for other games.</p>
+<h3>Parameters</h3>
+<p><a name="first"></a>
+<code>first</code> - One of the views to test, e.g. a sheep</p>
+<p><a name="second"></a>
+<code>second</code> - One of the views to test, e.g. a fence</p>
 <p><strong>Return</strong><br/>
 Boolean</p>
 </BODY>

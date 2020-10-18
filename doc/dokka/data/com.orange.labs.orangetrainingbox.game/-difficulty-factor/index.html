@@ -10,11 +10,18 @@
 <h1>DifficultyFactor</h1>
 (JVM) <code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">DifficultyFactor</span></code>
 <p>Enumeration defining the factor to apply to sensor inputs.
-The highest the value is, the lowest is the difficulty coefficient.</p>
+The highest the difficulty is, the lowest should be the difficulty coefficient.
+For example, a <a href="-l-o-w.html">DifficultyFactor.LOW</a> implies an high factor.</p>
+<h3>Parameters</h3>
+<p><a name="preferencesValue"></a>
+<code>preferencesValue</code> - <ul><li>Because difficulty factor is bound to an <a href="#">androidx.preference.SeekBarPreference</a>,
+the seekbar values as integers re saved for the enum values</li>
+</ul>
+</p>
 <p><strong>Since</strong><br/>
 16/05/2019</p>
 <p><strong>Version</strong><br/>
-3.0.0</p>
+4.0.0</p>
 <h3>Enum Values</h3>
 <table>
 <tbody>
@@ -24,7 +31,8 @@ The highest the value is, the lowest is the difficulty coefficient.</p>
 <h4><a href="-l-o-w.html">LOW</a></h4>
 </td>
 <td>
-<p>A low factor to apply, making small the difficulty</p>
+<p>A low factor to apply, making small the difficulty.
+Is bound to the 1st value of the seekbar.</p>
 </td>
 </tr>
 <tr>
@@ -33,7 +41,8 @@ The highest the value is, the lowest is the difficulty coefficient.</p>
 <h4><a href="-m-e-d-i-u-m.html">MEDIUM</a></h4>
 </td>
 <td>
-<p>A medium factor to apply, making harder the games thant the LOW level</p>
+<p>A medium factor to apply, making harder the games thant the LOW level.
+Is bound to the 2nd value of the seekbar.</p>
 </td>
 </tr>
 <tr>
@@ -42,8 +51,56 @@ The highest the value is, the lowest is the difficulty coefficient.</p>
 <h4><a href="-h-i-g-h.html">HIGH</a></h4>
 </td>
 <td>
-<p>The highest factor to apply, without help ;-)</p>
+<p>The highest factor to apply, without help ;-)
+Is bound to the 3rd value of the seekbar.</p>
 </td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Enumeration defining the factor to apply to sensor inputs.
+The highest the difficulty is, the lowest should be the difficulty coefficient.
+For example, a <a href="-l-o-w.html">DifficultyFactor.LOW</a> implies an high factor.</p>
+<code><span class="identifier">DifficultyFactor</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.DifficultyFactor$<init>(kotlin.Int)/preferencesValue">preferencesValue</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="preferences-value.html">preferencesValue</a></h4>
+</td>
+<td>
+<ul><li>Because difficulty factor is bound to an <a href="#">androidx.preference.SeekBarPreference</a>,
+the seekbar values as integers re saved for the enum values</li>
+</ul>
+<code><span class="keyword">val </span><span class="identifier">preferencesValue</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+(JVM) 
+<h4><a href="from-int-to-value.html">fromIntToValue</a></h4>
+</td>
+<td>
+<p>Using the given <em>value</em>, converts to a value of <a href="./index.html">DifficultyFactor</a> based on their
+<em>preferencesValue</em>.</p>
+<code><span class="keyword">fun </span><span class="identifier">fromIntToValue</span><span class="symbol">(</span><span class="identifier" id="com.orange.labs.orangetrainingbox.game.DifficultyFactor.Companion$fromIntToValue(kotlin.Int)/value">value</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="./index.html"><span class="identifier">DifficultyFactor</span></a><span class="symbol">?</span></code></td>
 </tr>
 </tbody>
 </table>
