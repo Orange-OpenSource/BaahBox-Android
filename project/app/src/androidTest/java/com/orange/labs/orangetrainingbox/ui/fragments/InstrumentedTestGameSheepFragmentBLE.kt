@@ -17,10 +17,20 @@
  */
 package com.orange.labs.orangetrainingbox.ui.fragments
 
+import androidx.preference.PreferenceManager
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.orange.labs.orangetrainingbox.R
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
+import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
+import com.orange.labs.orangetrainingbox.utils.properties.PropertiesKeys
+import com.orange.labs.orangetrainingbox.utils.properties.loadProperties
+import org.junit.Assert
+import org.junit.Assert.fail
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
@@ -74,6 +84,79 @@ class InstrumentedTestGameSheepFragmentBLE : AbstractInstrumentedTestSimpleGameF
         demoModeMustBeEnabled = false
         difficultyFactor = DifficultyFactor.MEDIUM
         super.setup()
+    }
+
+    /**
+     * Should win once the only fence has been jumped.
+     */
+    @Test
+    fun shouldWinOnceOneFenceOfOneJumped() {
+
+        // Given
+        difficultyFactor = DifficultyFactor.LOW
+        timeToWaitUntilNextMockFrame = 100
+        this.setUpPrerequisites(fencesNumber = 1, fencesSpeed = 1)
+        goToPlayingScreen()
+
+        // When
+        runMockBLEFramesFromFile("game-sheep-1-jump.mock")
+        Thread.sleep(10000)
+
+        // Then
+
+
+    }
+
+    // Inner methods
+
+    /**
+     * Defines the prerequisites to ensure the tests are triggered with the expected conditions.
+     * Settings are changed by code using [PreferenceManager].
+     * Uses the super class [AbstractInstrumentedTestSimpleGameFragmentBLE] method for basic settings,
+     * and defines more prerequisites for the game.
+     *
+     * @param enableDemoMode - True to enable it, false to disable, default set to _self.demoModeMustBeEnabled_
+     * @param difficultyFactor - The difficulty factor, default set to _self.difficultyFactor_
+     * @param fencesNumber - The number of fences to jump over
+     * @param fencesSpeed - The speed of fences' "run"? By definition in the _preferences.xml_ must be between 0 and 2.
+     */
+    private fun setUpPrerequisites(enableDemoMode: Boolean = this.demoModeMustBeEnabled,
+                           difficultyFactor: DifficultyFactor = this.difficultyFactor,
+                                    fencesNumber: Int, fencesSpeed: Int) {
+
+        // Check parameters
+        val maxNumberOfFences = appContext.loadProperties().getProperty(PropertiesKeys.GAME_SHEEP_MAX_FENCES_NUMBER.key).toInt()
+        if (fencesNumber < 0 || fencesNumber > maxNumberOfFences) fail("Fences number is $fencesNumber but must be between 0 and $maxNumberOfFences")
+        if (fencesSpeed < 0 || fencesSpeed > 2) fail("Fences speed is $fencesSpeed and must be between 0 and 2")
+
+        // Defines basic prerequisites
+        super.setUpPrerequisites(enableDemoMode, difficultyFactor)
+
+        // Go to settings activity
+        // Useful only when finished
+        Espresso.onView(ViewMatchers.withId(R.id.action_settings)).perform(ViewActions.click())
+
+        // Update fences configuration
+        val preferences = PreferenceManager.getDefaultSharedPreferences(appContext)
+        val preferencesEditor = preferences.edit()
+
+        preferencesEditor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesSpeed).apply()
+        val savedSpeedOfFences = preferences.getInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesSpeed * -1) // Trick to ensure to have a failing value if preference not saved
+        Assert.assertEquals("Speed fence has not been changed, expected $fencesSpeed but was $savedSpeedOfFences",
+            fencesSpeed,
+            savedSpeedOfFences)
+
+        preferencesEditor.putInt(PreferencesKeys.SHEEP_GAME_FENCES_NUMBER.key, fencesNumber).apply()
+        val savedNumberOfFences = preferences.getInt(PreferencesKeys.SHEEP_GAME_FENCES_SPEED.key, fencesNumber * -1) // Trick to ensure to have a failing value if preference not saved
+        Assert.assertEquals("Number of fences has not been changed, expected $fencesNumber but was $savedNumberOfFences",
+            fencesNumber,
+            savedNumberOfFences)
+
+        // Go to back.
+        // The finishing of the settings activity triggers the onActivityResult() of the main activity
+        // and updates objects like model.
+        Espresso.pressBack()
+
     }
 
 }

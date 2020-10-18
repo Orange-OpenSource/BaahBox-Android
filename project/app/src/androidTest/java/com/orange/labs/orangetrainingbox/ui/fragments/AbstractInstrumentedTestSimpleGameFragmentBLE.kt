@@ -32,6 +32,7 @@ import com.orange.labs.orangetrainingbox.`_`.readMockEventsFromFile
 import com.orange.labs.orangetrainingbox.game.DifficultyFactor
 import com.orange.labs.orangetrainingbox.ui.MainActivity
 import com.orange.labs.orangetrainingbox.ui.settings.PreferencesKeys
+import com.orange.labs.orangetrainingbox.utils.logs.Logger
 import org.hamcrest.CoreMatchers
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Assert
@@ -97,7 +98,6 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
     fun setup(){
         appContext = InstrumentationRegistry.getInstrumentation().targetContext
         goToGame()
-        //setUpPrerequisites()
     }
 
     // Tests
@@ -151,7 +151,7 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
      * Goes to star game screen
      */
     private fun goToGame(){
-        Espresso.onView(ViewMatchers.withText(appContext!!.getString(resourceStringGameTitle)))
+        Espresso.onView(ViewMatchers.withText(appContext.getString(resourceStringGameTitle)))
             .perform(ViewActions.click())
     }
 
@@ -174,9 +174,10 @@ abstract class AbstractInstrumentedTestSimpleGameFragmentBLE : InstrumentedTestS
      * @param name The name of the mock file to use
      */
     protected fun runMockBLEFramesFromFile(name: String) {
-        val mockEvents = readMockEventsFromFile(name, appContext!!)
+        val mockEvents = readMockEventsFromFile(name, appContext)
         mockEvents.forEach { frame ->
             val (sensorA, sensorB, _) = frame // Joystick management is not yet implemented
+            Logger.d("Process mock frame ($sensorA,$sensorB)")
             if (sensorA != null) activityTestRule.activity.model.sensorA.postValue(sensorA.payload)
             if (sensorB != null) activityTestRule.activity.model.sensorB.postValue(sensorB.payload)
             Thread.sleep(timeToWaitUntilNextMockFrame)
